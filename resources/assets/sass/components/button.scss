@@ -11,7 +11,7 @@
     padding: $buttonPaddingV $buttonPaddingH;
     font-size: $fontSize;
     font-weight: $buttonFontWeight;
-    background: $primary;
+    background: $secondary;
     border-radius: $buttonRadius;
     @include transition;
     &:link,
@@ -37,6 +37,7 @@
             right: -5px;
         }
     }
+
     &.icon {
         padding: $buttonPaddingV;
         [class*='icon-'] {
@@ -46,6 +47,22 @@
             min-width: $lineHeight;
         }
     }
+    
+    &.icon-svg {
+        display: flex;
+        align-items:center;
+    }
+
+    .icon-image {
+        left: auto;
+        right: auto;
+        display: block;
+        min-width: $lineHeight;
+        position: relative;
+        left: 10px;
+    }
+
+
     &.sm {
         font-size: 14px;
         border-radius: $buttonSmRadius;
@@ -80,7 +97,7 @@
     }
     &:hover {
         color: #fff;
-        background: darken($primary, 6%);
+        background: darken($secondary, 6%);
     }
     &.border {
         background: #fff;
@@ -119,7 +136,7 @@
             display: block;
             z-index: -1;
             border-radius: inherit;
-            @include linear-gradient(135deg, $primary, $secondary);
+            @include linear-gradient(135deg, $secondary, $dark);
             @include transition;
         }
         &:before {
@@ -132,7 +149,7 @@
             display: block;
             z-index: -2;
             border-radius: inherit;
-            @include linear-gradient(135deg, darken($primary, 6%), darken($secondary, 6%));
+            @include linear-gradient(135deg, darken($secondary, 6%), darken($secondary, 6%));
         }
         &:hover {
             &:after {
@@ -159,6 +176,7 @@
     }
     &.block {
         display: block;
+        width: 100%;
     }
     &:hover {
         @include transform($buttonHoverTransform);

@@ -12,7 +12,7 @@ h1 {
     color: $headingsH1Color;
     font-weight: $headingsH1Weight;
     font-size: $headingsH1Size;
-    margin: 0 0 $marginBottom 0;
+    margin: 0;
     @include responsive-size(floor($headingsH1Size * .8), $headingsH1Size);
 }
 
@@ -20,7 +20,7 @@ h2 {
     color: $headingsH2Color;
     font-weight: $headingsH2Weight;
     font-size: $headingsH2Size;
-    margin: 0 0 $marginBottom 0;
+    margin: 0;
     @include responsive-size(floor($headingsH2Size * .8), $headingsH2Size);
 }
 
@@ -28,7 +28,7 @@ h3 {
     color: $headingsH3Color;
     font-weight: $headingsH3Weight;
     font-size: $headingsH3Size;
-    margin: $marginBottom 0;
+    margin: 0;
     @include responsive-size(floor($headingsH3Size * .8), $headingsH3Size);
 }
 
@@ -36,7 +36,7 @@ h4 {
     color: $headingsH4Color;
     font-weight: $headingsH4Weight;
     font-size: $headingsH4Size;
-    margin: $marginBottom 0;
+    margin: 0;
     @include responsive-size(floor($headingsH4Size * .8), $headingsH4Size);
 }
 

@@ -110,6 +110,9 @@ textarea {
         font-weight: $labelWeight;
         max-width: 100%;
     }
+    &.center {
+        text-align: center;
+    }
 }
 
 .form-group {

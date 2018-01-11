@@ -1,7 +1,7 @@
 $primary: #355C7D;
 $secondary: #F67280;
 $dark: darken($primary, 10%);
-
+$white: #fff;
 $darkBlue: adjust-color($dark, $blue: 8);
 $dark90: mix(#fff, $darkBlue, 10%);
 $dark80: mix(#fff, $darkBlue, 20%);
@@ -16,6 +16,7 @@ $success: #69DD95;
 $error: #F26175;
 $warning: #F8C93F;
 $info: $secondary;
+$iconFontUrl: '../fonts/icons.css';
 $fontUrl: 'https://fonts.googleapis.com/css?family=Poppins:400,700,800';
 $fontFamily: 'Poppins', sans-serif;
 $fontSize: 16px;
@@ -35,8 +36,8 @@ $headingsH1Color: $dark80;
 $headingsH2Color: $dark80;
 $headingsH3Color: $dark80;
 $headingsH4Color: $dark80;
-$headingsH1Weight: normal;
-$headingsH2Weight: normal;
+$headingsH1Weight: bold;
+$headingsH2Weight: bold;
 $headingsH3Weight: bold;
 $headingsH4Weight: bold;
 $headingsH1Size: 36px;

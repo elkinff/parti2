@@ -1,0 +1,20 @@
+.nav {
+	width: $widthNav;
+	max-width: 300px;
+	height: calc(100vh - 70px);
+	display: inline-block;
+	background-color: $primary;
+	
+	left:0;
+	position:fixed;
+	@include translate;
+	@include max('sm') {
+		@include translate(-$widthNav, 0);
+		background-color: red;
+
+		 &.show {
+            @include translate;
+        }
+
+	}
+}

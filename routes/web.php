@@ -23,6 +23,10 @@ Route::get('/recuperar', function () {
     return view('pages.auth.recuperar');
 });
 
+Route::get('/ejemplo', function () {
+    return view('pages.dashboard.example');
+});
+
 
 
 

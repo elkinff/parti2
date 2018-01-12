@@ -1,0 +1,15 @@
+.container__main {
+	display:flex;
+//	background-color:$light;
+}
+
+.content {
+	width: 100%;
+	height: calc(100vh - 70px);
+	background-color:$light;
+	padding-left: $widthNav;
+	//border: 1px solid $primary;
+	@include max('sm') {
+		padding-left:0;
+	}
+}

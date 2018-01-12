@@ -6,13 +6,19 @@
 	align-items:center;
 
 	@include max('sm') {
-		overflow-y: scroll;
+		display: block;
+		height: auto;
 	}
 }
 
 .image__auth {
 	width: 50%;
 	padding: 2em;
+	
+	//opacity:0;  /* make things invisible upon start */
+  	animation:fadeIn ease-in 1;
+  	animation-fill-mode:forwards;
+  	animation-duration:1s;
 
 	@include max('sm') {
 		display: none;
@@ -28,6 +34,7 @@
 // Contenedor del formulario
 .form__auth {
 	width: 50%;
+	display:block;
 	@include max('sm') {
 		width: 100%;
 	}
@@ -39,13 +46,13 @@
 	display: block;
 	padding: 3em;
 	border-radius: $borderRadius;
-	z-index:999;
 	@include card();
 
 	@include max('sm') {
 		width: 90%;
 		padding: 2em;
-		margin-top: 3em;
+		height: auto;
+		padding-top: 50px;
 	}
 
 	&__title {
@@ -86,10 +93,16 @@
 .forma__auth {
 	position:absolute;
 	width:40%;
-	z-index: 0;
+	
+	&--logo {
+		position:absolute;
+		width:28%;
+	}
+
 	&--header {
 		top: 0;
 		left: 0;
+
 	}
 
 	&--footer {
@@ -113,5 +126,6 @@
 }
 
 
-
+// Animación imagen
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 

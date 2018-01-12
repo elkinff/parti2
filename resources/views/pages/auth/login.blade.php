@@ -28,12 +28,13 @@
             </button>
             
         </div>
-	
+
 		
 		<div class="form-element">
             <label>Correo Electrónico</label>
             <div>
                 <input type="email" class="form-field">
+                {{-- <span>Formato invalido</span> --}}
             </div>
         </div>
 

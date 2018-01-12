@@ -28,6 +28,10 @@
             background: rgba($error, .1);
         }
     }
+    &.error ~ span {
+        color: $error;
+    }
+
     &:focus {
         outline: none;
         border-color: $formBorderFocus;

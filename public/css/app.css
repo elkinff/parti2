@@ -390,6 +390,10 @@ fieldset[disabled] .form-field {
   background: rgba(242, 97, 117, 0.1);
 }
 
+.form-field.error ~ span {
+  color: #F26175;
+}
+
 .form-field:focus {
   outline: none;
   border-color: #355C7D;
@@ -3874,13 +3878,20 @@ form.horizontal .form-element .last-xs {
 
 @media (max-width: 768px) {
   .container__auth {
-    overflow-y: scroll;
+    display: block;
+    height: auto;
   }
 }
 
 .image__auth {
   width: 50%;
   padding: 2em;
+  -webkit-animation: fadeIn ease-in 1;
+          animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
 }
 
 @media (max-width: 768px) {
@@ -3897,6 +3908,7 @@ form.horizontal .form-element .last-xs {
 
 .form__auth {
   width: 50%;
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -3911,7 +3923,6 @@ form.horizontal .form-element .last-xs {
   display: block;
   padding: 3em;
   border-radius: 4px;
-  z-index: 999;
   -webkit-box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
           box-shadow: 0px 10px 40px -10px rgba(0, 64, 128, 0.2);
   background-color: #fff;
@@ -3921,7 +3932,8 @@ form.horizontal .form-element .last-xs {
   .form {
     width: 90%;
     padding: 2em;
-    margin-top: 3em;
+    height: auto;
+    padding-top: 50px;
   }
 }
 
@@ -3976,7 +3988,11 @@ form.horizontal .form-element .last-xs {
 .forma__auth {
   position: absolute;
   width: 40%;
-  z-index: 0;
+}
+
+.forma__auth--logo {
+  position: absolute;
+  width: 28%;
 }
 
 .forma__auth--header {
@@ -4005,6 +4021,26 @@ form.horizontal .form-element .last-xs {
 @media (max-width: 768px) {
   .forma__auth--footeralt {
     display: none;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 

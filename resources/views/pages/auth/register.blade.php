@@ -8,7 +8,6 @@
     
     <img src="{{ asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
 
-
 	<form class="form">
 		
 		<div class="form__title">

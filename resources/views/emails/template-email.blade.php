@@ -6,67 +6,59 @@
   <title>Partidos</title>
   
   <style type="text/css">
-  
-  /*@import url(http://fonts.googleapis.com/css?family=Droid+Sans);*/
-  @import url(https://fonts.googleapis.com/css?family=Poppins:400,700,800);
+    @import url(https://fonts.googleapis.com/css?family=Poppins:400,700,800);
+    img {
+      max-width: 600px;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
 
+    a {
+      text-decoration: none;
+      border: 0;
+      outline: none;
+      color: #bbbbbb;
+    }
 
-  img {
-    max-width: 600px;
-    outline: none;
-    text-decoration: none;
-    -ms-interpolation-mode: bicubic;
-  }
+    a img {
+      border: none;
+    }
 
-  a {
-    text-decoration: none;
-    border: 0;
-    outline: none;
-    color: #bbbbbb;
-  }
+    /* General styling */
 
-  a img {
-    border: none;
-  }
+    td, h1, h2, h3  {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+    }
 
-  /* General styling */
+    td {
+      text-align: center;
+      //border: 1px solid #ccc;
+    }
 
-  td, h1, h2, h3  {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-  }
+    body {
+      -webkit-font-smoothing:antialiased;
+      -webkit-text-size-adjust:none;
+      width: 100%;
+      height: 100%;
+      color: #37302d;
+      background: #F5F6FA;
+      font-size: 16px;
+    }
 
-  td {
-    text-align: center;
-    //border: 1px solid #ccc;
-  }
+     table {
+      border-collapse: collapse !important;
+    }
 
-  body {
-    -webkit-font-smoothing:antialiased;
-    -webkit-text-size-adjust:none;
-    width: 100%;
-    height: 100%;
-    color: #37302d;
-    background: #F5F6FA;
-    font-size: 16px;
-  }
+    .headline {
+      color: #355C7D;
+      font-size: 36px;
+    }
 
-   table {
-    border-collapse: collapse !important;
-  }
-
-  .headline {
-    color: #355C7D;
-    font-size: 36px;
-  }
-
- .force-full-width {
-  width: 100% !important;
- }
-
-
-
-
+    .force-full-width {
+      width: 100% !important;
+    }
   </style>
 
   <style type="text/css" media="screen">
@@ -89,8 +81,11 @@
 
     }
   </style>
+
 </head>
+
 <body class="body" style="padding:0; margin:0; display:block; background:#F5F6FA; -webkit-text-size-adjust:none" bgcolor="#F5F6FA">
+
 <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%">
   <tr>
     <td align="center" valign="top" bgcolor="#F5F6FA"  width="100%">
@@ -112,12 +107,13 @@
                 <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff">
                   <tr>
                     <td>
-                      <img src="{{ asset('img/users.svg') }}" width="216" height="290" alt="Partidos">
+                      {{-- <img src="{{ asset('img/users.svg') }}" width="216" height="270" alt="Partidos"> --}}
+                      @yield('imagen')
                     </td>
                   </tr>
                   <tr>
                     <td class="headline">
-                      Bienvenido
+                      @yield('titulo')
                     </td>
                   </tr>
                   <tr>
@@ -126,8 +122,8 @@
                       <center>
                         <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="60%">
                           <tr>
-                            <td style="color:#7d8da0;">
-                             To the awesomest place on earth! We're sure you will feel right at home with Awesome Co.
+                            <td style="color:#7d8da0; padding-bottom: 20px">
+                             @yield('descripcion')
                             </td>
                           </tr>
                         </table>
@@ -143,8 +139,10 @@
                           <center>
                         <![endif]-->
                             {{-- Boton de acción --}}
-                            <a href="http://"
-                      style="background-color:#178f8f;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:300px;-webkit-text-size-adjust:none;">Realiza tu primera publicación!</a>
+                            <a href="@yield('ruta__boton')"
+                      style="background-color:#F67280;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;padding:0 30px;-webkit-text-size-adjust:none;">
+                          @yield('texto__boton')
+                        </a>
 
                         <!--[if mso]>
                           </center>

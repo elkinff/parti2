@@ -24,11 +24,10 @@
                 <img src="{{ asset('img/google.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
             </a>
 
-            <a class="btn border icon-svg" href="{{route('social.auth', 'facebook')}}">
+            <a class="btn border icon-svg" href="{{ route('social.auth', 'facebook') }}">
                 Iniciar con
                 <img src="{{ asset('img/facebook.svg') }}" class="icon-image" width="30px" alt="Facebook Parti2">
             </a>
-            
         </div>
 
         

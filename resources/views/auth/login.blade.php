@@ -19,15 +19,15 @@
         
         <div class="form-element form__social">
 
-            <button class="btn border icon-svg sm-4">
+            <a class="btn border icon-svg sm-4">
                 Iniciar con
                 <img src="{{ asset('img/google.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
-            </button>
+            </a>
 
-            <button class="btn border icon-svg">
+            <a class="btn border icon-svg" href="{{route('social.auth', 'facebook')}}">
                 Iniciar con
-                <img src="{{ asset('img/facebook.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
-            </button>
+                <img src="{{ asset('img/facebook.svg') }}" class="icon-image" width="30px" alt="Facebook Parti2">
+            </a>
             
         </div>
 

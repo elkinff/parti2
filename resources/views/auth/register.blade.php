@@ -19,7 +19,7 @@
         <div class="form-element">
             <label>Nombres</label>
             <div>
-                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre">
+                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre" value="{{ old('nombre') }}">
                 @if ($errors->has('nombre'))
                     <span class="">
                         {{ $errors->first('nombre') }}
@@ -43,7 +43,7 @@
         <div class="form-element">
             <label>Celular</label>
             <div>
-                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular">
+                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" value="{{ old('celular') }}">
                 @if ($errors->has('celular'))
                     <span class="">
                         {{ $errors->first('celular') }}

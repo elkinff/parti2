@@ -4,17 +4,35 @@
 	height: calc(100vh - 70px);
 	display: inline-block;
 	background-color: $primary;
-	
-	left:0;
-	position:fixed;
 	@include translate;
 	@include max('sm') {
+		left: 0;
+		top: 0;
+		height: 100%;
+		position: fixed;
+		//background-color: red;
+		z-index: 50;
+		@include transition();	
 		@include translate(-$widthNav, 0);
-		background-color: red;
 
 		 &.show {
             @include translate;
         }
 
 	}
+}
+
+#overlay {
+    @include max('sm') {
+    	z-index: 40;
+    	height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        display: none;
+        background: rgba($overlayColor, .7);
+    }
 }

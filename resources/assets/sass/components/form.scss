@@ -164,6 +164,18 @@ textarea {
             border-color: $formBorderFocus;
         }
     }
+
+     &.focus {
+        & > span {
+            color: $formFocusColor;
+            background: $formFocus;
+            border-color: $formBorderFocus;
+        }
+    }
+
+    .icon {
+        width: 25px;
+    }
 }
 
 .password {

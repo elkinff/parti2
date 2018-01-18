@@ -6,9 +6,15 @@
     <body>
 		
 		@include('includes._header')
-
 		
-		<main class="container__main">{{-- Estilos en content --}}
+		
+		
+		
+		<main class="container__main">
+			{{-- Si hay nav  --}}
+
+			@yield('nav_bar')
+			
 			<div class="content">
 				@yield('content')
 			</div>

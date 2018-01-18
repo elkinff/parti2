@@ -1,15 +1,30 @@
 .container__main {
 	display:flex;
-//	background-color:$light;
 }
 
 .content {
+	//width: calc(100% - $widthNav);
 	width: 100%;
 	height: calc(100vh - 70px);
 	background-color:$light;
-	padding-left: $widthNav;
-	//border: 1px solid $primary;
+	padding: 1em;
+	overflow-y: scroll;
 	@include max('sm') {
-		padding-left:0;
+		height: auto;
+		padding:0.5em;
 	}
+}
+
+.tarjeta {
+	@include card();
+	padding: 1em;
+	//background-color: $darkBlue;
+}	 
+
+.table {
+	@include card();	
+}
+
+.busqueda {
+	@include box-shadow();
 }

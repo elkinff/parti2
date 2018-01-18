@@ -5,4 +5,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
+
+window.$ = window.jQuery = require('jquery');
+
 require('./framy');
+require('./modal');
+require('./functions');
+

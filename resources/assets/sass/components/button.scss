@@ -13,6 +13,7 @@
     font-weight: $buttonFontWeight;
     background: $secondary;
     border-radius: $buttonRadius;
+    cursor: pointer;
     @include transition;
     &:link,
     &:active,

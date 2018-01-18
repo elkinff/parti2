@@ -28,6 +28,11 @@ Route::get('/ejemplo', function () {
 });
 
 
+Route::get('/email', function () {
+    return view('emails.email-template');
+});
+
+
 
 
 

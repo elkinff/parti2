@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMovimientoBancarioTable extends Migration{
 
-    public $set_schema_table = 'Movimiento_Bancario';
+    public $set_schema_table = 'movimiento_bancario';
 
     public function up(){
         if (Schema::hasTable($this->set_schema_table)) return;

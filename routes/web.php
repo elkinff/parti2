@@ -33,12 +33,8 @@ Route::get('/email', function () {
 });
 
 
-
-
-
-
-
-
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
 
 Auth::routes();
 

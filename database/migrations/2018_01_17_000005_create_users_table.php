@@ -10,8 +10,8 @@ class CreateUsersTable extends Migration{
         Schema::create('users', function (Blueprint $table) {
            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('correo', 45);
-            $table->string('contraseña', 45)->nullable();
+            $table->string('email')->unique();
+            $table->string('password')->nullable();
             $table->string('nombre', 90);
             $table->bigInteger('celular')->nullable();
             $table->string('foto', 60)->nullable();
@@ -29,7 +29,6 @@ class CreateUsersTable extends Migration{
             $table->rememberToken();
             $table->timestamps();
 
-            $table->unique(["correo"], 'correo_usu_UNIQUE');
             $table->unique(["id"], 'id_UNIQUE');
             $table->unique(["id_google"], 'id_google_UNIQUE');
             $table->unique(["id_facebook"], 'id_facebook_UNIQUE');

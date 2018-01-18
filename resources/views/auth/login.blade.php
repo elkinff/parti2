@@ -63,6 +63,10 @@
                     </form>
                 </div>
             </div>
+
+            <a class="btn btn-primary" href="{{ route('social.auth', 'facebook') }}">
+                Facebook
+            </a>
         </div>
     </div>
 </div>

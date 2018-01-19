@@ -19,7 +19,7 @@
         <div class="form-element">
             <label>Nombres</label>
             <div>
-                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre" value="{{ old('nombre') }}">
+                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre" value="{{ old('nombre') }}" required autofocus>
                 @if ($errors->has('nombre'))
                     <span class="">
                         {{ $errors->first('nombre') }}
@@ -31,7 +31,7 @@
        <div class="form-element">
             <label>Correo Electrónico</label>
             <div>
-                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email') }}" name="email" required autofocus>
+                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email') }}" name="email" required>
                 @if ($errors->has('email'))
                     <span class="">
                         {{ $errors->first('email') }}
@@ -57,7 +57,7 @@
                 <div class="sm-6">
                     <label>Contraseña</label>
                     <div>
-                        <input type="password" class="form-field{{ $errors->has('password') ? ' error' : '' }}" name="password">
+                        <input type="password" class="form-field{{ $errors->has('password') ? ' error' : '' }}" name="password" required>
                         @if ($errors->has('password'))
                             <span class="">
                                 {{ $errors->first('password') }}
@@ -69,7 +69,7 @@
                 <div class="sm-6">
                     <label>Confirmar Contraseña</label>
                     <div>
-                        <input id="password-confirm" type="password" class="form-field" name="password_confirmation">
+                        <input id="password-confirm" type="password" class="form-field" name="password_confirmation" required>
                     </div>
                 </div>
             </div>

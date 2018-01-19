@@ -24,7 +24,7 @@
         <div class="form-element">
             <label>Correo Electrónico</label>
             <div>
-                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email') }}" required autofocus>
+                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email') }}" name="email" required autofocus>
                 @if ($errors->has('email'))
                     <span class="">
                         {{ $errors->first('email') }}

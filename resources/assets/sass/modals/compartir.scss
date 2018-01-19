@@ -1,0 +1,52 @@
+.compartir__image {
+	position: relative;
+	min-height: 250px;
+	background-color: darken($light, 3%);
+	overflow:hidden;
+}
+
+.compartir__item {
+	width: 110px;
+	position: absolute;
+	right: 15px;
+	bottom: 5px;
+	transform: rotate(15deg);
+	@include max('sm') {
+		width: 90px;
+		right: 15px;
+	}
+
+	&--large {
+		transform: rotate(-10deg);
+		width: 70%;
+		max-width: 250px;
+		left: -25px;
+		top: -10px;
+
+		@include max('sm') {
+			top:5%;
+			left: -30px;
+		}
+	}
+}
+
+.compartir__mensaje {
+	position: absolute;
+	width: 45%;
+	right:0;
+	top: 0;
+	text-align:center;
+	padding: 0.5em;
+
+
+	span {
+		font-weight: bold;
+	}
+}
+
+.compartir__redes {
+	text-align:center;
+	padding: 1em 3em;
+}
+
+

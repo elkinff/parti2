@@ -4205,7 +4205,7 @@ form.horizontal .form-element .last-xs {
 }
 
 .modal-header {
-  padding: 15px 15px 15px 25px;
+  padding: 15px 15px 0px 25px;
 }
 
 .modal-header .close {
@@ -4785,5 +4785,62 @@ form.horizontal .form-element .last-xs {
           justify-content: center;
   margin-bottom: 1em;
   text-align: center;
+}
+
+.compartir__image {
+  position: relative;
+  min-height: 250px;
+  background-color: #ebedf5;
+  overflow: hidden;
+}
+
+.compartir__item {
+  width: 110px;
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  -webkit-transform: rotate(15deg);
+          transform: rotate(15deg);
+}
+
+@media (max-width: 768px) {
+  .compartir__item {
+    width: 90px;
+    right: 15px;
+  }
+}
+
+.compartir__item--large {
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+  width: 70%;
+  max-width: 250px;
+  left: -25px;
+  top: -10px;
+}
+
+@media (max-width: 768px) {
+  .compartir__item--large {
+    top: 5%;
+    left: -30px;
+  }
+}
+
+.compartir__mensaje {
+  position: absolute;
+  width: 45%;
+  right: 0;
+  top: 0;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.compartir__mensaje span {
+  font-weight: bold;
+}
+
+.compartir__redes {
+  text-align: center;
+  padding: 1em 3em;
 }
 

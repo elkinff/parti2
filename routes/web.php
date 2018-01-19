@@ -5,20 +5,13 @@ Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProvider
 
 Route::get('/', 'HomeController@index')->name('muro');
 
-// Route::get('/login', function () {
-//     return view('pages.auth.login');
-// });
-
-// Route::get('/register', function () {
-//     return view('pages.auth.register');
-// });
-
-// Route::get('/recuperar', function () {
-//     return view('pages.auth.recuperar');
-// });
 
 Route::get('/ejemplo', function () {
     return view('pages.dashboard.example');
+});
+
+Route::get('/credito', function () {
+    return view('pages.dashboard.credito');
 });
 
 

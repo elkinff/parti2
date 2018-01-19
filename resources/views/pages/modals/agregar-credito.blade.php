@@ -13,7 +13,7 @@
 			        {{ csrf_field() }}
 			        
 			        <div class="columns">
-			         	<div class="form-element sm-6">
+			         	<div class="form-element xs-6">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>
@@ -21,7 +21,7 @@
 			                </label>
 			            </div>
 
-			            <div class="form-element sm-6 ">
+			            <div class="form-element xs-6 ">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>
@@ -31,7 +31,7 @@
 			        </div>
 
 			        <div class="columns">
-			         	<div class="form-element sm-6">
+			         	<div class="form-element xs-6">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>
@@ -39,7 +39,7 @@
 			                </label>
 			            </div>
 
-			            <div class="form-element sm-6">
+			            <div class="form-element xs-6">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>
@@ -49,7 +49,7 @@
 			        </div>
 
 			        <div class="columns">
-			         	<div class="form-element sm-6">
+			         	<div class="form-element xs-6">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>
@@ -57,7 +57,7 @@
 			                </label>
 			            </div>
 
-			            <div class="form-element sm-6">
+			            <div class="form-element xs-6">
 			                <label class="radio fancy">
 			                    <input type="radio" name="radio" value="2">
 			                    <div></div>

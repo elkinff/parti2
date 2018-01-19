@@ -19,7 +19,7 @@
         
         <div class="form-element form__social">
 
-            <a class="btn border icon-svg sm-4">
+            <a class="btn border icon-svg" href="{{ route('social.auth', 'google') }}">
                 Iniciar con
                 <img src="{{ asset('img/google.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
             </a>

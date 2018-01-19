@@ -67,7 +67,7 @@
         padding: 0 8px;
         border-radius: $inputRadius;
         background: $inputFileButtonBackground;
-        color: $inputFileButtonColor;
+        color: $labelColor;
         font-size: 14px;
         font-weight: 500;
         position: relative;
@@ -78,7 +78,7 @@
         vertical-align: top;
         font-size: 14px;
         font-weight: 500;
-        color: $inputFileColor;
+        color: $labelColor;
     }
     &.active {
         .file-msg {

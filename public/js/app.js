@@ -10370,7 +10370,7 @@ return jQuery;
         if (filesCount === 1) {
             el.parentNode.querySelectorAll(".file-msg")[0].textContent = el.value.split("\\").pop();
         } else {
-            var textSelected = "files selected";
+            var textSelected = "Archivos";
             if (el.parentNode.querySelectorAll(".file-msg")[0].dataset.selected) {
                 textSelected = el.parentNode.querySelectorAll(".file-msg")[0].dataset.selected;
             }
@@ -10854,7 +10854,6 @@ if (buttonFiltros && nav) {
 
 	buttonFiltros.onclick = function () {
 		nav.classList.toggle('show');
-
 		$('#overlay').fadeToggle(200);
 	};
 
@@ -10863,6 +10862,12 @@ if (buttonFiltros && nav) {
 		$('#overlay').fadeToggle(200);
 	});
 }
+
+// Seleccion de equipos
+$(".img-check").click(function () {
+	$(".img-check").removeClass("check");
+	$(this).addClass("check");
+});
 
 /***/ }),
 /* 6 */

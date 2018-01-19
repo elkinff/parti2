@@ -10,6 +10,7 @@
 	padding: 1em;
 	overflow-y: scroll;
 	@include max('sm') {
+		min-height: calc(100vh - 70px);
 		height: auto;
 		padding:0.5em;
 	}

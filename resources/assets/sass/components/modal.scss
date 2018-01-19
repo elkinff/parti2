@@ -70,7 +70,7 @@
   filter: alpha(opacity=50);
 }
 .modal-header {
-  padding: 15px 15px 0 15px;
+  padding: 15px 15px 15px 25px;
   //background-color:red;
   //border-bottom: 1px solid #e5e5e5;
   // display: flex;
@@ -86,11 +86,14 @@
 }
 .modal-body {
   position: relative;
-  padding: 15px;
+  padding: 25px;
 }
 .modal-footer {
-  padding: 15px;
+  padding: 25px;
   text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
   //border-top: 1px solid #e5e5e5;
 }
 .modal-footer .btn + .btn {
@@ -112,7 +115,7 @@
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 470px;
+    width: 425px;
     margin: 30px auto;
   }
   .modal-content {

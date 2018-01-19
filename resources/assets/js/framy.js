@@ -16,7 +16,7 @@
         if(filesCount === 1) {
             el.parentNode.querySelectorAll(".file-msg")[0].textContent = el.value.split("\\").pop();
         } else {
-            var textSelected = "files selected";
+            var textSelected = "Archivos";
             if(el.parentNode.querySelectorAll(".file-msg")[0].dataset.selected) {
                 textSelected = el.parentNode.querySelectorAll(".file-msg")[0].dataset.selected;
             }

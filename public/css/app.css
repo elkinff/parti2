@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.image-round {
+  border-radius: 100%;
+}
+
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -452,6 +456,7 @@ nav ul {
 
 @media (max-width: 768px) {
   .content {
+    min-height: calc(100vh - 70px);
     height: auto;
     padding: 0.5em;
   }
@@ -665,7 +670,7 @@ fieldset[disabled] .form-field {
   padding: 0 8px;
   border-radius: 4px;
   background: #D1D7E4;
-  color: #fff;
+  color: #516881;
   font-size: 14px;
   font-weight: 500;
   position: relative;
@@ -677,7 +682,7 @@ fieldset[disabled] .form-field {
   vertical-align: top;
   font-size: 14px;
   font-weight: 500;
-  color: #c9d0d8;
+  color: #516881;
 }
 
 .form-file-field.active .file-msg {
@@ -1241,6 +1246,24 @@ form.horizontal .switch.inline {
   min-width: 26px;
   position: relative;
   left: 10px;
+}
+
+.btn.secondary {
+  background: #355C7D;
+}
+
+.btn.secondary:hover {
+  color: #fff;
+  background: #2c4c68;
+}
+
+.btn.secondary {
+  background: #355C7D;
+}
+
+.btn.secondary:hover {
+  color: #fff;
+  background: #2c4c68;
 }
 
 .btn.sm {
@@ -2244,6 +2267,13 @@ form.horizontal .form-element.center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.columns.between,
+form.horizontal .form-element.between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .columns [class^='sm'],
@@ -4175,7 +4205,7 @@ form.horizontal .form-element .last-xs {
 }
 
 .modal-header {
-  padding: 15px 15px 0 15px;
+  padding: 15px 15px 15px 25px;
 }
 
 .modal-header .close {
@@ -4189,12 +4219,21 @@ form.horizontal .form-element .last-xs {
 
 .modal-body {
   position: relative;
-  padding: 15px;
+  padding: 25px;
 }
 
 .modal-footer {
-  padding: 15px;
+  padding: 25px;
   text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .modal-footer .btn + .btn {
@@ -4220,7 +4259,7 @@ form.horizontal .form-element .last-xs {
 
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 470px;
+    width: 425px;
     margin: 30px auto;
   }
 
@@ -4525,7 +4564,7 @@ form.horizontal .form-element .last-xs {
 
 @media (max-width: 768px) {
   .form {
-    width: 90%;
+    width: 100%;
     padding: 2em;
     height: auto;
     padding-top: 50px;
@@ -4637,5 +4676,114 @@ form.horizontal .form-element .last-xs {
   to {
     opacity: 1;
   }
+}
+
+.credito__header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #E8EBF4;
+  padding-bottom: 0.5em;
+}
+
+@media (max-width: 768px) {
+  .credito__header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+.credito__user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+@media (max-width: 768px) {
+  .credito__user {
+    width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.credito__user img {
+  width: 55px;
+  height: 55px;
+}
+
+@media (max-width: 768px) {
+  .credito__user img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.credito__user div {
+  margin-left: 0.5em;
+}
+
+.credito__user label {
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .credito__user label {
+    font-size: 0.9em;
+  }
+}
+
+.credito__options {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .credito__options {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.img-check {
+  width: 90px;
+  margin: 0 1.5em;
+  padding: 0.5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.img-check.check {
+  background-color: #c9d0d8;
+  border-radius: 4px;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.equipos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 1em;
+  text-align: center;
 }
 

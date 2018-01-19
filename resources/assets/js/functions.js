@@ -5,7 +5,6 @@ if(buttonFiltros && nav) {
 	
 	buttonFiltros.onclick =  function () {
 		nav.classList.toggle('show');
-
 		$('#overlay').fadeToggle(200);
 	}
 
@@ -13,5 +12,10 @@ if(buttonFiltros && nav) {
 		nav.classList.toggle('show');		
 		$('#overlay').fadeToggle(200);
 	});
-	
 }
+
+// Seleccion de equipos
+$(".img-check").click(function(){
+	$(".img-check").removeClass("check");
+	$(this).addClass("check");
+});

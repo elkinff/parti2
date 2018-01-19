@@ -1,0 +1,21 @@
+.img-check {
+	width: 90px;
+	margin: 0 1.5em;
+	padding: 0.5em;
+    user-select: none;
+	@include transition();
+
+    &.check {
+        background-color: $dark25;
+        border-radius:$borderRadius;
+		transform: scale(1.2);
+    }
+}
+
+// Contenedor de equipos
+.equipos {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1em;
+	text-align:center;
+}

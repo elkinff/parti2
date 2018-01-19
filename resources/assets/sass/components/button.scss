@@ -63,6 +63,24 @@
         left: 10px;
     }
 
+    &.secondary {
+        background: $primary;
+
+        &:hover {
+            color: #fff;
+            background: darken($primary, 6%);
+        }
+    }
+
+      &.secondary {
+        background: $primary;
+
+        &:hover {
+            color: #fff;
+            background: darken($primary, 6%);
+        }
+    }
+
 
     &.sm {
         font-size: 14px;

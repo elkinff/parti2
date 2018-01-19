@@ -1,0 +1,57 @@
+.credito__header {
+	width: 100%;
+	display: flex;
+	align-items:center;
+	margin-bottom: 1em;
+	border-bottom: 2px solid $line;
+	padding-bottom: 0.5em;
+	@include max('sm') {
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+}	
+
+.credito__user {
+	display: flex;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	@include max('sm') {
+		width: 100%;
+		justify-content: center;
+		//background-color: pink;
+	}
+
+	img {
+		width: 55px;
+		height: 55px;
+		@include max('sm') {
+			width: 50px;
+			height: 50px;
+		}
+	}
+
+	div  {
+		margin-left:0.5em;
+	}
+
+	label {
+		font-size: 1.2em;
+		@include max('sm') {
+			font-size: 0.9em;
+		}
+	}
+	
+}
+
+.credito__options {
+	margin-left: auto;
+	@include max('sm') {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		//background-color: teal;
+	}
+
+}
+
+

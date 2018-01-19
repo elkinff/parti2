@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration{
             $table->string('password')->nullable();
             $table->string('nombre', 90);
             $table->bigInteger('celular')->nullable();
-            $table->string('foto', 60)->nullable();
+            $table->string('foto', 120)->nullable();
             $table->string('id_google', 45)->nullable();
             $table->string('id_facebook', 45)->nullable();
             $table->bigInteger('saldo')->default('0');

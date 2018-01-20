@@ -39,6 +39,6 @@ class SocialAuthController extends Controller{
     // Login y redirección
     public function authAndRedirect($user){
         Auth::login($user);
-        return redirect()->to('muro');
+        return redirect()->to('/');
     }
 }

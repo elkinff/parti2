@@ -110,7 +110,6 @@ return [
 
     'attributes' => [
         'password' => 'Contraseña',
-        // "password_confirmation" => "Confirmar Contraseña",
         "email" => "Correo Electrónico"
     ],
 ];

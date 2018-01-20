@@ -97,8 +97,8 @@
                 {{-- Header Table --}}
                 <table  style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;" bgcolor="#355C7D">
                   <tr>
-                    <td style="font-size: 30px; text-align:center;padding: 20px 0">
-                        <img src="{{ asset('img/logo_blanco.svg') }}" width="50%">
+                    <td style="font-size: 30px; text-align:center;padding-top: 10px">
+                        <img src="{{ $message->embed('img/email/logo__blanco.png') }}" width="45%" alt="parti2">
                     </td>
                   </tr>
                 </table>
@@ -107,12 +107,15 @@
                 <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" bgcolor="#fff">
                   <tr>
                     <td>
+                      <br>
                       {{-- <img src="{{ asset('img/users.svg') }}" width="216" height="270" alt="Partidos"> --}}
-                      @yield('imagen')
+                      <center>
+                        @yield('imagen')
+                      </center>
                     </td>
                   </tr>
                   <tr>
-                    <td class="headline">
+                    <td class="headline" style="color: #355C7D;font-size: 30px; text-align: center;">
                       @yield('titulo')
                     </td>
                   </tr>
@@ -122,7 +125,7 @@
                       <center>
                         <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="60%">
                           <tr>
-                            <td style="color:#7d8da0; padding-bottom: 20px">
+                            <td style="color:#7d8da0; padding-bottom: 20px; text-align: center;">
                              @yield('descripcion')
                             </td>
                           </tr>
@@ -139,10 +142,12 @@
                           <center>
                         <![endif]-->
                             {{-- Boton de acción --}}
-                            <a href="@yield('ruta__boton')"
-                      style="background-color:#F67280;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;padding:0 30px;-webkit-text-size-adjust:none;">
-                          @yield('texto__boton')
-                        </a>
+                            <center>
+                              <a href="@yield('ruta__boton')"
+                            style="background-color:#F67280;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;padding:0 30px;-webkit-text-size-adjust:none;">
+                                @yield('texto__boton')
+                              </a>  
+                            </center>
 
                         <!--[if mso]>
                           </center>
@@ -153,32 +158,23 @@
                   </tr>
                 </table>
                 
-                {{-- Bottom Table --}}
-                <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" class="force-full-width" bgcolor="#22425F" style="margin: 0 auto">
-                  <tr>
-                    <td style="background-color:#22425F;">
-                    <br>
-                    <br>
-                      <img src="{{ $message->embed('img/facebook.svg') }}" alt="facebook">
-                      <img src="{{ asset('img/twitter.svg') }}" alt="twitter">
-                      <br>
-                      <br>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="color:#bbbbbb; font-size:12px;">
-                      <a href="#">Contáctanos</a>
-                      <br><br>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="color:#bbbbbb; font-size:12px;">
-                       © 2018 Todos los derechos reservados
-                       <br>
-                       <br>
-                    </td>
-                  </tr>
+                 <!-- --Start social network-- -->
+                <table  style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;" bgcolor="#355C7D" class="force-full-width">
+                    <tr class="force-full-width">
+                      <td style="text-align: center; padding-top: 20px; width: 100%">
+                        <a href=""><img src="{{ $message->embed('img/email/facebook.png') }}"></a>
+                        <a href=""><img src="{{ $message->embed('img/email/twitter.png') }}"></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 16px; color: #fff; text-align:center;padding: 20px 0">
+                        <a href="" style="color: #fff;width: 100%">Si necesitas ayuda contáctonos en hola@parti2.com</a>
+                      </td>
+                    </tr>
                 </table>
+                <br>
+                <center>Todos los derechos reservados <a href="http://parti2.com" target="_blank">Parti2.com</a></center>
+                  <!-- --End social network-- -->
             </td>
           </tr>
         </table>

@@ -2,13 +2,12 @@
 
 @section('imagen')
 	@if($imagen == 'recuperacion')
-		<img src="{{ asset('img/recuperar.svg') }}" width="216" height="270" alt="Partidos">
+		<img src="{{ $message->embed('img/email/recuperar.png') }}" width="170"  alt="Partidos">
 	@else 
-		<img src="{{ asset('img/users.svg') }}" width="216" height="270" alt="Partidos">
+		<img src="{{ $message->embed('img/email/users.png') }}" width="170" alt="Partidos">
 	@endif
 	
 @endsection
-
 
 @section('titulo',$titulo)
 

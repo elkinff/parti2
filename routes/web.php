@@ -16,7 +16,7 @@ Route::get('/credito', function () {
 
 
 Route::get('/email', function () {
-    return view('emails.bienvenida');
+    return view('emails.email-example');
 });
 
 

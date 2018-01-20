@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Partidos</title>
+  <title>Parti2</title>
   
   <style type="text/css">
     @import url(https://fonts.googleapis.com/css?family=Poppins:400,700,800);
@@ -159,7 +159,7 @@
                     <td style="background-color:#22425F;">
                     <br>
                     <br>
-                      <img src="{{ asset('img/facebook.svg') }}" alt="facebook">
+                      <img src="{{ $message->embed('img/facebook.svg') }}" alt="facebook">
                       <img src="{{ asset('img/twitter.svg') }}" alt="twitter">
                       <br>
                       <br>

@@ -1,7 +1,7 @@
 @extends('emails.template-email')
 
 @section('imagen')
-	<img src="{{ asset('img/avatar.png') }}" width="216" height="270" alt="Partidos">
+	<img src="{{ asset('img/users.svg') }}" width="216" height="270" alt="Partidos">
 @endsection
 
 

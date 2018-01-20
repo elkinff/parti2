@@ -168,7 +168,7 @@
                     </tr>
                     <tr>
                       <td style="font-size: 16px; color: #fff; text-align:center;padding: 20px 0">
-                        <a href="" style="color: #fff;width: 100%">Si necesitas ayuda contáctonos en hola@parti2.com</a>
+                        <a href="" style="color: #fff;width: 100%">Si necesitas ayuda contáctanos en hola@parti2.com</a>
                       </td>
                     </tr>
                 </table>

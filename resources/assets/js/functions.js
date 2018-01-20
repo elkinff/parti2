@@ -19,3 +19,25 @@ $(".img-check").click(function(){
 	$(".img-check").removeClass("check");
 	$(this).addClass("check");
 });
+
+
+var $loaderLink = document.querySelector(".loaderLink");
+
+$('.form').on('submit', function() {
+    if (this.checkValidity() == false) {
+        return false;
+    }else {
+    	if ($loaderLink) {	  
+    		
+	    	$loaderLink.classList.add("disabled");
+	    	$loaderLink.innerHTML = " Cargando ...";
+	    	$loaderLink.disabled = true;
+		}
+    }
+
+});
+
+
+
+
+

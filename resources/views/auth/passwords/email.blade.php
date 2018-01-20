@@ -8,11 +8,6 @@
     {{-- Forma Azul --}}
     <img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
     
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
 
     <form class="form" method="POST" action="{{ route('password.email') }}">
         {{ csrf_field() }}
@@ -34,8 +29,14 @@
         </div>
 
         <div>
-            <button class="btn block center">Recuperar</button>
+            <button class="btn block center loaderLink">Recuperar</button>
         </div>
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
 
         <div class="form__links">
             <a href="{{ url('login') }}">Iniciar Sesión</a>

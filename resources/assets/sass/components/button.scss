@@ -81,6 +81,15 @@
         }
     }
 
+    &.disabled {
+        cursor: default;
+        background: rgba($secondary, 0.6);
+        &:hover {
+            background: rgba($secondary, 0.6);
+            @include transform(0);
+        }
+    }
+
 
     &.sm {
         font-size: 14px;

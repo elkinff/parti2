@@ -8,7 +8,7 @@
     
     <img src="{{ asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
 
-    <form class="form" method="POST" action="{{ route('register') }}">
+    <form class="form" method="POST" action="{{ route('register.user') }}">
         
         {{ csrf_field() }}
 

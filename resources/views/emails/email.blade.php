@@ -3,7 +3,9 @@
 @section('imagen')
 	@if($imagen == 'recuperacion')
 		<img src="{{ $message->embed('img/email/recuperar.png') }}" width="170"  alt="Partidos">
-	@else 
+	@elseif($imagen == 'validacion') 
+		<img src="{{ $message->embed('img/email/users.png') }}" width="170" alt="Partidos">
+	@else
 		<img src="{{ $message->embed('img/email/users.png') }}" width="170" alt="Partidos">
 	@endif
 	

@@ -6,9 +6,11 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail;
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
-class RegisterController extends Controller
-{
+class RegisterController extends Controller{
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -61,13 +63,71 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'nombre' => $data['nombre'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'celular' => $data['celular']
+    protected function create(array $data){
+        // $this->user = User::create([
+        //     'nombre' => $data['nombre'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        //     'celular' => $data['celular']
+        // ]);
+
+        // $imagen = "validacion";
+        // $titulo = "Activa tu cuenta de Parti2!";
+        // $descripcion = "Parti2 es una aplicación donde podrás ganar dinero con tu equipo favorito en tres simples pasos, para activar tu cuenta sigue el link del siguiente boton"; 
+        // $labelButton = "Empieza ya!";
+
+        // $url = url("/activar/".$this->user->email."/".$this->user->remember_token);
+        
+        // Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
+        //     $message->subject('Bienvenido '.$this->user->nombre);
+        //     $message->to($this->user->email);
+        // });
+
+        // return $this->user;
+    }
+
+    public function createUser(UserRequest $request){
+        $this->user = User::create([
+            'nombre' => $request['nombre'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'celular' => $request['celular'],
+            'token' => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 50)
         ]);
+
+        $imagen = "validacion";
+        $titulo = "Activa tu cuenta de Parti2!";
+        $descripcion = "Para activar tu cuenta sigue el enlace del siguiente botón"; 
+        $labelButton = "Empieza ya!";
+            
+        $url = url("activar/".$this->user->id."/".$this->user->token);
+        Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
+            $message->subject('Activa tu cuenta '.$this->user->nombre);
+            $message->to($this->user->email);
+        });
+
+        return redirect()->to("login");
+
+    }
+
+    public function activarUser($id, $token){
+        $this->user = User::whereId($id)->whereToken($token)->first();
+        if ($this->user) {
+            $this->user->validado = 1;
+            $this->user->save();
+
+            $imagen = "bienvenida";
+            $titulo = "Bienvenido!";
+            $descripcion = "Parti2 es una aplicación donde podrás ganar dinero con tu equipo favorito en tres simples pasos"; 
+            $labelButton = "Empieza ya!";
+
+            $url = url("/");
+            
+            Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
+                $message->subject('Bienvenido '.$this->user->nombre);
+                $message->to($this->user->email);
+            });
+        }
+        return redirect()->to("login");
     }
 }

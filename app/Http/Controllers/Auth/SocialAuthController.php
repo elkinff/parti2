@@ -8,6 +8,7 @@ use Socialite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Redirect;
+use Mail;
 
 class SocialAuthController extends Controller{
     
@@ -26,13 +27,30 @@ class SocialAuthController extends Controller{
             return $this->authAndRedirect($user); // Login y redirección
         } else {  
             // En caso de que no exista creamos un nuevo usuario con sus datos.
-            $user = User::create([
+            $this->user = User::create([
                 'nombre' => $social_user->name,
                 'email' => $social_user->email,
                 'foto' => $social_user->avatar_original,
-                'id_'.$provider => $social_user->id
+                'id_'.$provider => $social_user->id,
+                'validado' => 1
             ]);
-            return $this->authAndRedirect($user); // Login y redirección
+
+            //Envio de correo de bienvenida
+            $imagen = "bienvenida";
+            $titulo = "Bienvenido!";
+            $descripcion = "Parti2 es una aplicación donde podrás ganar dinero con tu equipo favorito en tres simples pasos"; 
+            $labelButton = "Empieza ya!";
+
+            $url = url("/");
+            
+            Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
+                $message->subject('Bienvenido '.$this->user->nombre);
+                $message->to($this->user->email);
+            });
+
+            // Login y redirección
+            Auth::login($this->user);
+            return redirect()->to('/');
         }
     }
 

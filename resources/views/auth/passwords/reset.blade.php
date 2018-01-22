@@ -15,6 +15,7 @@
             <h2>Cambiar Contraseña</h2>    
         </div>
 
+        <input type="hidden" name="token" value="{{ $token }}">
 
        <div class="form-element">
             <label>Correo Electrónico</label>

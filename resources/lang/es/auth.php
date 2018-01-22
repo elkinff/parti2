@@ -10,6 +10,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+    'failed' => 'Estas credenciales no coinciden con nuestros registros o no has activado la cuenta.',
     'throttle' => 'Demasiados intentos de inicio de sesión. Vuelva a intentarlo en :seconds segundos.',
 ];

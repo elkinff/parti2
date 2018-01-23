@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Alert;
+
 
 class RegisterController extends Controller{
     /*
@@ -105,6 +107,8 @@ class RegisterController extends Controller{
             $message->subject('Activa tu cuenta '.$this->user->nombre);
             $message->to($this->user->email);
         });
+
+        Alert::info('Revisa tu bandeja de entrada para activar tu cuenta de Parti2');
 
         return redirect()->to("login");
 

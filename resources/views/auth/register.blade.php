@@ -76,7 +76,7 @@
         </div>
 
         <div>
-            <button class="btn block center">Registrarse</button>
+            <button class="btn block center loaderLink">Registrarse</button>
         </div>
         
         <div class="form__links">

@@ -4,12 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "hash": "45ed038ef30bd18796f8e1d9bab08144",
-    "content-hash": "53c650ad5d3d2cc01cbbec0d8e5900df",
-=======
-    "content-hash": "07c983f497d9ee7db9524879a58610c8",
->>>>>>> a9a76f81417c8d9316cfb8d085a59ab3742e8245
+    "hash": "2ef125a39c49f1fd177ab42dbec3c20a",
+    "content-hash": "b8c444ff1bd501883b3a8994130c1642",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -789,7 +785,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2017-12-07T22:15:01+00:00"
+            "time": "2017-12-07 22:15:01"
         },
         {
             "name": "laravel/socialite",
@@ -1680,11 +1676,7 @@
                 "identifier",
                 "uuid"
             ],
-<<<<<<< HEAD
-            "time": "2018-01-13 22:22:03"
-=======
-            "time": "2018-01-20T00:28:24+00:00"
->>>>>>> a9a76f81417c8d9316cfb8d085a59ab3742e8245
+            "time": "2018-01-20 00:28:24"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4307,6 +4299,62 @@
             "time": "2016-10-03 07:35:21"
         },
         {
+            "name": "softon/sweetalert",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/softon/sweetalert.git",
+                "reference": "685896b0d46aeea761938c0fca45bc869e55126d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/softon/sweetalert/zipball/685896b0d46aeea761938c0fca45bc869e55126d",
+                "reference": "685896b0d46aeea761938c0fca45bc869e55126d",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0|~6.0",
+                "illuminate/support": "~5.0|~6.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Softon\\SweetAlert\\SweetAlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "SWAL": "Softon\\SweetAlert\\Facades\\SWAL"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Softon\\SweetAlert\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shiburaj",
+                    "email": "powerupneo@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Package for SweetAlert2. Use this package to easily show sweetalert2 prompts in your laravel app.",
+            "keywords": [
+                "POPUP BOXES",
+                "laravel 5",
+                "sweetalert2"
+            ],
+            "time": "2017-12-03 14:34:40"
+        },
+        {
             "name": "symfony/thanks",
             "version": "v1.0.3",
             "source": {
@@ -4347,11 +4395,7 @@
                 }
             ],
             "description": "Give thanks (in the form of a GitHub ⭐) to your fellow PHP package maintainers (not limited to Symfony components)!",
-<<<<<<< HEAD
-            "time": "2018-01-10 15:41:47"
-=======
-            "time": "2018-01-19T16:12:41+00:00"
->>>>>>> a9a76f81417c8d9316cfb8d085a59ab3742e8245
+            "time": "2018-01-19 16:12:41"
         },
         {
             "name": "theseer/tokenizer",

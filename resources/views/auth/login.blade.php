@@ -5,7 +5,9 @@
 @endsection
 
 @section('form__auth')
-    
+
+
+
     {{-- Forma Azul --}}
     <img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
 

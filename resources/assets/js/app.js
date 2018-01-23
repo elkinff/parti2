@@ -12,7 +12,7 @@ window.$ = window.jQuery = require('jquery');
 require('./framy');
 require('./modal');
 require('./functions');
-import swal from 'sweetalert';
+require('./sweetalert');
 
 
 

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
-use Alert;
+use Softon\SweetAlert\Facades\SWAL;  
 
 
 class RegisterController extends Controller{
@@ -108,7 +108,7 @@ class RegisterController extends Controller{
             $message->to($this->user->email);
         });
 
-        Alert::info('Revisa tu bandeja de entrada para activar tu cuenta de Parti2');
+        alert()->info('Revisa tu bandeja de entrada para activar tu cuenta de Parti2','Registro exitoso !')->persistent("Aceptar");
 
         return redirect()->to("login");
 

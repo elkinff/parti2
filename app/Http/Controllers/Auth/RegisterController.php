@@ -108,7 +108,7 @@ class RegisterController extends Controller{
             $message->to($this->user->email);
         });
 
-        alert()->info('Revisa tu bandeja de entrada para activar tu cuenta de Parti2','Registro exitoso !')->persistent("Aceptar");
+        alert()->info('Revisa tu bandeja de entrada para activar tu cuenta de Parti2','Registro exitoso !');
 
         return redirect()->to("login");
 

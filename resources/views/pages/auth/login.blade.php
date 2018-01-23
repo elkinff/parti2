@@ -6,6 +6,9 @@
 
 @section('form__auth')
 	
+     <!-- Include this after the sweet alert js file -->
+    @include('sweet::alert')
+
 	{{-- Forma Azul --}}
 	<img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
 

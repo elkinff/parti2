@@ -13,7 +13,6 @@
 
 @section('titulo',$titulo)
 
-
 @section('descripcion')
 	{{ $descripcion }}
 @endsection
@@ -21,5 +20,3 @@
 @section('texto__boton', $labelButton)
 
 @section('ruta__boton', $url)
-
-

@@ -58,7 +58,7 @@
         </div>
 
         <div>
-            <button class="btn block center">Ingresar</button>
+            <button class="btn block center loaderLink">Ingresar</button>
         </div>
         
         <div class="form__links">

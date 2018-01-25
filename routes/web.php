@@ -11,19 +11,12 @@ Route::get('activar/{id}/{token}', 'Auth\RegisterController@activarUser')->name(
 //Parti2
 Route::get('/', 'HomeController@index')->name('muro');
 
+//Publicar Partido
+Route::get('publicar', 'PartidoController@index')->name('publicar.partido');
+Route::get('partidos', 'PartidoController@getPartidos')->name('get.partido');
+
 //Credito
 Route::get('credito', 'CreditoController@index');
-
-
-
-
-Route::get('/ejemplo', function () {
-    return view('pages.dashboard.example');
-});
-
-// Route::get('/credito', function () {
-//     return view('pages.dashboard.credito');
-// });
 
 
 Route::get('/email', function () {

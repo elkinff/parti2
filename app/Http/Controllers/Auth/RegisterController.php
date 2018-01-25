@@ -10,7 +10,7 @@ use Mail;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Softon\SweetAlert\Facades\SWAL;  
-
+use Auth;
 
 class RegisterController extends Controller{
     /*
@@ -66,29 +66,11 @@ class RegisterController extends Controller{
      * @return \App\User
      */
     protected function create(array $data){
-        // $this->user = User::create([
-        //     'nombre' => $data['nombre'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        //     'celular' => $data['celular']
-        // ]);
 
-        // $imagen = "validacion";
-        // $titulo = "Activa tu cuenta de Parti2!";
-        // $descripcion = "Parti2 es una aplicación donde podrás ganar dinero con tu equipo favorito en tres simples pasos, para activar tu cuenta sigue el link del siguiente boton"; 
-        // $labelButton = "Empieza ya!";
-
-        // $url = url("/activar/".$this->user->email."/".$this->user->remember_token);
-        
-        // Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-        //     $message->subject('Bienvenido '.$this->user->nombre);
-        //     $message->to($this->user->email);
-        // });
-
-        // return $this->user;
     }
 
     public function createUser(UserRequest $request){
+        
         $this->user = User::create([
             'nombre' => $request['nombre'],
             'email' => $request['email'],
@@ -131,7 +113,10 @@ class RegisterController extends Controller{
                 $message->subject('Bienvenido '.$this->user->nombre);
                 $message->to($this->user->email);
             });
+
+            Auth::login($this->user);
         }
-        return redirect()->to("login");
+        return redirect()->to('/');
+        // return redirect()->to("login");
     }
 }

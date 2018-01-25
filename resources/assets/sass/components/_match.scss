@@ -33,33 +33,10 @@
 	}
 
 	&__equipo {
-		width: 50%;
+		width: 47%;
 		padding: 1em;
 		padding-bottom:3em;
 		background-color:#fff;
-		
-
-		// &:first-child  {
-		// 	width: 65%;
-		// 	padding-right: 15%;
-		// 	background-color: #F2F2F2;
-		// 	background-color: $dark25;
-		// 	clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
-		// 	z-index: 10;
-		// }
-		
-
-		// &:nth-child(2) {
-		// 	//transform: translateX(-5%);
-		// 	//background-color:red;
-		// 	clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
-
-		// }
-
-		&:first-child  {
-			//background-color: $dark25;
-			z-index: 10;
-		}
 		
 
 		&:nth-child(2) *{
@@ -77,11 +54,7 @@
 
 
 		&__escudo {
-			//width: 50px;
-			img {
-				width: 50px;
-			}
-			//margin:0 auto;
+			width: 50px;
 		}
 
 		&__nombre {

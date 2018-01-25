@@ -34,7 +34,7 @@
 				<div class="match__equipo">
 
 					<div class="match__equipo__escudo">
-						<img :src="match.imageHomeTeam">
+						<img :src="match.imageHomeTeam" width="50">
 					</div>
 
 					<div class="match__equipo__nombre">
@@ -46,7 +46,7 @@
 
 				<div class="match__equipo">
 					<div class="match__equipo__escudo">
-						<img :src="match.imageAwayTeam">
+						<img :src="match.imageAwayTeam" width="50">
 					</div>
 
 					<div class="match__equipo__nombre">

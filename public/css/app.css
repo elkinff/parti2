@@ -4407,14 +4407,10 @@ form.horizontal .form-element .last-xs {
 }
 
 .match__equipo {
-  width: 50%;
+  width: 47%;
   padding: 1em;
   padding-bottom: 3em;
   background-color: #fff;
-}
-
-.match__equipo:first-child {
-  z-index: 10;
 }
 
 .match__equipo:nth-child(2) * {
@@ -4428,7 +4424,7 @@ form.horizontal .form-element .last-xs {
   cursor: pointer;
 }
 
-.match__equipo__escudo img {
+.match__equipo__escudo {
   width: 50px;
 }
 

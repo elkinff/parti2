@@ -46,7 +46,110 @@
 					24 de Febrero 2018
 				</div>
 				<div class="match__content">
+					<div class="match__equipo ">
+
+						<div class="match__equipo__escudo">
+							<img src="{{ asset('img/medellin.svg') }}">
+						</div>
+
+						<div class="match__equipo__nombre">
+							Real Cartegena
+						</div>
+
+						<div class="match__equipo__usuario">
+							{{-- Oscar Soler  --}}
+						</div>	
+
+					</div>
+
+
+					<div class="match__equipo match__equipo--selected">
+						<div class="match__equipo__escudo">
+							<img src="{{ asset('img/millonarios.svg') }}">
+						</div>
+
+						<div class="match__equipo__nombre">
+							Millonarios FC
+						</div>
+
+						<div class="match__equipo__usuario">
+							Oscar Soler 
+						</div>	
+
+					</div>
+				</div>
+				<div class="match__vs">
+					VS
+				</div>
+
+				<div class="match__price">$50.000</div>
+			</div>
+
+		{{-- @endfor --}}
+		
+	</div>
+
+
+	<div class="container__matchs">
+		{{-- @for($i=0; $i < 20; $i++) --}}
+			
+			<div class="match match--publicar">
+				<div class="match__header">
+					24 de Febrero 2018
+				</div>
+				<div class="match__content">
+					<div class="match__equipo ">
+
+						<div class="match__equipo__escudo">
+							<img src="{{ asset('img/medellin.svg') }}">
+						</div>
+
+						<div class="match__equipo__nombre">
+							Ind Medellín
+						</div>
+
+						<div class="match__equipo__usuario">
+							{{-- Oscar Soler  --}}
+						</div>	
+
+					</div>
+
+
 					<div class="match__equipo">
+						<div class="match__equipo__escudo">
+							<img src="{{ asset('img/millonarios.svg') }}">
+						</div>
+
+						<div class="match__equipo__nombre">
+							Millonarios FC
+						</div>
+
+						<div class="match__equipo__usuario">
+						</div>	
+
+					</div>
+				</div>
+				<div class="match__vs">
+					VS
+				</div>
+
+				{{-- <div class="match__price">$50.000</div> --}}
+			</div>
+
+		{{-- @endfor --}}
+		
+	</div>
+
+
+		<div class="container__matchs">
+		{{-- @for($i=0; $i < 20; $i++) --}}
+			
+			<div class="match">
+				<div class="match__header">
+					24 de Febrero 2018
+				</div>
+				<div class="match__content">
+					<div class="match__equipo match__equipo--selected">
 
 						<div class="match__equipo__escudo">
 							<img src="{{ asset('img/medellin.svg') }}">
@@ -73,7 +176,7 @@
 						</div>
 
 						<div class="match__equipo__usuario">
-							Oscar Soler 
+							{{-- Oscar Soler  --}}
 						</div>	
 
 					</div>
@@ -82,12 +185,14 @@
 					VS
 				</div>
 
-				<div class="match__price">$50.000</div>
+				<div class="match__price match__price--visitante">$50.000</div>
+
 			</div>
 
 		{{-- @endfor --}}
 		
 	</div>
+
 
 
 

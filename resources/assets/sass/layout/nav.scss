@@ -1,6 +1,6 @@
 .nav {
 	width: $widthNav;
-	max-width: 300px;
+	max-width: 350px;
 	height: calc(100vh - 70px);
 	display: inline-block;
 	background-color: $primary;
@@ -9,6 +9,7 @@
 		left: 0;
 		top: 0;
 		height: 100%;
+		max-width: 75%;
 		position: fixed;
 		//background-color: red;
 		z-index: 50;

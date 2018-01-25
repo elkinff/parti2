@@ -7,10 +7,7 @@
 		
 		@include('includes._header')
 		
-		
-		
-		
-		<main class="container__main">
+		<main class="container__main" id="app">
 			{{-- Si hay nav  --}}
 
 			@yield('nav_bar')

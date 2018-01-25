@@ -16,6 +16,7 @@ if(buttonFiltros && nav) {
 
 // Seleccion de equipos
 $(".img-check").click(function(){
+	//console.log("hola mundos");
 	$(".img-check").removeClass("check");
 	$(this).addClass("check");
 });

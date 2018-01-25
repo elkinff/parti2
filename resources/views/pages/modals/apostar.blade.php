@@ -58,7 +58,7 @@
 
 			<div class="modal-footer">
 				<button class="btn border" data-toggle="modal" data-target="#modalApostar">Cancelar</button>
-				<span>Tu crédito es de $100.0000</span>
+				<span>Tu crédito es de $100.0000 !</span>
 			</div>
 	    </div>
 	</div>

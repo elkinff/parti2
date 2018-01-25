@@ -1,0 +1,16 @@
+#buttonFiltros {
+	display: none;
+	@include max('sm') {
+		display: block;
+	}
+}
+
+.busqueda__equipo {
+	margin: 0 auto;
+	margin-bottom: 2em;
+	margin-top: 1em;
+	max-width: 50%;
+	@include max('sm') {
+		max-width: 100%;
+	}
+}

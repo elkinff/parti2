@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use Cache;
 use DateTime;
 use App\Equipo;
+use App\Partido;
 
 class PartidoController extends Controller{
 	
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
 	public function index(){
 		return view("pages.dashboard.publicar");
 	}
@@ -26,7 +31,7 @@ class PartidoController extends Controller{
 			foreach ($competiciones as $competicion) {
 				$urlApi = "http://api.football-data.org/v1/fixtures?timeFrameStart=".$fechaHoy."&timeFrameEnd=".$fechaFinal."&league=".$competicion;	
 				$reqPrefs['http']['method'] = 'GET';
-		    	$reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
+		    	// $reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
 			    $stream_context = stream_context_create($reqPrefs);
 			    $response = file_get_contents($urlApi, false, $stream_context);
 			    $fixturesCompetition = json_decode($response);
@@ -45,12 +50,15 @@ class PartidoController extends Controller{
 				$fixture->idAwayTeam = $idAwayTeam;
 				$fixture->imageHomeTeam = Equipo::getImagenEquipo($idHomeTeam, $fixture->_links->homeTeam->href);
 				$fixture->imageAwayTeam = Equipo::getImagenEquipo($idAwayTeam, $fixture->_links->awayTeam->href);
-				
+				$fixture->date_show = Partido::setDateMatch($fixture->date);
 				return $fixture;
 			});
-		   	Cache::put('fixtures',$fixturesFinal->collapse(), $ultimaHora);	
+		   	Cache::put('fixtures', $fixturesFinal->collapse(), $ultimaHora);	
 	    }
-
-	    return response()->json(Cache::get("fixtures"));
+	    $sortFixtures = Cache::get("fixtures")->toArray();
+	   	usort($sortFixtures, function($a, $b) {
+   			return (strtotime($a->date) < strtotime($b->date) ? -1 : 1);
+ 		});
+ 		return $sortFixtures;
 	}   
 }

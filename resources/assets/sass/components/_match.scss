@@ -33,13 +33,18 @@
 	}
 
 	&__equipo {
-		width: 47%;
-		padding: 1em;
+		width: 50%;
+		padding: 1em 0.5em;
 		padding-bottom:3em;
+		text-align: center;
+		
 
-		&:nth-child(2) *{
-			text-align: right;
-			margin-left: auto;
+		&:first-child{
+			padding-right: 10%;
+		}
+
+		&:nth-child(2){
+			padding-left: 10%;
 		}
 
 		&--selected {
@@ -53,8 +58,12 @@
 		&__escudo {
 			width: 50px;
 			height: 50px;
+			margin: 0 auto;
+			//background-color: red;
 
 			.image__team {
+				margin: 0 auto;
+				display: block;
 				height: 50px;
 				background-size: contain;
 				background-position: center;
@@ -64,7 +73,7 @@
 
 		&__nombre {
 			font-weight: bold;
-			text-align: left;
+			text-align: center;
 			margin:0;
 			color: $primary;
 			width: 100%;
@@ -78,7 +87,7 @@
 
 		&__usuario {
 			font-weight: light;
-			text-align: left;
+			text-align: center;
 			margin:0;
 			font-size: 0.85em;
 			line-height: 0.9em;

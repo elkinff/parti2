@@ -8,6 +8,9 @@ window.Vue = require('vue');
 
 
 import VueCurrencyFilter from 'vue-currency-filter';
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
 
 Vue.use(VueCurrencyFilter, 
 {
@@ -19,7 +22,31 @@ Vue.use(VueCurrencyFilter,
   symbolSpacing: false
 });
 
-//Vue.component('example', require('./components/ExampleComponent.vue'));
+const dictionary = {
+  es: {
+    messages: {
+      required: (field) => "El campo " + field +" es requerido"
+    }
+  }
+};
+// console.log(VeeValidate.Validator);
+VeeValidate.Validator.localize(dictionary);
+VeeValidate.Validator.localize('es'); // now this validator will generate messages in arabic.
+
+// Vue.component('example', require('./components/ExampleComponent.vue'));
+
+VeeValidate.Validator.extend('prueba', {
+    getMessage: field => `Deben ser multiplos de $10.000 ($20.000, $50.000)`,
+    validate: value => {
+        value = value.replace(/,/g, '').replace(/\$/g, '');
+        if((value % 10000) == 0  ){
+            return true;
+        }else {
+            return false;
+        }
+        
+    }
+});
 
 // Vista de publicar
 const app = new Vue({
@@ -33,7 +60,10 @@ const app = new Vue({
     	retencion_parti2 : '5',
     	search:'',
 
-    	matchUser: {}
+    	matchUser: {},
+        prueba:'',
+
+
 
     },
 
@@ -43,8 +73,12 @@ const app = new Vue({
 
     computed:{
 	 	totalGanancia() {
-	 		var porcentajeParti2 = (this.apuesta * 2 / 100) * this.retencion_parti2;
-	    	return (this.apuesta * 2) - porcentajeParti2;
+            var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
+
+	 		var porcentajeParti2 = (apuestaUsuario * 2 / 100) * this.retencion_parti2;
+            
+	    	return (apuestaUsuario * 2) - porcentajeParti2;
+
 	    },
 
 	    filteredMatch:function() {
@@ -57,6 +91,9 @@ const app = new Vue({
     },
 
     methods: {
+        upper(e) {
+            e.target.value = this.prueba.toUpperCase()
+        },
 
     	getMatchs() {
     		var urlMatchs = 'partidos';
@@ -70,12 +107,17 @@ const app = new Vue({
 
     	detailMatch(match) {
     		console.log(match);
+            this.apuesta = '';
     		this.auxMatch = match;
     	},
 
     	savaMatch() {
     		var urlSaveMatch = ''; 
     		
+            if(!this.apuesta) {
+                errors.apuesta = "Valor requerido";
+            }
+
     		this.matchUser = this.auxMatch;
     		this.matchUser.valor = this.apuesta
     		this.matchUser.valor_ganado = this.totalGanancia;
@@ -102,6 +144,8 @@ require('./framy');
 require('./functions');
 require('./modal');
 require('./sweetalert');
+
+
 
 
 

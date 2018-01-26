@@ -24,5 +24,11 @@ Route::get('/email', function () {
 });
 
 
+Route::get('/ejemplo', function () {
+    return view('pages.dashboard.example');
+});
+
+
+
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

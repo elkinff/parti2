@@ -45,17 +45,18 @@
 			        </div>
 
 			        <div class="form-element">
-			            <label>Valor</label>
+			            <label>Valor (COP)</label>
 			            <div>
-			                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" required
-								v-model='apuesta'
-			                >
 
-			                @if ($errors->has('celular'))
-			                    <span class="">
-			                        {{ $errors->first('celular') }}
-			                    </span>
-			                @endif
+			                <input type="text" :value="apuesta" name="apuesta" class="form-field"
+			                	v-validate="'required|prueba'"
+			                	@input="apuesta = $options.filters.currency($event.target.value)"
+			                	:class="{'error': errors.has('apuesta') }"
+			                	>
+							<span v-show="errors.has('apuesta')">
+								@{{ errors.first('apuesta') }}
+							</span>
+							
 			            </div>
 			        </div>
 					

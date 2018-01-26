@@ -38,7 +38,11 @@
 
 					<div class="match__equipo__escudo">
 						{{-- <img :src="match.imageHomeTeam" width="50"> --}}
-						<div class="image__team" :style="{'background-image' :'url(' + match.imageHomeTeam + ')'}"></div>
+						{{-- <div class="image__team" :style="{'background-image' :'url(' + match.imageHomeTeam + ')'}"></div> --}}
+
+						<div class="image__team" 
+							:style="{ 'background-image': imageUrl(match.imageHomeTeam) }">
+						</div>	
 					</div>
 
 					<div class="match__equipo__nombre">

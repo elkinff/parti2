@@ -4407,14 +4407,18 @@ form.horizontal .form-element .last-xs {
 }
 
 .match__equipo {
-  width: 47%;
-  padding: 1em;
+  width: 50%;
+  padding: 1em 0.5em;
   padding-bottom: 3em;
+  text-align: center;
 }
 
-.match__equipo:nth-child(2) * {
-  text-align: right;
-  margin-left: auto;
+.match__equipo:first-child {
+  padding-right: 10%;
+}
+
+.match__equipo:nth-child(2) {
+  padding-left: 10%;
 }
 
 .match__equipo--selected {
@@ -4426,9 +4430,12 @@ form.horizontal .form-element .last-xs {
 .match__equipo__escudo {
   width: 50px;
   height: 50px;
+  margin: 0 auto;
 }
 
 .match__equipo__escudo .image__team {
+  margin: 0 auto;
+  display: block;
   height: 50px;
   background-size: contain;
   background-position: center;
@@ -4437,7 +4444,7 @@ form.horizontal .form-element .last-xs {
 
 .match__equipo__nombre {
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   margin: 0;
   color: #355C7D;
   width: 100%;
@@ -4449,7 +4456,7 @@ form.horizontal .form-element .last-xs {
 
 .match__equipo__usuario {
   font-weight: light;
-  text-align: left;
+  text-align: center;
   margin: 0;
   font-size: 0.85em;
   line-height: 0.9em;
@@ -4828,24 +4835,34 @@ form.horizontal .form-element .last-xs {
 }
 
 .equipos__escudo {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   text-align: center;
   margin-bottom: 0.4em;
+  padding: 2px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
 
 .equipos__escudo.check {
   background-color: #c9d0d8;
-  border-radius: 4px;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
 
 .equipos .image__team {
-  height: 70px;
-  width: 70px;
+  height: 64px;
+  width: 64px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,10 +1,8 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard', ['nav__visible' => true])
 
-
-@section('nav_bar')
-	@include('includes._nav')
+@section('nav__content')
+	<h1>Hola mundos</h1>
 @endsection
-
 
 @section('content')
 	
@@ -27,6 +25,7 @@
 		
 		<a class="match match--publicar" data-toggle="modal" data-target="#modalApostar"
 			v-for="match in filteredMatch"
+			v-if="validacionHora(match.date_show)"
 			@click="detailMatch(match)"
 			> 
 

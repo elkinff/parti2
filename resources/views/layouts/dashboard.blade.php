@@ -10,7 +10,11 @@
 		<main class="container__main" id="app">
 			{{-- Si hay nav  --}}
 
-			@yield('nav_bar')
+			@if($nav__visible)
+				<nav class="nav" id="nav">
+					@yield('nav__content')
+				</nav>
+			@endif
 			
 			<div class="content">
 				@yield('content')

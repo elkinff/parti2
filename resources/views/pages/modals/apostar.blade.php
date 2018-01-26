@@ -12,8 +12,6 @@
         
 			        {{ csrf_field() }}
 
-
-			        
 			        <div class="equipos">
 			        	<div class="equipos__item">
 				        	<label class="radio">
@@ -44,25 +42,23 @@
 				        	</div>
 			        	</div>
 
-			        	  <span v-show="errors.has('equipo')" class="equipos__error">
-							@{{ errors.first('equipo') }}
+		        	  	<span v-show="errors.has('equipo')" class="equipos__error">
+							Selecciona tu equipo
 						</span>
 
 			        </div>
-
-
 
 			        <div class="form-element">
 			            <label>Valor (COP)</label>
 			            <div>
 
-			                <input type="text" :value="apuesta" name="apuesta" class="form-field"
+			                <input type="text" :value="apuesta" name="valor" class="form-field"
 			                	v-validate="'required|prueba'"
 			                	@input="apuesta = $options.filters.currency($event.target.value)"
-			                	:class="{'error': errors.has('apuesta') }"
+			                	:class="{'error': errors.has('valor') }"
 			                	>
-							<span v-show="errors.has('apuesta')">
-								@{{ errors.first('apuesta') }}
+							<span v-show="errors.has('valor')">
+								@{{ errors.first('valor') }}
 							</span>
 
 			            </div>

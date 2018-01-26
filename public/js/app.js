@@ -1177,6 +1177,13 @@ var app = new Vue({
                 console.log(e);
             });
         },
+        validacionHora: function validacionHora(fechaMatch) {
+            var d = new Date();
+            var hora = d.getHours() + ':' + d.getMinutes();
+            console.log(fechaMatch);
+
+            return true;
+        },
         detailMatch: function detailMatch(match) {
             console.log(match);
             this.apuesta = '';

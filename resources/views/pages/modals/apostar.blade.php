@@ -11,6 +11,8 @@
 				<div class="" >
         
 			        {{ csrf_field() }}
+
+
 			        
 			        <div class="equipos">
 			        	<div class="equipos__item">
@@ -20,7 +22,7 @@
 				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageHomeTeam + ')'}"></div>
 				        		</div>	
 
-				        		<input type="radio" name="equipo">
+				        		<input type="radio" name="equipo" v-validate="'required'">
 				        	</label>
 				        	<div class="equipos__name">
 				        		@{{ auxMatch.homeTeamName }}
@@ -35,14 +37,20 @@
 				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageAwayTeam + ')'}"></div>
 				        		</div>	
 
-				        		<input type="radio" name="equipo">
+				        		<input type="radio" name="equipo" v-validate="'required'">
 				        	</label>
 				        	<div class="equipos__name">
 				        		@{{ auxMatch.awayTeamName }}
 				        	</div>
 			        	</div>
 
+			        	  <span v-show="errors.has('equipo')" class="equipos__error">
+							@{{ errors.first('equipo') }}
+						</span>
+
 			        </div>
+
+
 
 			        <div class="form-element">
 			            <label>Valor (COP)</label>
@@ -56,7 +64,7 @@
 							<span v-show="errors.has('apuesta')">
 								@{{ errors.first('apuesta') }}
 							</span>
-							
+
 			            </div>
 			        </div>
 					

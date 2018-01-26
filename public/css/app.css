@@ -4819,9 +4819,12 @@ form.horizontal .form-element .last-xs {
           justify-content: center;
   margin-bottom: 1em;
   text-align: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .equipos__item {
+  width: 45%;
   margin: 0.5em;
   text-align: center;
   display: -webkit-box;
@@ -4870,6 +4873,12 @@ form.horizontal .form-element .last-xs {
 
 .equipos__name {
   width: 100%;
+}
+
+.equipos__error {
+  width: 100%;
+  color: #F26175;
+  text-align: left;
 }
 
 .compartir__image {

@@ -1104,7 +1104,8 @@ __WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */].Validator.extend('
     },
     validate: function validate(value) {
         value = value.replace(/,/g, '').replace(/\$/g, '');
-        if (value % 10000 == 0) {
+        if (value != 0 && value % 10000 == 0 && value !== '$0') {
+            console.log(value);
             return true;
         } else {
             return false;
@@ -1125,7 +1126,11 @@ var app = new Vue({
         search: '',
 
         matchUser: {},
-        prueba: ''
+        prueba: '',
+
+        errorsForm: {
+            apuesta: ''
+        }
 
     },
 
@@ -1154,8 +1159,13 @@ var app = new Vue({
     },
 
     methods: {
-        upper: function upper(e) {
-            e.target.value = this.prueba.toUpperCase();
+        validateBeforeSubmit: function validateBeforeSubmit() {
+            this.$validator.validateAll().then(function (result) {
+                if (result) {
+                    return;
+                }
+                // alert('Correct them errors!');
+            });
         },
         getMatchs: function getMatchs() {
             var _this = this;
@@ -1170,13 +1180,19 @@ var app = new Vue({
         detailMatch: function detailMatch(match) {
             console.log(match);
             this.apuesta = '';
+            this.errors.clear();
             this.auxMatch = match;
         },
         savaMatch: function savaMatch() {
             var urlSaveMatch = '';
+            this.validateBeforeSubmit();
+
+            console.log(this.apuesta);
 
             if (!this.apuesta) {
-                errors.apuesta = "Valor requerido";
+                this.errorsForm.apuesta = "Valor requerido";
+            } else {
+                this.errorsForm.apuesta = "Hooa mundos";
             }
 
             this.matchUser = this.auxMatch;

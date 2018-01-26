@@ -39,7 +39,8 @@ VeeValidate.Validator.extend('prueba', {
     getMessage: field => `Deben ser multiplos de $10.000 ($20.000, $50.000)`,
     validate: value => {
         value = value.replace(/,/g, '').replace(/\$/g, '');
-        if((value % 10000) == 0  ){
+        if( value!= 0 && (value % 10000) == 0 && value !== '$0' ){
+            console.log(value);
             return true;
         }else {
             return false;
@@ -62,6 +63,10 @@ const app = new Vue({
 
     	matchUser: {},
         prueba:'',
+
+        errorsForm:{
+            apuesta:''
+        },
 
 
 
@@ -88,12 +93,18 @@ const app = new Vue({
 	      	});
 	    },
 
+
     },
 
     methods: {
-        upper(e) {
-            e.target.value = this.prueba.toUpperCase()
-        },
+        validateBeforeSubmit() {
+              this.$validator.validateAll().then((result) => {
+                if (result) {
+                  return;
+                }
+                // alert('Correct them errors!');
+            });
+        },      
 
     	getMatchs() {
     		var urlMatchs = 'partidos';
@@ -108,14 +119,20 @@ const app = new Vue({
     	detailMatch(match) {
     		console.log(match);
             this.apuesta = '';
+            this.errors.clear();
     		this.auxMatch = match;
     	},
 
     	savaMatch() {
     		var urlSaveMatch = ''; 
+            this.validateBeforeSubmit()
     		
-            if(!this.apuesta) {
-                errors.apuesta = "Valor requerido";
+            console.log(this.apuesta);
+
+            if(!this.apuesta) { 
+                this.errorsForm.apuesta = "Valor requerido";
+            }else {
+                this.errorsForm.apuesta = "Hooa mundos";
             }
 
     		this.matchUser = this.auxMatch;

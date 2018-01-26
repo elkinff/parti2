@@ -10,9 +10,9 @@ use App\Partido;
 
 class PartidoController extends Controller{
 	
-    public function __construct(){
-        $this->middleware('auth', ["only" => ["create", "store"]]);
-    }
+    // public function __construct(){
+    //     $this->middleware('auth', ["only" => ["create", "store"]]);
+    // }
 
 	public function index(){
 		return view("pages.dashboard.publicar");
@@ -25,13 +25,13 @@ class PartidoController extends Controller{
 			$fechaFinal = date("Y-m-d",strtotime($fechaHoy."+ 7 days"));
 			$ultimaHora = new DateTime(date('r', strtotime('tomorrow') - 1));
 
-			//Premier league PL, Liga Española PD, Champions League CL, Europa League EL
-			$competiciones = array("PL", "PD", "EL", "CL");
+			//Liga Española PD, Premier league PL, Liga Italiana SA, Champions League CL
+			$competiciones = array("PD", "PL", "SA", "CL");
 			$fixturesFinal = collect();
 			foreach ($competiciones as $competicion) {
 				$urlApi = "http://api.football-data.org/v1/fixtures?timeFrameStart=".$fechaHoy."&timeFrameEnd=".$fechaFinal."&league=".$competicion;	
 				$reqPrefs['http']['method'] = 'GET';
-		    	// $reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
+		    	$reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
 			    $stream_context = stream_context_create($reqPrefs);
 			    $response = file_get_contents($urlApi, false, $stream_context);
 			    $fixturesCompetition = json_decode($response);
@@ -45,14 +45,16 @@ class PartidoController extends Controller{
 			$fixturesFinal->collapse()->each(function($fixture){
 				$idHomeTeam = str_replace("http://api.football-data.org/v1/teams/", "", $fixture->_links->homeTeam->href);
 				$idAwayTeam = str_replace("http://api.football-data.org/v1/teams/", "", $fixture->_links->awayTeam->href);
-				$fixture->league = str_replace("http://api.football-data.org/v1/competitions/", "", $fixture->_links->competition->href);
+				$liga = str_replace("http://api.football-data.org/v1/competitions/", "", $fixture->_links->competition->href);
+				$fixture->league = $liga;
 				$fixture->idHomeTeam = $idHomeTeam;
 				$fixture->idAwayTeam = $idAwayTeam;
-				$fixture->imageHomeTeam = Equipo::getImagenEquipo($idHomeTeam, $fixture->_links->homeTeam->href);
-				$fixture->imageAwayTeam = Equipo::getImagenEquipo($idAwayTeam, $fixture->_links->awayTeam->href);
+				$fixture->imageHomeTeam = Equipo::getImagenEquipo($idHomeTeam, $fixture->_links->homeTeam->href, $liga, $fixture->homeTeamName);
+				$fixture->imageAwayTeam = Equipo::getImagenEquipo($idAwayTeam, $fixture->_links->awayTeam->href, $liga, $fixture->awayTeamName);
 				$fixture->date_show = Partido::setDateMatch($fixture->date);
 				return $fixture;
 			});
+
 		   	Cache::put('fixtures', $fixturesFinal->collapse(), $ultimaHora);	
 	    }
 	    //Ordenar json por hora del partido

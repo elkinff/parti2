@@ -21,7 +21,7 @@ class CreateEquipoTable extends Migration{
                     ->onUpdate('no action');
 
                 $table->string('nombre', 45);
-                $table->string('escudo', 512);
+                $table->string('escudo', 512)->nullable();
 
                 $table->unique(["id"], 'id_UNIQUE');
             });

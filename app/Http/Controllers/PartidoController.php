@@ -55,10 +55,15 @@ class PartidoController extends Controller{
 			});
 		   	Cache::put('fixtures', $fixturesFinal->collapse(), $ultimaHora);	
 	    }
+	    //Ordenar json por hora del partido
 	    $sortFixtures = Cache::get("fixtures")->toArray();
 	   	usort($sortFixtures, function($a, $b) {
    			return (strtotime($a->date) < strtotime($b->date) ? -1 : 1);
  		});
+
+ 		// foreach ($sortFixtures as $key => $value) {
+ 		// 	$value->date_show = Partido::setDateMatch($value->date);
+ 		// }
  		return $sortFixtures;
 	}   
 }

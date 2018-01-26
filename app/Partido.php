@@ -35,7 +35,7 @@ class Partido extends Model{
                 'Saturday' =>'Sábado',
                 'Sunday' => 'Domingo'
             );
-            return $days_dias[date('l', strtotime($date))]." ".$horaFixture;
+            return $days_dias[date('l', strtotime($date))]." ".date("d/m", strtotime($date))." - ".$horaFixture;
         }
     }
 }

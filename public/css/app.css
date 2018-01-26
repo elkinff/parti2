@@ -4410,7 +4410,6 @@ form.horizontal .form-element .last-xs {
   width: 47%;
   padding: 1em;
   padding-bottom: 3em;
-  background-color: #fff;
 }
 
 .match__equipo:nth-child(2) * {
@@ -4426,6 +4425,14 @@ form.horizontal .form-element .last-xs {
 
 .match__equipo__escudo {
   width: 50px;
+  height: 50px;
+}
+
+.match__equipo__escudo .image__team {
+  height: 50px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .match__equipo__nombre {
@@ -4434,8 +4441,10 @@ form.horizontal .form-element .last-xs {
   margin: 0;
   color: #355C7D;
   width: 100%;
+  margin-top: 0.3em;
   line-height: 1em;
   width: 100%;
+  font-size: 0.95em;
 }
 
 .match__equipo__usuario {
@@ -4794,25 +4803,6 @@ form.horizontal .form-element .last-xs {
   }
 }
 
-.img-check {
-  width: 90px;
-  margin: 0 1.5em;
-  padding: 0.5em;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-.img-check.check {
-  background-color: #c9d0d8;
-  border-radius: 4px;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
 .equipos {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4822,6 +4812,47 @@ form.horizontal .form-element .last-xs {
           justify-content: center;
   margin-bottom: 1em;
   text-align: center;
+}
+
+.equipos__item {
+  margin: 0.5em;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.equipos__escudo {
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  margin-bottom: 0.4em;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.equipos__escudo.check {
+  background-color: #c9d0d8;
+  border-radius: 4px;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.equipos .image__team {
+  height: 70px;
+  width: 70px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.equipos__name {
+  width: 100%;
 }
 
 .compartir__image {

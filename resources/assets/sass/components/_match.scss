@@ -36,11 +36,8 @@
 		width: 47%;
 		padding: 1em;
 		padding-bottom:3em;
-		background-color:#fff;
-		
 
 		&:nth-child(2) *{
-			//transform: translateX(-5%);
 			text-align: right;
 			margin-left: auto;
 		}
@@ -55,6 +52,14 @@
 
 		&__escudo {
 			width: 50px;
+			height: 50px;
+
+			.image__team {
+				height: 50px;
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
 		}
 
 		&__nombre {
@@ -63,8 +68,10 @@
 			margin:0;
 			color: $primary;
 			width: 100%;
+			margin-top: 0.3em;
 			line-height: 1em;
 			width: 100%;
+			font-size: 0.95em;
 
 			//background-color:teal;
 		}

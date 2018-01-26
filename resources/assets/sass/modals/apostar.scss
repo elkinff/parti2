@@ -1,21 +1,65 @@
-.img-check {
-	width: 90px;
-	margin: 0 1.5em;
-	padding: 0.5em;
-    user-select: none;
-	@include transition();
+// .img-check {
+// 	width: 90px;
+// 	height: 90px;
+// 	margin: 0 1.5em;
+// 	padding: 0.5em;
+//     user-select: none;
+// 	@include transition();
 
-    &.check {
-        background-color: $dark25;
-        border-radius:$borderRadius;
-		transform: scale(1.2);
-    }
-}
+//     &.check {
+//         background-color: $dark25;
+//         border-radius:$borderRadius;
+// 		transform: scale(1.2);
+//     }
+// }
 
 // Contenedor de equipos
-.equipos {
+.equipos {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 1em;
 	text-align:center;
+
+	&__item {
+		margin: 0.5em;
+		text-align: center;
+		//background-color: teal;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	&__escudo {
+		width: 70px;
+		height: 70px;
+		text-align: center;
+		margin-bottom: 0.4em;
+		@include transition();
+
+	    &.check {
+	        background-color: $dark25;
+	        border-radius:$borderRadius;
+			transform: scale(1.2);
+	    }
+	}
+
+	.image__team {
+		height: 70px;
+		width: 70px;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		// background-color: pink;
+	}
+
+	&__name {
+		width: 100%;
+	}
+
 }
+
+
+
+
+
+

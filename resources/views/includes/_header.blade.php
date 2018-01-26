@@ -28,7 +28,7 @@
 		
 		{{-- Imagen usuario --}}
 		<a class="header__menu__item header__menu__item--user">
-			<img src="http://lorempixel.com/50/50/people/">
+			{{-- <img src="http://lorempixel.com/50/50/people/"> --}}
 		</a>
 
 	</div>

@@ -6,6 +6,19 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+import VueCurrencyFilter from 'vue-currency-filter';
+
+Vue.use(VueCurrencyFilter, 
+{
+  symbol : '$', 
+  thousandsSeparator: ',',
+  fractionCount: 0,
+  fractionSeparator: ',',
+  symbolPosition: 'front',
+  symbolSpacing: false
+});
+
 //Vue.component('example', require('./components/ExampleComponent.vue'));
 
 // Vista de publicar
@@ -13,21 +26,14 @@ const app = new Vue({
     el: '#app',
 
     data: {
-    	fecha : '',
-
-    	id_visitante: '',
-    	id_local: '',
-
-    	nombre_visitante: '',
-    	nombre_local: '',
-    	
-    	escudo_local:'',
-    	escudo_visitante: '',
-    	
-    	id_liga:'',
-
     	matchs: [],
     	auxMatch: {},
+    	apuesta:'',
+    	ganacia_apuesta:'',
+    	retencion_parti2 : '5',
+    	search:'',
+
+    	matchUser: {}
 
     },
 
@@ -36,38 +42,70 @@ const app = new Vue({
     },
 
     computed:{
+	 	totalGanancia() {
+	 		var porcentajeParti2 = (this.apuesta * 2 / 100) * this.retencion_parti2;
+	    	return (this.apuesta * 2) - porcentajeParti2;
+	    },
 
 	    filteredMatch:function() {
 			var self=this;
-			return this.shop.filter(function(match){
-	        	return match.nombre_item.toLowerCase().indexOf(self.search.toLowerCase())>=0;
+			return this.matchs.filter(function(match){
+	        	return match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 ;
 	      	});
-	    }
+	    },
+
     },
 
     methods: {
-    	getMatchs: function() {
+
+    	getMatchs() {
     		var urlMatchs = 'partidos';
 			axios.get(urlMatchs).then(response => {
 				this.matchs = response.data;
-				console.log(this.matchs);
 			})
 			.catch(e => {
 				console.log(e);
 			});
     	},
 
-    	savaMatch: function() {
+    	detailMatch(match) {
+    		console.log(match);
+    		this.auxMatch = match;
+    	},
+
+    	savaMatch() {
     		var urlSaveMatch = ''; 
-    		axios.post(urlSaveMatch).then(response => {
-				//this.match = response.data;
-			})
-			.catch(e => {
-				console.log(e);
-			});
-    	}
+    		
+    		this.matchUser = this.auxMatch;
+    		this.matchUser.valor = this.apuesta
+    		this.matchUser.valor_ganado = this.totalGanancia;
+
+    		console.log(this.matchUser);
+
+   //  		axios.post(urlSaveMatch).then(response => {
+			// 	//this.match = response.data;
+			// })
+			// .catch(e => {
+			// 	console.log(e);
+			// });
+    	},
+
+        imageUrl(url) {
+            return 'url("'+ url + '")';
+        },
     }
 
 });
+
+
+require('./framy');
+require('./functions');
+require('./modal');
+require('./sweetalert');
+
+
+
+
+
 
 

@@ -12,7 +12,9 @@
 
 			@if($nav__visible)
 				<nav class="nav" id="nav">
-					@yield('nav__content')
+					<div class="nav__content">
+						@yield('nav__content')
+					</div>
 				</nav>
 			@endif
 			

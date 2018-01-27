@@ -21,6 +21,37 @@
         }
 
 	}
+
+	&__content {
+		padding: 1em;
+		padding-top:2em;
+	}
+
+	&__title {
+		color: $white;
+		margin-bottom:0.5em;
+	}
+
+	&__title__divider {
+		color: $white;
+		margin-bottom:0.7em;
+		margin-top:0.7em;
+		font-weight: normal;
+		font-size: 1.2em;
+	}
+
+	.filter__tags {
+		padding: 0 1em;
+		&__item {
+			color: $white;
+			padding: 0.5em;
+			border: 1px solid #fff;
+			border-radius: $borderRadius;
+			text-align: center;
+			margin: 0.2em;
+		}
+	}
+
 }
 
 #overlay {

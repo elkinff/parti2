@@ -426,6 +426,37 @@ nav ul {
   }
 }
 
+.nav__content {
+  padding: 1em;
+  padding-top: 2em;
+}
+
+.nav__title {
+  color: #fff;
+  margin-bottom: 0.5em;
+}
+
+.nav__title__divider {
+  color: #fff;
+  margin-bottom: 0.7em;
+  margin-top: 0.7em;
+  font-weight: normal;
+  font-size: 1.2em;
+}
+
+.nav .filter__tags {
+  padding: 0 1em;
+}
+
+.nav .filter__tags__item {
+  color: #fff;
+  padding: 0.5em;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0.2em;
+}
+
 @media (max-width: 768px) {
   #overlay {
     z-index: 40;
@@ -637,6 +668,21 @@ fieldset[disabled] .form-field {
 
 .form-field:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+.form-field.small {
+  padding: 0.5em;
+  background-color: #355C7D;
+  color: #fff;
+}
+
+.form-field.small:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.form-field.small:focus.filled {
+  background: none;
 }
 
 .form-file-field {
@@ -1035,6 +1081,18 @@ form.horizontal .switch.inline {
 .checkbox.fancy input + div:after {
   -webkit-box-shadow: 0 18px 0 #355C7D, 0 -18px 0 #355C7D, -18px 0 0 #355C7D, 18px 0 0 #355C7D, 12px 12px 0 #355C7D, -12px 12px 0 #355C7D, 12px -12px 0 #355C7D, -12px -12px 0 #355C7D;
           box-shadow: 0 18px 0 #355C7D, 0 -18px 0 #355C7D, -18px 0 0 #355C7D, 18px 0 0 #355C7D, 12px 12px 0 #355C7D, -12px 12px 0 #355C7D, 12px -12px 0 #355C7D, -12px -12px 0 #355C7D;
+}
+
+.checkbox.white > span {
+  color: #fff;
+}
+
+.checkbox.white input {
+  background-color: #355C7D;
+}
+
+.checkbox.white input:checked + div {
+  background: #F67280;
 }
 
 .radio > span {

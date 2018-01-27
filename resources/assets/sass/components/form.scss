@@ -42,6 +42,20 @@
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px white inset !important;
     }
+
+    &.small {
+         padding: 0.5em;
+         background-color: $primary;
+         color: $white;
+
+         &:focus {
+            outline: none;
+            border-color: $white;
+            &.filled {
+                background: none;
+            }
+        }
+    }
 }
 
 .form-file-field {
@@ -363,6 +377,19 @@ form {
                 }
             }
         }
+    }
+
+    &.white > span  {
+        color: $white;
+    }
+
+    &.white {
+        input {
+            background-color: $primary;
+            &:checked + div {
+                background: $secondary;
+            }
+        }   
     }
 }
 

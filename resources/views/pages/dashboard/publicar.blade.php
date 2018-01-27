@@ -1,7 +1,73 @@
 @extends('layouts.dashboard', ['nav__visible' => true])
 
 @section('nav__content')
-	<h1>Hola mundos</h1>
+	
+	<h2 class="nav__title">Filtros</h2>
+
+	<h4 class="nav__title__divider">Liga</h4>
+	
+	<div class="form-element">
+        <label class="checkbox fancy white">
+            <input type="checkbox">
+            <div></div>
+            <span class="nav__filter__label">Liga Española</span>
+        </label>
+    </div>
+
+    <div class="form-element">
+        <label class="checkbox fancy white">
+            <input type="checkbox">
+            <div></div>
+            <span>Liga Inglesa</span>
+        </label>
+    </div>
+
+
+	<div class="form-element">
+        <label class="checkbox fancy white">
+            <input type="checkbox">
+            <div></div>
+            <span>Liga Italiana</span>
+        </label>
+    </div>
+
+    <h4 class="nav__title__divider">Fecha</h4>
+	
+	<div class="form-element">
+        <div>
+            <div class="form-group">
+	            <input type="date" class="form-field small">
+	            <span><img src="{{ asset('img/calendar.svg') }}" width="20px"></span>
+	        </div>
+        </div>
+    </div>
+	
+	<div class="filter__tags columns">
+		<label class="radio filter__tags__item xs-12">
+			<div class="">
+				Hoy
+			</div>	
+			<input type="radio" name="equipo">
+		</label>
+
+		<label class="radio filter__tags__item xs-6">
+			<div class="">
+				Mañana
+			</div>	
+			<input type="radio" name="equipo">
+		</label>
+
+		<label class="radio filter__tags__item xs-6">
+			<div class="">
+				Prox 3 días
+			</div>	
+			<input type="radio" name="equipo">
+		</label>
+
+	</div>
+
+
+
 @endsection
 
 @section('content')

@@ -1179,10 +1179,15 @@ var app = new Vue({
         },
         validacionHora: function validacionHora(fechaMatch) {
             var d = new Date();
-            var hora = d.getHours() + ':' + d.getMinutes();
-            console.log(fechaMatch);
-
-            return true;
+            var hora = d.getHours() + '' + d.getMinutes();
+            if (fechaMatch.includes('Hoy ')) {
+                fechaMatch = fechaMatch.slice(-5).replace(':', '');
+                if (hora >= fechaMatch) {
+                    return false;
+                }
+            } else {
+                return true;
+            }
         },
         detailMatch: function detailMatch(match) {
             console.log(match);

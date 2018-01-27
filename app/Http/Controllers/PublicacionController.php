@@ -11,6 +11,12 @@ class PublicacionController extends Controller{
     }
 
 	public function store(PublicacionRequest $request){
+		//Calcular fecha de final del partido
+		$fechaFixture = $request->date;
 		
+
+		
+		//crear partido
+		$partido = Partido::create(["id_local" => $request->idHomeTeam, "id_visitante" => $request->idAwayTeam, "fecha_inicio" => , "fecha_final" => ])
 	}
 }

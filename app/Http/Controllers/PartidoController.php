@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Cache;
 use DateTime;
+use DateTimeZone;
 use App\Equipo;
 use App\Partido;
 
@@ -52,6 +53,11 @@ class PartidoController extends Controller{
 				$fixture->imageHomeTeam = Equipo::getImagenEquipo($idHomeTeam, $fixture->_links->homeTeam->href, $liga, $fixture->homeTeamName);
 				$fixture->imageAwayTeam = Equipo::getImagenEquipo($idAwayTeam, $fixture->_links->awayTeam->href, $liga, $fixture->awayTeamName);
 				$fixture->date_show = Partido::setDateMatch($fixture->date);
+				$fixture->date_show = Partido::setDateMatch($fixture->date);
+
+				$dateTime = new DateTime($fixture->date, new DateTimeZone('UTC'));
+				$dateTime->setTimezone(new DateTimeZone("America/Bogota"));
+				$fixture->date = $dateTime->format('Y-m-d H:i:s');
 				return $fixture;
 			});
 
@@ -64,7 +70,9 @@ class PartidoController extends Controller{
  		});
 
  		// foreach ($sortFixtures as $key => $value) {
- 		// 	$value->date_show = Partido::setDateMatch($value->date);
+ 			
+			// dd();
+ 			
  		// }
  		return $sortFixtures;
 	}   

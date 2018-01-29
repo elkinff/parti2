@@ -41,14 +41,22 @@
 	}
 
 	.filter__tags {
-		padding: 0 1em;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
 		&__item {
+			width: 48%;
 			color: $white;
 			padding: 0.5em;
 			border: 1px solid #fff;
 			border-radius: $borderRadius;
 			text-align: center;
-			margin: 0.2em;
+			margin-bottom: 0.7em;
+
+			&--large {
+				width: 100%;
+			}
 		}
 	}
 

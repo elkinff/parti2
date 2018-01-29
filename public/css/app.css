@@ -445,16 +445,28 @@ nav ul {
 }
 
 .nav .filter__tags {
-  padding: 0 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .nav .filter__tags__item {
+  width: 48%;
   color: #fff;
   padding: 0.5em;
   border: 1px solid #fff;
   border-radius: 4px;
   text-align: center;
-  margin: 0.2em;
+  margin-bottom: 0.7em;
+}
+
+.nav .filter__tags__item--large {
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -4893,6 +4905,12 @@ form.horizontal .form-element .last-xs {
           justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .equipos__item {
+    width: 40%;
+  }
 }
 
 .equipos__escudo {

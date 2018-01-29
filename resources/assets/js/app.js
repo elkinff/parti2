@@ -59,7 +59,10 @@ const app = new Vue({
     	apuesta:'',
     	ganacia_apuesta:'',
     	retencion_parti2 : '5',
-    	search:'',
+    	
+        search:'',
+        checkedLigas: [],
+        searchDate:'',
 
     	matchUser: {},
         prueba:'',
@@ -86,15 +89,52 @@ const app = new Vue({
 
 	    },
 
-	    filteredMatch:function() {
+	    filteredMatch(){
+            
+            //console.log(this.searchDate);
+
 			var self=this;
-			return this.matchs.filter(function(match){
-	        	return match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 ;
-	      	});
+            if (!this.checkedLigas.length){
+                return this.matchs
+                .filter(match => match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
+            }
+            
+			return this.matchs
+                .filter(match => match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => self.checkedLigas.includes(match.league))
+                .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
+
+                // .filter(function(match) {
+                //     //console.log(match.date.slice(0,10));
+                //      //console.log(self.searchDate);
+
+                //      match.date.slice(0,10) == self.searchDate
+                // })
+                    //.filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0 );
+
+
+                // .filter(function(match) {
+                //     console.log(self.checkedLigas);
+                //     if (!self.checkedLigas.length){
+                //         return self.matchs
+                //     }
+                //     self.checkedLigas.includes(match.league)
+                // });  
+            
+            // if (!self.checkedLigas.length){
+            //     return this.matchs
+            // }
+            
 	    },
 
-        
-
+        // filteredLigas(){
+        //     console.log(this.checkedLigas);
+        //     if (!this.checkedLigas.length){
+        //         return this.matchs
+        //     }
+        //     return this.matchs.filter(j => this.checkedLigas.includes(j.league))
+        // }
 
     },
 

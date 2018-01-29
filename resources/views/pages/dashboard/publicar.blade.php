@@ -8,7 +8,7 @@
 	
 	<div class="form-element">
         <label class="checkbox fancy white">
-            <input type="checkbox">
+            <input type="checkbox" v-model="checkedLigas" value="455">
             <div></div>
             <span class="nav__filter__label">Liga Española</span>
         </label>
@@ -16,7 +16,7 @@
 
     <div class="form-element">
         <label class="checkbox fancy white">
-            <input type="checkbox">
+            <input type="checkbox" v-model="checkedLigas" value="445">
             <div></div>
             <span>Liga Inglesa</span>
         </label>
@@ -25,7 +25,7 @@
 
 	<div class="form-element">
         <label class="checkbox fancy white">
-            <input type="checkbox">
+            <input type="checkbox" v-model="checkedLigas" value="456">
             <div></div>
             <span>Liga Italiana</span>
         </label>
@@ -36,33 +36,35 @@
 	<div class="form-element">
         <div>
             <div class="form-group">
-	            <input type="date" class="form-field small">
+	            <input type="date" class="form-field small" placeholder="dd/mm/aaaa" v-model="searchDate">
 	            <span><img src="{{ asset('img/calendar.svg') }}" width="20px"></span>
 	        </div>
         </div>
     </div>
 	
-	<div class="filter__tags columns">
-		<label class="radio filter__tags__item xs-12">
+	<div class="filter__tags">
+		<label class="radio filter__tags__item filter__tags__item--large">
 			<div class="">
 				Hoy
 			</div>	
 			<input type="radio" name="equipo">
 		</label>
-
-		<label class="radio filter__tags__item xs-6">
+		
+		<label class="radio filter__tags__item">
 			<div class="">
 				Mañana
 			</div>	
 			<input type="radio" name="equipo">
 		</label>
 
-		<label class="radio filter__tags__item xs-6">
+		<label class="radio filter__tags__item">
 			<div class="">
 				Prox 3 días
 			</div>	
 			<input type="radio" name="equipo">
 		</label>
+
+
 
 	</div>
 

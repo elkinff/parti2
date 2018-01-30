@@ -469,6 +469,10 @@ nav ul {
   width: 100%;
 }
 
+.nav .filter__tags__item.check {
+  background-color: #4476a1;
+}
+
 @media (max-width: 768px) {
   #overlay {
     z-index: 40;
@@ -4442,6 +4446,32 @@ form.horizontal .form-element .last-xs {
           justify-content: space-between;
 }
 
+.container__matchs__loader {
+  margin: 0 auto;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.container__matchs__loader img {
+  width: 105px;
+  display: block;
+}
+
+.container__matchs__empty {
+  width: 100%;
+  text-align: center;
+}
+
+.container__matchs__empty img {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+}
+
+.container__matchs__empty.hide {
+  display: none;
+}
+
 .match {
   width: 32%;
   height: auto;
@@ -4955,6 +4985,10 @@ form.horizontal .form-element .last-xs {
   width: 100%;
   color: #F26175;
   text-align: left;
+}
+
+[v-cloak] {
+  display: none;
 }
 
 .compartir__image {

@@ -57,7 +57,12 @@
 			&--large {
 				width: 100%;
 			}
+
+			&.check {
+				background-color: lighten($primary, 10%)
+			}
 		}
+		
 	}
 
 }

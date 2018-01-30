@@ -1133,7 +1133,11 @@ var app = new Vue({
 
         errorsForm: {
             apuesta: ''
-        }
+        },
+
+        clickHoyState: 0,
+
+        loading: false
 
     },
 
@@ -1151,46 +1155,28 @@ var app = new Vue({
             return apuestaUsuario * 2 - porcentajeParti2;
         },
         filteredMatch: function filteredMatch() {
-
-            //console.log(this.searchDate);
+            var _this = this;
 
             var self = this;
             if (!this.checkedLigas.length) {
                 return this.matchs.filter(function (match) {
-                    return match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+                    return match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0;
                 }).filter(function (match) {
                     return match.date.slice(0, 10).indexOf(self.searchDate) >= 0;
+                }).filter(function (match) {
+                    return _this.validacionHora(match.date_show);
                 });
             }
 
             return this.matchs.filter(function (match) {
-                return match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+                return match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0;
             }).filter(function (match) {
                 return self.checkedLigas.includes(match.league);
             }).filter(function (match) {
                 return match.date.slice(0, 10).indexOf(self.searchDate) >= 0;
+            }).filter(function (match) {
+                return _this.validacionHora(match.date_show);
             });
-
-            // .filter(function(match) {
-            //     //console.log(match.date.slice(0,10));
-            //      //console.log(self.searchDate);
-
-            //      match.date.slice(0,10) == self.searchDate
-            // })
-            //.filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0 );
-
-
-            // .filter(function(match) {
-            //     console.log(self.checkedLigas);
-            //     if (!self.checkedLigas.length){
-            //         return self.matchs
-            //     }
-            //     self.checkedLigas.includes(match.league)
-            // });  
-
-            // if (!self.checkedLigas.length){
-            //     return this.matchs
-            // }
         }
     },
 
@@ -1204,11 +1190,14 @@ var app = new Vue({
             });
         },
         getMatchs: function getMatchs() {
-            var _this = this;
+            var _this2 = this;
+
+            this.loading = true;
 
             var urlMatchs = 'partidos';
             axios.get(urlMatchs).then(function (response) {
-                _this.matchs = response.data;
+                _this2.matchs = response.data;
+                _this2.loading = false;
             }).catch(function (e) {
                 console.log(e);
             });
@@ -1258,6 +1247,29 @@ var app = new Vue({
         },
         imageUrl: function imageUrl(url) {
             return 'url("' + url + '")';
+        },
+        filterDia: function filterDia(dia) {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            today = yyyy + '-' + mm + '-' + dd;
+            // var tomorrow = new Date() 
+            // tomorrow = yyyy + '-' + mm + '-' + (dd + 1);
+
+            if (this.clickHoyState == 0) {
+                this.searchDate = today;
+                this.clickHoyState = 1;
+            } else {
+                this.searchDate = '';
+                this.clickHoyState = 0;
+            }
         }
     }
 
@@ -47849,7 +47861,21 @@ $(".img-check").click(function () {
 	$(this).addClass("check");
 });
 
-var $loaderLink = document.querySelector(".loaderLink");
+// Etiquetas de busqueda
+$('#filterSelectHoy').click(function () {
+
+	if ($(this).hasClass('check')) {
+		$(this).removeClass("check");
+		return false;
+	} else {
+		$(".filter__tags__item").removeClass("check");
+		$(this).addClass("check");
+		return false;
+	}
+	// 	return true; 
+});
+
+//var $loaderLink = document.querySelector(".loaderLink");
 
 $('.form').on('submit', function () {
 	if (this.checkValidity() == false) {

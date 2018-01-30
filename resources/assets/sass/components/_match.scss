@@ -2,6 +2,31 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+
+	&__loader {
+		margin: 0 auto;
+		margin-top: 2em;
+		text-align: center;
+		img {
+			width: 105px;
+			display: block;
+		}
+	}
+
+	&__empty {
+		width: 100%;
+		text-align: center;
+		img {
+			display: block;
+			margin: 0 auto;
+			width: 120px;
+		}
+
+		&.hide {
+			display: none;
+		}
+	}
+
 }
 
 .match {

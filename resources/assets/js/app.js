@@ -45,7 +45,6 @@ VeeValidate.Validator.extend('prueba', {
         }else {
             return false;
         }
-        
     }
 });
 
@@ -72,6 +71,10 @@ const app = new Vue({
         },
 
 
+        clickHoyState : 0,
+
+        loading: false,
+
 
     },
 
@@ -86,55 +89,25 @@ const app = new Vue({
 	 		var porcentajeParti2 = (apuestaUsuario * 2 / 100) * this.retencion_parti2;
             
 	    	return (apuestaUsuario * 2) - porcentajeParti2;
-
 	    },
 
 	    filteredMatch(){
-            
-            //console.log(this.searchDate);
 
 			var self=this;
             if (!this.checkedLigas.length){
                 return this.matchs
-                .filter(match => match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
                 .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
+                .filter(match => this.validacionHora(match.date_show))
             }
-            
+
 			return this.matchs
-                .filter(match => match.homeTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
                 .filter(match => self.checkedLigas.includes(match.league))
                 .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
+                .filter(match => this.validacionHora(match.date_show))
 
-                // .filter(function(match) {
-                //     //console.log(match.date.slice(0,10));
-                //      //console.log(self.searchDate);
-
-                //      match.date.slice(0,10) == self.searchDate
-                // })
-                    //.filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0 );
-
-
-                // .filter(function(match) {
-                //     console.log(self.checkedLigas);
-                //     if (!self.checkedLigas.length){
-                //         return self.matchs
-                //     }
-                //     self.checkedLigas.includes(match.league)
-                // });  
-            
-            // if (!self.checkedLigas.length){
-            //     return this.matchs
-            // }
-            
-	    },
-
-        // filteredLigas(){
-        //     console.log(this.checkedLigas);
-        //     if (!this.checkedLigas.length){
-        //         return this.matchs
-        //     }
-        //     return this.matchs.filter(j => this.checkedLigas.includes(j.league))
-        // }
+	    }
 
     },
 
@@ -149,9 +122,12 @@ const app = new Vue({
         },      
 
     	getMatchs() {
+            this.loading = true;
+
     		var urlMatchs = 'partidos';
 			axios.get(urlMatchs).then(response => {
 				this.matchs = response.data;
+                this.loading = false;
 			})
 			.catch(e => {
 				console.log(e);
@@ -206,6 +182,31 @@ const app = new Vue({
 
         imageUrl(url) {
             return 'url("'+ url + '")';
+        },
+
+        filterDia(dia) {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+            today = yyyy + '-' + mm + '-' + dd;
+            // var tomorrow = new Date() 
+            // tomorrow = yyyy + '-' + mm + '-' + (dd + 1);
+
+            if(this.clickHoyState == 0) {
+                this.searchDate = today;    
+                this.clickHoyState = 1;
+            }else {
+                this.searchDate = '';
+                this.clickHoyState = 0;
+            }
+
         },
     }
 

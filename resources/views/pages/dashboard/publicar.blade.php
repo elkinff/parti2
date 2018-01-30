@@ -2,10 +2,18 @@
 
 @section('nav__content')
 	
-	<h2 class="nav__title">Filtros</h2>
+	{{-- <h2 class="nav__title">Filtros</h2> --}}
 
-	<h4 class="nav__title__divider">Liga</h4>
+	<h4 class="nav__title__divider">Torneos</h4>
 	
+	<div class="form-element">
+        <label class="checkbox fancy white">
+            <input type="checkbox" v-model="checkedLigas" value="464">
+            <div></div>
+            <span class="nav__filter__label">Champions League</span>
+        </label>
+    </div>
+
 	<div class="form-element">
         <label class="checkbox fancy white">
             <input type="checkbox" v-model="checkedLigas" value="455">
@@ -43,32 +51,13 @@
     </div>
 	
 	<div class="filter__tags">
-		<label class="radio filter__tags__item filter__tags__item--large">
+		<label class="checkbox filter__tags__item filter__tags__item--large" id="filterSelectHoy" @click="filterDia('hoy')">
 			<div class="">
 				Hoy
-			</div>	
-			<input type="radio" name="equipo">
+			</div>
+			<input type="checkbox" name="filterDia" id="filterHoy">
 		</label>
-		
-		<label class="radio filter__tags__item">
-			<div class="">
-				Mañana
-			</div>	
-			<input type="radio" name="equipo">
-		</label>
-
-		<label class="radio filter__tags__item">
-			<div class="">
-				Prox 3 días
-			</div>	
-			<input type="radio" name="equipo">
-		</label>
-
-
-
 	</div>
-
-
 
 @endsection
 
@@ -91,11 +80,16 @@
 
 	<div class="container__matchs">
 		
+		<div class="container__matchs__loader" v-if="loading">
+			<img src="{{ asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+			<span>Cargando...</span>
+		</div>
+
 		<a class="match match--publicar" data-toggle="modal" data-target="#modalApostar"
+			v-cloak
 			v-for="match in filteredMatch"
-			v-if="validacionHora(match.date_show)"
 			@click="detailMatch(match)"
-			> 
+			>
 
 			<div class="match__header">
 				@{{ match.date_show }}
@@ -125,8 +119,7 @@
 							:style="{ 'background-image' : 'url(' + match.imageAwayTeam + ')'}"></div> --}}
 						<div class="image__team" 
 							:style="{ 'background-image': imageUrl(match.imageAwayTeam) }">
-						</div>	
-
+						</div>
 							
 					</div>
 
@@ -139,8 +132,16 @@
 			<div class="match__vs">
 				VS
 			</div>
-
 		</a>
+
+		<span class="container__matchs__empty"
+			v-if="!filteredMatch.length"
+			>
+
+			<img src="{{ asset('img/empty_search.png') }}">
+			Lo sentimos no hay resultados para tu busqueda <br> Inténtalo nuevamente! 
+		</span>
+
 	</div>
 
 	@include('pages.modals.apostar')

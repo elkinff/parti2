@@ -135,9 +135,10 @@
 		</a>
 
 		<span class="container__matchs__empty"
+			:class="{hide: loading}"
+			v-cloak
 			v-if="!filteredMatch.length"
 			>
-
 			<img src="{{ asset('img/empty_search.png') }}">
 			Lo sentimos no hay resultados para tu busqueda <br> Inténtalo nuevamente! 
 		</span>

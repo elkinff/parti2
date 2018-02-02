@@ -4,6 +4,7 @@
 	height: calc(100vh - 70px);
 	display: inline-block;
 	background-color: $primary;
+	position: relative;
 	@include translate;
 	@include max('sm') {
 		left: 0;
@@ -62,7 +63,26 @@
 				background-color: lighten($primary, 10%)
 			}
 		}
-		
+	}
+
+	&__cerrar__mobile {
+		display: none ;
+		@include max('sm') {
+			display: block;
+		}
+	}
+
+	&__ayuda {
+		position: absolute;
+		bottom: 20px;
+		left: 0;
+		text-align: center;
+		width: 100%;
+		color: $white;
+
+		&:hover {
+			color: lighten($white, 10%);			
+		}
 	}
 
 }

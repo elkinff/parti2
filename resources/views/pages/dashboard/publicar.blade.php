@@ -58,6 +58,15 @@
 			<input type="checkbox" name="filterDia" id="filterHoy">
 		</label>
 	</div>
+	
+	<div class="nav__cerrar__mobile">
+		<a class="btn block" href="#" id="cerrarModal">Cerrar</a>	
+	</div>
+	
+
+	<a class="nav__ayuda" href="#">
+		¿Necesitas ayuda?
+	</a>
 
 @endsection
 

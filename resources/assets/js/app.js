@@ -64,12 +64,8 @@ const app = new Vue({
         searchDate:'',
 
     	matchUser: {},
-        prueba:'',
 
-        errorsForm:{
-            apuesta:''
-        },
-
+        id_retador: '',
 
         clickHoyState : 0,
 
@@ -155,29 +151,23 @@ const app = new Vue({
     	},
 
     	savaMatch() {
-    		var urlSaveMatch = ''; 
+    		var urlSaveMatch = 'publicar'; 
             this.validateBeforeSubmit()
     		
-            console.log(this.apuesta);
-
-            if(!this.apuesta) { 
-                this.errorsForm.apuesta = "Valor requerido";
-            }else {
-                this.errorsForm.apuesta = "Hooa mundos";
-            }
 
     		this.matchUser = this.auxMatch;
     		this.matchUser.valor = this.apuesta
     		this.matchUser.valor_ganado = this.totalGanancia;
-
+            this.matchUser.id_retador = this.id_retador;
+            console.log(this.id_retador);
     		console.log(this.matchUser);
 
-   //  		axios.post(urlSaveMatch).then(response => {
-			// 	//this.match = response.data;
-			// })
-			// .catch(e => {
-			// 	console.log(e);
-			// });
+    		axios.post(urlSaveMatch, this.matchUser).then(response => {
+				//this.match = response.data;
+			})
+			.catch(e => {
+				console.log(e);
+			});
     	},
 
         imageUrl(url) {

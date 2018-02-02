@@ -20,7 +20,7 @@
 				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageHomeTeam + ')'}"></div>
 				        		</div>	
 
-				        		<input type="radio" name="equipo" v-validate="'required'">
+				        		<input type="radio" name="equipo" v-validate="'required'" :value="auxMatch.idHomeTeam" v-model="id_retador">
 				        	</label>
 				        	<div class="equipos__name">
 				        		@{{ auxMatch.homeTeamName }}
@@ -35,7 +35,7 @@
 				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageAwayTeam + ')'}"></div>
 				        		</div>	
 
-				        		<input type="radio" name="equipo" v-validate="'required'">
+				        		<input type="radio" name="equipo" v-validate="'required'" :value="auxMatch.idAwayTeam" v-model="id_retador">
 				        	</label>
 				        	<div class="equipos__name">
 				        		@{{ auxMatch.awayTeamName }}

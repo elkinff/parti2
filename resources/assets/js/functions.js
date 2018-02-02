@@ -14,6 +14,16 @@ if(buttonFiltros && nav) {
 	});
 }
 
+var cerrarModal = document.querySelector("#cerrarModal");
+
+if(cerrarModal) {
+
+	cerrarModal.onclick =  function() {
+		nav.classList.remove('show');
+		$('#overlay').fadeToggle(200);
+	}
+}
+
 // Seleccion de equipos
 $(".img-check").click(function(){
 	//console.log("hola mundos");

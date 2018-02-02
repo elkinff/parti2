@@ -11,14 +11,14 @@ use Auth;
 class PublicacionController extends Controller{
     
     public function __construct(){
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
 	public function store(Request $request){
-		dd(Auth::user());
+		// dd(Auth::user());
 		// dd("ss");
 		$liga = Liga::findOrFail($request->league);
-		dd($liga);
+		// dd($liga);
 		$equipoRetador = Equipo::findOrFail($request->id_retador);
 
 		//Calcular fecha de final del partido

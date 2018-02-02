@@ -1218,7 +1218,7 @@ var app = new Vue({
             this.auxMatch = match;
         },
         savaMatch: function savaMatch() {
-            var urlSaveMatch = 'publicar';
+            var urlSaveMatch = 'api/publicar';
             this.validateBeforeSubmit();
 
             this.matchUser = this.auxMatch;

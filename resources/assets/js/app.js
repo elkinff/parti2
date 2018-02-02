@@ -151,9 +151,8 @@ const app = new Vue({
     	},
 
     	savaMatch() {
-    		var urlSaveMatch = 'publicar'; 
+    		var urlSaveMatch = 'api/publicar'; 
             this.validateBeforeSubmit()
-    		
 
     		this.matchUser = this.auxMatch;
     		this.matchUser.valor = this.apuesta

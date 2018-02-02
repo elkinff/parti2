@@ -26,13 +26,14 @@ return [
     'facebook' => [
         'client_id' => '282875052239233',
         'client_secret' => '1139017fa37dd828054b3d4f512308fd',
-        //'redirect' => url('auth/facebook/callback')
+        'redirect' => env("APP_URL").'/auth/facebook/callback'
     ],
 
     'google' => [
         'client_id' => '845163377358-elev6ai06b6vrmcp2rvcao3grll61m8m.apps.googleusercontent.com',
         'client_secret' => 'kNw8FizXb-XdJM8Lrlgq-ouv',
-        //'redirect' => url('auth/google/callback')
+        'redirect' => env("APP_URL").'/auth/google/callback',
+        // 'redirect' => 'http://127.0.0.1:8000/auth/google/callback'
     ]
 
 ];

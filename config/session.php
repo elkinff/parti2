@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'domain' => 'parti2-env.us-west-2.elasticbeanstalk.com',
+    'domain' => 'localhost',
 
     /*
     |--------------------------------------------------------------------------

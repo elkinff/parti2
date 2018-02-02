@@ -11,9 +11,10 @@ Route::get('activar/{id}/{token}', 'Auth\RegisterController@activarUser')->name(
 //Parti2
 Route::get('/', 'HomeController@index')->name('muro');
 
-//Publicar Partido
+//Publicar Partido y publicacion
 Route::get('publicar', 'PartidoController@index')->name('publicar.partido');
 Route::get('partidos', 'PartidoController@getPartidos')->name('get.partido');
+
 
 //Credito
 Route::get('credito', 'CreditoController@index');

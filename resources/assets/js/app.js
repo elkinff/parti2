@@ -64,6 +64,8 @@ const app = new Vue({
         searchDate:'',
 
     	matchUser: {},
+        saldo_user: '',
+        estado_pago: '',
 
         id_retador: '',
 
@@ -76,6 +78,8 @@ const app = new Vue({
 
     created() {
     	this.getMatchs();
+        this.saldo_user = document.querySelector("#saldoUser").value;
+        //console.log(this.saldo_user);
     },
 
     computed:{
@@ -103,7 +107,21 @@ const app = new Vue({
                 .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
                 .filter(match => this.validacionHora(match.date_show))
 
-	    }
+	    },
+
+        validateCreditoApuesta() {
+            var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
+            //console.log(apuestaUsuario);
+            //console.log(this.saldo_user);
+
+            if(this.saldo_user < parseInt(apuestaUsuario)){
+                this.estado_pago = 3; //Sin pagar 
+                return "No tienes crédito suficiente, puedes pagar directamente en el siguiente botón";
+            }else {
+                this.estado_pago = 0 //Pagado;
+                return '';
+            }
+        }
 
     },
 
@@ -111,9 +129,10 @@ const app = new Vue({
         validateBeforeSubmit() {
               this.$validator.validateAll().then((result) => {
                 if (result) {
+                    this.savaMatch();
                   return;
                 }
-                // alert('Correct them errors!');
+                //alert('Correct them errors!');
             });
         },      
 
@@ -152,17 +171,18 @@ const app = new Vue({
 
     	savaMatch() {
     		var urlSaveMatch = 'api/publicar'; 
-            this.validateBeforeSubmit()
-
-    		this.matchUser = this.auxMatch;
+    		
+            this.matchUser = this.auxMatch;
     		this.matchUser.valor = this.apuesta
     		this.matchUser.valor_ganado = this.totalGanancia;
             this.matchUser.id_retador = this.id_retador;
-            console.log(this.id_retador);
-    		console.log(this.matchUser);
+            this.matchUser.estado_pago = this.estado_pago;
+
+            console.log(this.matchUser);
 
     		axios.post(urlSaveMatch, this.matchUser).then(response => {
 				//this.match = response.data;
+                console.log(response.data)
 			})
 			.catch(e => {
 				console.log(e);

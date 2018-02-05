@@ -1129,6 +1129,8 @@ var app = new Vue({
         searchDate: '',
 
         matchUser: {},
+        saldo_user: '',
+        estado_pago: '',
 
         id_retador: '',
 
@@ -1140,6 +1142,8 @@ var app = new Vue({
 
     created: function created() {
         this.getMatchs();
+        this.saldo_user = document.querySelector("#saldoUser").value;
+        //console.log(this.saldo_user);
     },
 
 
@@ -1174,27 +1178,43 @@ var app = new Vue({
             }).filter(function (match) {
                 return _this.validacionHora(match.date_show);
             });
+        },
+        validateCreditoApuesta: function validateCreditoApuesta() {
+            var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
+            //console.log(apuestaUsuario);
+            //console.log(this.saldo_user);
+
+            if (this.saldo_user < parseInt(apuestaUsuario)) {
+                this.estado_pago = 3; //Sin pagar 
+                return "No tienes crédito suficiente, puedes pagar directamente en el siguiente botón";
+            } else {
+                this.estado_pago = 0; //Pagado;
+                return '';
+            }
         }
     },
 
     methods: {
         validateBeforeSubmit: function validateBeforeSubmit() {
+            var _this2 = this;
+
             this.$validator.validateAll().then(function (result) {
                 if (result) {
+                    _this2.savaMatch();
                     return;
                 }
-                // alert('Correct them errors!');
+                //alert('Correct them errors!');
             });
         },
         getMatchs: function getMatchs() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.loading = true;
 
             var urlMatchs = 'partidos';
             axios.get(urlMatchs).then(function (response) {
-                _this2.matchs = response.data;
-                _this2.loading = false;
+                _this3.matchs = response.data;
+                _this3.loading = false;
             }).catch(function (e) {
                 console.log(e);
             });
@@ -1219,17 +1239,18 @@ var app = new Vue({
         },
         savaMatch: function savaMatch() {
             var urlSaveMatch = 'api/publicar';
-            this.validateBeforeSubmit();
 
             this.matchUser = this.auxMatch;
             this.matchUser.valor = this.apuesta;
             this.matchUser.valor_ganado = this.totalGanancia;
             this.matchUser.id_retador = this.id_retador;
-            console.log(this.id_retador);
+            this.matchUser.estado_pago = this.estado_pago;
+
             console.log(this.matchUser);
 
             axios.post(urlSaveMatch, this.matchUser).then(function (response) {
                 //this.match = response.data;
+                console.log(response.data);
             }).catch(function (e) {
                 console.log(e);
             });

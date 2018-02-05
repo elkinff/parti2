@@ -149,7 +149,7 @@
 			v-if="!filteredMatch.length"
 			>
 			<img src="{{ asset('img/empty_search.png') }}">
-			Lo sentimos no hay resultados para tu busqueda <br> Inténtalo nuevamente! 
+			Lo sentimos no hay resultados para tu búsqueda <br> Inténtalo con otro torneo o fecha ! 
 		</span>
 
 	</div>

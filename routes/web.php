@@ -14,7 +14,8 @@ Route::get('/', 'HomeController@index')->name('muro');
 //Publicar Partido y publicacion
 Route::get('publicar', 'PartidoController@index')->name('publicar.partido');
 Route::get('partidos', 'PartidoController@getPartidos')->name('get.partido');
-
+Route::post('api/publicar', 'PublicacionController@store')->name('publicar');
+Route::get('publicaciones/{idPublicacion}', 'PublicacionController@show')->name('show.publicacion');
 
 //Credito
 Route::get('credito', 'CreditoController@index');

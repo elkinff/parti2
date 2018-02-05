@@ -13,13 +13,6 @@ class CreateEquipoTable extends Migration{
             Schema::create($this->set_schema_table, function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->increments('id');
-                $table->integer('id_liga')->unsigned();
-                $table->index(["id_liga"], 'fk_Equipo_Liga1_idx');
-                $table->foreign('id_liga', 'fk_Equipo_Liga1_idx')
-                    ->references('id')->on('liga')
-                    ->onDelete('no action')
-                    ->onUpdate('no action');
-
                 $table->string('nombre', 45);
                 $table->string('escudo', 512)->nullable();
 

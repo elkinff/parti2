@@ -50,7 +50,7 @@ class CreatePublicacionTable extends Migration{
 
             $table->bigInteger('valor');
             $table->bigInteger('valor_ganado');
-            $table->string('link', 90);
+            $table->string('link', 90)->nullable();
 
             $table->integer('id_ganador')->nullable()->unsigned();
             $table->index(["id_ganador"], 'fk_Publicacion_users2_idx');
@@ -67,7 +67,9 @@ class CreatePublicacionTable extends Migration{
                 ->onUpdate('no action');
 
             $table->tinyInteger('empate')->default('0');
-
+            $table->tinyInteger('estado')->default('0');
+            $table->timestamps();
+            
             $table->unique(["id"], 'id_UNIQUE');
         });
     }

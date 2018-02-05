@@ -16,8 +16,7 @@ class PublicacionRequest extends FormRequest{
             "idHomeTeam" => "required",
             "idAwayTeam" => "required",
             "date" => "required",
-            "id" => "required",
-            "valor" => "required|digits_between:5,9"
+            "valor" => "required|digits_between:5,9",
             "valor_ganado" => "required|digits_between:5,9"
         ];
     }

@@ -13,6 +13,13 @@ class CreatePartidoTable extends Migration{
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('id_liga')->unsigned();
+            $table->index(["id_liga"], 'fk_Partido_Liga1_idx');
+            $table->foreign('id_liga', 'fk_Partido_Liga1_idx')
+                ->references('id')->on('liga')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
             $table->integer('id_local')->unsigned();
             $table->index(["id_local"], 'fk_Partido_Equipo1_idx');
             $table->foreign('id_local', 'fk_Partido_Equipo1_idx')

@@ -9,11 +9,18 @@ use Laravel\Scout\Searchable;
 class Partido extends Model{
 	use Searchable;
 
-    public $table="partido";
+    protected $table="partido";
+    public $timestamps = false;
+    
+    protected $fillable = ['id_liga', 'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'];
 
-    protected $fillable = [
-        'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'
-    ];
+    public function liga(){
+        return $this->belongsTo(Liga::class, 'id_liga');
+    }
+
+    public static function getPartidoByEquiposAndFecha($idEquipoLocal, $idEqipoVisitante, $fecha){
+        return Partido::whereIdLocal($idEquipoLocal)->whereIdVisitante($idEqipoVisitante)->whereFechaInicio($fecha)->first();
+    }
 
     public static function setDateMatch($date){
         $hoy = date("Y-m-d");

@@ -14,9 +14,17 @@ class Partido extends Model{
     
     protected $fillable = ['id_liga', 'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'];
 
+    public function equipoLocal(){
+        return $this->belongsTo(Partido::class, 'id_local');
+    }
+
+    public function equipoVisitante(){
+        return $this->belongsTo(Partido::class, 'id_visitante');
+    }
+
     public function liga(){
         return $this->belongsTo(Liga::class, 'id_liga');
-    }
+    }  
 
     public static function getPartidoByEquiposAndFecha($idEquipoLocal, $idEqipoVisitante, $fecha){
         return Partido::whereIdLocal($idEquipoLocal)->whereIdVisitante($idEqipoVisitante)->whereFechaInicio($fecha)->first();

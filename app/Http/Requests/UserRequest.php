@@ -15,7 +15,7 @@ class UserRequest extends FormRequest{
             'nombre' => 'required|string|max:90',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'celular' => 'digits:10'
+            'celular' => 'nullable|digits:10'
         ];
     }
 }

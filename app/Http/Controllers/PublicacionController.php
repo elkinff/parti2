@@ -43,7 +43,7 @@ class PublicacionController extends Controller{
 				//Crear la publicacion y retonar el mensaje de respuesta satisfactorio con las variables necesarias
 				$publicacion = Publicacion::create(['id_partido' => $partido->id, 'id_usu_retador' => $user->id, 'id_equipo_retador' => $equipoRetador->id, 'id_equipo_receptor' => $equipoReceptor->id, 'valor' => str_replace([",","$"], "", $request->valor), 'valor_ganado' => $request->valor_ganado, "estado" => $request->estado_pago]);
 
-				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id]);		
+				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador]);		
 
 			}catch (Exception $e) {
 				return response()->json(["success" => $e]);		

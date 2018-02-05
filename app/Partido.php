@@ -15,11 +15,11 @@ class Partido extends Model{
     protected $fillable = ['id_liga', 'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'];
 
     public function equipoLocal(){
-        return $this->belongsTo(Partido::class, 'id_local');
+        return $this->belongsTo(Equipo::class, 'id_local');
     }
 
     public function equipoVisitante(){
-        return $this->belongsTo(Partido::class, 'id_visitante');
+        return $this->belongsTo(Equipo::class, 'id_visitante');
     }
 
     public function liga(){

@@ -17,18 +17,16 @@ class Publicacion extends Model{
 
     //Mapping algolia
     public function toSearchableArray(){
-        // $partido = Partido::findOrFail($record['id_partido']);
-        // $equipoLocal = $partido->equipoLocal;
-        // $equipoVisitante = $partido->equipoVisitante;
-
         $record = $this->toArray();
-        // $record['liga'] = $partido->liga->id;
-        // $record['idEquipoLocal'] = $equipoLocal;
-        // $record['idEquipoVisitante'] = $equipoVisitante;
-        // $record['nombreEquipoLocal'] = ;
-        // $record['nombreEquipoVisitante'] = $partido->equipoVisitante;
-        // $record['equipoLocalEscudo'] = $partido->equipoLocal;
-        // $record['equipoVisitanteEscudo'] = $partido->equipoLocal;
+
+        $partido = Partido::findOrFail($record['id_partido']);
+        $publicacion = Publicacion::findOrFail($record['id']);
+        $partido->equipoLocal;
+        $partido->equipoVisitante;
+        $partido->liga;
+
+        $record['usuario'] = $publicacion->usuarioRetador;
+        $record['partido'] = $partido;
         return $record;
     }
 
@@ -39,5 +37,9 @@ class Publicacion extends Model{
 
     public function equipoReceptor(){
     	return $this->belongsTo(Equipo::class, 'id_equipo_receptor');
+    }
+
+    public function usuarioRetador(){
+        return $this->belongsTo(User::class, 'id_usu_retador');   
     }
 }

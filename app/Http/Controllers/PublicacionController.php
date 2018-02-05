@@ -29,7 +29,7 @@ class PublicacionController extends Controller{
 			$fechaFinalPartido = date('Y-m-d H:i:s', strtotime('+110 minute', strtotime($fechaPartido)));
 			
 			try {
-				//Obtener equipo receptor para retonarlo solo si la publicación se crea satisfactoriamente
+				//Obtener equipo receptor solo si la publicación se crea satisfactoriamente
 				$idEquipoReceptor = $request->id_retador == $request->idHomeTeam ? $request->idAwayTeam : $request->idHomeTeam;
 				$equipoReceptor = Equipo::findOrFail($idEquipoReceptor);
 
@@ -39,9 +39,11 @@ class PublicacionController extends Controller{
 					// Crear publicacion de nuevo partido
 					$partido = Partido::create(["id_liga" => $liga->id, "id_local" => $request->idHomeTeam, "id_visitante" => $request->idAwayTeam, "fecha_inicio" => $fechaPartido, "fecha_final" => $fechaFinalPartido]);
 				}
+
+				//Crear la publicacion y retonar el mensaje de respuesta satisfactorio con las variables necesarias
 				$publicacion = Publicacion::create(['id_partido' => $partido->id, 'id_usu_retador' => $user->id, 'id_equipo_retador' => $equipoRetador->id, 'id_equipo_receptor' => $equipoReceptor->id, 'valor' => str_replace([",","$"], "", $request->valor), 'valor_ganado' => $request->valor_ganado, "estado" => $request->estado_pago]);
 
-				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "equipoRetador" => $equipoRetador , "equipoReceptor" => $equipoReceptor]);		
+				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id]);		
 
 			}catch (Exception $e) {
 				return response()->json(["success" => $e]);		

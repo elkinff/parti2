@@ -2,7 +2,7 @@
 
 
 @section('nav__content')
-
+	
 @endsection
 
 
@@ -22,53 +22,81 @@
 	</div>
 	
 
-	<div class="container__matchs" id="container__matchs">
-			
-	{{-- 	<div class="match">
-			<div class="match__header">
-				24 de Febrero 2018
-			</div>
-			<div class="match__content">
-				<div class="match__equipo ">
+	<ais-index app-id="{{ config('scout.algolia.id') }}"
+           api-key="{{ env('ALGOLIA_SEARCH') }}"
+           index-name="publicacion">
 
-					<div class="match__equipo__escudo">
-						<img src="{{ asset('img/medellin.svg') }}">
+       <ais-input placeholder="Busqueda partidos"></ais-input>
+       
+       <ais-results class="container__matchs">
+           	<template slot-scope="{ result }">
+		   	
+				<div class="match">
+					<div class="match__header">
+						@{{ result.partido.fecha_inicio }}
+					</div>
+					<div class="match__content">
+						<div class="match__equipo" 
+							:class="{  'match__equipo--selected' : result.partido.equipo_local.usuario }">
+
+							<div class="match__equipo__escudo">
+								<div class="image__team" 
+									:style="{ 'background-image': imageUrl( result.partido.equipo_local.escudo ) }">
+								</div>	
+							</div>
+
+							<div class="match__equipo__nombre">
+								@{{ result.partido.equipo_local.nombre }}
+							</div>
+
+							<div class="match__equipo__usuario" v-if="result.partido.equipo_local.usuario">
+								@{{ result.partido.equipo_local.usuario.nombre }}				
+							</div>	
+
+						</div>
+
+						<div class="match__equipo"
+							:class="{  'match__equipo--selected' :result.partido.equipo_visitante.usuario }">
+							
+							<div class="match__equipo__escudo">
+								<div class="image__team" 
+									:style="{ 'background-image': imageUrl( result.partido.equipo_visitante.escudo ) }">
+								</div>
+							</div>
+
+							<div class="match__equipo__nombre">
+								@{{ result.partido.equipo_visitante.nombre }}
+							</div>
+
+							<div class="match__equipo__usuario" v-if="result.partido.equipo_visitante.usuario">
+								@{{ result.partido.equipo_visitante.usuario.nombre }}				
+							</div>	
+
+						</div>
+					</div>
+					<div class="match__vs">
+						VS
+					</div>
+					
+					<div v-if="result.partido.equipo_local.usuario">
+						<div class="match__price match__price--visitante">@{{ result.valor }}</div>
+					</div>
+					<div v-else>
+						<div class="match__price">@{{ result.valor }}</div>
 					</div>
 
-					<div class="match__equipo__nombre">
-						Real Cartegena
-					</div>
+				</div>   		
+			   	
 
-					<div class="match__equipo__usuario">
-						
-					</div>	
+			</template>
+       	</ais-results>
 
-				</div>
 
-				<div class="match__equipo match__equipo--selected">
-					<div class="match__equipo__escudo">
-						<img src="{{ asset('img/millonarios.svg') }}">
-					</div>
+       	<ais-range-input attribute-name="valor" />
 
-					<div class="match__equipo__nombre">
-						Millonarios FC
-					</div>
+		
+	</ais-index>
 
-					<div class="match__equipo__usuario">
-						Oscar Soler 
-					</div>	
-
-				</div>
-			</div>
-			<div class="match__vs">
-				VS
-			</div>
-
-			<div class="match__price">$50.000</div>
-		</div> --}}
-	
-	</div>
-	
 
 	@include('pages.modals.apostar')
 

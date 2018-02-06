@@ -9,8 +9,12 @@ window.Vue = require('vue');
 
 import VueCurrencyFilter from 'vue-currency-filter';
 import VeeValidate from 'vee-validate';
+import InstantSearch from 'vue-instantsearch';
+
+Vue.use(InstantSearch);
 
 Vue.use(VeeValidate);
+
 
 Vue.use(VueCurrencyFilter, 
 {

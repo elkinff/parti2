@@ -11,9 +11,7 @@ class Publicacion extends Model{
     
     protected $table = "publicacion";
     
-    protected $fillable = [
-        'id_partido', 'id_usu_retador', 'id_usu_receptor', 'id_equipo_retador', 'id_equipo_receptor', 'valor', 'valor_ganado', 'link', 'id_ganador', 'id_perdedor', 'empate', 'estado'
-    ];
+    protected $fillable = ['id_partido', 'id_usu_retador', 'id_usu_receptor', 'id_equipo_retador', 'id_equipo_receptor', 'valor', 'valor_ganado', 'link', 'id_ganador', 'id_perdedor', 'empate', 'estado'];
 
     //Mapping algolia
     public function toSearchableArray(){
@@ -21,12 +19,19 @@ class Publicacion extends Model{
 
         $partido = Partido::findOrFail($record['id_partido']);
         $publicacion = Publicacion::findOrFail($record['id']);
-        $partido->equipoLocal;
-        $partido->equipoVisitante;
+        
         $partido->liga;
 
-        $record['usuario'] = $publicacion->usuarioRetador;
         $record['partido'] = $partido;
+        $record['partido']["equipo_local"] = $partido->equipoLocal;
+        $record['partido']["equipo_visitante"] = $partido->equipoVisitante;
+
+        //Asignar usuario al equipo por el que aposto
+        if ($record['id_equipo_retador'] == $record["partido"]->equipoLocal->id) {
+            $record["partido"]["equipo_local"]["usuario"] = $publicacion->usuarioRetador;
+        }else{
+            $record["partido"]["equipo_visitante"]["usuario"] = $publicacion->usuarioRetador;
+        }
         return $record;
     }
 
@@ -37,6 +42,10 @@ class Publicacion extends Model{
 
     public function equipoReceptor(){
     	return $this->belongsTo(Equipo::class, 'id_equipo_receptor');
+    }
+
+    public function partido(){
+        return $this->belongsTo(Partido::class, 'id_partido');   
     }
 
     public function usuarioRetador(){

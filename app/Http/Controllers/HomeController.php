@@ -7,13 +7,9 @@ use Auth;
 
 class HomeController extends Controller{
 
-    // public function __construct(){
-    //     $this->middleware('auth');
-    // }
-
     public function index(){
     	// dd(Auth::user());
-        return view('home');
+        return view('pages.dashboard.muro');
 
     }
 }

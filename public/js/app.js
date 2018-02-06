@@ -1105,7 +1105,7 @@ __WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */].Validator.extend('
     validate: function validate(value) {
         value = value.replace(/,/g, '').replace(/\$/g, '');
         if (value != 0 && value % 10000 == 0 && value !== '$0') {
-            console.log(value);
+            //console.log(value);
             return true;
         } else {
             return false;
@@ -1116,7 +1116,6 @@ __WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */].Validator.extend('
 // Vista de publicar
 var app = new Vue({
     el: '#app',
-
     data: {
         matchs: [],
         auxMatch: {},
@@ -1136,13 +1135,19 @@ var app = new Vue({
 
         clickHoyState: 0,
 
-        loading: false
+        loading: false,
+
+        loadingPago: false,
+
+        link_compartir: ''
 
     },
 
     created: function created() {
         this.getMatchs();
-        this.saldo_user = document.querySelector("#saldoUser").value;
+        if (document.querySelector("#saldoUser")) {
+            this.saldo_user = document.querySelector("#saldoUser").value;
+        }
         //console.log(this.saldo_user);
     },
 
@@ -1238,6 +1243,10 @@ var app = new Vue({
             this.auxMatch = match;
         },
         savaMatch: function savaMatch() {
+            var _this4 = this;
+
+            this.loadingPago = true;
+
             var urlSaveMatch = 'api/publicar';
 
             this.matchUser = this.auxMatch;
@@ -1246,11 +1255,52 @@ var app = new Vue({
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
 
-            console.log(this.matchUser);
+            //console.log(this.matchUser);
 
             axios.post(urlSaveMatch, this.matchUser).then(function (response) {
-                //this.match = response.data;
-                console.log(response.data);
+
+                _this4.link_compartir = response.data.link;
+
+                //console.log(response.data);
+                var equipoRetador = response.data.equipoRetador.nombre;
+
+                //console.log(equipoRetador);
+
+                //$("#modalCompartir").modal('show');
+
+                var handler = ePayco.checkout.configure({
+                    key: '68b310ef2761a73e4cc4c06b0631beba',
+                    test: true
+                });
+
+                var data = {
+                    //Parametros compra (obligatorio)
+                    name: "Publicación  Parti2",
+                    description: "Acabas de realizar una publicación a favor de " + equipoRetador,
+                    invoice: response.data.publicacion, //Id publicacion
+                    currency: "cop",
+                    amount: _this4.apuesta,
+                    tax_base: "0",
+                    tax: "0",
+                    country: "co",
+                    lang: "es",
+
+                    //Onpage="false" - Standard="true"
+                    external: "true",
+
+                    //Atributos opcionales
+                    extra1: response.data.publicacion,
+
+                    confirmation: "http://secure2.payco.co/prueba_curl.php",
+                    response: "http://secure2.payco.co/prueba_curl.php"
+
+                };
+
+                handler.open(data);
+
+                _this4.loadingPago = false;
+
+                $("#modalApostar").modal('hide');
             }).catch(function (e) {
                 console.log(e);
             });
@@ -47895,7 +47945,7 @@ $('#filterSelectHoy').click(function () {
 	// 	return true; 
 });
 
-//var $loaderLink = document.querySelector(".loaderLink");
+var $loaderLink = document.querySelector(".loaderLink");
 
 $('.form').on('submit', function () {
 	if (this.checkValidity() == false) {
@@ -47908,6 +47958,16 @@ $('.form').on('submit', function () {
 			$loaderLink.disabled = true;
 		}
 	}
+});
+
+function copiarLink() {
+	var copyText = document.getElementById("inputLinkCompartir");
+	copyText.select();
+	document.execCommand("Copy");
+}
+
+$('#buttonCompartir').click(function () {
+	copiarLink();
 });
 
 /***/ }),

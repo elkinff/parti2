@@ -71,16 +71,24 @@
 					<br>
 
 			        <div>
-			        	@if(Auth::user())
-			        		<center>@{{validateCreditoApuesta}}</center>
-							
-							<button class="btn block center" @click="validateBeforeSubmit()">Pagar</button>
-							
-							<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
 
-			        	@else
-							<a class="btn block center" href="{{ url('login') }}">Pagar</a>
-			        	@endif
+			        	<div class="container__loader" v-if="loadingPago">
+							<img src="{{ asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+							<span>Cargando...</span>
+						</div>
+
+						<div v-else>
+							@if(Auth::user())
+				        		<center>@{{validateCreditoApuesta}}</center>
+								
+								<button class="btn block center" @click="validateBeforeSubmit()">Pagar</button>
+								
+								<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
+
+				        	@else
+								<a class="btn block center" href="{{ url('login') }}">Pagar</a>
+				        	@endif	
+						</div>
 
 			        </div>
 			    </div>

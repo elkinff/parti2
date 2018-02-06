@@ -30,6 +30,10 @@ Route::get('/ejemplo', function () {
     return view('pages.dashboard.example');
 });
 
+Route::get('/detalle', function () {
+    return view('pages.dashboard.detalle-publicacion');
+});
+
 
 
 Auth::routes();

@@ -45,7 +45,8 @@ $('#filterSelectHoy').click(function() {
 	// 	return true; 
 });
 
-//var $loaderLink = document.querySelector(".loaderLink");
+
+var $loaderLink = document.querySelector(".loaderLink");
 
 $('.form').on('submit', function() {
     if (this.checkValidity() == false) {
@@ -60,6 +61,15 @@ $('.form').on('submit', function() {
     }
 });
 
+function copiarLink() {
+  var copyText = document.getElementById("inputLinkCompartir");
+  copyText.select();
+  document.execCommand("Copy");
+}
+
+$('#buttonCompartir').click(function() {
+	copiarLink();
+});
 
 
 

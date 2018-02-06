@@ -23,6 +23,9 @@
 			</div>
 			
 		</main>
+		
+		<script type="text/javascript" src="https://checkout.epayco.co/checkout.js">   </script>
+		<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
 
 		<script src="{{ asset('js/app.js') }}"></script>
 		

@@ -1,30 +1,10 @@
-@extends('layouts.dashboard', ['nav__visible' => true])
+@extends('layouts.dashboard', ['nav__visible' => false])
 
 
-@section('nav__content')
-
-@endsection
-
-
-@section('content')
+@section('content')	
 	
-	<a href="#" id="buttonFiltros">
-		Ver todos los filtros
-	</a>
-
-	<div class="form-element busqueda busqueda__equipo">
-		<div class="form-group">
-			<span>
-				<img src="{{ asset('img/search.svg') }}" alt="Busqueda Parti2" class="icon">	
-			</span>
-			<input class="form-field" type="text" placeholder="¿Por cual equipo deseas apostar?">
-		</div>
-	</div>
-	
-
-	<div class="container__matchs" id="container__matchs">
-			
-	{{-- 	<div class="match">
+	<div class="container-detail">
+		<div class="match">
 			<div class="match__header">
 				24 de Febrero 2018
 			</div>
@@ -40,10 +20,11 @@
 					</div>
 
 					<div class="match__equipo__usuario">
-						
+						{{-- Oscar Soler  --}}
 					</div>	
 
 				</div>
+
 
 				<div class="match__equipo match__equipo--selected">
 					<div class="match__equipo__escudo">
@@ -65,17 +46,22 @@
 			</div>
 
 			<div class="match__price">$50.000</div>
-		</div> --}}
-	
-	</div>
-	
+		</div>
 
-	@include('pages.modals.apostar')
+		<div class="form-element">
+        	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match</label>
+            <div class="form-group">
+                <input class="form-field" type="text" id="inputLinkCompartir" v-model="link_compartir">
+                 <button class="btn sm" id="buttonCompartir">
+                    <i class="icon-layers"></i>
+                    Copiar
+                </button>
+            </div>
+        </div>
+	</div>	
 
-	<div id="overlay"></div>    
 
-    
+
 
 @endsection
-
 

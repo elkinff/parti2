@@ -1,8 +1,8 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard', ['nav__visible' => true])
 
 
 @section('nav_bar')
-	@include('includes._nav')
+	
 @endsection
 
 

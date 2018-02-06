@@ -712,16 +712,19 @@ fieldset[disabled] .form-field {
 
 .form-field.small {
   padding: 0.5em;
+}
+
+.form-field.dark {
   background-color: #355C7D;
   color: #fff;
 }
 
-.form-field.small:focus {
+.form-field.dark:focus {
   outline: none;
   border-color: #fff;
 }
 
-.form-field.small:focus.filled {
+.form-field.dark:focus.filled {
   background: none;
 }
 
@@ -4658,6 +4661,16 @@ form.horizontal .form-element .last-xs {
   padding-bottom: 1em;
 }
 
+.container__loader {
+  text-align: center;
+}
+
+.container__loader img {
+  width: 80px;
+  display: block;
+  margin: 0 auto;
+}
+
 #buttonFiltros {
   display: none;
 }
@@ -4941,6 +4954,44 @@ form.horizontal .form-element .last-xs {
   }
 }
 
+.container-detail {
+  width: 100%;
+}
+
+.container-detail .match {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .container-detail .match {
+    width: 100%;
+  }
+}
+
+.container-detail .match__equipo__escudo {
+  width: 80px;
+  height: 80px;
+}
+
+@media (max-width: 768px) {
+  .container-detail .match__equipo__escudo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.container-detail .form-element {
+  width: 50%;
+  margin: 1em auto;
+}
+
+@media (max-width: 768px) {
+  .container-detail .form-element {
+    width: 100%;
+  }
+}
+
 .equipos {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5038,6 +5089,13 @@ form.horizontal .form-element .last-xs {
           transform: rotate(15deg);
 }
 
+.compartir__item img {
+  height: 110px;
+  max-width: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 @media (max-width: 768px) {
   .compartir__item {
     width: 90px;
@@ -5049,9 +5107,14 @@ form.horizontal .form-element .last-xs {
   -webkit-transform: rotate(-10deg);
           transform: rotate(-10deg);
   width: 70%;
-  max-width: 250px;
-  left: -25px;
-  top: -10px;
+  max-width: 200px;
+  left: -10px;
+  top: 5px;
+}
+
+.compartir__item--large img {
+  max-width: 210px;
+  height: auto;
 }
 
 @media (max-width: 768px) {

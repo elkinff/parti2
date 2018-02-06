@@ -3,28 +3,24 @@
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      	<div class="modal-header">
-	      		<h3>Compartir</h3>
-
+	      		<h3>Comparte esta publicación</h3>
+				<span>Se ha creado la publicación satisfactoriamente</span>
 	      	</div>
 
 	      	<div class="modal-body">
-				<div class="compartir__image">
-					<div class="compartir__item compartir__item--large">
-						<img src="{{ asset('img/millonarios.svg') }}">
-					</div>	
-
-					<div class="compartir__item">
-						<img src="{{ asset('img/medellin.svg') }}">
-					</div>	
-
-					<div class="compartir__mensaje">
-						<span>Acabo de apostar</span>
-						<h3>$50.0000</h3>
-						<div>Reta a tus amigos</div>
-					</div>
-
-				</div>
-
+		        
+                <div class="form-element">
+                	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match</label>
+                    <div class="form-group">
+                        <input class="form-field" type="text" id="inputLinkCompartir" v-model="link_compartir">
+                         <button class="btn sm" id="buttonCompartir">
+	                        <i class="icon-layers"></i>
+	                        Copiar
+	                    </button>
+                    </div>
+                </div>
+            
+		
 				<div class="compartir__redes">
 					<img src="{{ asset('img/whatsapp.svg') }}">
 				</div>

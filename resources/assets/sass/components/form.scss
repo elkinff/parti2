@@ -44,11 +44,13 @@
     }
 
     &.small {
-         padding: 0.5em;
-         background-color: $primary;
-         color: $white;
+        padding: 0.5em;
+    }
 
-         &:focus {
+    &.dark {
+        background-color: $primary;
+        color: $white;
+        &:focus {
             outline: none;
             border-color: $white;
             &.filled {

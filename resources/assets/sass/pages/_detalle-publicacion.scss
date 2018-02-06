@@ -1,0 +1,31 @@
+.container-detail {
+	width: 100%;
+	.match {
+		width: 50%;
+		margin: 0 auto;
+		@include max('sm') {
+			width: 100%;
+		}
+		&__equipo {
+			&__escudo {
+				width: 80px;
+				height: 80px;
+
+				@include max('sm') {
+					width: 50px;
+					height: 50px;
+				}
+			}
+		}
+	}
+	
+	// Formulario compartir
+	.form-element {
+		width: 50%;
+		margin: 1em auto;
+
+		@include max('sm') {
+			width: 100%;
+		}
+	}
+}

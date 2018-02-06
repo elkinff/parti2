@@ -40,7 +40,7 @@ VeeValidate.Validator.extend('prueba', {
     validate: value => {
         value = value.replace(/,/g, '').replace(/\$/g, '');
         if( value!= 0 && (value % 10000) == 0 && value !== '$0' ){
-            console.log(value);
+            //console.log(value);
             return true;
         }else {
             return false;
@@ -51,7 +51,6 @@ VeeValidate.Validator.extend('prueba', {
 // Vista de publicar
 const app = new Vue({
     el: '#app',
-
     data: {
     	matchs: [],
     	auxMatch: {},
@@ -73,12 +72,17 @@ const app = new Vue({
 
         loading: false,
 
+        loadingPago : false,
+
+        link_compartir : '',
 
     },
 
     created() {
     	this.getMatchs();
-        this.saldo_user = document.querySelector("#saldoUser").value;
+        if (document.querySelector("#saldoUser")) {
+            this.saldo_user = document.querySelector("#saldoUser").value;
+        }
         //console.log(this.saldo_user);
     },
 
@@ -170,6 +174,8 @@ const app = new Vue({
     	},
 
     	savaMatch() {
+            this.loadingPago =  true;
+
     		var urlSaveMatch = 'api/publicar'; 
     		
             this.matchUser = this.auxMatch;
@@ -178,15 +184,60 @@ const app = new Vue({
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
 
-            console.log(this.matchUser);
+            //console.log(this.matchUser);
 
     		axios.post(urlSaveMatch, this.matchUser).then(response => {
-				//this.match = response.data;
-                console.log(response.data)
+
+
+                this.link_compartir = response.data.link;
+
+                //console.log(response.data);
+                var equipoRetador = response.data.equipoRetador.nombre;
+
+                //console.log(equipoRetador);
+
+                //$("#modalCompartir").modal('show');
+
+                var handler = ePayco.checkout.configure({
+                    key: '68b310ef2761a73e4cc4c06b0631beba',
+                    test: true
+                });
+
+                var data={
+                  //Parametros compra (obligatorio)
+                  name: "Publicación  Parti2",
+                  description: "Acabas de realizar una publicación a favor de " + equipoRetador,
+                  invoice: response.data.publicacion,//Id publicacion
+                  currency: "cop",
+                  amount: this.apuesta,
+                  tax_base: "0",
+                  tax: "0",
+                  country: "co",
+                  lang: "es",
+
+                  //Onpage="false" - Standard="true"
+                  external: "true",
+
+                  //Atributos opcionales
+                  extra1: response.data.publicacion,
+                
+                  confirmation: "http://secure2.payco.co/prueba_curl.php",
+                  response: "http://secure2.payco.co/prueba_curl.php",
+
+                }
+
+                handler.open(data);
+
+                this.loadingPago =  false;
+
+                $("#modalApostar").modal('hide');
+
 			})
 			.catch(e => {
 				console.log(e);
 			});
+            
+           
     	},
 
         imageUrl(url) {
@@ -220,7 +271,6 @@ const app = new Vue({
     }
 
 });
-
 
 require('./framy');
 require('./functions');

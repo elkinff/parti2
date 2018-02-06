@@ -1,5 +1,6 @@
 @extends('layouts.dashboard', ['nav__visible' => true])
 
+
 @section('nav__content')
 	
 	{{-- <h2 class="nav__title">Filtros</h2> --}}
@@ -44,7 +45,7 @@
 	<div class="form-element">
         <div>
             <div class="form-group">
-	            <input type="date" class="form-field small" placeholder="dd/mm/aaaa" v-model="searchDate">
+	            <input type="date" class="form-field small dark" placeholder="dd/mm/aaaa" v-model="searchDate">
 	            <span><img src="{{ asset('img/calendar.svg') }}" width="20px"></span>
 	        </div>
         </div>
@@ -75,6 +76,7 @@
 	<a href="#" id="buttonFiltros">
 		Ver todos los filtros
 	</a>
+
 
 	<div class="form-element busqueda busqueda__equipo">
 		<div class="form-group">
@@ -156,8 +158,8 @@
 
 	@include('pages.modals.apostar')
 
+	@include('pages.modals.compartir')
+
 	<div id="overlay"></div>
 
 @endsection
-
-

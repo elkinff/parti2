@@ -11,6 +11,16 @@
 	right: 15px;
 	bottom: 5px;
 	transform: rotate(15deg);
+	
+	//background-color:red;
+	
+	img {
+		height:110px;
+		max-width: 80px;
+		object-fit: cover;
+		
+	}
+
 	@include max('sm') {
 		width: 90px;
 		right: 15px;
@@ -19,9 +29,15 @@
 	&--large {
 		transform: rotate(-10deg);
 		width: 70%;
-		max-width: 250px;
-		left: -25px;
-		top: -10px;
+		max-width: 200px;
+		left: -10px;
+		top: 5px;
+		
+		img {
+			max-width: 210px;
+			height: auto;
+		}
+		//background-color:red;
 
 		@include max('sm') {
 			top:5%;

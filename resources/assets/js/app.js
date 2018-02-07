@@ -252,8 +252,6 @@ const app = new Vue({
 
         detailMatch(match) {
             console.log(match);
-            console.log(this.precio_apuesta.value[0])
-            console.log(this.precio_apuesta.value[1])
             this.apuesta = '';
             this.errors.clear();
             this.auxMatch = match;
@@ -307,8 +305,8 @@ const app = new Vue({
                   //Atributos opcionales
                   extra1: response.data.publicacion,
                 
-                  confirmation: "http://secure2.payco.co/prueba_curl.php",
-                  response: "http://127.0.0.1:8000/publicaciones/detalle",
+                  confirmation: "http://127.0.0.1:8000/api/publicar/confirmacion",
+                  response: "http://127.0.0.1:8000/api/publicaciones/detalle",
 
                 }
 

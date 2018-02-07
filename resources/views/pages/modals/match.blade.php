@@ -13,20 +13,7 @@
 			        {{ csrf_field() }}
 
 			        <div class="equipos">
-			        	<div class="equipos__item">
-				        	<label class="radio">
-
-				        		<div class="equipos__escudo img-check">
-				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageHomeTeam + ')'}"></div>
-				        		</div>	
-
-				        		<input type="radio" name="equipo" v-validate="'required'" :value="auxMatch.idHomeTeam" v-model="id_retador">
-				        	</label>
-				        	<div class="equipos__name">
-				        		@{{ auxMatch.homeTeamName }}
-				        	</div>
-			        	</div>
-
+			        	
 			        	<div class="equipos__item"> 
 				        	<label class="radio">
 				        		{{-- <img :src="auxMatch.imageAwayTeam" class="img-check"> --}}
@@ -37,14 +24,18 @@
 
 				        		<input type="radio" name="equipo" v-validate="'required'" :value="auxMatch.idAwayTeam" v-model="id_retador">
 				        	</label>
-				        	<div class="equipos__name">
-				        		@{{ auxMatch.awayTeamName }}
-				        	</div>
+				        	
+
+							<div class="match__price" v-if="match.equipo_visitante.usuario">
+								@{{ match.equipo_visitante.nombre }}
+							</div>
+
+							<div class="match__price match__price--visitante" v-else>
+								@{{ match.equipo_visitante.nombre }}
+							</div>
+
 			        	</div>
 
-		        	  	<span v-show="errors.has('equipo')" class="equipos__error">
-							Selecciona tu equipo
-						</span>
 
 			        </div>
 

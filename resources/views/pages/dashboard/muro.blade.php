@@ -9,8 +9,8 @@
 		
 		<vue-slider v-bind="precio_apuesta" v-model="precio_apuesta.value"></vue-slider>
 
-		<input type="hide" value="{{ $valor_minimo }}" id="valor_minimo">
-		<input type="hide" value="{{ $valor_maximo }}" id="valor_maximo">
+		<input type="hidden" value="{{ $valor_minimo }}" id="valor_minimo">
+		<input type="hidden" value="{{ $valor_maximo }}" id="valor_maximo">
 
 	</center>
 

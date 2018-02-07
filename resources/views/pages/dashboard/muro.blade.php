@@ -103,7 +103,7 @@
 		<a class="match match--publicar" data-toggle="modal" data-target="#modalApostar"
 			v-cloak
 			v-for="match in filteredPublicaciones"
-			@click="detailMatch(match)"
+			@click="detailPublicacion(match)"
 		>
 
 			<div class="match__header">
@@ -172,9 +172,7 @@
 	</div>
 
 	
-
-
-	@include('pages.modals.apostar')
+	@include('pages.modals.match')
 
 	<div id="overlay"></div>    
 

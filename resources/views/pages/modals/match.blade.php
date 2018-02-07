@@ -3,7 +3,7 @@
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      	<div class="modal-header">
-	      		<h3>Apostar a favor de </h3>
+	      		<h3>Tu a puesta es a favor de </h3>
 	      	</div>
 
 	      	<div class="modal-body">
@@ -13,50 +13,58 @@
 			        {{ csrf_field() }}
 
 			        <div class="equipos">
-			        	
-			        	<div class="equipos__item"> 
+			        	<div class="equipos__item">
 				        	<label class="radio">
-				        		{{-- <img :src="auxMatch.imageAwayTeam" class="img-check"> --}}
 
-				        		<div class="equipos__escudo img-check">
-				        			<div class="image__team" :style="{'background-image' :'url(' + auxMatch.imageAwayTeam + ')'}"></div>
+				        		<div class="equipos__escudo" 
+				        			:class="{ check : !auxMatch2.equipo_local.seleccionado }">
+				        			
+				        			<div class="image__team" 
+				        				:style="{'background-image' :'url(' + auxMatch2.equipo_local.escudo + ')'}">
+				        				
+				        			</div>
 				        		</div>	
 
-				        		<input type="radio" name="equipo" v-validate="'required'" :value="auxMatch.idAwayTeam" v-model="id_retador">
 				        	</label>
-				        	
 
-							<div class="match__price" v-if="match.equipo_visitante.usuario">
-								@{{ match.equipo_visitante.nombre }}
-							</div>
-
-							<div class="match__price match__price--visitante" v-else>
-								@{{ match.equipo_visitante.nombre }}
-							</div>
+				        	<div class="equipos__name">
+				        		@{{ auxMatch2.equipo_local.nombre }}
+				        	</div>
 
 			        	</div>
 
+			        	<div class="equipos__item"> 
+				        	<label class="radio">
+
+				        		<div class="equipos__escudo"
+				        			:class="{ check : !auxMatch2.equipo_visitante.seleccionado }">
+
+				        			<div class="image__team" 
+				        				:style="{'background-image' :'url(' + auxMatch2.equipo_visitante.escudo + ')'}">
+				        			</div>
+
+				        		</div>	
+
+				        	</label>
+
+				        	<div class="equipos__name">
+				        		@{{ auxMatch2.equipo_visitante.nombre }}
+				        	</div>
+			        	</div>
+
+		        	  	<span v-show="errors.has('equipo')" class="equipos__error">
+							Selecciona tu equipo
+						</span>
 
 			        </div>
 
-			        <div class="form-element">
+			        {{-- <div class="form-element">
 			            <label>Valor (COP)</label>
-			            <div>
-
-			                <input type="text" :value="apuesta" name="valor" class="form-field"
-			                	v-validate="'required|prueba'"
-			                	@input="apuesta = $options.filters.currency($event.target.value)"
-			                	:class="{'error': errors.has('valor') }"
-			                	>
-							<span v-show="errors.has('valor')">
-								@{{ errors.first('valor') }}
-							</span>
-
-			            </div>
-			        </div>
+			            <center><h4>@{{ auxMatch2.valor | currency }}</h4></center>
+			        </div> --}}
 					
 					<div class="columns center">
-			        	<h4>Ganarás @{{ totalGanancia | currency }}</h4>
+			        	<h4>Ganarás @{{ auxMatch2.ganancia_match | currency  }}</h4>
 					</div>
 
 					<br>
@@ -72,12 +80,16 @@
 							@if(Auth::user())
 				        		<center>@{{validateCreditoApuesta}}</center>
 								
-								<button class="btn block center" @click="validateBeforeSubmit()">Pagar</button>
+								<button class="btn block center" @click="validateBeforeSubmit()">
+									Pagar @{{ auxMatch2.valor | currency }}
+								</button>
 								
 								<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
 
 				        	@else
-								<a class="btn block center" href="{{ url('login') }}">Pagar</a>
+								<a class="btn block center" href="{{ url('login') }}">
+									Pagar @{{ auxMatch2.valor | currency }}
+								</a>
 				        	@endif	
 						</div>
 

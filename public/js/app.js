@@ -1126,6 +1126,20 @@ var app = new Vue({
     data: {
         matchs: [],
         auxMatch: {},
+
+        auxMatch2: {
+            equipo_local: {
+                nombre: '',
+                escudo: '',
+                seleccionado: ''
+            },
+            equipo_visitante: {
+                nombre: '',
+                escudo: '',
+                seleccionado: ''
+            }
+        },
+
         apuesta: '',
         ganacia_apuesta: '',
         retencion_parti2: '5',
@@ -1271,7 +1285,7 @@ var app = new Vue({
 
             if (this.saldo_user < parseInt(apuestaUsuario)) {
                 this.estado_pago = 3; //Sin pagar 
-                return "No tienes crédito suficiente, puedes pagar directamente en el siguiente botón";
+                return "No tienes crédito suficiente, el saldo restante lo puedes pagar directamente en el siguiente botón";
             } else {
                 this.estado_pago = 0; //Pagado;
                 return '';
@@ -1312,6 +1326,7 @@ var app = new Vue({
             var urlMatchs = 'publicaciones';
             axios.get(urlMatchs).then(function (response) {
                 _this5.publicaciones = response.data;
+                console.log(response.data);
                 _this5.loading = false;
             }).catch(function (e) {
                 console.log(e);
@@ -1334,6 +1349,16 @@ var app = new Vue({
             this.apuesta = '';
             this.errors.clear();
             this.auxMatch = match;
+
+            this.auxMatch2 = match;
+        },
+        detailPublicacion: function detailPublicacion(match) {
+            //console.log(match);
+            var porcentajeParti2 = match.valor * 2 / 100 * this.retencion_parti2;
+            var ganancia_match = match.valor * 2 - porcentajeParti2;
+
+            this.auxMatch2 = match;
+            this.auxMatch2.ganancia_match = ganancia_match;
         },
         savaMatch: function savaMatch() {
             var _this6 = this;
@@ -1399,7 +1424,7 @@ var app = new Vue({
             });
         },
         savePublicacion: function savePublicacion() {
-            var urlSavePublicacion = 'api/publicar';
+            var urlSavePublicacion = 'publicaciones/match';
         },
         imageUrl: function imageUrl(url) {
             return 'url("' + url + '")';

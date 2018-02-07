@@ -51,4 +51,8 @@ class Publicacion extends Model{
     public function usuarioRetador(){
         return $this->belongsTo(User::class, 'id_usu_retador');   
     }
+
+    public static function getMaxValor($publicaciones){
+        return $publicaciones->max('valor');
+    }
 }

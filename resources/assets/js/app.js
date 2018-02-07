@@ -201,7 +201,7 @@ const app = new Vue({
                 //$("#modalCompartir").modal('show');
 
                 var handler = ePayco.checkout.configure({
-                    key: '68b310ef2761a73e4cc4c06b0631beba',
+                    key: 'cc6dfc520c35ec628e622bcf782a5f01',
                     test: true
                 });
 

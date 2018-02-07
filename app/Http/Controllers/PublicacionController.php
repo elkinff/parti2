@@ -16,6 +16,7 @@ class PublicacionController extends Controller{
     // public function __construct(){
     //     $this->middleware('auth');
     // }
+    //Envio de publicaciones activas al muro
 	public function getPublicaciones(){
     	$publicaciones = Publicacion::whereEstado(0)->get();
     	foreach ($publicaciones as $publicacion) {
@@ -33,7 +34,8 @@ class PublicacionController extends Controller{
 	        }
 	        
     	}
-    	return $publicaciones;	
+
+    	return $publicaciones;
 	}
 
 

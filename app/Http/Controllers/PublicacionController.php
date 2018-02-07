@@ -12,10 +12,11 @@ use App\Http\Requests\PublicacionRequest;
 use App\Http\Requests\ItemRequest;
 
 class PublicacionController extends Controller{
-    
+
     // public function __construct(){
-    //     $this->middleware('auth');
+    //     $this->middleware('auth', ["only" => ["store", "match"]]);
     // }
+
     //Envio de publicaciones activas al muro
 	public function getPublicaciones(){
     	$publicaciones = Publicacion::whereEstado(0)->get();
@@ -26,21 +27,24 @@ class PublicacionController extends Controller{
 	        $publicacion->equipo_local = $partido->equipoLocal;
 	        $publicacion->equipo_visitante = $partido->equipoVisitante;
 
+	        $publicacion->equipo_local->seleccionado = false;
+	        $publicacion->equipo_visitante->seleccionado = false;
+
 	        //Asignar usuario al equipo por el que aposto
 	        if ($publicacion->id_equipo_retador == $publicacion->equipo_local->id) {
 	            $publicacion->equipo_local->usuario = $publicacion->usuarioRetador;
+ 				$publicacion->equipo_local->seleccionado = true;
 	        }else{
 	            $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
-	        }
-	        
+	            $publicacion->equipo_visitante->seleccionado = true;
+	        }   
     	}
-
     	return $publicaciones;
 	}
 
 
 	public function store(PublicacionRequest $request){
-		// dd($request->all());
+	
 		$user = Auth::user();
 		if ($user) {
 			$liga = Liga::findOrFail($request->league);
@@ -78,10 +82,6 @@ class PublicacionController extends Controller{
 		}
 	}
 
-	public function show($idPublicacion){
-		dd(Publicacion::findOrFail($idPublicacion)->equipoRetador);
-	}
-
 	public function match(MatchRequest $request){
 		$publicacion = Publicacion::findOrFail($request->id_publicacion);
 		$publicacion->id_usu_receptor = $request->id_usuario;
@@ -90,7 +90,20 @@ class PublicacionController extends Controller{
 		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
 	}
 
+	public function show(Request $request){
+		$idPublicacion = $request->x_id_invoice;
+		$codigoRespuesta = $request->x_cod_response;
 
+		$publicacion = Publicacion::findOrFail($idPublicacion);
+		$publicacion->codigoRespuesta = $codigoRespuesta;
+
+		return $publicacion;
+		return view("pages.detalle-publicacion", compact("publicacion"));
+	}
+
+	public function confirmacionPasarela(Request $request){
+
+	}
 
 
 

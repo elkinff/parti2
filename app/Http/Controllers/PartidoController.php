@@ -10,10 +10,6 @@ use App\Equipo;
 use App\Partido;
 
 class PartidoController extends Controller{
-	
-    // public function __construct(){
-    //     $this->middleware('auth', ["only" => ["create", "store"]]);
-    // }
 
 	public function index(){
 		return view("pages.dashboard.publicar");

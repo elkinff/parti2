@@ -30,6 +30,7 @@ class PublicacionController extends Controller{
 	        }else{
 	            $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
 	        }
+	        $publicacion->date_show = Partido::setDateMatch($publicacion->date);
     	}
     	return $publicaciones;	
 	}

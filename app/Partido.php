@@ -35,6 +35,7 @@ class Partido extends Model{
         $mañana = date("Y-m-d",strtotime($hoy."+1 days"));
         $dateFixture = date('Y-m-d',strtotime($date));
         $horaFixture = date('H:i',strtotime($date));
+        
         //Validar la fecha y retonar el nombre en español del dia
         if ($dateFixture == $hoy) {
             return "Hoy ".$horaFixture;

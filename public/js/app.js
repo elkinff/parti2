@@ -1156,12 +1156,12 @@ var app = new Vue({
         valor_maximo: 500,
 
         precio_apuesta: {
-            value: [this.valor_minino, this.valor_maximo],
+            value: [10000, 500000],
             width: '80%',
             height: 8,
             dotSize: 16,
-            min: this.valor_minino,
-            max: this.valor_maximo,
+            min: 10000,
+            max: 500000,
             disabled: false,
             show: true,
             tooltip: 'always',
@@ -1190,15 +1190,17 @@ var app = new Vue({
             this.saldo_user = document.querySelector("#saldoUser").value;
         }
 
-        // if (document.querySelector("#valor_minimo")) {
-        //     this.valor_minino = parseInt(document.querySelector("#valor_minimo").value);
-        // }
+        if (document.querySelector("#valor_minimo")) {
+            this.precio_apuesta.min = parseInt(document.querySelector("#valor_minimo").value);
+        }
 
-        // if (document.querySelector("#valor_maximo")) {
-        //     this.valor_maximo = parseInt(document.querySelector("#valor_maximo").value);
-        // }
+        if (document.querySelector("#valor_maximo")) {
+            this.precio_apuesta.max = parseInt(document.querySelector("#valor_maximo").value);
+        }
 
-        // console.log(this.valor_maximo);
+        if (document.querySelector("#valor_maximo")) {
+            this.precio_apuesta.value = [parseInt(document.querySelector("#valor_minimo").value), parseInt(document.querySelector("#valor_maximo").value)];
+        }
     },
 
 
@@ -1385,7 +1387,7 @@ var app = new Vue({
                     extra1: response.data.publicacion,
 
                     confirmation: "http://secure2.payco.co/prueba_curl.php",
-                    response: "http://localhost:8000/publicaciones/detalle"
+                    response: "http://127.0.0.1:8000/publicaciones/detalle"
 
                 };
 

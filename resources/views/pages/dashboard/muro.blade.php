@@ -7,10 +7,10 @@
 	<br>
 	<center>
 		
-		<vue-slider v-bind="precio_apuesta" v-model="precio_apuesta.value" :min='0' :max='500' :value="[0,500]"></vue-slider>
+		<vue-slider v-bind="precio_apuesta" v-model="precio_apuesta.value"></vue-slider>
 
-		<input type="text" value="{{ $valor_minimo }}" id="valor_minimo">
-		<input type="text" value="{{ $valor_maximo }}" id="valor_maximo">
+		<input type="hide" value="{{ $valor_minimo }}" id="valor_minimo">
+		<input type="hide" value="{{ $valor_maximo }}" id="valor_maximo">
 
 	</center>
 

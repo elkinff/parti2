@@ -1156,7 +1156,7 @@ var app = new Vue({
         valor_maximo: 500,
 
         precio_apuesta: {
-            value: [valor_minino, this.valor_maximo],
+            value: [this.valor_minino, this.valor_maximo],
             width: '80%',
             height: 8,
             dotSize: 16,

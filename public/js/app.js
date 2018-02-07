@@ -1153,15 +1153,15 @@ var app = new Vue({
         publicaciones: [],
 
         valor_minino: 0,
-        valor_maximo: 0,
+        valor_maximo: 500,
 
         precio_apuesta: {
-            value: '',
+            value: [valor_minino, this.valor_maximo],
             width: '80%',
             height: 8,
             dotSize: 16,
-            min: '',
-            max: '',
+            min: this.valor_minino,
+            max: this.valor_maximo,
             disabled: false,
             show: true,
             tooltip: 'always',
@@ -1190,15 +1190,15 @@ var app = new Vue({
             this.saldo_user = document.querySelector("#saldoUser").value;
         }
 
-        if (document.querySelector("#valor_minimo")) {
-            this.valor_minino = parseInt(document.querySelector("#valor_minimo").value);
-        }
+        // if (document.querySelector("#valor_minimo")) {
+        //     this.valor_minino = parseInt(document.querySelector("#valor_minimo").value);
+        // }
 
-        if (document.querySelector("#valor_maximo")) {
-            this.valor_maximo = parseInt(document.querySelector("#valor_maximo").value);
-        }
+        // if (document.querySelector("#valor_maximo")) {
+        //     this.valor_maximo = parseInt(document.querySelector("#valor_maximo").value);
+        // }
 
-        console.log(this.valor_maximo);
+        // console.log(this.valor_maximo);
     },
 
 
@@ -1385,7 +1385,7 @@ var app = new Vue({
                     extra1: response.data.publicacion,
 
                     confirmation: "http://secure2.payco.co/prueba_curl.php",
-                    response: "http://localhost:8000//detalle"
+                    response: "http://localhost:8000/publicaciones/detalle"
 
                 };
 

@@ -4558,6 +4558,7 @@ form.horizontal .form-element .last-xs {
 .match__equipo--selected {
   opacity: 0.6;
   background-color: #c9d0d8;
+  height: 150px;
   cursor: pointer;
 }
 
@@ -4586,6 +4587,7 @@ form.horizontal .form-element .last-xs {
   line-height: 1em;
   width: 100%;
   font-size: 0.95em;
+  min-height: 30px;
 }
 
 .match__equipo__usuario {
@@ -4616,7 +4618,7 @@ form.horizontal .form-element .last-xs {
   bottom: 10px;
   position: absolute;
   display: inline-block;
-  width: 80px;
+  width: 90px;
   height: 30px;
   line-height: 30px;
   background-color: #F67280;
@@ -4640,7 +4642,7 @@ form.horizontal .form-element .last-xs {
 }
 
 .match__price--visitante {
-  left: calc(100% - 80px);
+  left: calc(100% - 90px);
 }
 
 .match__price--visitante:before {

@@ -81,6 +81,7 @@
 			opacity: 0.6;
 			background-color: $dark25;
 			//background-color:red;
+			height: 150px;
 			cursor : pointer;
 		}
 
@@ -111,6 +112,7 @@
 			line-height: 1em;
 			width: 100%;
 			font-size: 0.95em;
+			min-height: 30px;
 
 			//background-color:teal;
 		}
@@ -145,7 +147,7 @@
 		bottom:10px;
 		position:absolute;
 		display:inline-block;
-		width:80px;
+		width:90px;
 		height:30px;
 		line-height:30px;
 		background-color:$secondary;
@@ -178,7 +180,7 @@
 		}
 
 	  	&--visitante {
-			left: calc(100% - 80px);
+			left: calc(100% - 90px);
 
 			&:before{
 				content: "";

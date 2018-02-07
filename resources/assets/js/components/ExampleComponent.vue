@@ -1,6 +1,6 @@
 <template>
     <div>
-       hola mindos
+       <h1>Hola mundos perdidos</h1>
     </div>
 </template>
 

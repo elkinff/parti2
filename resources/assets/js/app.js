@@ -9,6 +9,7 @@ window.Vue = require('vue');
 
 import VueCurrencyFilter from 'vue-currency-filter';
 import VeeValidate from 'vee-validate';
+import vueSlider from 'vue-slider-component';
 
 
 Vue.use(VeeValidate);
@@ -53,18 +54,22 @@ VeeValidate.Validator.extend('prueba', {
 // Vista de publicar
 const app = new Vue({
     el: '#app',
+    components: {
+        vueSlider
+    },
+
     data: {
-    	matchs: [],
-    	auxMatch: {},
-    	apuesta:'',
-    	ganacia_apuesta:'',
-    	retencion_parti2 : '5',
-    	
+        matchs: [],
+        auxMatch: {},
+        apuesta:'',
+        ganacia_apuesta:'',
+        retencion_parti2 : '5',
+        
         search:'',
         checkedLigas: [],
         searchDate:'',
 
-    	matchUser: {},
+        matchUser: {},
         saldo_user: '',
         estado_pago: '',
 
@@ -78,10 +83,39 @@ const app = new Vue({
 
         link_compartir : '',
 
+        // MUro
+
+        publicaciones:[],
+
+        precio_apuesta: {
+            value: [10000, 500000],
+            width: '80%',
+            height: 8,
+            dotSize: 16,
+            min: 10000,
+            max: 500000,
+            disabled: false,
+            show: true,
+            tooltip: 'always',
+            formatter: (v) => `$${Math.round(v).toLocaleString()}`,
+
+            bgStyle: {
+                backgroundColor: '#999',
+            },
+            tooltipStyle: {
+                fontSize: '14px',
+            },
+            processStyle: {
+                backgroundColor: '#fff'
+            }
+        },
+
     },
 
     created() {
-    	this.getMatchs();
+        this.getPublicaciones();
+        this.getMatchs();
+
         if (document.querySelector("#saldoUser")) {
             this.saldo_user = document.querySelector("#saldoUser").value;
         }
@@ -89,17 +123,17 @@ const app = new Vue({
     },
 
     computed:{
-	 	totalGanancia() {
+        totalGanancia() {
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
 
-	 		var porcentajeParti2 = (apuestaUsuario * 2 / 100) * this.retencion_parti2;
+            var porcentajeParti2 = (apuestaUsuario * 2 / 100) * this.retencion_parti2;
             
-	    	return (apuestaUsuario * 2) - porcentajeParti2;
-	    },
+            return (apuestaUsuario * 2) - porcentajeParti2;
+        },
 
-	    filteredMatch(){
+        filteredMatch(){
 
-			var self=this;
+            var self=this;
             if (!this.checkedLigas.length){
                 return this.matchs
                 .filter(match => match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
@@ -107,13 +141,33 @@ const app = new Vue({
                 .filter(match => this.validacionHora(match.date_show))
             }
 
-			return this.matchs
+            return this.matchs
                 .filter(match => match.homeTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.awayTeamName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
                 .filter(match => self.checkedLigas.includes(match.league))
                 .filter(match => match.date.slice(0,10).indexOf(self.searchDate)>=0)
                 .filter(match => this.validacionHora(match.date_show))
 
-	    },
+        },
+
+
+        filteredPublicaciones(){
+            var self=this;
+            if (!this.checkedLigas.length){
+                return this.publicaciones
+                .filter(match => match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor < this.precio_apuesta.value[1])
+                .filter(match => match.partido.fecha_inicio.slice(0,10).indexOf(self.searchDate)>=0)
+                .filter(match => this.validacionHora(match.partido.fecha_inicio))
+            }
+
+            return this.publicaciones
+                .filter(match => match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
+                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor < this.precio_apuesta.value[1])
+                .filter(match => self.checkedLigas.includes(match.partido.id_liga.toString()))
+                .filter(match => match.partido.fecha_inicio.slice(0,10).indexOf(self.searchDate)>=0)
+                .filter(match => this.validacionHora(match.partido.fecha_inicio))
+
+        },
 
         validateCreditoApuesta() {
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
@@ -142,18 +196,31 @@ const app = new Vue({
             });
         },      
 
-    	getMatchs() {
+        getMatchs() {
             this.loading = true;
 
-    		var urlMatchs = 'partidos';
-			axios.get(urlMatchs).then(response => {
-				this.matchs = response.data;
+            var urlMatchs = 'partidos';
+            axios.get(urlMatchs).then(response => {
+                this.matchs = response.data;
                 this.loading = false;
-			})
-			.catch(e => {
-				console.log(e);
-			});
-    	},
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        },
+
+        getPublicaciones() {
+            this.loading = true;
+
+            var urlMatchs = 'publicaciones';
+            axios.get(urlMatchs).then(response => {
+                this.publicaciones = response.data;
+                this.loading = false;
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        },
 
         validacionHora(fechaMatch) {
             var d = new Date();
@@ -168,27 +235,29 @@ const app = new Vue({
             }
         },
 
-    	detailMatch(match) {
-    		console.log(match);
+        detailMatch(match) {
+            console.log(match);
+            console.log(this.precio_apuesta.value[0])
+            console.log(this.precio_apuesta.value[1])
             this.apuesta = '';
             this.errors.clear();
-    		this.auxMatch = match;
-    	},
+            this.auxMatch = match;
+        },
 
-    	savaMatch() {
+        savaMatch() {
             this.loadingPago =  true;
 
-    		var urlSaveMatch = 'api/publicar'; 
-    		
+            var urlSaveMatch = 'api/publicar'; 
+            
             this.matchUser = this.auxMatch;
-    		this.matchUser.valor = this.apuesta
-    		this.matchUser.valor_ganado = this.totalGanancia;
+            this.matchUser.valor = this.apuesta
+            this.matchUser.valor_ganado = this.totalGanancia;
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
 
             //console.log(this.matchUser);
 
-    		axios.post(urlSaveMatch, this.matchUser).then(response => {
+            axios.post(urlSaveMatch, this.matchUser).then(response => {
 
 
                 this.link_compartir = response.data.link;
@@ -224,7 +293,7 @@ const app = new Vue({
                   extra1: response.data.publicacion,
                 
                   confirmation: "http://secure2.payco.co/prueba_curl.php",
-                  response: "http://secure2.payco.co/prueba_curl.php",
+                  response: "/detalle",
 
                 }
 
@@ -234,13 +303,18 @@ const app = new Vue({
 
                 $("#modalApostar").modal('hide');
 
-			})
-			.catch(e => {
-				console.log(e);
-			});
+            })
+            .catch(e => {
+                console.log(e);
+            });
             
            
-    	},
+        },
+
+        savePublicacion() {
+            var urlSavePublicacion = 'api/publicar';
+
+        },
 
         imageUrl(url) {
             return 'url("'+ url + '")';
@@ -274,12 +348,13 @@ const app = new Vue({
 
 });
 
+
+
+
 require('./framy');
 require('./functions');
 require('./modal');
 require('./sweetalert');
-
-
 
 
 

@@ -71,11 +71,14 @@
 
 @endsection
 
+							{{-- Content --}}
+
 @section('content')
 	
 	<a href="#" id="buttonFiltros">
 		Ver todos los filtros
 	</a>
+
 
 
 	<div class="form-element busqueda busqueda__equipo">
@@ -109,8 +112,6 @@
 				<div class="match__equipo">
 
 					<div class="match__equipo__escudo">
-						{{-- <img :src="match.imageHomeTeam" width="50"> --}}
-						{{-- <div class="image__team" :style="{'background-image' :'url(' + match.imageHomeTeam + ')'}"></div> --}}
 
 						<div class="image__team" 
 							:style="{ 'background-image': imageUrl(match.imageHomeTeam) }">
@@ -126,8 +127,6 @@
 
 				<div class="match__equipo">
 					<div class="match__equipo__escudo">
-						{{-- <div class="image__team" 
-							:style="{ 'background-image' : 'url(' + match.imageAwayTeam + ')'}"></div> --}}
 						<div class="image__team" 
 							:style="{ 'background-image': imageUrl(match.imageAwayTeam) }">
 						</div>

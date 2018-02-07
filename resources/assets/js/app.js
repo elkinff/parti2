@@ -87,13 +87,16 @@ const app = new Vue({
 
         publicaciones:[],
 
+        valor_minino:0,
+        valor_maximo:0,
+
         precio_apuesta: {
-            value: [10000, 500000],
+            value: '',
             width: '80%',
             height: 8,
             dotSize: 16,
-            min: 10000,
-            max: 500000,
+            min: '',
+            max: '',
             disabled: false,
             show: true,
             tooltip: 'always',
@@ -116,10 +119,20 @@ const app = new Vue({
         this.getPublicaciones();
         this.getMatchs();
 
-        if (document.querySelector("#saldoUser")) {
+         if (document.querySelector("#saldoUser")) {
             this.saldo_user = document.querySelector("#saldoUser").value;
         }
-        //console.log(this.saldo_user);
+
+        if (document.querySelector("#valor_minimo")) {
+            this.valor_minino = parseInt(document.querySelector("#valor_minimo").value);
+        }
+
+        if (document.querySelector("#valor_maximo")) {
+            this.valor_maximo = parseInt(document.querySelector("#valor_maximo").value);
+        }
+
+        console.log(this.valor_maximo);
+
     },
 
     computed:{
@@ -293,7 +306,7 @@ const app = new Vue({
                   extra1: response.data.publicacion,
                 
                   confirmation: "http://secure2.payco.co/prueba_curl.php",
-                  response: "/detalle",
+                  response: "http://localhost:8000//detalle",
 
                 }
 

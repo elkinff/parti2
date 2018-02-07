@@ -20,7 +20,8 @@ class PublicacionController extends Controller{
     	$publicaciones = Publicacion::whereEstado(0)->get();
     	foreach ($publicaciones as $publicacion) {
     		$partido = $publicacion->partido;
-	      
+	      	$partido->date_show = Partido::setDateMatch($partido->fecha_inicio);
+
 	        $publicacion->equipo_local = $partido->equipoLocal;
 	        $publicacion->equipo_visitante = $partido->equipoVisitante;
 
@@ -30,7 +31,7 @@ class PublicacionController extends Controller{
 	        }else{
 	            $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
 	        }
-	        $publicacion->date_show = Partido::setDateMatch($publicacion->date);
+	        
     	}
     	return $publicaciones;	
 	}

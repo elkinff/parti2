@@ -53,7 +53,6 @@ class Publicacion extends Model{
     }
 
     public static function getPublicacionesActivas($publicacionTipo){
-
         //Validar si se retonan todas las publicaciones activas o solo una publicacion
         if ($publicacionTipo == "All") {
             $publicaciones = Publicacion::whereEstado(0)->get();

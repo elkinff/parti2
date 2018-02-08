@@ -25,18 +25,18 @@ Route::post('publicaciones/match', 'PublicacionController@match')->name('match.p
 Route::get('credito', 'CreditoController@index');
 
 
-Route::get('/email', function () {
-    return view('emails.email-example');
-});
+// Route::get('/email', function () {
+//     return view('emails.email-example');
+// });
 
 
-Route::get('/ejemplo', function () {
-    return view('pages.dashboard.example');
-});
+// Route::get('/ejemplo', function () {
+//     return view('pages.dashboard.example');
+// });
 
-Route::get('/detalle', function () {
-    return view('pages.dashboard.detalle-publicacion');
-});
+// Route::get('/detalle', function () {
+//     return view('pages.dashboard.detalle-publicacion');
+// });
 
 
 

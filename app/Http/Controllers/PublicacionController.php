@@ -79,8 +79,8 @@ class PublicacionController extends Controller{
 	}
 
 	public function show($idPublicacion){
-		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion);
-
+		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
+		
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 

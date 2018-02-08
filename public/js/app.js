@@ -1366,8 +1366,10 @@ var app = new Vue({
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
             var valor_apuesta = 0; //Valor apuesta en pago epayco
 
-            if (this.saldo_user < apuestaUsuario) {
+            if (this.saldo_user > apuestaUsuario) {
                 valor_apuesta = this.saldo_user - apuestaUsuario;
+            } else {
+                valor_apuesta = apuestaUsuario - this.saldo_user;
             }
 
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;

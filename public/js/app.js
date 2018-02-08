@@ -1368,6 +1368,8 @@ var app = new Vue({
 
             if (this.saldo_user < apuestaUsuario) {
                 valor_apuesta = this.saldo_user - apuestaUsuario;
+            } else {
+                valor_apuesta = apuestaUsuario - this.saldo_user;
             }
 
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;

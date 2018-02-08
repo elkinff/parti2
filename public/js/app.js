@@ -1258,7 +1258,7 @@ var app = new Vue({
                 return this.publicaciones.filter(function (match) {
                     return match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0;
                 }).filter(function (match) {
-                    return match.valor >= _this2.precio_apuesta.value[0] && match.valor < _this2.precio_apuesta.value[1];
+                    return match.valor >= _this2.precio_apuesta.value[0] && match.valor <= _this2.precio_apuesta.value[1];
                 }).filter(function (match) {
                     return match.partido.fecha_inicio.slice(0, 10).indexOf(self.searchDate) >= 0;
                 }).filter(function (match) {
@@ -1269,7 +1269,7 @@ var app = new Vue({
             return this.publicaciones.filter(function (match) {
                 return match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase()) >= 0;
             }).filter(function (match) {
-                return match.valor >= _this2.precio_apuesta.value[0] && match.valor < _this2.precio_apuesta.value[1];
+                return match.valor >= _this2.precio_apuesta.value[0] && match.valor <= _this2.precio_apuesta.value[1];
             }).filter(function (match) {
                 return self.checkedLigas.includes(match.partido.id_liga.toString());
             }).filter(function (match) {
@@ -1349,7 +1349,6 @@ var app = new Vue({
             this.apuesta = '';
             this.errors.clear();
             this.auxMatch = match;
-
             this.auxMatch2 = match;
         },
         detailPublicacion: function detailPublicacion(match) {

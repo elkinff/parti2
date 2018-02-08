@@ -184,14 +184,14 @@ const app = new Vue({
             if (!this.checkedLigas.length){
                 return this.publicaciones
                 .filter(match => match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
-                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor < this.precio_apuesta.value[1])
+                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor <= this.precio_apuesta.value[1])
                 .filter(match => match.partido.fecha_inicio.slice(0,10).indexOf(self.searchDate)>=0)
                 .filter(match => this.validacionHora(match.partido.fecha_inicio))
             }
 
             return this.publicaciones
                 .filter(match => match.equipo_local.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 || match.equipo_visitante.nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(self.search.toLowerCase())>=0 )
-                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor < this.precio_apuesta.value[1])
+                .filter(match => match.valor >= this.precio_apuesta.value[0] && match.valor <= this.precio_apuesta.value[1])
                 .filter(match => self.checkedLigas.includes(match.partido.id_liga.toString()))
                 .filter(match => match.partido.fecha_inicio.slice(0,10).indexOf(self.searchDate)>=0)
                 .filter(match => this.validacionHora(match.partido.fecha_inicio))
@@ -270,7 +270,6 @@ const app = new Vue({
             this.apuesta = '';
             this.errors.clear();
             this.auxMatch = match;
-
             this.auxMatch2 = match;
         },
 

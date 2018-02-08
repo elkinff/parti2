@@ -78,19 +78,23 @@ class PublicacionController extends Controller{
 		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
 	}
 
-	public function show(Request $request){
+	public function show($idPublicacion){
+		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion);
+
+		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
+	}
+
+	public function respuestaPaserela(Request $request){
 		$idPublicacion = $request->x_id_invoice;
-		$codigoRespuesta = $request->x_cod_response;
 
 		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion);
-		$publicacion->codigoRespuesta = $codigoRespuesta;
 
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 
 	public function confirmacionPasarela(Request $request){
 		// dd($request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
-		
+
 		//Validar firma
 		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 

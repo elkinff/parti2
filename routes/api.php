@@ -1,7 +1,7 @@
 <?php
 
 //Pagina de respuesta epay co
-Route::post('publicaciones/detalle', 'PublicacionController@show')->name('show.publicacion');
+Route::post('publicaciones/detalle', 'PublicacionController@respuestaConfirmacion')->name('respuesta.publicacion');
 
 //Pagina de confirmacion epay
 Route::post('publicar/confirmacion', 'PublicacionController@confirmacionPasarela')->name('confirmacion.publicar');

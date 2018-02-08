@@ -97,7 +97,7 @@
 			<div class="modal-footer">
 				<button class="btn border" data-toggle="modal" data-target="#modalApostar">Cancelar</button>
 				@if(Auth::user())
-					<span>Tu crédito es de <strong>${{ number_format(Auth::user()->saldo) }}</strong> !</span>
+					<span>Tu crédito es de <strong>${{ number_format(Auth::user()->saldo) }}</strong></span>
 				@endif
 				
 			</div>

@@ -19,11 +19,10 @@
 	                    </button>
                     </div>
                 </div>
-            
-		
-				<div class="compartir__redes">
+
+				<a class="compartir__redes" :href=" 'whatsapp://send?text=' + link_compartir" data-action="share/whatsapp/share">
 					<img src="{{ asset('img/whatsapp.svg') }}">
-				</div>
+				</a>
 				
 				<button class="btn block border" data-toggle="modal" data-target="#modalCompartir">Cerrar</button>
 

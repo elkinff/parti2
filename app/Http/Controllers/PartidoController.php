@@ -43,6 +43,9 @@ class PartidoController extends Controller{
 				$idHomeTeam = str_replace("http://api.football-data.org/v1/teams/", "", $fixture->_links->homeTeam->href);
 				$idAwayTeam = str_replace("http://api.football-data.org/v1/teams/", "", $fixture->_links->awayTeam->href);
 				$liga = str_replace("http://api.football-data.org/v1/competitions/", "", $fixture->_links->competition->href);
+				$idPartido = str_replace("http://api.football-data.org/v1/fixtures/", "", $fixture->_links->self->href);
+				
+				$fixture->partido = $idPartido;
 				$fixture->league = $liga;
 				$fixture->idHomeTeam = $idHomeTeam;
 				$fixture->idAwayTeam = $idAwayTeam;

@@ -75,6 +75,14 @@ class PublicacionController extends Controller{
 		$publicacion->id_usu_receptor = $request->id_usuario;
 		$publicacion->estado = 1;
 		$publicacion->save();
+
+		//Validar si hay que restar el credito del usuario
+		$estadoPublicacion = $request->estado_pago;
+		if ($estadoPublicacion == 0) {
+			$user->saldo = $user->saldo - $valorPublicacion;
+			$user->save();
+		}
+
 		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
 	}
 

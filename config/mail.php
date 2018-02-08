@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => 'smtp.gmail.com',
+    'host' => 'smtp.zoho.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => 587,
+    'port' => 465,
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'welcome@parti2.com',
+        'address' => 'info@parti2.com',
         'name' => 'Parti2',
     ],
 
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => 'tls',
+    'encryption' => 'ssl',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => "lapptiveco@gmail.com",
+    'username' => "info@parti2.com",
 
-    'password' => "snoselovnidea93",
+    'password' => "Snoselovnidea93",
 
     /*
     |--------------------------------------------------------------------------

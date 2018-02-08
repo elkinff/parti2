@@ -12,7 +12,7 @@ class Partido extends Model{
     protected $table="partido";
     public $timestamps = false;
     
-    protected $fillable = ['id_liga', 'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'];
+    protected $fillable = ['id', 'id_liga', 'id_local', 'id_visitante', 'fecha_inicio', 'fecha_final'];
 
     public function equipoLocal(){
         return $this->belongsTo(Equipo::class, 'id_local');

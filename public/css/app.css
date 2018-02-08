@@ -5144,5 +5144,10 @@ form.horizontal .form-element .last-xs {
   text-align: center;
   padding: 1em 3em;
   margin: 0 auto;
+  display: none;
+}
+
+.compartir__redes {
+  display: block;
 }
 

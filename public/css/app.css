@@ -523,6 +523,7 @@ nav ul {
   height: calc(100vh - 70px);
   background-color: #F5F6FA;
   padding: 1em;
+  padding-bottom: 4em;
   overflow-y: scroll;
 }
 

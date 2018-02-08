@@ -344,11 +344,15 @@ const app = new Vue({
 
                 }
 
-                handler.open(data);
+
+                if (valor_apuesta != 0) {
+                    handler.open(data);
+                }else {
+                    $("#modalCompartir").modal('show');
+                }
 
                 this.loadingPago =  false;
-
-                $("#modalApostar").modal('hide');
+                $("#modalApostar").modal('hide');                
 
             })
             .catch(e => {

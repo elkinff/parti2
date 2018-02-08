@@ -9,6 +9,7 @@
 	background-color:$light;
 	//background-color:$dark60;
 	padding: 1em;
+	padding-bottom: 4em;
 	overflow-y: scroll;
 	@include max('sm') {
 		min-height: calc(100vh - 70px);

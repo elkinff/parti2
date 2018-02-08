@@ -1419,10 +1419,13 @@ var app = new Vue({
 
                 };
 
-                handler.open(data);
+                if (valor_apuesta != 0) {
+                    handler.open(data);
+                } else {
+                    $("#modalCompartir").modal('show');
+                }
 
                 _this6.loadingPago = false;
-
                 $("#modalApostar").modal('hide');
             }).catch(function (e) {
                 console.log(e);

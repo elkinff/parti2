@@ -17,7 +17,7 @@
 		</a>
 		
 		{{-- Boton para V escritorio --}}
-		<a class="header__menu__item header__menu__item--accent btn">
+		<a class="header__menu__item header__menu__item--accent btn" href="{{ url('publicar') }}">
 			<span>Crear Apuesta</span>
 		</a>
 		

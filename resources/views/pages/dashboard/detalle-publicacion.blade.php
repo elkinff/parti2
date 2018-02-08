@@ -1,8 +1,29 @@
 @extends('layouts.dashboard', ['nav__visible' => false])
 
-
 @section('content')	
-	
+		
+	{{-- 
+		0: Publicado - espera de match - Pagado
+		1: Match
+		2: Publicación terminada - Terminé partido
+		3: Pendiente por pagar
+		4: Cancelado 
+	--}}
+
+	{{-- {{ $publicacion }} --}}
+
+	@if( $publicacion->estado == 0 )
+		<h2>Estado: Publicado en espera de match</h2>
+	@elseif( $publicacion->estado == 1 )	
+		<h2>Estado : Match</h2>
+	@elseif( $publicacion->estado == 2 )	
+		<h2>Estado : Match terminado</h2>	
+	@elseif( $publicacion->estado == 3 )	
+		<h2>Estado : Pendiente por pagar</h2>	
+	@else	
+		<h2>Estado : Cancelado</h2>
+	@endif
+
 	<div class="container-detail">
 		<div class="match">
 			<div class="match__header">
@@ -60,8 +81,20 @@
         </div>
 	</div>	
 
-
-
-
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

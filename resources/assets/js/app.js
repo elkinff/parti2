@@ -286,7 +286,14 @@ const app = new Vue({
 
 
         savaMatch() {
+
             this.loadingPago =  true;
+            var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
+            var valor_apuesta = apuestaUsuario - this.saldo_user;
+            
+            var impuesto_payco = ((valor_apuesta / 100 ) * 2.99) + 900;
+
+            //console.log(impuesto_payco);
 
             var urlSaveMatch = 'api/publicar'; 
             
@@ -321,9 +328,9 @@ const app = new Vue({
                   description: "Acabas de realizar una publicación a favor de " + equipoRetador,
                   invoice: response.data.publicacion,//Id publicacion
                   currency: "cop",
-                  amount: this.apuesta,
+                  amount: valor_apuesta ,
                   tax_base: "0",
-                  tax: "0",
+                  tax: impuesto_payco,
                   country: "co",
                   lang: "es",
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Partido;
 use App\Liga; 
 use App\Equipo; 
+use App\User; 
 use App\Publicacion; 
 use Auth; 
 use App\Http\Requests\PublicacionRequest;
@@ -13,38 +14,16 @@ use App\Http\Requests\ItemRequest;
 
 class PublicacionController extends Controller{
 
-    // public function __construct(){
-    //     $this->middleware('auth', ["only" => ["store", "match"]]);
-    // }
+    public function __construct(){
+        $this->middleware('auth', ["only" => ["store", "match"]]);
+    }
 
     //Envio de publicaciones activas al muro
 	public function getPublicaciones(){
-    	$publicaciones = Publicacion::whereEstado(0)->get();
-    	foreach ($publicaciones as $publicacion) {
-    		$partido = $publicacion->partido;
-	      	$partido->date_show = Partido::setDateMatch($partido->fecha_inicio);
-
-	        $publicacion->equipo_local = $partido->equipoLocal;
-	        $publicacion->equipo_visitante = $partido->equipoVisitante;
-
-	        $publicacion->equipo_local->seleccionado = false;
-	        $publicacion->equipo_visitante->seleccionado = false;
-
-	        //Asignar usuario al equipo por el que aposto
-	        if ($publicacion->id_equipo_retador == $publicacion->equipo_local->id) {
-	            $publicacion->equipo_local->usuario = $publicacion->usuarioRetador;
- 				$publicacion->equipo_local->seleccionado = true;
-	        }else{
-	            $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
-	            $publicacion->equipo_visitante->seleccionado = true;
-	        }   
-    	}
-    	return $publicaciones;
+    	return Publicacion::getPublicacionesActivas("All");
 	}
 
-
 	public function store(PublicacionRequest $request){
-	
 		$user = Auth::user();
 		if ($user) {
 			$liga = Liga::findOrFail($request->league);
@@ -58,6 +37,8 @@ class PublicacionController extends Controller{
 				//Obtener equipo receptor solo si la publicación se crea satisfactoriamente
 				$idEquipoReceptor = $request->id_retador == $request->idHomeTeam ? $request->idAwayTeam : $request->idHomeTeam;
 				$equipoReceptor = Equipo::findOrFail($idEquipoReceptor);
+				$estadoPublicacion = $request->estado_pago;
+				$valorPublicacion = str_replace([",","$"], "", $request->valor);
 
 				//Validar si el partido ya esta guardado en BD
 				$partido = Partido::getPartidoByEquiposAndFecha($request->idHomeTeam, $request->idAwayTeam, $fechaPartido);
@@ -67,10 +48,17 @@ class PublicacionController extends Controller{
 				}
 
 				//Crear la publicacion y retonar el mensaje de respuesta satisfactorio con las variables necesarias
-				$publicacion = Publicacion::create(['id_partido' => $partido->id, 'id_usu_retador' => $user->id, 'id_equipo_retador' => $equipoRetador->id, 'id_equipo_receptor' => $equipoReceptor->id, 'valor' => str_replace([",","$"], "", $request->valor), 'valor_ganado' => $request->valor_ganado, "estado" => $request->estado_pago]);
+				$publicacion = Publicacion::create(['id_partido' => $partido->id, 'id_usu_retador' => $user->id, 'id_equipo_retador' => $equipoRetador->id, 'id_equipo_receptor' => $equipoReceptor->id, 'valor' => $valorPublicacion, 'valor_ganado' => $request->valor_ganado, "estado" => $estadoPublicacion]);
+
 				$linkCompartir = url("publicaciones/".$publicacion->id);
 				$publicacion->link = $linkCompartir;
 				$publicacion->save();
+
+				//Validar si hay que restar el credito del usuario
+				if ($estadoPublicacion == 0) {
+					$user->saldo = $user->saldo - $valorPublicacion;
+					$user->save();
+				}
 
 				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => $linkCompartir, "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador]);		
 
@@ -94,21 +82,51 @@ class PublicacionController extends Controller{
 		$idPublicacion = $request->x_id_invoice;
 		$codigoRespuesta = $request->x_cod_response;
 
-		$publicacion = Publicacion::findOrFail($idPublicacion);
+		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion);
 		$publicacion->codigoRespuesta = $codigoRespuesta;
 
-		return $publicacion;
-		return view("pages.detalle-publicacion", compact("publicacion"));
+		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 
 	public function confirmacionPasarela(Request $request){
+		dd($request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
+		
+		//Validar firma
+		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 
+		if ($signature == $request->signature) {
+			$codigoRespuesta = $request->x_cod_response;
+			if ($codigoRespuesta == 1) {
+				$idPublicacion = $request->x_id_invoice;
+				$publicacion = Publicacion::findOrFail($idPublicacion);
+				// dd($publicacion);
+
+				$publicacion->estado = 0;
+				$publicacion->save();
+
+				//Actualizamos el saldo del usuario a $0
+				$usuario = $publicacion->usuarioRetador;
+				$usuario->saldo = 0;
+				$usuario->save();
+				$mensaje ="Realizada publicacion";
+			}else{
+				$mensaje ="No Realizada, estado = ".$codigoRespuesta;
+			}
+		}else{
+			$mensaje = "No coincide la firma";
+		}
+
+		$nombre_archivo = public_path("confirmacion/response-".$request->x_id_invoice.".txt"); 
+		$archivo = fopen($nombre_archivo, "w+");
+		fwrite($archivo,$mensaje);
+		fclose($archivo);
+		return $mensaje;
 	}
 
-
-
-
-
-
-
 }
+
+
+
+
+
+

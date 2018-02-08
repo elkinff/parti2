@@ -52,7 +52,36 @@ class Publicacion extends Model{
         return $this->belongsTo(User::class, 'id_usu_retador');   
     }
 
-    public static function getMaxValor($publicaciones){
-        return $publicaciones->max('valor');
+    public static function getPublicacionesActivas($publicacionTipo){
+
+        //Validar si se retonan todas las publicaciones activas o solo una publicacion
+        if ($publicacionTipo == "All") {
+            $publicaciones = Publicacion::whereEstado(0)->get();
+        }else{
+            $publicacion = Publicacion::findOrFail($publicacionTipo);
+            $publicaciones = collect();
+            $publicaciones->push($publicacion);
+        }
+
+        foreach ($publicaciones as $publicacion) {
+            $partido = $publicacion->partido;
+            $partido->date_show = Partido::setDateMatch($partido->fecha_inicio);
+
+            $publicacion->equipo_local = $partido->equipoLocal;
+            $publicacion->equipo_visitante = $partido->equipoVisitante;
+
+            $publicacion->equipo_local->seleccionado = false;
+            $publicacion->equipo_visitante->seleccionado = false;
+
+            //Asignar el usuario al equipo por el que aposto
+            if ($publicacion->id_equipo_retador == $publicacion->equipo_local->id) {
+                $publicacion->equipo_local->usuario = $publicacion->usuarioRetador;
+                $publicacion->equipo_local->seleccionado = true;
+            }else{
+                $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
+                $publicacion->equipo_visitante->seleccionado = true;
+            }   
+        }
+        return $publicaciones;
     }
 }

@@ -56,6 +56,8 @@ class Publicacion extends Model{
         //Validar si se retonan todas las publicaciones activas o solo una publicacion
         if ($publicacionTipo == "All") {
             $publicaciones = Publicacion::whereEstado(0)->get();
+        }else if($publicacionTipo == 1){
+            $publicaciones = Publicacion::whereEstado(1)->get();
         }else{
             $publicacion = Publicacion::findOrFail($publicacionTipo);
             $publicaciones = collect();

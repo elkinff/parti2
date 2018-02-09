@@ -11,6 +11,11 @@ use App\Partido;
 
 class PartidoController extends Controller{
 
+	public function __construct(){
+        // $this->middleware('auth', ["only" => ["store", "match"]]);
+        $this->middleware('auth');
+    }
+    
 	public function index(){
 		return view("pages.dashboard.publicar");
 	}

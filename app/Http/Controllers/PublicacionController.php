@@ -71,7 +71,7 @@ class PublicacionController extends Controller{
 		}
 	}
 
-	public function match(MatchRequest $request){
+	public function match(Request $request){
 		$this->usuarioReceptor = Auth::user();
 		$publicacion = Publicacion::findOrFail($request->id_publicacion);
 		$publicacion->id_usu_receptor = $this->usuarioReceptor->id;

@@ -85,9 +85,12 @@
 
 		<div class="form-element">
         	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match
+
+        		{{-- {{ url($publicacion->link) }} --}}
+
         	</label>
             <div class="form-group">
-                <input class="form-field" type="text" id="inputLinkCompartir" value="{{ $publicacion->link }}">
+                <input class="form-field" type="url" id="inputLinkCompartir" value="http:{{ url($publicacion->link) }}">
                  <button class="btn sm" id="buttonCompartir">
                     <i class="icon-layers"></i>
                     Copiar

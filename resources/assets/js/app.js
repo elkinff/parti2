@@ -274,7 +274,7 @@ const app = new Vue({
         },
 
         detailPublicacion(match) {
-            //console.log(match);
+            console.log(match);
             var porcentajeParti2 = (match.valor * 2 / 100) * this.retencion_parti2;
             var ganancia_match = ( match.valor * 2 ) - porcentajeParti2;
 
@@ -373,8 +373,86 @@ const app = new Vue({
            
         },
 
+        // Match publicacion 
         savePublicacion() {
+            this.loading = true;
             var urlSavePublicacion = 'publicaciones/match';
+        
+            var apuestaUsuario = this.auxMatch2.valor;
+            var valor_apuesta = 0;//Valor apuesta en pago epayco
+            var bandera_pasarela = false;
+            
+            if(this.saldo_user > apuestaUsuario) {
+                valor_apuesta = this.saldo_user - apuestaUsuario ;    
+            }else {
+                bandera_pasarela = true;
+                valor_apuesta = apuestaUsuario - this.saldo_user ;    
+            }    
+
+            var impuesto_payco = ((valor_apuesta / 100 ) * 2.99) + 900;
+            var impuesto_payco_iva = impuesto_payco * 0.19;
+            
+            this.matchUser = this.auxMatch2;
+            if (bandera_pasarela) {
+                this.estado_pago = 3
+            }else {
+                this.estado_pago = 0
+            }
+
+            this.matchUser.estado_pago = this.estado_pago;
+
+            axios.post(urlSavePublicacion, this.matchUser).then(response => {
+                console.log(response.data);
+
+
+                this.saldo_user = response.data.saldo;
+                //console.log(response.data);
+                //var equipoRetador = response.data.equipoRetador.nombre;
+
+                //console.log(equipoRetador);
+
+                //$("#modalCompartir").modal('show');
+
+                var handler = ePayco.checkout.configure({
+                    key: 'cc6dfc520c35ec628e622bcf782a5f01',
+                    test: true
+                });
+
+                var data={
+                  //Parametros compra (obligatorio)
+                  name: "Publicación  Parti2",
+                  description: "Acabas de realizar una publicación a favor de ",
+                  invoice: response.data.publicacion,//Id publicacion
+                  currency: "cop",
+                  amount: valor_apuesta ,
+                  tax_base: "0",
+                  tax: impuesto_payco + impuesto_payco_iva,
+                  country: "co",
+                  lang: "es",
+
+                  //Onpage="false" - Standard="true"
+                  external: "true",
+
+                  //Atributos opcionales
+                  extra1: response.data.publicacion,
+                
+                  confirmation: "http://127.0.0.1:8000/api/publicar/confirmacion",
+                  response: "http://127.0.0.1:8000/api/publicaciones/detalle",
+
+                }
+
+                if (bandera_pasarela && valor_apuesta != 0 ) {
+                    handler.open(data);
+                }else {
+                    swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success");
+                }
+
+                this.loadingPago =  false;
+                $("#modalMatch").modal('hide');
+            })
+            .catch(e => {
+                console.log(e);
+            });
 
         },
 

@@ -163,7 +163,7 @@
                     <tr class="force-full-width">
                       <td style="text-align: center; padding-top: 20px; width: 100%">
                         <a href=""><img src="{{ $message->embed('img/email/facebook.png') }}"></a>
-                        <a href=""><img src="{{ $message->embed('img/email/twitter.png') }}"></a>
+                        <a href="https://twitter.com/parti2co"><img src="{{ $message->embed('img/email/twitter.png') }}"></a>
                       </td>
                     </tr>
                     <tr>

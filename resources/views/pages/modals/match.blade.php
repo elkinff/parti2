@@ -3,7 +3,20 @@
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      	<div class="modal-header">
-	      		<h3>Tu a puesta es a favor de </h3>
+	      		<center>
+
+	      			<h3>Tu a puesta es a favor de </h3>
+
+		      		<div v-if="!auxMatch2.equipo_local.seleccionado">
+		      			@{{ auxMatch2.equipo_local.nombre }}
+		      		</div>
+
+		      		<div v-else>
+		      			<h4>@{{ auxMatch2.equipo_visitante.nombre }}</h4>
+		      		</div>
+
+	      		</center>
+
 	      	</div>
 
 	      	<div class="modal-body">
@@ -80,7 +93,7 @@
 							@if(Auth::user())
 				        		<center>@{{validateCreditoApuesta}}</center>
 								
-								<button class="btn block center" @click="validateBeforeSubmit()">
+								<button class="btn block center" @click="savePublicacion()">
 									Pagar @{{ auxMatch2.valor | currency }}
 								</button>
 								

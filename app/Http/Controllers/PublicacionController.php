@@ -72,7 +72,7 @@ class PublicacionController extends Controller{
 	}
 
 	public function match(MatchRequest $request){
-		$this->usuarioReceptor = User::findOrFail($request->id_usuario);
+		$this->usuarioReceptor = Auth::user();
 		$publicacion = Publicacion::findOrFail($request->id_publicacion);
 		$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
 		$publicacion->estado = 1;
@@ -87,10 +87,10 @@ class PublicacionController extends Controller{
 		}
 
 		//Enviar notificaciones de match realizado
-		Mail::send('', [], function ($message){
-	        $message->subject('Has encontrado tu match en parti2');
-	        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
-        });
+		// Mail::send('', [], function ($message){
+	 //        $message->subject('Has encontrado tu match en parti2');
+	 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
+  //       });
 
 		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
 	}

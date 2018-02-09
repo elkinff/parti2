@@ -80,8 +80,7 @@
 		&--selected {
 			opacity: 0.6;
 			background-color: $dark25;
-			//background-color:red;
-			height: 150px;
+			min-height: 150px;
 			cursor : pointer;
 		}
 
@@ -99,6 +98,12 @@
 				background-size: contain;
 				background-position: center;
 				background-repeat: no-repeat;
+				&--large {
+					height: 80px;
+					@include max('sm'){
+						height: 50px;
+					}
+				}
 			}
 		}
 
@@ -125,6 +130,10 @@
 			line-height: 0.9em;
 			width: 100%;
 			margin-top: 0.5em;
+
+			&--large {
+				font-size: 1.1em;
+			}
 		}
 
 	}

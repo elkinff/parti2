@@ -64,9 +64,7 @@
 	text-align:center;
 	padding: 1em 3em;
 	margin: 0 auto;
-	background-color:red;
 	display: none;
-	
 	@include max('sm') {
 		display: block;
 	}

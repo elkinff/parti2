@@ -289,14 +289,18 @@ const app = new Vue({
             this.loadingPago =  true;
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
             var valor_apuesta = 0;//Valor apuesta en pago epayco
-            
+            var bandera_pasarela = false;
             if(this.saldo_user > apuestaUsuario) {
                 valor_apuesta = this.saldo_user - apuestaUsuario ;    
             }else {
+                bandera_pasarela = true;
                 valor_apuesta = apuestaUsuario - this.saldo_user ;    
             }
             
             var impuesto_payco = ((valor_apuesta / 100 ) * 2.99) + 900;
+
+            var impuesto_payco_iva = impuesto_payco * 0.19;
+
 
             //console.log(impuesto_payco);
 
@@ -335,7 +339,7 @@ const app = new Vue({
                   currency: "cop",
                   amount: valor_apuesta ,
                   tax_base: "0",
-                  tax: impuesto_payco,
+                  tax: impuesto_payco + impuesto_payco_iva,
                   country: "co",
                   lang: "es",
 
@@ -350,8 +354,7 @@ const app = new Vue({
 
                 }
 
-
-                if (valor_apuesta != 0) {
+                if (bandera_pasarela && valor_apuesta !=0) {
                     handler.open(data);
                 }else {
                     $("#modalCompartir").modal('show');

@@ -16,21 +16,11 @@ use Cookie;
 class PublicacionController extends Controller{
 
     public function __construct(){
-        $this->middleware('auth', ["only" => ["store", "match"]]);
-        // $this->middleware('auth');
+        $this->middleware('auth', ["only" => ["store", "match", "show"]]);
     }
 
     //Envio de publicaciones activas al muro
 	public function getPublicaciones(){
-		// $partido = Partido::findOrFail(163672);
-		// $urlApi = "http://api.football-data.org/v1/fixtures/".$partido->id;    
-  //       $reqPrefs['http']['method'] = 'GET';
-  //       $reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
-  //       $stream_context = stream_context_create($reqPrefs);
-  //       $response = file_get_contents($urlApi, false, $stream_context);
-  //       $fixture = json_decode($response);
-  //       dd($fixture->fixture);
-
     	return Publicacion::getPublicacionesActivas("All");
 	}
 
@@ -82,10 +72,12 @@ class PublicacionController extends Controller{
 	}
 
 	public function match(MatchRequest $request){
+		$this->usuarioReceptor = User::findOrFail($request->id_usuario);
 		$publicacion = Publicacion::findOrFail($request->id_publicacion);
-		$publicacion->id_usu_receptor = $request->id_usuario;
+		$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
 		$publicacion->estado = 1;
 		$publicacion->save();
+		$this->usuarioRetador = $publicacion->usuarioRetador;
 
 		//Validar si hay que restar el credito del usuario
 		$estadoPublicacion = $request->estado_pago;
@@ -93,6 +85,12 @@ class PublicacionController extends Controller{
 			$user->saldo = $user->saldo - $valorPublicacion;
 			$user->save();
 		}
+
+		//Enviar notificaciones de match realizado
+		Mail::send('', [], function ($message){
+	        $message->subject('Has encontrado tu match en parti2');
+	        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
+        });
 
 		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
 	}

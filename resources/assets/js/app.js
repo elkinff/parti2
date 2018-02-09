@@ -319,6 +319,8 @@ const app = new Vue({
 
                 this.link_compartir = response.data.link;
 
+                this.saldo_user = response.data.saldo;
+
                 //console.log(response.data);
                 var equipoRetador = response.data.equipoRetador.nombre;
 

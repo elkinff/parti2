@@ -4559,7 +4559,7 @@ form.horizontal .form-element .last-xs {
 .match__equipo--selected {
   opacity: 0.6;
   background-color: #c9d0d8;
-  height: 150px;
+  min-height: 150px;
   cursor: pointer;
 }
 
@@ -4576,6 +4576,16 @@ form.horizontal .form-element .last-xs {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.match__equipo__escudo .image__team--large {
+  height: 80px;
+}
+
+@media (max-width: 768px) {
+  .match__equipo__escudo .image__team--large {
+    height: 50px;
+  }
 }
 
 .match__equipo__nombre {
@@ -4599,6 +4609,10 @@ form.horizontal .form-element .last-xs {
   line-height: 0.9em;
   width: 100%;
   margin-top: 0.5em;
+}
+
+.match__equipo__usuario--large {
+  font-size: 1.1em;
 }
 
 .match__vs {
@@ -4955,6 +4969,34 @@ form.horizontal .form-element .last-xs {
     margin: 0 auto;
     text-align: center;
   }
+}
+
+.message-detail {
+  width: 50%;
+  margin: 0 auto;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 768px) {
+  .message-detail {
+    width: 100%;
+  }
+}
+
+.message-detail__icon {
+  width: 10%;
+  padding: 0.5em;
+  margin-right: 0.5em;
 }
 
 .container-detail {

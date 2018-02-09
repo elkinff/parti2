@@ -10,19 +10,26 @@
 		4: Cancelado 
 	--}}
 
-	{{-- {{ $publicacion }} --}}
+	<div class="message-detail">
+		<div class="message-detail__icon">
+			<img src="{{ asset('img/users.svg') }}">
+		</div>
 
-	@if( $publicacion->estado == 0 )
-		<h2>Estado: Publicado en espera de match</h2>
-	@elseif( $publicacion->estado == 1 )	
-		<h2>Estado : Match</h2>
-	@elseif( $publicacion->estado == 2 )	
-		<h2>Estado : Match terminado</h2>	
-	@elseif( $publicacion->estado == 3 )	
-		<h2>Estado : Pendiente por pagar</h2>	
-	@else	
-		<h2>Estado : Cancelado</h2>
-	@endif
+		<div class="message-detail__info">
+			@if( $publicacion->estado == 0 )
+				<h3>Estado: Publicado en espera de match</h3>
+			@elseif( $publicacion->estado == 1 )	
+				<h3>Estado : Match</h3>
+			@elseif( $publicacion->estado == 2 )	
+				<h3>Estado : Match terminado</h3>	
+			@elseif( $publicacion->estado == 3 )	
+				<h3>Estado : Pendiente por pagar</h3>	
+			@else	
+				<h3>Estado : Cancelado</h3>
+			@endif
+			
+		</div>
+	</div>
 
 	<div class="container-detail">
 		<div class="match">
@@ -33,32 +40,39 @@
 				<div class="match__equipo ">
 
 					<div class="match__equipo__escudo">
-						<img src="{{ asset('img/medellin.svg') }}">
+						<div class="image__team image__team--large" 
+							style="background-image: url({{ $publicacion->equipo_local->escudo }}) ">
+						</div>
 					</div>
 
 					<div class="match__equipo__nombre">
-						Real Cartegena
+						{{ $publicacion->equipo_local->nombre }}
 					</div>
-
-					<div class="match__equipo__usuario">
-						{{-- Oscar Soler  --}}
-					</div>	
+					@if($publicacion->equipo_local->usuario)
+						<div class="match__equipo__usuario  match__equipo__usuario--large">
+							{{ $publicacion->equipo_local->usuario->nombre }}
+						</div>	
+					@endif
 
 				</div>
 
 
 				<div class="match__equipo match__equipo--selected">
+					
 					<div class="match__equipo__escudo">
-						<img src="{{ asset('img/millonarios.svg') }}">
+						<div class="image__team image__team--large" 
+							style="background-image: url({{ $publicacion->equipo_visitante->escudo }}) ">
+						</div>
 					</div>
 
 					<div class="match__equipo__nombre">
-						Millonarios FC
+						{{ $publicacion->equipo_visitante->nombre }}
 					</div>
-
-					<div class="match__equipo__usuario">
-						Oscar Soler 
-					</div>	
+					@if( $publicacion->equipo_visitante->usuario )
+						<div class="match__equipo__usuario match__equipo__usuario--large">
+							{{ $publicacion->equipo_visitante->usuario->nombre }}
+						</div>
+					@endif
 
 				</div>
 			</div>
@@ -66,13 +80,14 @@
 				VS
 			</div>
 
-			<div class="match__price">$50.000</div>
+			<div class="match__price">${{ number_format($publicacion->valor) }}</div>
 		</div>
 
 		<div class="form-element">
-        	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match</label>
+        	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match
+        	</label>
             <div class="form-group">
-                <input class="form-field" type="text" id="inputLinkCompartir" v-model="link_compartir">
+                <input class="form-field" type="text" id="inputLinkCompartir" value="{{ $publicacion->link }}">
                  <button class="btn sm" id="buttonCompartir">
                     <i class="icon-layers"></i>
                     Copiar

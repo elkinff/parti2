@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Publicacion;
 
 class MarcadorPartido extends Command{
     
@@ -15,6 +16,13 @@ class MarcadorPartido extends Command{
     }
 
     public function handle(){
-        //
+        $fechaHoraActual = date("Y-m-d H:i:s");
+        $publicacionesHoy = Publicacion::whereEstado(1)->get();
+        foreach ($publicacionesHoy as $publicacion) {
+            $this->info($fechaHoraActual);
+            if ($publicacion->partido->fecha_final == $fechaHoraActual) {
+                $this->info($publicacion);
+            }
+        }
     }
 }

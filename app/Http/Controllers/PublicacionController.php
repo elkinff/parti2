@@ -44,7 +44,7 @@ class PublicacionController extends Controller{
 				$partido = Partido::getPartidoByEquiposAndFecha($request->idHomeTeam, $request->idAwayTeam, $fechaPartido);
 				if (is_null($partido)) {
 					// Crear publicacion de nuevo partido
-					$partido = Partido::create(["id_liga" => $liga->id, "id_local" => $request->idHomeTeam, "id_visitante" => $request->idAwayTeam, "fecha_inicio" => $fechaPartido, "fecha_final" => $fechaFinalPartido]);
+					$partido = Partido::create(["id" => $request->partido, "id_liga" => $liga->id, "id_local" => $request->idHomeTeam, "id_visitante" => $request->idAwayTeam, "fecha_inicio" => $fechaPartido, "fecha_final" => $fechaFinalPartido]);
 				}
 
 				//Crear la publicacion y retonar el mensaje de respuesta satisfactorio con las variables necesarias
@@ -60,7 +60,7 @@ class PublicacionController extends Controller{
 					$user->save();
 				}
 
-				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => $linkCompartir, "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador]);		
+				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => $linkCompartir, "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador, "saldo" => $user->saldo]);		
 
 			}catch (Exception $e) {
 				return response()->json(["success" => $e]);		

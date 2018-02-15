@@ -3,16 +3,16 @@
 
 @section('nav__content')
 	
-	<h4 class="nav__title__divider">Valor</h4>
-	<br>
-	<center>
-		
-		<vue-slider v-bind="precio_apuesta" v-model="precio_apuesta.value"></vue-slider>
-
-		<input type="hidden" value="{{ $valor_minimo }}" id="valor_minimo">
-		<input type="hidden" value="{{ $valor_maximo }}" id="valor_maximo">
-
-	</center>
+	
+	<div v-if="filteredPublicaciones.length">
+		<h4 class="nav__title__divider">Valor</h4>
+		<br>
+		<center>
+			<vue-slider  v-bind="precio_apuesta" v-model="precio_apuesta.value"></vue-slider>
+			<input type="hidden" value="{{ $valor_minimo }}" id="valor_minimo">
+			<input type="hidden" value="{{ $valor_maximo }}" id="valor_maximo">
+		</center>
+	</div>
 
 
 	<h4 class="nav__title__divider">Torneos</h4>
@@ -99,10 +99,16 @@
 	</div>
 
 	<div class="container__matchs">
+
+		<div class="container__matchs__loader" v-if="loading">
+			<img src="{{ asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+			<span>Cargando...</span>
+		</div>
 		
+
 		<a class="match match--publicar" data-toggle="modal" data-target="#modalApostar"
-			v-cloak
 			v-for="match in filteredPublicaciones"
+			v-cloak
 			@click="detailPublicacion(match)"
 		>
 
@@ -174,10 +180,14 @@
 	
 	@include('pages.modals.match')
 
-	<div id="overlay"></div>    
-
-    
+	<div id="overlay"></div>
 
 @endsection
+
+
+
+
+
+
 
 

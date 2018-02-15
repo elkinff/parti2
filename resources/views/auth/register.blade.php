@@ -80,7 +80,12 @@
         </div>
         
         <div class="form__links">
-            <a href="{{url('login')}}">¿Ya tienes una cuenta?</a>
+            <a href="{{url('login')}}">¿Ya tienes una cuenta?</a><br>
+            <div>
+                Al crear tu cuenta aceptas nuestros 
+                <a href="#">Términos y Condiciones</a> y 
+                <a href="#">Política de Tratamiento de Datos.</a>
+            </div>
         </div>
 
     </form>

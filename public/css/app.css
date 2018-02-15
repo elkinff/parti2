@@ -349,12 +349,14 @@ nav ul {
 }
 
 .header__menu__item--user {
-  background-color: steelblue;
+  background-color: #fff;
+  border: 1px solid #355C7D;
   height: 50px;
   width: 50px;
   border-radius: 100%;
   text-align: center;
   padding: 0;
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
@@ -4688,6 +4690,44 @@ form.horizontal .form-element .last-xs {
   margin: 0 auto;
 }
 
+.dropdown {
+  float: right;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  right: 0;
+  z-index: 200;
+  text-align: right;
+  font-size: 0.95em;
+}
+
+.dropdown-content .title {
+  padding: 0.2em 0.5em;
+  padding-right: 1em;
+  color: #264259;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content a {
+  padding: 0.5em;
+  padding-right: 1em;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
 #buttonFiltros {
   display: none;
 }
@@ -4831,6 +4871,19 @@ form.horizontal .form-element .last-xs {
 .form__links a {
   margin-bottom: 0;
   cursor: pointer;
+}
+
+.form__links div {
+  font-size: 0.8em;
+  line-height: 1.2em;
+  text-align: center;
+  border-top: 1px solid #D1D7E4;
+  padding-top: 0.4em;
+  margin-top: 0.4em;
+}
+
+.form__links div a {
+  margin: 0;
 }
 
 .forma__auth {

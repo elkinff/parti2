@@ -61,12 +61,14 @@
 			}
 
 			&--user {
-				background-color: steelblue;
+				background-color: $white;
+				border: 1px solid $primary;
 				height: 50px;
 				width: 50px;
 				border-radius: 100%;
 				text-align: center;
 				padding:0;
+				z-index: 10;
 				@include max('sm') {
 					width: 40px;
 					height: 40px;

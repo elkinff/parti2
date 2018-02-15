@@ -5,9 +5,6 @@
 @endsection
 
 @section('form__auth')
-
-
-
     {{-- Forma Azul --}}
     <img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
 
@@ -64,7 +61,16 @@
         <div class="form__links">
             <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a><br>
             <a href="{{ url('register') }}">¿No tienes una cuenta ? Créala aquí</a>
+
+            <div>
+                Al crear tu cuenta aceptas nuestros 
+                <a href="#">Términos y Condiciones</a> y 
+                <a href="#">Política de Tratamiento de Datos.</a>
+            </div>
+
         </div>
+
+
 
 
     </form>

@@ -1250,6 +1250,9 @@ var app = new Vue({
                 return _this.validacionHora(match.date_show);
             });
         },
+
+
+        // --- Filter Matchs
         filteredPublicaciones: function filteredPublicaciones() {
             var _this2 = this;
 
@@ -1280,8 +1283,6 @@ var app = new Vue({
         },
         validateCreditoApuesta: function validateCreditoApuesta() {
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
-            //console.log(apuestaUsuario);
-            //console.log(this.saldo_user);
 
             if (this.saldo_user < parseInt(apuestaUsuario)) {
                 this.estado_pago = 3; //Sin pagar 
@@ -1299,7 +1300,7 @@ var app = new Vue({
 
             this.$validator.validateAll().then(function (result) {
                 if (result) {
-                    _this3.savaMatch();
+                    _this3.saveMatch();
                     return;
                 }
                 //alert('Correct them errors!');
@@ -1318,6 +1319,9 @@ var app = new Vue({
                 console.log(e);
             });
         },
+
+
+        // Get matchs
         getPublicaciones: function getPublicaciones() {
             var _this5 = this;
 
@@ -1326,7 +1330,6 @@ var app = new Vue({
             var urlMatchs = 'publicaciones';
             axios.get(urlMatchs).then(function (response) {
                 _this5.publicaciones = response.data;
-                console.log(response.data);
                 _this5.loading = false;
             }).catch(function (e) {
                 console.log(e);
@@ -1359,7 +1362,7 @@ var app = new Vue({
             this.auxMatch2 = match;
             this.auxMatch2.ganancia_match = ganancia_match;
         },
-        savaMatch: function savaMatch() {
+        saveMatch: function saveMatch() {
             var _this6 = this;
 
             this.loadingPago = true;
@@ -1367,6 +1370,7 @@ var app = new Vue({
             var valor_apuesta = 0; //Valor apuesta en pago epayco
             var bandera_pasarela = false;
             if (this.saldo_user > apuestaUsuario) {
+                bandera_pasarela = false;
                 valor_apuesta = this.saldo_user - apuestaUsuario;
             } else {
                 bandera_pasarela = true;
@@ -1376,8 +1380,6 @@ var app = new Vue({
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;
 
             var impuesto_payco_iva = impuesto_payco * 0.19;
-
-            //console.log(impuesto_payco);
 
             var urlSaveMatch = 'api/publicar';
 
@@ -1430,7 +1432,7 @@ var app = new Vue({
 
                 };
 
-                if (bandera_pasarela && valor_apuesta != 0) {
+                if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
                     handler.open(data);
                 } else {
                     $("#modalCompartir").modal('show');
@@ -1448,7 +1450,7 @@ var app = new Vue({
         savePublicacion: function savePublicacion() {
             var _this7 = this;
 
-            this.loading = true;
+            this.loadingPago = true;
             var urlSavePublicacion = 'publicaciones/match';
 
             var apuestaUsuario = this.auxMatch2.valor;
@@ -1460,6 +1462,12 @@ var app = new Vue({
             } else {
                 bandera_pasarela = true;
                 valor_apuesta = apuestaUsuario - this.saldo_user;
+            }
+            var equipoSeleccionado; //Equipo contrario
+            if (this.auxMatch2.equipo_local.seleccionado) {
+                equipoSeleccionado = this.auxMatch2.equipo_visitante.nombre;
+            } else {
+                equipoSeleccionado = this.auxMatch2.equipo_local.nombre;
             }
 
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;
@@ -1475,25 +1483,21 @@ var app = new Vue({
             this.matchUser.estado_pago = this.estado_pago;
 
             axios.post(urlSavePublicacion, this.matchUser).then(function (response) {
+
                 console.log(response.data);
 
                 _this7.saldo_user = response.data.saldo;
-                //console.log(response.data);
-                //var equipoRetador = response.data.equipoRetador.nombre;
-
-                //console.log(equipoRetador);
-
-                //$("#modalCompartir").modal('show');
 
                 var handler = ePayco.checkout.configure({
                     key: 'cc6dfc520c35ec628e622bcf782a5f01',
                     test: true
                 });
 
+                // Match
                 var data = {
                     //Parametros compra (obligatorio)
-                    name: "Publicación  Parti2",
-                    description: "Acabas de realizar una publicación a favor de ",
+                    name: "Match Parti2",
+                    description: "Acabas de realizar un Match en Parti2, a favor del equipo " + equipoSeleccionado,
                     invoice: response.data.publicacion, //Id publicacion
                     currency: "cop",
                     amount: valor_apuesta,
@@ -1501,26 +1505,24 @@ var app = new Vue({
                     tax: impuesto_payco + impuesto_payco_iva,
                     country: "co",
                     lang: "es",
-
                     //Onpage="false" - Standard="true"
                     external: "true",
-
                     //Atributos opcionales
                     extra1: response.data.publicacion,
-
                     confirmation: "http://127.0.0.1:8000/api/publicar/confirmacion",
                     response: "http://127.0.0.1:8000/api/publicaciones/detalle"
-
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0) {
                     handler.open(data);
                 } else {
+                    _this7.getPublicaciones();
                     swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success");
                 }
 
+                $("#modalApostar").modal('hide');
+
                 _this7.loadingPago = false;
-                $("#modalMatch").modal('hide');
             }).catch(function (e) {
                 console.log(e);
             });
@@ -48195,6 +48197,27 @@ function copiarLink() {
 $('#buttonCompartir').click(function () {
 	copiarLink();
 });
+
+// Dropdown User
+
+$('#dropdownUser').click(function (event) {
+	event.stopImmediatePropagation();
+	document.getElementById("myDropdown").classList.toggle("show");
+});
+
+window.onclick = function (event) {
+	if (!event.target.matches('.dropbtn')) {
+
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
+};
 
 /***/ }),
 /* 42 */

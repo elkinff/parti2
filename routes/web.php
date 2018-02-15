@@ -30,9 +30,9 @@ Route::get('credito', 'CreditoController@index');
 // });
 
 
-// Route::get('/ejemplo', function () {
-//     return view('pages.dashboard.example');
-// });
+Route::get('/publicaciones', function () {
+    return view('pages.dashboard.publicaciones');
+});
 
 // Route::get('/detalle', function () {
 //     return view('pages.dashboard.detalle-publicacion');

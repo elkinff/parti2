@@ -55,8 +55,7 @@
 					@endif
 
 				</div>
-
-
+				
 				<div class="match__equipo match__equipo--selected">
 					
 					<div class="match__equipo__escudo">
@@ -82,21 +81,23 @@
 
 			<div class="match__price">${{ number_format($publicacion->valor) }}</div>
 		</div>
+	
+		@if( $publicacion->estado == 0 )
+			<div class="form-element">
+	        	
+	        	<label>
+	        		Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match
+	        	</label>
 
-		<div class="form-element">
-        	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match
-
-        		{{-- {{ url($publicacion->link) }} --}}
-
-        	</label>
-            <div class="form-group">
-                <input class="form-field" type="url" id="inputLinkCompartir" value="http:{{ url($publicacion->link) }}">
-                 <button class="btn sm" id="buttonCompartir">
-                    <i class="icon-layers"></i>
-                    Copiar
-                </button>
-            </div>
-        </div>
+	            <div class="form-group">
+	                <input class="form-field" type="url" id="inputLinkCompartir" value="http:{{ url($publicacion->link) }}">
+	                 <button class="btn sm" id="buttonCompartir">
+	                    <i class="icon-layers"></i>
+	                    Copiar
+	                </button>
+	            </div>
+	        </div>
+		@endif
 	</div>	
 
 @endsection

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class CreditoController extends Controller{
     
     public function __construct(){
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index(){

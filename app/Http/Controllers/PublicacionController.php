@@ -78,12 +78,13 @@ class PublicacionController extends Controller{
 		$publicacion->estado = 1;
 		$publicacion->save();
 		$this->usuarioRetador = $publicacion->usuarioRetador;
+		$valorPublicacion = $request->valor;
 
 		//Validar si hay que restar el credito del usuario
 		$estadoPublicacion = $request->estado_pago;
 		if ($estadoPublicacion == 0) {
-			$user->saldo = $user->saldo - $valorPublicacion;
-			$user->save();
+			$this->usuarioReceptor->saldo = $this->usuarioReceptor->saldo - $valorPublicacion;
+			$this->usuarioReceptor->save();
 		}
 
 		//Enviar notificaciones de match realizado
@@ -92,7 +93,7 @@ class PublicacionController extends Controller{
 	 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
   //       });
 
-		return response()->json(["success" => "Se ha creado el match satisfactoriamente"]);		
+		return response()->json(["success" => "Se ha creado el match con tu contrincante!"]);		
 	}
 
 	public function show($idPublicacion){
@@ -110,8 +111,6 @@ class PublicacionController extends Controller{
 	}
 
 	public function confirmacionPasarela(Request $request){
-		// dd($request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
-
 		//Validar firma
 		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 

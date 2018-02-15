@@ -67,7 +67,7 @@ class CreatePublicacionTable extends Migration{
                 ->onUpdate('no action');
 
             $table->tinyInteger('empate')->default('0');
-            $table->tinyInteger('estado')->default('0');
+            $table->tinyInteger('estado', 1)->default('0');
             $table->timestamps();
             
             $table->unique(["id"], 'id_UNIQUE');

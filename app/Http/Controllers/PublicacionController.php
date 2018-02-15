@@ -98,6 +98,11 @@ class PublicacionController extends Controller{
 
 	public function show($idPublicacion){
 		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
+		if (is_null($publicacion->equipo_local->usuario)) {
+			$publicacion->equipo_local->usuario = $publicacion->usuarioReceptor;
+		}else{
+			$publicacion->equipo_visitante->usuario = $publicacion->usuarioReceptor;
+		}
 		
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}

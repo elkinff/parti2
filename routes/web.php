@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@index')->name('muro');
 Route::get('publicar', 'PartidoController@index')->name('publicar.partido');
 Route::get('partidos', 'PartidoController@getPartidos')->name('get.partido');
 Route::get('publicaciones/{idPublicacion}', 'PublicacionController@show')->name('show.publicacion');
+Route::get('usuario/publicaciones', 'PublicacionController@publicacionesUsuario')->name('get.publicacionesUsuario');
 
 //--Apis
 Route::get('publicaciones', 'PublicacionController@getPublicaciones')->name('get.publicacion');
@@ -28,11 +29,6 @@ Route::get('credito', 'CreditoController@index');
 // Route::get('/email', function () {
 //     return view('emails.email-example');
 // });
-
-
-Route::get('/publicaciones', function () {
-    return view('pages.dashboard.publicaciones');
-});
 
 // Route::get('/detalle', function () {
 //     return view('pages.dashboard.detalle-publicacion');

@@ -16,7 +16,7 @@ use Cookie;
 class PublicacionController extends Controller{
 
     public function __construct(){
-        $this->middleware('auth', ["only" => ["store", "match", "show"]]);
+        $this->middleware('auth', ["only" => ["store", "match", "show", "publicacionesUsuario"]]);
     }
 
     //Envio de publicaciones activas al muro
@@ -72,28 +72,28 @@ class PublicacionController extends Controller{
 	}
 
 	public function match(Request $request){
-		$this->usuarioReceptor = Auth::user();
-		$publicacion = Publicacion::findOrFail($request->id);
-		$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
-		$publicacion->estado = 1;
-		$publicacion->save();
-		$this->usuarioRetador = $publicacion->usuarioRetador;
-		$valorPublicacion = $request->valor;
+		//Validar si hay que restar el credito del usuario ya que tenia credito disponible
+		// $estadoPublicacion = $request->estado_pago;
+		
+		// if ($estadoPublicacion == 0) {
+			$valorPublicacion = $request->valor;
+			$this->usuarioReceptor = Auth::user();
+			$publicacion = Publicacion::findOrFail($request->id);
+			$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
+			$publicacion->estado = 1;
+			$publicacion->save();
 
-		//Validar si hay que restar el credito del usuario
-		$estadoPublicacion = $request->estado_pago;
-		if ($estadoPublicacion == 0) {
 			$this->usuarioReceptor->saldo = $this->usuarioReceptor->saldo - $valorPublicacion;
 			$this->usuarioReceptor->save();
-		}
+			$this->usuarioRetador = $publicacion->usuarioRetador;
 
-		//Enviar notificaciones de match realizado
+			//Enviar notificaciones de match realizado
 		// Mail::send('', [], function ($message){
 	 //        $message->subject('Has encontrado tu match en parti2');
 	 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
   //       });
-
-		return response()->json(["success" => "Se ha creado el match con tu contrincante!"]);		
+			return response()->json(["success" => "Se ha creado el match con tu contrincante!"]);		
+		// }
 	}
 
 	public function show($idPublicacion){
@@ -103,14 +103,23 @@ class PublicacionController extends Controller{
 		}else{
 			$publicacion->equipo_visitante->usuario = $publicacion->usuarioReceptor;
 		}
-		
+
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
+	}
+
+	public function publicacionesUsuario(){
+		$publicaciones = Publicacion::getPublicacionesActivas("user");
+		$sortedPublicaciones = $publicaciones->sortByDesc(function ($publicacion, $key) {
+   			return $publicacion->partido->fecha_inicio;
+		});	
+		
+		return view('pages.dashboard.publicaciones', compact("sortedPublicaciones"));
 	}
 
 	public function respuestaPaserela(Request $request){
 		$idPublicacion = $request->x_id_invoice;
 
-		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion);
+		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
 
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
@@ -122,18 +131,36 @@ class PublicacionController extends Controller{
 		if ($signature == $request->signature) {
 			$codigoRespuesta = $request->x_cod_response;
 			if ($codigoRespuesta == 1) {
+				$tipoPublicacion == $request->extra1;
 				$idPublicacion = $request->x_id_invoice;
 				$publicacion = Publicacion::findOrFail($idPublicacion);
-				// dd($publicacion);
+				if ($tipoPublicacion == "publicacion") {
+					$publicacion->estado = 0;
+					$publicacion->save();
 
-				$publicacion->estado = 0;
-				$publicacion->save();
+					//Actualizamos el saldo del usuario a $0
+					$usuario = $publicacion->usuarioRetador;
+					$usuario->saldo = 0;
+					$usuario->save();
+					$mensaje ="Realizada publicacion";
+				}else{
+					$valorPublicacion = $request->valor;
+					$this->usuarioReceptor = User::findOrFail($request->extra2);
 
-				//Actualizamos el saldo del usuario a $0
-				$usuario = $publicacion->usuarioRetador;
-				$usuario->saldo = 0;
-				$usuario->save();
-				$mensaje ="Realizada publicacion";
+					$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
+					$publicacion->estado = 1;
+					$publicacion->save();
+
+					$this->usuarioReceptor->saldo = 0;
+					$this->usuarioReceptor->save();
+					$this->usuarioRetador = $publicacion->usuarioRetador;
+
+					//Enviar notificaciones de match realizado
+				// Mail::send('', [], function ($message){
+			 //        $message->subject('Has encontrado tu match en parti2');
+			 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
+		  //       });
+				}
 			}else{
 				$mensaje ="No Realizada, estado = ".$codigoRespuesta;
 			}

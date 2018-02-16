@@ -17,6 +17,10 @@ class User extends Authenticatable{
     ];
 
     public function publicaciones(){
-    	return $this->hasMany(Publicacion::class, $id_usu_retador);
+    	return $this->hasMany(Publicacion::class, "id_usu_retador");
     }
+
+    public function matchs(){
+        return $this->hasMany(Publicacion::class, "id_usu_receptor");
+    }    
 }

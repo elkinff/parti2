@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Auth;
 
 class Publicacion extends Model{
 
@@ -60,6 +61,10 @@ class Publicacion extends Model{
         //Validar si se retonan todas las publicaciones activas o solo una publicacion
         if ($publicacionTipo == "All") {
             $publicaciones = Publicacion::whereEstado(0)->get();
+        }elseif ($publicacionTipo == "user") {
+            $usuario = Auth::user();
+            $publicaciones = $usuario->publicaciones;
+            $publicaciones = $publicaciones->merge($usuario->matchs);
         }else{
             $publicacion = Publicacion::findOrFail($publicacionTipo);
             $publicaciones = collect();

@@ -255,6 +255,10 @@ nav ul {
   list-style: none;
 }
 
+.strong {
+  font-weight: 700;
+}
+
 .header {
   width: 100%;
   height: 70px;

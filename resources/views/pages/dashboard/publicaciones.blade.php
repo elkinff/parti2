@@ -28,7 +28,13 @@
 				@foreach($publicacionesUsuario as $publicacion  )
 					<tr>
 						<td data-th="Partido">
-							{{ $publicacion->equipo_local->nombre }} vs  {{ $publicacion->equipo_visitante->nombre }} 
+							@if($publicacion->equipo_local->seleccionado)
+								<strong>{{ $publicacion->equipo_local->nombre }}</strong>
+								Vs {{ $publicacion->equipo_visitante->nombre }}
+							@else 
+								{{ $publicacion->equipo_local->nombre }}
+								Vs <strong>{{ $publicacion->equipo_visitante->nombre }}</strong>
+							@endif
 						</td>
 						<td data-th="Tipo">
 							@if($publicacion->id_usu_receptor)
@@ -43,19 +49,19 @@
 						<td data-th="Estado">
 							<div class="message-detail__info">
 								@if( $publicacion->estado == 0 )
-									Publicado en espera de match
+									<span style="color: #2ecc71">Publicado en espera de match</span>
 								@elseif( $publicacion->estado == 1 )	
-									 Match
+									 <span style="color: #F67280"> Match </span>
 								@elseif( $publicacion->estado == 2 )	
-								 	Match terminado	
+								 	<span style="color: #355C7D"> Match terminado </span>	
 								@elseif( $publicacion->estado == 3 )	
-								 	Pendiente por pagar	
+								 	<span style="color: #f39c12"> Publicado pendiente por pagar </span>	
 								@else	
-								 	Cancelado
+								 	<span style="color: #7f8c8d"> Cancelado </span>
 								@endif
 							</div>
 						</td>
-						<td data-th="Acción"><button class="btn sm secondary">Ver</button></td>
+						<td data-th="Acción"><a class="btn sm secondary" href="{{ url('publicaciones', $publicacion->id) }}">Ver</a></td>
 					</tr>
 				@endforeach
 				

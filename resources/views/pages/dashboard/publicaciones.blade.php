@@ -2,7 +2,8 @@
 
 
 @section('content')
-
+	
+	{{ $publicaciones }}
 	<div class="publicacion-user">
 		<table class="table stripe hover responsive">
 			<thead>
@@ -15,6 +16,7 @@
 					<th></th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<tr>
 					<td data-th="Partido"><strong>Millonarios</strong> - Nacional</td>

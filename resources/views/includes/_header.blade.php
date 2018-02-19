@@ -6,7 +6,7 @@
 
 	<div class="header__menu">
 		
-		<a class="header__menu__item">
+		<a class="header__menu__item" href="{{ url('usuario/publicaciones') }}">
 			<img src="{{ asset('img/ball.svg') }}">
 			<span>Mis Publicaciones</span>
 		</a>

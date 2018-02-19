@@ -58,26 +58,30 @@
 			img {
 				width: 25px;
 				margin-right:0.5em;
+
 			}
 
 			&--user {
 				background-color: $white;
-				border: 1px solid $primary;
 				height: 50px;
 				width: 50px;
 				border-radius: 100%;
 				text-align: center;
 				padding:0;
 				z-index: 10;
+				position: relative;
 				@include max('sm') {
 					width: 40px;
 					height: 40px;
 				}
+
 				img {
+					border: 1px solid $primary;
 					margin: 0 auto;
 					border-radius:50%;
 					width: 50px;
 					height: 50px;
+					background-color: #fff;
 					@include max('sm') {
 						width: 40px;
 						height: 40px;

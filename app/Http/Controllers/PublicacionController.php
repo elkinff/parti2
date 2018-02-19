@@ -109,11 +109,11 @@ class PublicacionController extends Controller{
 
 	public function publicacionesUsuario(){
 		$publicaciones = Publicacion::getPublicacionesActivas("user");
-		$sortedPublicaciones = $publicaciones->sortByDesc(function ($publicacion, $key) {
+		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion, $key) {
    			return $publicacion->partido->fecha_inicio;
 		});	
 		
-		return view('pages.dashboard.publicaciones', compact("sortedPublicaciones"));
+		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 
 	public function respuestaPaserela(Request $request){

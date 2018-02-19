@@ -446,7 +446,7 @@ const app = new Vue({
                     response: "http://127.0.0.1:8000/api/publicaciones/detalle",
                 }
 
-                //handler.open(data);
+                handler.open(data);
 
             }else {
                  axios.post(urlSavePublicacion, this.matchUser).then(response => {

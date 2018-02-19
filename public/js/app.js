@@ -1526,10 +1526,9 @@ var app = new Vue({
                     extra2: idUsuario,
                     confirmation: "http://127.0.0.1:8000/api/publicar/confirmacion",
                     response: "http://127.0.0.1:8000/api/publicaciones/detalle"
-
-                    //handler.open(data);
-
                 };
+
+                handler.open(data);
             } else {
                 axios.post(urlSavePublicacion, this.matchUser).then(function (response) {
 

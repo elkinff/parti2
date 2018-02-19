@@ -4,7 +4,9 @@
 @section('nav__content')
 	
 	{{-- Id para enviarlo en el match --}}
-	<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
+	@if(Auth::user())
+		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
+	@endif
 
 	<div v-if="filteredPublicaciones.length">
 		<h4 class="nav__title__divider">Valor</h4>

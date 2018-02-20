@@ -8,7 +8,7 @@
 		1: Match
 		2: Publicación terminada - Terminé partido
 		3: Pendiente por pagar
-		4: Cancelado 
+		4: Cancelado
 	--}}
 
 	<div class="publicacion-user">

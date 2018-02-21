@@ -26,15 +26,5 @@ Route::post('publicaciones/match', 'PublicacionController@match')->name('match.p
 Route::get('credito', 'CreditoController@index');
 
 
-// Route::get('/email', function () {
-//     return view('emails.email-example');
-// });
-
-// Route::get('/detalle', function () {
-//     return view('pages.dashboard.detalle-publicacion');
-// });
-
-
-
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

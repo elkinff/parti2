@@ -92,7 +92,7 @@ class PublicacionController extends Controller{
 	 //        $message->subject('Has encontrado tu match en parti2');
 	 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
   //       });
-			return response()->json(["success" => "Se ha creado el match con tu contrincante!"]);		
+			return response()->json(["success" => "Se ha creado el match con tu contrincante!", "saldo" => $this->usuarioReceptor->saldo]);		
 		// }
 	}
 
@@ -112,7 +112,7 @@ class PublicacionController extends Controller{
 		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion, $key) {
    			return $publicacion->partido->fecha_inicio;
 		});	
-		
+
 		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 
@@ -127,11 +127,11 @@ class PublicacionController extends Controller{
 	public function confirmacionPasarela(Request $request){
 		//Validar firma
 		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
-
-		if ($signature == $request->signature) {
+		
+		if ($signature == $request->x_signature) {
 			$codigoRespuesta = $request->x_cod_response;
 			if ($codigoRespuesta == 1) {
-				$tipoPublicacion == $request->extra1;
+				$tipoPublicacion = $request->x_extra1;
 				$idPublicacion = $request->x_id_invoice;
 				$publicacion = Publicacion::findOrFail($idPublicacion);
 				if ($tipoPublicacion == "publicacion") {
@@ -144,8 +144,7 @@ class PublicacionController extends Controller{
 					$usuario->save();
 					$mensaje ="Realizada publicacion";
 				}else{
-					$valorPublicacion = $request->valor;
-					$this->usuarioReceptor = User::findOrFail($request->extra2);
+					$this->usuarioReceptor = User::findOrFail($request->x_extra2);
 
 					$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
 					$publicacion->estado = 1;
@@ -160,6 +159,7 @@ class PublicacionController extends Controller{
 			 //        $message->subject('Has encontrado tu match en parti2');
 			 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
 		  //       });
+					$mensaje = "Match!";
 				}
 			}else{
 				$mensaje ="No Realizada, estado = ".$codigoRespuesta;
@@ -168,10 +168,10 @@ class PublicacionController extends Controller{
 			$mensaje = "No coincide la firma";
 		}
 
-		$nombre_archivo = public_path("confirmacion/response-".$request->x_id_invoice.".txt"); 
-		$archivo = fopen($nombre_archivo, "w+");
-		fwrite($archivo,$mensaje);
-		fclose($archivo);
+		// $nombre_archivo = public_path("confirmacion/response-".$request->x_id_invoice.".txt"); 
+		// $archivo = fopen($nombre_archivo, "w+");
+		// fwrite($archivo,$mensaje);
+		// fclose($archivo);
 		return $mensaje;
 	}
 

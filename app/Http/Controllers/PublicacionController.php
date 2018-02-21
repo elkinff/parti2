@@ -29,7 +29,7 @@ class PublicacionController extends Controller{
 		if ($user) {
 			$liga = Liga::findOrFail($request->league);
 			$equipoRetador = Equipo::findOrFail($request->id_retador);
-			
+			 
 			//Calcular fecha de final del partido
 			$fechaPartido = $request->date;
 			$fechaFinalPartido = date('Y-m-d H:i:s', strtotime('+110 minute', strtotime($fechaPartido)));

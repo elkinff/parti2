@@ -94,6 +94,22 @@ window.onclick = function(event) {
 }
 
 
+// Preview de imagen en perfil
+var inputImageProfile = document.querySelector("#inputImageProfile");
+
+inputImageProfile.onchange = function preview_image(event) {
+	var reader = new FileReader();
+ 	reader.onload = function(){
+	  var output = document.querySelector('.profile__image--preview');
+	  output.src = reader.result;
+ 	}
+ 	reader.readAsDataURL(event.target.files[0]);
+}
+
+
+
+
+
 
 
 

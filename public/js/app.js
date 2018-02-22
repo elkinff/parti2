@@ -1452,7 +1452,7 @@ var app = new Vue({
                     extra1: "publicacion",
 
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response:     "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
+                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
@@ -1540,7 +1540,7 @@ var app = new Vue({
             } else {
                 // Save Match
                 axios.post(urlSavePublicacion, this.matchUser).then(function (response) {
-                    console.log(response.data);
+                    console.log("" + response.data.saldo);
                     _this7.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
                     _this7.getPublicaciones();
@@ -48230,6 +48230,18 @@ window.onclick = function (event) {
 			}
 		}
 	}
+};
+
+// Preview de imagen en perfil
+var inputImageProfile = document.querySelector("#inputImageProfile");
+
+inputImageProfile.onchange = function preview_image(event) {
+	var reader = new FileReader();
+	reader.onload = function () {
+		var output = document.querySelector('.profile__image--preview');
+		output.src = reader.result;
+	};
+	reader.readAsDataURL(event.target.files[0]);
 };
 
 /***/ }),

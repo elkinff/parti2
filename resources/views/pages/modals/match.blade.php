@@ -96,8 +96,6 @@
 								<button class="btn block center" @click="savePublicacion()">
 									Pagar @{{ auxMatch2.valor | currency }}
 								</button>
-								
-								<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
 
 				        	@else
 								<a class="btn block center" href="{{ url('login') }}">
@@ -113,7 +111,8 @@
 			<div class="modal-footer">
 				<button class="btn border" data-toggle="modal" data-target="#modalApostar">Cancelar</button>
 				@if(Auth::user())
-					<span>Tu crédito es de <strong>${{ number_format(Auth::user()->saldo) }}</strong> !</span>
+					<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
+					<span>Tu crédito es de <strong> @{{ saldo_user | currency }} </strong></span>
 				@endif
 				
 			</div>

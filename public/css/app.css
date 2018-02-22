@@ -5096,6 +5096,10 @@ form.horizontal .form-element .last-xs {
   }
 }
 
+.profile__image img {
+  max-width: 50%;
+}
+
 .equipos {
   display: -webkit-box;
   display: -ms-flexbox;

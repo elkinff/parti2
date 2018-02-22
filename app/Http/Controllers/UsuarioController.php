@@ -16,6 +16,6 @@ class UsuarioController extends Controller{
     }
 
     public function index(){
-    	return view("page.dashboard.perfil")->with("usuario", $this->usuario);
+    	return view("pages.dashboard.perfil")->with("usuario", $this->usuario);
     }
 }

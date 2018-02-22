@@ -43,7 +43,7 @@
 					<div id="myDropdown" class="dropdown-content">
 						<div class="dropdown-option">
 							<div class="title">Mi cuenta</div>
-							<a href="#">{{ Auth::user()->nombre }}</a>
+							<a href="{{ url('perfil') }}">{{ Auth::user()->nombre }}</a>
 						</div>
 
 						<div class="dropdown-option">

@@ -451,7 +451,7 @@ const app = new Vue({
             }else {
                 // Save Match
                  axios.post(urlSavePublicacion, this.matchUser).then(response => {
-                    console.log(response.data);
+                    console.log("" + response.data.saldo);
                     this.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
                     this.getPublicaciones();

@@ -2,7 +2,8 @@
 
 
 @section('content')
-
+	
+	{{-- {{ $usuario }} --}}
 	<div class="profile ">
 		
 		<form class="form " method="POST" action="{{ route('register') }}">
@@ -13,14 +14,18 @@
 				
 			
 			<div class="profile__image sm-12 md-5 center-xs">
-				<a>
-					<img src="http://lorempixel.com/150/150/people/" class="image-round">
-				</a>
+				<div>
+					@if($usuario->foto)
+						<img src="{{ Auth::user()->foto }}" class="profile__image--preview">
+					@else 
+						<img src="{{ asset('img/email/users.png') }}"  class="profile__image--preview">
+					@endif
+				</div>
 				<div class="form-element">
                     <div class="form-file-field">
                         <span class="file-btn">Selecciona tu archivo</span>
                         <span class="file-msg">o arrastralo aquí</span>
-                        <input type="file" name="logoFile" >
+                        <input type="file" name="logoFile" id="inputImageProfile" accept="image/*" >
                     </div>
                 </div>
 			</div>
@@ -29,7 +34,7 @@
 		        <div class="form-element">
 		            <label>Nombres</label>
 		            <div>
-		                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre" value="{{ old('nombre') }}">
+		                <input type="text" class="form-field{{ $errors->has('nombre') ? ' error' : '' }}" name="nombre" value="{{ old('nombre', $usuario->nombre) }}">
 		                @if ($errors->has('nombre'))
 		                    <span class="">
 		                        {{ $errors->first('nombre') }}
@@ -41,7 +46,7 @@
 		        <div class="form-element">
 		            <label>Correo Electrónico</label>
 		            <div>
-		                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email') }}" name="email" required>
+		                <input type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email', $usuario->email) }}" name="email" required>
 		                @if ($errors->has('email'))
 		                    <span class="">
 		                        {{ $errors->first('email') }}
@@ -53,7 +58,7 @@
 		        <div class="form-element">
 		            <label>Celular</label>
 		            <div>
-		                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" value="{{ old('celular') }}">
+		                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" value="{{ old('celular', $usuario->celular) }}">
 		                @if ($errors->has('celular'))
 		                    <span class="">
 		                        {{ $errors->first('celular') }}

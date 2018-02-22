@@ -1452,7 +1452,7 @@ var app = new Vue({
                     extra1: "publicacion",
 
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
+                    response:     "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {

@@ -77,7 +77,7 @@ class MarcadorPartido extends Command{
                         }else{
                             $this->usuarioGanador = $publicacion->usuarioReceptor;
                             $this->usuarioPerdedor = $publicacion->usuarioRetador;
-
+                            
                             $publicacion->id_ganador = $this->usuarioGanador->id;
                             $publicacion->id_perdedor = $this->usuarioPerdedor->id;
                         }

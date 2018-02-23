@@ -24,7 +24,6 @@ class UsuarioController extends Controller{
     public function actualizarUsuario(UsuarioRequest $request){
         if (bcrypt($request->password) <> $this->usuario->password) {
             $request["password"] = bcrypt($request->password);
-            alert()->info('Tu contraseña ha sido actualizada!');
         }
 
         //Subir foto de perfil
@@ -39,6 +38,7 @@ class UsuarioController extends Controller{
         $this->usuario->fill($request->all());
         $this->usuario->save();
 
+        alert()->success('Tus datos se han actualizado satisfactoriamente');
         return redirect()->to("perfil");
 
     }

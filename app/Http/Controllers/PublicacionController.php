@@ -116,7 +116,7 @@ class PublicacionController extends Controller{
 		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 
-	public function respuestaPaserela(Request $request){
+	public function respuestaPasarela(Request $request){
 		$idPublicacion = $request->x_id_invoice;
 
 		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();

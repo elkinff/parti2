@@ -22,6 +22,8 @@ class UsuarioController extends Controller{
     }
 
     public function actualizarUsuario(UsuarioRequest $request){
+        $request["email"] = $this->usuario->email;
+
         if (bcrypt($request->password) <> $this->usuario->password) {
             $request["password"] = bcrypt($request->password);
         }
@@ -40,6 +42,5 @@ class UsuarioController extends Controller{
 
         alert()->success('Tus datos se han actualizado satisfactoriamente');
         return redirect()->to("perfil");
-
     }
 }

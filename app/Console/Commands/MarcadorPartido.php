@@ -18,6 +18,8 @@ class MarcadorPartido extends Command{
 
     public function handle(){
         $fechaHoraActual = date("Y-m-d H:i");
+
+        //Validar Matchs Realizados en Parti2
         $publicacionesHoy = Publicacion::getMatchsHoraActual();
 
         if (!$publicacionesHoy->isEmpty()) {
@@ -86,7 +88,7 @@ class MarcadorPartido extends Command{
                         $this->usuarioGanador->saldo = $this->usuarioGanador->saldo + $publicacion->valor_ganado;
                         $this->usuarioGanador->save();
 
-                        //Notificar a los usuarios de la victoria o empate
+                        // Notificar a los usuarios de la victoria o empate
                         // Mail::send('', [], function ($message){
                         //     $message->subject('Tu partido ha quedado en empate');
                         //     $message->to($this->usuarioGanador->email);
@@ -103,7 +105,25 @@ class MarcadorPartido extends Command{
                 }
             }
         }else{
-            $this->info("NO hay matchs programados");
+            $this->info("No hay matchs programados");
+        }
+
+        //Validar Publicaciones que no encontraron Match
+        $publicacionesSinMatch = Publicacion::getPublicacionesSinMacth();
+        foreach ($publicacionesSinMatch as $publicacion) {
+            $publicacion->estado = 5;
+            $publicacion->save();
+
+            //Retonar saldo al usuario retador
+            $usuarioRetador = $publicacion->usuarioRetador;
+            $usuarioRetador->saldo = $usuarioRetador->saldo + $publicacion->valor;
+            $usuarioRetador->save();
+
+
+            // Mail::send('', [], function ($message){
+            //     $message->subject('El partido de tu publicacion ha iniciado y no encontraste el match');
+            //     $message->to($this->usuarioPerdedor->email);
+            // });
         }
     }
 }

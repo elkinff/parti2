@@ -14,29 +14,6 @@ class Publicacion extends Model{
     
     protected $fillable = ['id_partido', 'id_usu_retador', 'id_usu_receptor', 'id_equipo_retador', 'id_equipo_receptor', 'valor', 'valor_ganado', 'link', 'id_ganador', 'id_perdedor', 'empate', 'estado'];
 
-    //Mapping algolia
-    // public function toSearchableArray(){
-    //     $record = $this->toArray();
-
-    //     $partido = Partido::findOrFail($record['id_partido']);
-    //     $publicacion = Publicacion::findOrFail($record['id']);
-        
-    //     $partido->liga;
-
-    //     $record['partido'] = $partido;
-    //     $record['partido']["equipo_local"] = $partido->equipoLocal;
-    //     $record['partido']["equipo_visitante"] = $partido->equipoVisitante;
-
-    //     //Asignar usuario al equipo por el que aposto
-    //     if ($record['id_equipo_retador'] == $record["partido"]->equipoLocal->id) {
-    //         $record["partido"]["equipo_local"]["usuario"] = $publicacion->usuarioRetador;
-    //     }else{
-    //         $record["partido"]["equipo_visitante"]["usuario"] = $publicacion->usuarioRetador;
-    //     }
-    //     return $record;
-    // }
-
-
     public function equipoRetador(){
     	return $this->belongsTo(Equipo::class, 'id_equipo_retador');
     }
@@ -94,6 +71,10 @@ class Publicacion extends Model{
     }
 
     public static function getMatchsHoraActual(){
-        return Publicacion::whereEstado(1)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_final", "<=", date("Y-m-d H:i"))->get(["Publicacion.*"]);
+        return Publicacion::whereEstado(1)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_final", "<=", date("Y-m-d H:i"))->get(["publicacion.*"]);
+    }
+
+    public static function getPublicacionesSinMacth(){
+        return Publicacion::whereEstado(0)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_inicio", "<=", date("Y-m-d H:i"))->get(["publicacion.*"]);
     }
 }

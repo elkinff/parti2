@@ -6,7 +6,7 @@
 	{{-- {{ $usuario }} --}}
 	<div class="profile ">
 		
-		<form class="form " method="POST" action="{{ route('register') }}">
+		<form class="form" method="POST" action="{{ route('perfil.update') }}" enctype="multipart/form-data">
 	        
 	        {{ csrf_field() }}
 			
@@ -15,7 +15,7 @@
 				<div class="profile__image sm-12 md-5 center-xs">
 					<div>
 						@if($usuario->foto)
-							<img src="{{ Auth::user()->foto }}" class="profile__image--preview">
+							<img src="/img/usuario/{{$usuario->foto}}" class="profile__image--preview">
 						@else 
 							<img src="{{ asset('img/email/users.png') }}"  class="profile__image--preview">
 						@endif
@@ -25,7 +25,7 @@
 	                    <div class="form-file-field">
 	                        <span class="file-btn">Selecciona tu archivo</span>
 	                        <span class="file-msg">o arrastralo aquí</span>
-	                        <input type="file" name="foto" id="inputImageProfile" accept="image/*" >
+	                        <input type="file" name="fotoUsuario" id="inputImageProfile" accept="image/*" >
 	                    </div>
 	                </div>
 

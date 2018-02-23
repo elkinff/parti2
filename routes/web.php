@@ -26,7 +26,9 @@ Route::post('publicaciones/match', 'PublicacionController@match')->name('match.p
 Route::get('credito', 'CreditoController@index');
 
 //Perfil
-Route::get('perfil', 'UsuarioController@index');
+// Route::resource("perfil", "UsuarioController");
+Route::get('perfil', 'UsuarioController@index')->name("perfil");
+Route::post('perfil', 'UsuarioController@actualizarUsuario')->name("perfil.update");
 
-Auth::routes();
+Auth::routes(); 
 Route::get('logout', 'Auth\LoginController@logout');

@@ -11,7 +11,7 @@
 			<span>Mis Publicaciones</span>
 		</a>
 
-		<a class="header__menu__item">
+		<a class="header__menu__item" href="{{ url('credito') }}">
 			<img src="{{ asset('img/credito.svg') }}">
 			<span>Mi Crédito</span>
 		</a>

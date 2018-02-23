@@ -377,6 +377,8 @@ nav ul {
   width: 50px;
   height: 50px;
   background-color: #fff;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -5097,7 +5099,22 @@ form.horizontal .form-element .last-xs {
 }
 
 .profile__image img {
-  max-width: 50%;
+  -webkit-box-shadow: 0 3px 7px 1px rgba(38, 66, 109, 0.1);
+          box-shadow: 0 3px 7px 1px rgba(38, 66, 109, 0.1);
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: #fff;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .profile__image img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .equipos {

@@ -3,6 +3,7 @@
 
 @section('content')
 	
+	
 	{{-- {{ $usuario }} --}}
 	<div class="profile ">
 		

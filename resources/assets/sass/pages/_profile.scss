@@ -1,7 +1,19 @@
 .profile {
 	&__image {
+
 		img {
-			max-width:50%;
+			//border: 1px solid $primary;
+			@include shadow();
+			margin: 0 auto;
+			border-radius:50%;
+			width: 200px;
+			height: 200px;
+			background-color: #fff;
+			object-fit: cover;
+			@include max('sm') {
+				width: 40px;
+				height: 40px;
+			}
 		}
 	}
 }

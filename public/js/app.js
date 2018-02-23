@@ -48236,7 +48236,6 @@ window.onclick = function (event) {
 };
 
 // Preview de imagen en perfil
-
 var inputImageProfile = document.querySelector("#inputImageProfile");
 
 if (inputImageProfile) {

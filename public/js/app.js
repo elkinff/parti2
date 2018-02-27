@@ -1195,9 +1195,9 @@ var app = new Vue({
         },
 
         creditoAgregar: '',
-
-        errorCredito: ''
-
+        errorCredito: '',
+        valorRetiroCredito: '',
+        creditoRetirar: ''
     },
 
     created: function created() {
@@ -1293,6 +1293,16 @@ var app = new Vue({
                 return "No tienes crédito suficiente, el saldo restante lo puedes pagar directamente en el siguiente botón";
             } else {
                 this.estado_pago = 0; //Pagado;
+                return '';
+            }
+        },
+        validateRetiroCredito: function validateRetiroCredito() {
+            // Remoción de puntos y signo pesos. 
+            var creditoRetirarFormat = this.creditoRetirar.replace(/,/g, '').replace(/\$/g, '');
+
+            if (creditoRetirarFormat > this.saldo_user) {
+                return "No tienes crédito suficiente, el valor del retiro debe ser menor o igual a tu saldo";
+            } else {
                 return '';
             }
         }
@@ -1583,6 +1593,7 @@ var app = new Vue({
             });
 
             if (creditoAgregarFinal && creditoAgregarFinal != 0) {
+
                 var data = {
                     //Parametros compra (obligatorio)
                     name: "Crédito Parti2",
@@ -1601,6 +1612,7 @@ var app = new Vue({
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
                     response: "http://127.0.0.1/api/credito/agregar/respuesta"
                 };
+
                 handler.open(data);
             } else {
                 this.errorCredito = "Debes seleccionar una opción o ingresar un valor";

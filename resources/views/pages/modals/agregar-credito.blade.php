@@ -85,7 +85,7 @@
 						<span v-show="errors.has('valor')">
 							@{{ errors.first('valor') }}
 						</span>
-
+						
 		            </div>
 		        </div>
 

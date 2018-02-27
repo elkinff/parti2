@@ -33,6 +33,18 @@
 				</div>
 
 		        <div class="profile__info sm-12 md-6 lg-offset-1">
+		        	<div class="form-element">
+			            <label>Correo Electrónico</label>
+			            <div>
+			                <input disabled type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email', $usuario->email) }}" name="email" required>
+			                @if ($errors->has('email'))
+			                    <span class="">
+			                        {{ $errors->first('email') }}
+			                    </span>
+			                @endif
+			            </div>
+			        </div>
+
 			        <div class="form-element">
 			            <label>Nombres</label>
 			            <div>
@@ -40,18 +52,6 @@
 			                @if ($errors->has('nombre'))
 			                    <span class="">
 			                        {{ $errors->first('nombre') }}
-			                    </span>
-			                @endif
-			            </div>
-			        </div>
-
-			        <div class="form-element">
-			            <label>Correo Electrónico</label>
-			            <div>
-			                <input disabled type="email" class="form-field{{ $errors->has('email') ? ' error' : '' }}" value="{{ old('email', $usuario->email) }}" name="email" required>
-			                @if ($errors->has('email'))
-			                    <span class="">
-			                        {{ $errors->first('email') }}
 			                    </span>
 			                @endif
 			            </div>

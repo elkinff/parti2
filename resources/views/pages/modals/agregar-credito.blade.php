@@ -7,85 +7,97 @@
 	      	</div>
 
 	      	<div class="modal-body">
-				
-				<form class="" method="POST" action="{{ route('login') }}">
         
-			        {{ csrf_field() }}
-			        
-			        <div class="columns">
-			         	<div class="form-element xs-6">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$10.000</span>
-			                </label>
-			            </div>
+		        {{ csrf_field() }}
+		        
+		        <div class="columns">
+		         	<div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="10000">
+		                    <div></div>
+		                    <span>$10.000</span>
+		                </label>
+		            </div>
 
-			            <div class="form-element xs-6 ">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$20.000</span>
-			                </label>
-			            </div>
-			        </div>
+		            <div class="form-element xs-6 ">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="20000">
+		                    <div></div>
+		                    <span>$20.000</span>
+		                </label>
+		            </div>
+		        </div>
 
-			        <div class="columns">
-			         	<div class="form-element xs-6">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$30.000</span>
-			                </label>
-			            </div>
+		        <div class="columns">
+		         	<div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="30000">
+		                    <div></div>
+		                    <span>$30.000</span>
+		                </label>
+		            </div>
 
-			            <div class="form-element xs-6">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$50.000</span>
-			                </label>
-			            </div>
-			        </div>
+		            <div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="50000">
+		                    <div></div>
+		                    <span>$50.000</span>
+		                </label>
+		            </div>
+		        </div>
 
-			        <div class="columns">
-			         	<div class="form-element xs-6">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$100.000</span>
-			                </label>
-			            </div>
+		        <div class="columns">
+		         	<div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="100000">
+		                    <div></div>
+		                    <span>$100.000</span>
+		                </label>
+		            </div>
 
-			            <div class="form-element xs-6">
-			                <label class="radio fancy">
-			                    <input type="radio" name="radio" value="2">
-			                    <div></div>
-			                    <span>$200.000</span>
-			                </label>
-			            </div>
-			        </div>
-			        
+		            <div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="200000">
+		                    <div></div>
+		                    <span>$200.000</span>
+		                </label>
+		            </div>
 
-			        <div class="form-element">
-			            <label>Otro Valor</label>
-			            <div>
-			                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" required>
-			                @if ($errors->has('celular'))
-			                    <span class="">
-			                        {{ $errors->first('celular') }}
-			                    </span>
-			                @endif
-			            </div>
-			        </div>
+		            <div class="form-element xs-6">
+		                <label class="radio fancy">
+		                    <input type="radio" name="creditoAgregar" value="valor">
+		                    <div></div>
+		                    <span>Otro valor</span>
+		                </label>
+		            </div>
 
-					<br>
+		        </div>
+		        
 
-			        <div>
-			            <button class="btn block center">Agregar</button>
-			        </div>
+		        <div class="form-element">
+		            <label>Otro Valor</label>
+		            <div>
+		                <input type="text" disabled :value="creditoAgregar" id="agregarOtroValor" name="valor" class="form-field"
+		                	v-validate="'prueba'"
+		                	@input="creditoAgregar = $options.filters.currency($event.target.value)"
+		                	:class="{'error': errors.has('valor') }"
+		                	>
+						<span v-show="errors.has('valor')">
+							@{{ errors.first('valor') }}
+						</span>
 
-			    </form>
+		            </div>
+		        </div>
+
+		        <span v-show="errorCredito">
+					@{{ errorCredito }}
+				</span>
+		        
+				<br>
+
+		        <div>
+		            <button class="btn block center" @click="agregarCredito()">Agregar</button>
+		        </div>
 	      	</div>
 
 			{{-- <div class="modal-footer">

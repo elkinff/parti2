@@ -109,4 +109,20 @@ if (inputImageProfile) {
 }
 
 
+// Funcion en modal agregar credito
+$('input[name=creditoAgregar]').change(function() {
+	//$("#agregarOtroValor").value('');
+
+	if(this.value == 'valor') {
+		$("#agregarOtroValor").attr('disabled', false);		
+	}else {
+		$("#agregarOtroValor").attr('disabled', true);
+		$("#agregarOtroValor").val('')
+	}
+
+	//console.log( $("#agregarOtroValor").val('') );
+});
+
+
+
 

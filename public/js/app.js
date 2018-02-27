@@ -1192,7 +1192,11 @@ var app = new Vue({
             processStyle: {
                 backgroundColor: '#fff'
             }
-        }
+        },
+
+        creditoAgregar: '',
+
+        errorCredito: ''
 
     },
 
@@ -1490,7 +1494,7 @@ var app = new Vue({
 
             var idUsuario = document.querySelector('#idUsuario').value;
 
-            console.log(idUsuario);
+            //console.log(idUsuario);
 
             this.matchUser = this.auxMatch2;
             if (bandera_pasarela) {
@@ -1541,6 +1545,65 @@ var app = new Vue({
                 }).catch(function (e) {
                     console.log(e);
                 });
+            }
+        },
+        agregarCredito: function agregarCredito() {
+            var impuesto_payco;
+            var impuesto_payco_iva;
+
+            var radios = document.getElementsByName('creditoAgregar');
+            var creditoAgregarOpcion;
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    creditoAgregarOpcion = radios[i].value;
+                    break;
+                }
+            }
+
+            var idUsuario = document.querySelector('#idUsuario').value;
+
+            var creditoAgregarValor = this.creditoAgregar.replace(/,/g, '').replace(/\$/g, '');
+            var creditoAgregarFinal;
+
+            if (creditoAgregarOpcion == 'valor') {
+                creditoAgregarFinal = creditoAgregarValor;
+                impuesto_payco = creditoAgregarValor / 100 * 2.99 + 900;
+            } else {
+                creditoAgregarFinal = creditoAgregarOpcion;
+                impuesto_payco = creditoAgregarOpcion / 100 * 2.99 + 900;
+            }
+            impuesto_payco_iva = impuesto_payco * 0.19;
+
+            console.log("El valor a agregar es" + creditoAgregarFinal);
+
+            //console.log(parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva));
+            var handler = ePayco.checkout.configure({
+                key: 'cc6dfc520c35ec628e622bcf782a5f01',
+                test: true
+            });
+
+            if (creditoAgregarFinal && creditoAgregarFinal != 0) {
+                var data = {
+                    //Parametros compra (obligatorio)
+                    name: "Crédito Parti2",
+                    description: "Agregar crédito a tu saldo de Parti2",
+                    invoice: this.auxMatch2.id, //Id publicacion
+                    currency: "cop",
+                    amount: parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva),
+                    tax_base: creditoAgregarFinal,
+                    tax: impuesto_payco + impuesto_payco_iva,
+                    country: "co",
+                    lang: "es",
+                    //Onpage="false" - Standard="true"
+                    external: "true",
+                    //Atributos opcionales
+                    extra1: idUsuario,
+                    confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
+                    response: "http://127.0.0.1/api/credito/agregar/respuesta"
+                };
+                handler.open(data);
+            } else {
+                this.errorCredito = "Debes seleccionar una opción o ingresar un valor";
             }
         },
         imageUrl: function imageUrl(url) {
@@ -48248,6 +48311,20 @@ if (inputImageProfile) {
 		reader.readAsDataURL(event.target.files[0]);
 	};
 }
+
+// Funcion en modal agregar credito
+$('input[name=creditoAgregar]').change(function () {
+	//$("#agregarOtroValor").value('');
+
+	if (this.value == 'valor') {
+		$("#agregarOtroValor").attr('disabled', false);
+	} else {
+		$("#agregarOtroValor").attr('disabled', true);
+		$("#agregarOtroValor").val('');
+	}
+
+	//console.log( $("#agregarOtroValor").val('') );
+});
 
 /***/ }),
 /* 42 */

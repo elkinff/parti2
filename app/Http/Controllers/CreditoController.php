@@ -16,7 +16,7 @@ class CreditoController extends Controller{
     }
 
     public function respuestaPasarela(Request $request){
-    	if ($request->x_franchise == "AM" || $request->x_franchise == "CR" || $request->x_franchise == "DC" || $request->x_franchise == "CR" || $request->x_franchise == "MC" $request->x_franchise == "SP") {
+    	if ($request->x_franchise == "AM" || $request->x_franchise == "CR" || $request->x_franchise == "DC" || $request->x_franchise == "CR" || $request->x_franchise == "MC" || $request->x_franchise == "SP") {
     		alert()->info("Tu Pago se ha realizado satisfactoriamente, en unos segundos se reflejará en tu saldo");
     		return view('pages.dashboard.credito');
     	}else{

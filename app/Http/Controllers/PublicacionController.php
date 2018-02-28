@@ -10,9 +10,8 @@ use App\User;
 use App\Publicacion; 
 use Auth; 
 use App\Http\Requests\PublicacionRequest;
-use App\Http\Requests\ItemRequest;
-use Cookie;
-use Mail;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\EmailNotification;
 
 class PublicacionController extends Controller{
 
@@ -84,18 +83,16 @@ class PublicacionController extends Controller{
 		$this->usuarioReceptor->save();
 		$this->usuarioRetador = $publicacion->usuarioRetador;
 
-		// Notificar al usuario de la victoria
+		// Notificar a los usuarios del match
         $imagen = "match";
         $titulo = "Felicitaciones, encontraste tu Match!";
         $descripcion = "Tu publicación encontró el contrincante. Si tu equipo gana recibirás $".number_format($publicacion->valor_ganado); 
         $labelButton = "Continua publicando!";
         $url = url("publicar");
+		$subject = 'Felicitaciones, Encontraste tu match en Parti2';
 
-		// Enviar notificaciones de match realizado
-		Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-	        $message->subject('Has encontrado tu match en Parti2!');
-	        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
-        });
+	    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+	    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 
 		return response()->json(["success" => "Se ha creado el match con tu contrincante!", "saldo" => $this->usuarioReceptor->saldo]);		
 	}
@@ -122,10 +119,10 @@ class PublicacionController extends Controller{
 
 	public function respuestaPasarela(Request $request){
 		$idPublicacion = $request->x_id_invoice;
-
+		$tipoPago = $request->x_franchise;
 		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
 
-		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
+		return view("pages.dashboard.detalle-publicacion", compact("publicacion", "tipoPago"));
 	}
 
 	public function confirmacionPasarela(Request $request){
@@ -158,11 +155,16 @@ class PublicacionController extends Controller{
 					$this->usuarioReceptor->save();
 					$this->usuarioRetador = $publicacion->usuarioRetador;
 
-					//Enviar notificaciones de match realizado
-				// Mail::send('', [], function ($message){
-			 //        $message->subject('Has encontrado tu match en parti2');
-			 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
-		  //       });
+					// Notificar a los usuarios del match
+			        $imagen = "match";
+			        $titulo = "Felicitaciones, encontraste tu Match!";
+			        $descripcion = "Tu publicación encontró el contrincante. Si tu equipo gana recibirás $".number_format($publicacion->valor_ganado); 
+			        $labelButton = "Continua publicando!";
+			        $url = url("publicar");
+					$subject = 'Felicitaciones, Encontraste tu match en Parti2';
+
+				    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+				    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 					$mensaje = "Match!";
 				}
 			}else{
@@ -171,17 +173,9 @@ class PublicacionController extends Controller{
 		}else{
 			$mensaje = "No coincide la firma";
 		}
-
-		// $nombre_archivo = public_path("confirmacion/response-".$request->x_id_invoice.".txt"); 
-		// $archivo = fopen($nombre_archivo, "w+");
-		// fwrite($archivo,$mensaje);
-		// fclose($archivo);
 		return $mensaje;
 	}
-
 }
-
-
 
 
 

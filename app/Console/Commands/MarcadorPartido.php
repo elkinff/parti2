@@ -19,6 +19,7 @@ class MarcadorPartido extends Command{
 
     public function handle(){
         $fechaHoraActual = date("Y-m-d H:i");
+        $url = url("publicar");
 
         //Validar Matchs Realizados en Parti2
         $publicacionesHoy = Publicacion::getMatchsHoraActual();
@@ -42,11 +43,11 @@ class MarcadorPartido extends Command{
 
                     //Obtener el equipo ganador
                     if ($goalsHomeTeam > $goalsAwayTeam) {
-                        $equipoGanador = $partido->equipoLocal->id;
-                        $equipoPerdedor = $partido->equipoVisitante->id;
+                        $equipoGanador = $partido->equipoLocal;
+                        $equipoPerdedor = $partido->equipoVisitante;
                     }else if ($goalsHomeTeam < $goalsAwayTeam){
-                        $equipoGanador = $partido->equipoVisitante->id;
-                        $equipoPerdedor = $partido->equipoLocal->id;
+                        $equipoGanador = $partido->equipoVisitante;
+                        $equipoPerdedor = $partido->equipoLocal;
                     }else{
                         //Hay un empate: Se actualiza la publicacion y se devuelven los saldos apostados
                         $publicacion->empate = 1;
@@ -66,26 +67,18 @@ class MarcadorPartido extends Command{
 
                         $imagen = "empate";
                         $titulo = "El partido de tu match ha quedado empatado";
-                        $descripcion = "El partido ha terminado con un marcador de ".$equipoLocal->nombre." : ".$goalsHomeTeam." - ".$equipoVisitante->nombre." : ".$goalsAwayTeam.". Pero sigue publicando para que encuentres tu victoria."; 
+                        $descripcion = "El partido ha terminado con un marcador de: ".$equipoLocal->nombre." : ".$goalsHomeTeam." - ".$equipoVisitante->nombre." : ".$goalsAwayTeam.". Sigue publicando para que encuentres tu victoria.";
                         $labelButton = "Sigue Publicando!";
-                        $url = url("publicar");
                         $subject = 'Tu partido ha quedado en empate';
-                        $correos = [$this->usuarioRetador->email, $this->usuarioReceptor->email];
 
                         $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
-
-
-                        // //Notificar a los usuarios del empate
-                        // Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-                        //     $message->subject('Tu partido ha quedado en empate');
-                        //     $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
-                        // });
+                        $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
                         $this->info("Empate");
                     }
                     
                     //Obtener el usuario ganador y perdedor
                     if ($publicacion->empate <> 1) {
-                        if ($equipoGanador == $publicacion->id_equipo_retador) {
+                        if ($equipoGanador->id == $publicacion->id_equipo_retador) {
                             $this->usuarioGanador = $publicacion->usuarioRetador;
                             $this->usuarioPerdedor = $publicacion->usuarioReceptor;
 
@@ -110,26 +103,21 @@ class MarcadorPartido extends Command{
                         // Notificar al usuario de la victoria
                         $imagen = "ganador";
                         $titulo = "Felicitaciones, ganaste en tu Match!";
-                        $descripcion = "Tu equipo ".$equipoGanador." ganó su partido y acabas de recibir $ ".number_format($publicacion->valor_ganado).". Felicitaciones!!! sigue publicando para que continues tu racha ganadora"; 
+                        $descripcion = "Tu equipo ".$equipoGanador->nombre." ganó su partido y acabas de recibir $ ".number_format($publicacion->valor_ganado).". Felicitaciones!!! sigue publicando para que continues tu racha ganadora"; 
                         $labelButton = "Sigue Ganando!";
-                        $url = url("publicar");
+                        $subject = 'Ganaste en Parti2';
 
-                        Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-                            $message->subject('Ganaste en Parti2');
-                            $message->to($this->usuarioGanador->email);
-                        });
+                        $this->usuarioGanador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 
                         // Notificar al usuario de la perdida
-                        $imagen = "perdedor";
-                        $titulo = "Lo sentimos, has perdido tu match";
-                        $descripcion = "Tu equipo ".$equipoPerdedor." perdió su partido. Pero no importa!!! sigue publicando para que empieces tu racha ganadora"; 
-                        $labelButton = "Publica Ya!";
-                        $url = url("publicar");
+                        $imagenP = "perdedor";
+                        $tituloP = "Lo sentimos, has perdido tu match";
+                        $descripcionP = "Tu equipo ".$equipoPerdedor->nombre." perdió su partido. Pero no te desanimes!!! sigue publicando para que empieces tu racha ganadora"; 
+                        $labelButtonP = "Publica Ya!";
+                        $subjectP = 'Perdiste en Parti2';
 
-                        Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-                            $message->subject('Perdiste en Parti2');
-                            $message->to($this->usuarioPerdedor->email);
-                        });
+                        $this->usuarioPerdedor->notify(new EmailNotification($imagenP, $tituloP, $descripcionP, $labelButtonP, $url, $subjectP));
+                         
                         $this->info("Hubo un ganador");
                     }   
                 }else{
@@ -153,14 +141,14 @@ class MarcadorPartido extends Command{
 
              // Notificar al usuario que no encontró match
             $imagen = "no_match";
-            $titulo = "Lo sentimos, no encontraste tu macth";
-            $descripcion = "Tu publicacion a favor de ".$publicacion->equipoRetador." por un valor de $".number_format($publicacion->valor)." no encontró un usuario receptor para realizar el match. Pero no importa!!! sigue publicando para que empieces tu racha ganadora"; 
+            $titulo = "Lo sentimos, no encontraste tu match";
+            $descripcion = "Tu publicacion a favor de ".$publicacion->equipoRetador->nombre." por un valor de $".number_format($publicacion->valor)." no encontró un usuario receptor para realizar el match. Pero no te desanimes!!! sigue publicando para que empieces tu racha ganadora"; 
             $labelButton = "Publica Ya!";
-            $url = url("publicar");
-            Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
-                $message->subject('El partido de tu publicacion ha iniciado y no encontraste el match');
-                $message->to($usuarioRetador->email);
-            });
+            $subject = 'El partido de tu publicacion ha iniciado y no encontraste el match';
+
+           $usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+            $this->info("No se encontro match para la publicacion");
         }
     }
 }

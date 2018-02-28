@@ -8,13 +8,13 @@
 
 	      	<div class="modal-body">
 				
-				<form class="" method="POST" action="{{ route('login') }}">
+				<form class="" method="POST" action="{{ route('credito/retirar') }}">
         
 			        {{ csrf_field() }}
 			        
 			        <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="radio" value="metodo" required>
+		                    <input type="radio" name="metodo" value="metodo" required>
 		                    <div></div>
 		                    <span>Nequi</span>
 		                </label>
@@ -22,7 +22,7 @@
 
 		            <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="radio" value="metodo" required>
+		                    <input type="radio" name="metodo" value="metodo" required>
 		                    <div></div>
 		                    <span>Daviplata</span>
 		                </label>

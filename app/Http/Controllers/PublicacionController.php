@@ -12,6 +12,7 @@ use Auth;
 use App\Http\Requests\PublicacionRequest;
 use App\Http\Requests\ItemRequest;
 use Cookie;
+use Mail;
 
 class PublicacionController extends Controller{
 
@@ -72,28 +73,31 @@ class PublicacionController extends Controller{
 	}
 
 	public function match(Request $request){
-		//Validar si hay que restar el credito del usuario ya que tenia credito disponible
-		// $estadoPublicacion = $request->estado_pago;
-		
-		// if ($estadoPublicacion == 0) {
-			$valorPublicacion = $request->valor;
-			$this->usuarioReceptor = Auth::user();
-			$publicacion = Publicacion::findOrFail($request->id);
-			$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
-			$publicacion->estado = 1;
-			$publicacion->save();
+		$valorPublicacion = $request->valor;
+		$this->usuarioReceptor = Auth::user();
+		$publicacion = Publicacion::findOrFail($request->id);
+		$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
+		$publicacion->estado = 1;
+		$publicacion->save();
 
-			$this->usuarioReceptor->saldo = $this->usuarioReceptor->saldo - $valorPublicacion;
-			$this->usuarioReceptor->save();
-			$this->usuarioRetador = $publicacion->usuarioRetador;
+		$this->usuarioReceptor->saldo = $this->usuarioReceptor->saldo - $valorPublicacion;
+		$this->usuarioReceptor->save();
+		$this->usuarioRetador = $publicacion->usuarioRetador;
 
-			//Enviar notificaciones de match realizado
-		// Mail::send('', [], function ($message){
-	 //        $message->subject('Has encontrado tu match en parti2');
-	 //        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
-  //       });
-			return response()->json(["success" => "Se ha creado el match con tu contrincante!", "saldo" => $this->usuarioReceptor->saldo]);		
-		// }
+		// Notificar al usuario de la victoria
+        $imagen = "match";
+        $titulo = "Felicitaciones, encontraste tu Match!";
+        $descripcion = "Tu publicación encontró el contrincante. Si tu equipo gana recibirás $".number_format($publicacion->valor_ganado); 
+        $labelButton = "Continua publicando!";
+        $url = url("publicar");
+
+		// Enviar notificaciones de match realizado
+		Mail::send('emails.email', ['imagen' => $imagen, 'titulo' => $titulo, 'descripcion' => $descripcion, "labelButton" => $labelButton, "url" => $url], function ($message){
+	        $message->subject('Has encontrado tu match en Parti2!');
+	        $message->to([$this->usuarioRetador->email, $this->usuarioReceptor->email]);
+        });
+
+		return response()->json(["success" => "Se ha creado el match con tu contrincante!", "saldo" => $this->usuarioReceptor->saldo]);		
 	}
 
 	public function show($idPublicacion){

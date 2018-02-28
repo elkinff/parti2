@@ -98,7 +98,7 @@
                 <table  style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;" bgcolor="#355C7D">
                   <tr>
                     <td style="font-size: 30px; text-align:center;padding-top: 10px">
-                        <img src="{{ $message->embed('img/email/logo__blanco.png') }}" width="45%" alt="parti2">
+                        <img src="{{ $message->embed(public_path().'/img/email/logo__blanco.png') }}" width="45%" alt="parti2">
                     </td>
                   </tr>
                 </table>
@@ -162,8 +162,8 @@
                 <table  style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;" bgcolor="#355C7D" class="force-full-width">
                     <tr class="force-full-width">
                       <td style="text-align: center; padding-top: 20px; width: 100%">
-                        <a href=""><img src="{{ $message->embed('img/email/facebook.png') }}"></a>
-                        <a href="https://twitter.com/parti2co"><img src="{{ $message->embed('img/email/twitter.png') }}"></a>
+                        <a href=""><img src="{{ $message->embed(public_path().'/img/email/facebook.png') }}"></a>
+                        <a href="https://twitter.com/parti2co"><img src="{{ $message->embed(public_path().'/img/email/twitter.png') }}"></a>
                       </td>
                     </tr>
                     <tr>

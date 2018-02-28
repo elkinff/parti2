@@ -6,8 +6,9 @@
 	{{-- Id para enviarlo en las opraciones de credito --}}
 	@if(Auth::user())
 		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
+		<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
 	@endif
-
+	
 	<div class="credito__header">
 		<div class="credito__user">
 			
@@ -26,7 +27,6 @@
 
 		</div>
 	</div>
-
 
 	<table class="table stripe hover responsive">
 		<thead>

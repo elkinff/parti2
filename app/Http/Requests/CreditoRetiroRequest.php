@@ -14,7 +14,7 @@ class CreditoRetiroRequest extends FormRequest{
         return [
             "metodo" => "required",
             "celular" => "required|digits:10",
-            "valor" => "required|digits_between:5,8|menor_saldo"
+            "valor" => "required"
         ];
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\CreditoRetiroRequest;
+use Auth;
 
 class CreditoController extends Controller{
     
@@ -49,9 +51,14 @@ class CreditoController extends Controller{
     }
 
     public function retirarDinero(CreditoRetiroRequest $request){
-    	dd("ss");
+    	$this->validate($request, [
+	        'valor' => 'required|menor_saldo',
+	    ]);
+
     	$valorRetiro = $request->valor;
     	$usuario = Auth::user();
+
+    	
     }
 }
 

@@ -80,6 +80,7 @@ return [
     'unique'         => 'El :attribute ya se encuentra registrado.',
     'url'            => 'El formato de :attribute es invalido.',
 
+    'menor_saldo' => "El :attribute debe ser menor a tu saldo",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Lunguage Lines
@@ -110,6 +111,7 @@ return [
 
     'attributes' => [
         'password' => 'Contraseña',
-        "email" => "Correo Electrónico"
+        "email" => "Correo Electrónico",
+
     ],
 ];

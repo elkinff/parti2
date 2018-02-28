@@ -47,4 +47,16 @@ class CreditoController extends Controller{
 
 		return $mensaje;
     }
+
+    public function retirarDinero(CreditoRetiroRequest $request){
+    	dd("ss");
+    	$valorRetiro = $request->valor;
+    	$usuario = Auth::user();
+    }
 }
+
+
+
+
+
+

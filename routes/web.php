@@ -24,6 +24,7 @@ Route::post('publicaciones/match', 'PublicacionController@match')->name('match.p
 
 //Credito
 Route::get('credito', 'CreditoController@index');
+Route::post('credito/retirar', 'CreditoController@retirarDinero')->name('credito.retirar');
 
 //Perfil
 // Route::resource("perfil", "UsuarioController");

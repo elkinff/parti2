@@ -59,6 +59,7 @@ const app = new Vue({
     },
 
     data: {
+        baseUrl: '',
         matchs: [],
         auxMatch: {},
         
@@ -74,6 +75,8 @@ const app = new Vue({
                 seleccionado:'',
             }
         },
+
+        banderaDetalle: false, 
 
         apuesta:'',
         ganacia_apuesta:'',
@@ -271,10 +274,14 @@ const app = new Vue({
         validacionHora(fechaMatch) {
             var d = new Date();
             var hora = d.getHours() +''+ d.getMinutes();
+
             if(fechaMatch.includes('Hoy ')) {
                 fechaMatch = fechaMatch.slice(-5).replace(':','');
+
                 if(hora >= fechaMatch){
                     return false;    
+                }else {
+                    return true;
                 }
             }else{
                 return true;
@@ -300,8 +307,14 @@ const app = new Vue({
         },
 
         // Match
-        detailPublicacion(match) {
+        detailPublicacion(match, bandera) {
             console.log(match);
+            console.log("la bandera es" , bandera);
+            if(bandera == 'detalle' ) {
+                this.banderaDetalle =  true;
+            }else {
+                this.banderaDetalle =  false;
+            }
             var porcentajeParti2 = (match.valor * 2 / 100) * this.retencion_parti2;
             var ganancia_match = ( match.valor * 2 ) - porcentajeParti2;
 
@@ -317,14 +330,20 @@ const app = new Vue({
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
             var valor_apuesta = 0;//Valor apuesta en pago epayco
             var bandera_pasarela = false;
-            if(this.saldo_user > apuestaUsuario) {
+            
+            if(parseInt(this.saldo_user) > parseInt(apuestaUsuario)) {
+                console.log("bandera_pasarela es falsa " + this.saldo_user + ", " + apuestaUsuario);                
                 bandera_pasarela = false;
                 valor_apuesta = this.saldo_user - apuestaUsuario ;    
             }else {
+                console.log("bandera_pasarela es verdadera " + this.saldo_user + ", " + apuestaUsuario);             
                 bandera_pasarela = true;
                 valor_apuesta = apuestaUsuario - this.saldo_user ;    
             }
             
+
+            console.log(bandera_pasarela);
+
             var impuesto_payco = ((valor_apuesta / 100 ) * 2.99 + 900) ;
 
             var impuesto_payco_iva = impuesto_payco * 0.19;
@@ -377,7 +396,7 @@ const app = new Vue({
                   extra1: "publicacion",
                 
                   confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                  response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle",
+                  response: "http://localhost:8080/api/publicaciones/detalle",
                 }
 
                 if (bandera_pasarela && valor_apuesta !=0 && valor_apuesta > 0) {
@@ -400,13 +419,13 @@ const app = new Vue({
         // Match publicacion 
         savePublicacion() {
             this.loadingPago = true;
-            var urlSavePublicacion = 'publicaciones/match';
+            var urlSavePublicacion = '/publicaciones/match';
         
             var apuestaUsuario = this.auxMatch2.valor;
             var valor_apuesta = 0;//Valor apuesta en pago epayco
             var bandera_pasarela = false;
             
-            if(this.saldo_user > apuestaUsuario) {
+            if(parseInt(this.saldo_user) > parseInt(apuestaUsuario)) {
                 valor_apuesta = this.saldo_user - apuestaUsuario ;    
             }else {
                 bandera_pasarela = true;
@@ -466,14 +485,21 @@ const app = new Vue({
 
             }else {
                 // Save Match
-                 axios.post(urlSavePublicacion, this.matchUser).then(response => {
+                 axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(response => {
                     console.log("" + response.data.saldo);
                     this.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
-                    this.getPublicaciones();
-                    swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success");
-                    this.loadingPago =  false;
+                    if(this.banderaDetalle) {
+                        
+                        swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success").then(() => {
+                            window.location.reload();
+                        });
 
+                    }else {
+                        this.getPublicaciones();
+                        swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success");
+                    }
+                    this.loadingPago =  false;
                 })
                 .catch(e => {
                     console.log(e);

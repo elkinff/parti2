@@ -10,10 +10,20 @@
 		4: Cancelado 
 	--}}
 
+
+
+	@if(Auth::user())
+		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
+	@endif
+
+
+
 	<div class="message-detail">
 		<div class="message-detail__icon">
 			<img src="{{ asset('img/users.svg') }}">
 		</div>
+
+
 
 		<div class="message-detail__info">
 			@if( $publicacion->estado == 0 )
@@ -24,15 +34,41 @@
 				<h3>Estado : Match terminado</h3>	
 			@elseif( $publicacion->estado == 3 )	
 				<h3>Estado : Pendiente por pagar</h3>	
+				<p>
+					@isset($tipoPago)	
+						@if($tipoPago == 'BA')
+							Puedes acercarte a un punto Baloto para terminar de realizar el pago
+						@elseif($tipoPago == 'EF')	
+							Puedes acercarte a un punto Efecty para terminar de realizar el pago
+						@elseif($tipoPago == 'GA')	
+							Puedes acercarte a un punto Gana para terminar de realizar el pago
+						@elseif($tipoPago == 'PR')	
+							Puedes acercarte a un punto Punto Red para terminar de realizar el pago
+						@elseif($tipoPago == 'RS')	
+							Puedes acercarte a un punto Red Servi para terminar de realizar el pago	
+						@else 
+							La trasacción se esta confirmando, esto puede tardar unos minutos	
+						@endif
+						
+					@endisset
+				</p>
 			@else	
 				<h3>Estado : Cancelado</h3>
 			@endif
 			
 		</div>
+
+
 	</div>
 
 	<div class="container-detail">
-		<div class="match">
+
+		@if( $publicacion->estado == 0 ) 
+			<div class="match" data-toggle="modal" data-target="#modalApostar" @click="detailPublicacion({{$publicacion}}, 'detalle')">
+		@else 
+			<div class="match">
+		@endif
+		
 			<div class="match__header">
 				24 de Febrero 2018
 			</div>
@@ -99,6 +135,11 @@
 	        </div>
 		@endif
 	</div>	
+
+
+	@include('pages.modals.match')
+
+	<div id="overlay"></div>
 
 @endsection
 

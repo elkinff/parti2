@@ -10,6 +10,8 @@
 		<main class="container__main" id="app">
 			{{-- Si hay nav  --}}
 
+			<input type="hidden" value="{{ url('/') }}" v-model="baseUrl" />
+
 			@if($nav__visible)
 				<nav class="nav" id="nav">
 					<div class="nav__content">
@@ -27,15 +29,14 @@
 
 		
 		<script type="text/javascript" src="https://checkout.epayco.co/checkout.js">   </script>
-		<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
 
 		<script src="{{ asset('js/app.js') }}"></script>
 
 		@include('sweet::alert')
 		
-		<script type="text/javascript">
+		{{-- <script type="text/javascript">
 		var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"965eebfbbee4d5f22f1bfe7598e78891ee66a3cbae50d11170e3779277c570cc", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
-		</script>
+		</script> --}}
     </body>
 </html>
 

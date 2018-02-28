@@ -5,7 +5,7 @@
 	      	<div class="modal-header">
 	      		<center>
 
-	      			<h3>Tu a puesta es a favor de </h3>
+	      			<h3>Tu apuesta es a favor de </h3>
 
 		      		<div v-if="!auxMatch2.equipo_local.seleccionado">
 		      			@{{ auxMatch2.equipo_local.nombre }}

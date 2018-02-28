@@ -14,7 +14,7 @@
 			        
 			        <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo" value="metodo" required>
+		                    <input type="radio" name="metodo" value="nequi" required>
 		                    <div></div>
 		                    <span>Nequi</span>
 		                </label>
@@ -22,7 +22,7 @@
 
 		            <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo" value="metodo" required>
+		                    <input type="radio" name="metodo" value="daviplata" required>
 		                    <div></div>
 		                    <span>Daviplata</span>
 		                </label>

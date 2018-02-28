@@ -8,7 +8,7 @@
 
 	      	<div class="modal-body">
 				
-				<form class="" method="POST" action="{{ route('credito/retirar') }}">
+				<form class="" method="POST" action="{{ route('credito.retirar') }}">
         
 			        {{ csrf_field() }}
 			        

@@ -8,13 +8,14 @@
 
 	      	<div class="modal-body">
 				
-				<form class="" method="POST" action="{{ route('credito.retirar') }}">
+				<form id="formRetirarCredito" method="POST" action="{{ route('credito.retirar') }}"  
+				@submit.prevent="validateBeforeSubmitRetirar()">
         
 			        {{ csrf_field() }}
 			        
 			        <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo" value="nequi" required>
+		                    <input type="radio" name="metodo" value="nequi" v-validate="'required'">
 		                    <div></div>
 		                    <span>Nequi</span>
 		                </label>
@@ -22,16 +23,25 @@
 
 		            <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo" value="daviplata" required>
+		                    <input type="radio" name="metodo" value="daviplata" v-validate="'required'">
 		                    <div></div>
 		                    <span>Daviplata</span>
 		                </label>
 		            </div>
 
+		            <span v-show="errors.has('metodo')" class="equipos__error">
+						Debes seleccionar un metodo
+					</span>
+
 			        <div class="form-element">
 			            <label>Celular</label>
 			            <div>
-			                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" name="celular" required>
+			                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" :class="{'error': errors.has('celular') }"  name="celular" v-validate="'required|digits:10'">
+			                
+			                <span v-show="errors.has('celular')">
+								@{{ errors.first('celular') }}
+							</span>
+
 			                @if ($errors->has('celular'))
 			                    <span class="">
 			                        {{ $errors->first('celular') }}
@@ -44,7 +54,7 @@
 			            <label>Valor</label>
 			            <div>
 			                <input type="text" name="valor" class="form-field"
-			                	v-validate="'prueba'"
+			                	v-validate="'prueba|required'"
 			                	:value="creditoRetirar"
 			                	@input="creditoRetirar = $options.filters.currency($event.target.value)"
 			                	:class="{'error': errors.has('valor') }"
@@ -52,11 +62,18 @@
 							<span v-show="errors.has('valor')">
 								@{{ errors.first('valor') }}
 							</span>
+
+							@if ($errors->has('valor'))
+			                    <span class="">
+			                        {{ $errors->first('valor') }}
+			                    </span>
+			                @endif
 							
 			            </div>
 			        </div>
 
-			        <center>@{{validateRetiroCredito}}</center>
+			        <center class="equipos__error">@{{ validateRetiroCredito }}</center>
+
 			        <br>
 
 			        <div>

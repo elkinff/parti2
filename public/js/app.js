@@ -1091,6 +1091,9 @@ var dictionary = {
         messages: {
             required: function required(field) {
                 return "El campo " + field + " es requerido";
+            },
+            digits: function digits(field, _digits) {
+                return "El campo " + field + " debe tener " + _digits + " digitos";
             }
         }
     }
@@ -1200,7 +1203,9 @@ var app = new Vue({
         creditoAgregar: '',
         errorCredito: '',
         valorRetiroCredito: '',
-        creditoRetirar: ''
+        creditoRetirar: '',
+        errorRetirar: ''
+
     },
 
     created: function created() {
@@ -1302,10 +1307,12 @@ var app = new Vue({
         validateRetiroCredito: function validateRetiroCredito() {
             // Remoción de puntos y signo pesos. 
             var creditoRetirarFormat = this.creditoRetirar.replace(/,/g, '').replace(/\$/g, '');
-
-            if (creditoRetirarFormat > this.saldo_user) {
-                return "No tienes crédito suficiente, el valor del retiro debe ser menor o igual a tu saldo";
+            if (parseInt(creditoRetirarFormat) > parseInt(this.saldo_user)) {
+                this.errorRetirar = false;
+                return "No tienes crédito suficiente, el valor del retiro debe ser menor o igual a tu saldo";;
             } else {
+
+                this.errorRetirar = true;
                 return '';
             }
         }
@@ -1323,15 +1330,26 @@ var app = new Vue({
                 //alert('Correct them errors!');
             });
         },
-        getMatchs: function getMatchs() {
+        validateBeforeSubmitRetirar: function validateBeforeSubmitRetirar() {
             var _this4 = this;
+
+            this.$validator.validateAll().then(function (result) {
+                if (result && _this4.errorRetirar) {
+                    document.querySelector("#formRetirarCredito").submit();
+                    return;
+                }
+                //alert('Correct them errors!');
+            });
+        },
+        getMatchs: function getMatchs() {
+            var _this5 = this;
 
             this.loading = true;
 
             var urlMatchs = 'partidos';
             axios.get(urlMatchs).then(function (response) {
-                _this4.matchs = response.data;
-                _this4.loading = false;
+                _this5.matchs = response.data;
+                _this5.loading = false;
             }).catch(function (e) {
                 console.log(e);
             });
@@ -1340,14 +1358,14 @@ var app = new Vue({
 
         // Get matchs
         getPublicaciones: function getPublicaciones() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.loading = true;
 
             var urlMatchs = 'publicaciones';
             axios.get(urlMatchs).then(function (response) {
-                _this5.publicaciones = response.data;
-                _this5.loading = false;
+                _this6.publicaciones = response.data;
+                _this6.loading = false;
             }).catch(function (e) {
                 console.log(e);
             });
@@ -1406,7 +1424,7 @@ var app = new Vue({
 
         //Publicacion de un macth
         saveMatch: function saveMatch() {
-            var _this6 = this;
+            var _this7 = this;
 
             this.loadingPago = true;
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
@@ -1441,9 +1459,9 @@ var app = new Vue({
 
             axios.post(urlSaveMatch, this.matchUser).then(function (response) {
 
-                _this6.link_compartir = response.data.link;
+                _this7.link_compartir = response.data.link;
 
-                _this6.saldo_user = response.data.saldo;
+                _this7.saldo_user = response.data.saldo;
 
                 //console.log(response.data);
                 var equipoRetador = response.data.equipoRetador.nombre;
@@ -1485,7 +1503,7 @@ var app = new Vue({
                     $("#modalCompartir").modal('show');
                 }
 
-                _this6.loadingPago = false;
+                _this7.loadingPago = false;
                 $("#modalApostar").modal('hide');
             }).catch(function (e) {
                 console.log(e);
@@ -1495,7 +1513,7 @@ var app = new Vue({
 
         // Match publicacion 
         savePublicacion: function savePublicacion() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.loadingPago = true;
             var urlSavePublicacion = '/publicaciones/match';
@@ -1565,18 +1583,18 @@ var app = new Vue({
                 // Save Match
                 axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(function (response) {
                     console.log("" + response.data.saldo);
-                    _this7.saldo_user = response.data.saldo;
+                    _this8.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
-                    if (_this7.banderaDetalle) {
+                    if (_this8.banderaDetalle) {
 
                         swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success").then(function () {
                             window.location.reload();
                         });
                     } else {
-                        _this7.getPublicaciones();
+                        _this8.getPublicaciones();
                         swal("Felicidades!", "Se ha creado el match satisfactoriamente!", "success");
                     }
-                    _this7.loadingPago = false;
+                    _this8.loadingPago = false;
                 }).catch(function (e) {
                     console.log(e);
                 });

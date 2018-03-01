@@ -28,7 +28,8 @@ Vue.use(VueCurrencyFilter,
 const dictionary = {
   es: {
     messages: {
-      required: (field) => "El campo " + field +" es requerido"
+      required: (field) => "El campo " + field +" es requerido",
+      digits: (field, digits) => "El campo " + field +" debe tener " + digits + " digitos",
     }
   }
 };
@@ -134,6 +135,8 @@ const app = new Vue({
         errorCredito:'',
         valorRetiroCredito:'',
         creditoRetirar:'',
+        errorRetirar:'',
+
     },
 
     created() {
@@ -219,17 +222,18 @@ const app = new Vue({
             } 
         },
 
-
         validateRetiroCredito() {
             // Remoción de puntos y signo pesos. 
             var creditoRetirarFormat = this.creditoRetirar.replace(/,/g, '').replace(/\$/g, '');
-
-            if(creditoRetirarFormat > this.saldo_user ) {
-                return "No tienes crédito suficiente, el valor del retiro debe ser menor o igual a tu saldo"
+            if(parseInt(creditoRetirarFormat) > parseInt(this.saldo_user) ) {
+                this.errorRetirar = false;
+                return "No tienes crédito suficiente, el valor del retiro debe ser menor o igual a tu saldo";;
             }else {
+                
+                this.errorRetirar = true;
                 return ''; 
             }
-        }
+        },
 
     },
 
@@ -242,7 +246,20 @@ const app = new Vue({
                 }
                 //alert('Correct them errors!');
             });
-        },      
+        }, 
+
+
+        validateBeforeSubmitRetirar() {
+            
+            this.$validator.validateAll().then((result) => {
+                if (result && this.errorRetirar) {
+                    document.querySelector("#formRetirarCredito").submit();
+                  return;
+                }
+                //alert('Correct them errors!');
+            });
+        }, 
+
 
         getMatchs() {
             this.loading = true;

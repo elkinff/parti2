@@ -162,7 +162,7 @@
                 <table  style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;" bgcolor="#355C7D" class="force-full-width">
                     <tr class="force-full-width">
                       <td style="text-align: center; padding-top: 20px; width: 100%">
-                        <a href=""><img src="{{ $message->embed(public_path().'/img/email/facebook.png') }}"></a>
+                        <a href="https://www.facebook.com/Parti2-1712514282141263/?modal=admin_todo_tour"><img src="{{ $message->embed(public_path().'/img/email/facebook.png') }}"></a>
                         <a href="https://twitter.com/parti2co"><img src="{{ $message->embed(public_path().'/img/email/twitter.png') }}"></a>
                       </td>
                     </tr>

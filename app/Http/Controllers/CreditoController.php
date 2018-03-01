@@ -14,7 +14,8 @@ class CreditoController extends Controller{
     }
 
     public function index(){
-    	return view('pages.dashboard.credito');
+        $historial = Auth::user()->historialCrediticio;
+    	return view('pages.dashboard.credito', compact("historial"));
     }
 
     public function respuestaPasarela(Request $request){
@@ -48,17 +49,22 @@ class CreditoController extends Controller{
 		}
 
 		return $mensaje;
+
+        //Falta registrar movimiento banacario
     }
 
     public function retirarDinero(CreditoRetiroRequest $request){
-    	$this->validate($request, [
-	        'valor' => 'required|menor_saldo',
-	    ]);
+    	$this->validate($request, ['valor' => 'required|menor_saldo']);
 
     	$valorRetiro = $request->valor;
     	$usuario = Auth::user();
 
-    	
+    	$usuario->saldo = $usuario->saldo - $valorRetiro;
+    	$usuario->save();
+
+    	//Enviar Correo a admin-parti2
+
+        //Falta registrar movimiento banacario
     }
 }
 

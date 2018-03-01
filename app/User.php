@@ -16,6 +16,10 @@ class User extends Authenticatable{
         'password', 'remember_token',
     ];
 
+    public function historialCrediticio(){
+        return $this->hasMany(MovimientoBancario::class, "id_usu");
+    }
+
     public function publicaciones(){
     	return $this->hasMany(Publicacion::class, "id_usu_retador");
     }

@@ -64,8 +64,8 @@
 
             <div>
                 Al crear tu cuenta aceptas nuestros 
-                <a href="#">Términos y Condiciones</a> y 
-                <a href="#">Política de Tratamiento de Datos.</a>
+                <a href="{{ asset('documentos/terminos_condiciones.pdf') }}" target="_blank">Términos y Condiciones</a> y 
+                <a href="{{ asset('documentos/politica_privacidad.pdf') }}" target="_blank">Política de Tratamiento de Datos.</a>
             </div>
 
         </div>

@@ -56,7 +56,6 @@ class PartidoController extends Controller{
 				$fixture->imageHomeTeam = Equipo::getImagenEquipo($idHomeTeam, $fixture->_links->homeTeam->href, $liga, $fixture->homeTeamName);
 				$fixture->imageAwayTeam = Equipo::getImagenEquipo($idAwayTeam, $fixture->_links->awayTeam->href, $liga, $fixture->awayTeamName);
 				$fixture->date_show = Partido::setDateMatch($fixture->date);
-				// $fixture->date_show = Partido::setDateMatch($fixture->date);
 
 				$dateTime = new DateTime($fixture->date, new DateTimeZone('UTC'));
 				$dateTime->setTimezone(new DateTimeZone("America/Bogota"));

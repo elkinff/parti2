@@ -5,6 +5,5 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder{
     public function run(){
     	$this->call(LigaSeeder::class);
-    	// $this->call(EquipoSeeder::class);
     }
 }

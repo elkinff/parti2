@@ -118,11 +118,22 @@ class PublicacionController extends Controller{
 	}
 
 	public function respuestaPasarela(Request $request){
-		$idPublicacion = $request->x_id_invoice;
-		$tipoPago = $request->x_franchise;
-		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
+		dd($request->x_cod_response);
+		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 
-		return view("pages.dashboard.detalle-publicacion", compact("publicacion", "tipoPago"));
+		if ($signature == $request->x_signature) {
+			$codigoRespuesta = $request->x_cod_response;
+			if ($codigoRespuesta == 1) {
+				$idPublicacion = $request->x_id_invoice;
+				$tipoPago = $request->x_franchise;
+				$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
+				return view("pages.dashboard.detalle-publicacion", compact("publicacion", "tipoPago"));
+			}
+		}
+
+		
+
+		
 	}
 
 	public function confirmacionPasarela(Request $request){
@@ -180,3 +191,4 @@ class PublicacionController extends Controller{
 
 
 
+	

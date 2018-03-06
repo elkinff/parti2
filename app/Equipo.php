@@ -15,14 +15,10 @@ class Equipo extends Model{
     }
 
     public static function getImagenEquipo($idEquipo, $urlImage, $liga, $nombreEquipo){
+    	//Validamos si el equipo ya se encuentra en base de datos o si no creamos el registro
     	$equipo = Equipo::find($idEquipo);
     	
 		if(is_null($equipo)){
-			// $reqPrefs['http']['method'] = 'GET';
-	  //   	$reqPrefs['http']['header'] = 'X-Auth-Token: bc763b6f15d546928ac8ce3efbb42544';
-		 //    $stream_context = stream_context_create($reqPrefs);
-		 //    $response = file_get_contents($urlImage, false, $stream_context);
-		 //    $detailTeam = json_decode($response);
 			$escudo = "img/teams/".$liga."/".$idEquipo."/".$idEquipo."_60.png";
 		    $equipo = Equipo::create(["id" => $idEquipo, "nombre" => $nombreEquipo, "escudo" => $escudo]);
 		    $equipo->ligas()->attach($liga);

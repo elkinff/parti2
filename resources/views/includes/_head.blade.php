@@ -14,4 +14,8 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
 	<link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">
 	<meta name="msapplication-TileColor" content="#355C7D">
+
+	{{-- Metas --}}
+	<meta description="Disfruta ganando dinero con tu equipo!">
+	<meta keywords="Parti2, Apuesta, Partidos">
 </head>

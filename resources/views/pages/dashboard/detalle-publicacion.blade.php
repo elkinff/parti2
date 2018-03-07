@@ -7,23 +7,17 @@
 		1: Match
 		2: Publicación terminada - Terminé partido
 		3: Pendiente por pagar
-		4: Cancelado 
+		4: Cancelado
 	--}}
-
-
 
 	@if(Auth::user())
 		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
 	@endif
 
-
-
 	<div class="message-detail">
 		<div class="message-detail__icon">
 			<img src="{{ asset('img/users.svg') }}">
 		</div>
-
-
 
 		<div class="message-detail__info">
 			@if( $publicacion->estado == 0 )
@@ -58,7 +52,6 @@
 			
 		</div>
 
-
 	</div>
 
 	<div class="container-detail">
@@ -70,14 +63,14 @@
 		@endif
 		
 			<div class="match__header">
-				24 de Febrero 2018
+				{{ $publicacion->partido->date_show }}
 			</div>
 			<div class="match__content">
 				<div class="match__equipo ">
 
 					<div class="match__equipo__escudo">
 						<div class="image__team image__team--large" 
-							style="background-image: url({{ $publicacion->equipo_local->escudo }}) ">
+							style="background-image:  url(../{{ $publicacion->equipo_local->escudo }}) ">
 						</div>
 					</div>
 
@@ -87,7 +80,7 @@
 					@if($publicacion->equipo_local->usuario)
 						<div class="match__equipo__usuario  match__equipo__usuario--large">
 							{{ $publicacion->equipo_local->usuario->nombre }}
-						</div>	
+						</div>
 					@endif
 
 				</div>
@@ -96,7 +89,7 @@
 					
 					<div class="match__equipo__escudo">
 						<div class="image__team image__team--large" 
-							style="background-image: url({{ $publicacion->equipo_visitante->escudo }}) ">
+							style="background-image: url(../{{ $publicacion->equipo_visitante->escudo }}) ">
 						</div>
 					</div>
 
@@ -126,7 +119,7 @@
 	        	</label>
 
 	            <div class="form-group">
-	                <input class="form-field" type="url" id="inputLinkCompartir" value="http:{{ url($publicacion->link) }}">
+	                <input class="form-field" type="url" id="inputLinkCompartir" value="{{ url($publicacion->link) }}">
 	                 <button class="btn sm" id="buttonCompartir">
 	                    <i class="icon-layers"></i>
 	                    Copiar
@@ -134,7 +127,8 @@
 	            </div>
 	        </div>
 		@endif
-	</div>	
+	</div>
+
 
 
 	@include('pages.modals.match')
@@ -142,14 +136,6 @@
 	<div id="overlay"></div>
 
 @endsection
-
-
-
-
-
-
-
-
 
 
 

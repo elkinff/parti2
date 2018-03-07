@@ -37,17 +37,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td data-th="Fecha">01/01/2018</td>
-				<td data-th="Retiro">Retiro</td>
-				<td data-th="Monto">$100.000</td>
-			</tr>
 
-			<tr>
-				<td data-th="Fecha">01/01/2018</td>
-				<td data-th="Retiro">Retiro</td>
-				<td data-th="Monto">$100.000</td>
-			</tr>
+			@foreach($historial as $transaccion)
+				<tr>
+					<td data-th="Fecha">{{ $transaccion->fecha }}</td>
+					<td data-th="Retiro">{{ $transaccion->tipo }}</td>
+					<td data-th="Monto">${{ number_format($transaccion->valor) }}</td>
+				</tr>
+			@endforeach
+
 		</tbody>
 	</table>
 	

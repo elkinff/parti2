@@ -1,7 +1,6 @@
 window.$ = window.jQuery = require('jquery');
 
-
-// Vue 
+// Vue
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -244,7 +243,7 @@ const app = new Vue({
                     this.saveMatch();
                   return;
                 }
-                //alert('Correct them errors!');
+                //'Correct them errors!';
             });
         }, 
 
@@ -256,7 +255,6 @@ const app = new Vue({
                     document.querySelector("#formRetirarCredito").submit();
                   return;
                 }
-                //alert('Correct them errors!');
             });
         }, 
 

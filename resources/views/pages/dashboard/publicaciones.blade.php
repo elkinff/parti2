@@ -16,8 +16,7 @@
 			<thead>
 				<tr>
 					<th>Partido</th>
-					<th>Tipo</th>
-					<th>Fecha</th>
+					<th>Fecha Partido</th>
 					<th>Valor</th>
 					<th>Estado</th>
 					<th></th>
@@ -36,16 +35,19 @@
 								Vs <strong>{{ $publicacion->equipo_visitante->nombre }}</strong>
 							@endif
 						</td>
-						<td data-th="Tipo">
+
+						{{-- <td data-th="Tipo">
 							@if($publicacion->id_usu_receptor)
 								Publicación
 							@else
 								Match
 							@endif
-							
-						</td>
-						<td data-th="Fecha"> {{ $publicacion->partido->date_show }} </td>
+						</td> --}}
+
+						<td data-th="Fecha Partido">{{ $publicacion->partido->date_show }}</td>
+
 						<td data-th="Monto">${{ number_format($publicacion->valor) }}</td>
+
 						<td data-th="Estado">
 							<div class="message-detail__info">
 								@if( $publicacion->estado == 0 )
@@ -61,6 +63,7 @@
 								@endif
 							</div>
 						</td>
+
 						<td data-th="Acción"><a class="btn sm secondary" href="{{ url('publicaciones', $publicacion->id) }}">Ver</a></td>
 					</tr>
 				@endforeach

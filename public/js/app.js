@@ -1066,7 +1066,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_slider_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_slider_component__);
 window.$ = window.jQuery = __webpack_require__(13);
 
-// Vue 
+// Vue
 __webpack_require__(14);
 
 window.Vue = __webpack_require__(35);
@@ -1327,7 +1327,7 @@ var app = new Vue({
                     _this3.saveMatch();
                     return;
                 }
-                //alert('Correct them errors!');
+                //'Correct them errors!';
             });
         },
         validateBeforeSubmitRetirar: function validateBeforeSubmitRetirar() {
@@ -1338,7 +1338,6 @@ var app = new Vue({
                     document.querySelector("#formRetirarCredito").submit();
                     return;
                 }
-                //alert('Correct them errors!');
             });
         },
         getMatchs: function getMatchs() {
@@ -1494,7 +1493,7 @@ var app = new Vue({
                     extra1: "publicacion",
 
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://localhost:8000/api/publicaciones/detalle"
+                    response: "http://localhost:8080/api/publicaciones/detalle"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {

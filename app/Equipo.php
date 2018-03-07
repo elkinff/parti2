@@ -19,7 +19,7 @@ class Equipo extends Model{
     	$equipo = Equipo::find($idEquipo);
     	
 		if(is_null($equipo)){
-			$escudo = "img/teams/".$liga."/".$idEquipo."/".$idEquipo."_60.png";
+			$escudo = "img/teams/".$liga."/".$idEquipo."/".$idEquipo."_100.png";
 		    $equipo = Equipo::create(["id" => $idEquipo, "nombre" => $nombreEquipo, "escudo" => $escudo]);
 		    $equipo->ligas()->attach($liga);
 

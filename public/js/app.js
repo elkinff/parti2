@@ -1494,7 +1494,7 @@ var app = new Vue({
                     extra1: "publicacion",
 
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://localhost:8000/api/publicaciones/detalle"
+                    response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
@@ -1575,7 +1575,7 @@ var app = new Vue({
                     extra1: "match",
                     extra2: idUsuario,
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
+                    response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
                 };
 
                 handler.open(data);

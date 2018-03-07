@@ -1,5 +1,4 @@
 window.$ = window.jQuery = require('jquery');
-
 // Vue
 require('./bootstrap');
 

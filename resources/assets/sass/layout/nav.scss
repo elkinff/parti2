@@ -10,9 +10,10 @@
 		left: 0;
 		top: 0;
 		height: 100%;
-		max-width: 75%;
+		max-width: 80%;
 		position: fixed;
 		//background-color: red;
+		overflow-y: scroll;
 		z-index: 50;
 		@include transition();	
 		@include translate(-$widthNav, 0);
@@ -26,6 +27,10 @@
 	&__content {
 		padding: 1em;
 		padding-top:2em;
+
+		@include max('sm') {
+			padding-top:1em;
+		}
 	}
 
 	&__title {
@@ -73,9 +78,11 @@
 	}
 
 	&__ayuda {
-		position: absolute;
-		bottom: 20px;
-		left: 0;
+		// position: absolute;
+		// bottom: 20px;
+		// left: 0;
+		margin: 1em auto;
+		display:block;
 		text-align: center;
 		width: 100%;
 		color: $white;

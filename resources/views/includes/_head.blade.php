@@ -17,5 +17,4 @@
 
 	{{-- Metas --}}
 	<meta description="Disfruta ganando dinero con tu equipo!">
-	<meta keywords="Parti2, Apuesta, Partidos">
 </head>

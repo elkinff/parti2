@@ -30,13 +30,13 @@
 		            </div>
 
 		            <span v-show="errors.has('metodo')" class="equipos__error">
-						Debes seleccionar un metodo
+						Debes seleccionar un método de retiro
 					</span>
 
 			        <div class="form-element">
 			            <label>Celular</label>
 			            <div>
-			                <input type="number" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" :class="{'error': errors.has('celular') }"  name="celular" v-validate="'required|digits:10'">
+			                <input type="number" value="{{ Auth::user()->celular }}" class="form-field{{ $errors->has('celular') ? ' error' : '' }}" :class="{'error': errors.has('celular') }"  name="celular" v-validate="'required|digits:10'">
 			                
 			                <span v-show="errors.has('celular')">
 								@{{ errors.first('celular') }}

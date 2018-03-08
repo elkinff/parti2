@@ -68,29 +68,32 @@
 			                @endif
 			            </div>
 			        </div>
+					
+					@if(Auth::user()->id_google || Auth::user()->id_facebook )
+				        <div class="form-element">
+				            <div class="columns">
+				                <div class="sm-6">
+				                    <label>Nueva Contraseña</label>
+				                    <div>
+				                        <input type="password" class="form-field{{ $errors->has('password') ? ' error' : '' }}" name="password">
+				                        @if ($errors->has('password'))
+				                            <span class="">
+				                                {{ $errors->first('password') }}
+				                            </span>
+				                        @endif
+				                    </div>
+				                </div>
 
-			        <div class="form-element">
-			            <div class="columns">
-			                <div class="sm-6">
-			                    <label>Nueva Contraseña</label>
-			                    <div>
-			                        <input type="password" class="form-field{{ $errors->has('password') ? ' error' : '' }}" name="password">
-			                        @if ($errors->has('password'))
-			                            <span class="">
-			                                {{ $errors->first('password') }}
-			                            </span>
-			                        @endif
-			                    </div>
-			                </div>
-
-			                <div class="sm-6">
-			                    <label>Confirmar Contraseña</label>
-			                    <div>
-			                        <input id="password-confirm" type="password" class="form-field" name="password_confirmation">
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
+				                <div class="sm-6">
+				                    <label>Confirmar Contraseña</label>
+				                    <div>
+				                        <input id="password-confirm" type="password" class="form-field" name="password_confirmation">
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+					@endif
+					
 		        </div>
 
 	        </div>

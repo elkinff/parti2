@@ -26,7 +26,7 @@
 				        		@{{ auxMatch.homeTeamName }}
 				        	</div>
 			        	</div>
-
+			        	
 			        	<div class="equipos__item"> 
 				        	<label class="radio">
 				        		{{-- <img :src="auxMatch.imageAwayTeam" class="img-check"> --}}

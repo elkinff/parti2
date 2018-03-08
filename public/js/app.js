@@ -1092,7 +1092,7 @@ var dictionary = {
                 return "El campo " + field + " es requerido";
             },
             digits: function digits(field, _digits) {
-                return "El campo " + field + " debe tener " + _digits + " digitos";
+                return "El campo " + field + " debe tener " + _digits + " dígitos";
             }
         }
     }
@@ -1363,6 +1363,7 @@ var app = new Vue({
             var urlMatchs = 'publicaciones';
             axios.get(urlMatchs).then(function (response) {
                 _this6.publicaciones = response.data;
+
                 _this6.loading = false;
             }).catch(function (e) {
                 console.log(e);
@@ -1406,7 +1407,7 @@ var app = new Vue({
         // Match
         detailPublicacion: function detailPublicacion(match, bandera) {
             console.log(match);
-            console.log("la bandera es", bandera);
+            //console.log("la bandera es" , bandera);
             if (bandera == 'detalle') {
                 this.banderaDetalle = true;
             } else {
@@ -1430,16 +1431,14 @@ var app = new Vue({
             var bandera_pasarela = false;
 
             if (parseInt(this.saldo_user) > parseInt(apuestaUsuario)) {
-                console.log("bandera_pasarela es falsa " + this.saldo_user + ", " + apuestaUsuario);
+                //console.log("bandera_pasarela es falsa " + this.saldo_user + ", " + apuestaUsuario);                
                 bandera_pasarela = false;
                 valor_apuesta = this.saldo_user - apuestaUsuario;
             } else {
-                console.log("bandera_pasarela es verdadera " + this.saldo_user + ", " + apuestaUsuario);
+                //console.log("bandera_pasarela es verdadera " + this.saldo_user + ", " + apuestaUsuario);             
                 bandera_pasarela = true;
                 valor_apuesta = apuestaUsuario - this.saldo_user;
             }
-
-            console.log(bandera_pasarela);
 
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;
 
@@ -1580,7 +1579,7 @@ var app = new Vue({
             } else {
                 // Save Match
                 axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(function (response) {
-                    console.log("" + response.data.saldo);
+                    //console.log("" + response.data.saldo);
                     _this8.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
                     if (_this8.banderaDetalle) {
@@ -1625,7 +1624,7 @@ var app = new Vue({
             }
             impuesto_payco_iva = impuesto_payco * 0.19;
 
-            console.log("El valor a agregar es" + creditoAgregarFinal);
+            //console.log("El valor a agregar es" + creditoAgregarFinal);
 
             //console.log(parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva));
             var handler = ePayco.checkout.configure({

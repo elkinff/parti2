@@ -170,6 +170,8 @@
 
 		</a>
 
+		
+
 		<span class="container__matchs__empty"
 			:class="{hide: loading}"
 			v-cloak
@@ -177,10 +179,13 @@
 			>
 			<img src="{{ asset('img/empty_search.png') }}">
 			Lo sentimos no hay resultados para tu búsqueda <br> Inténtalo con otro torneo o fecha ! 
+			<br><br>
+			<a class="header__menu__item header__menu__item--accent btn btn" href="{{ url('publicar') }}">
+				<span>Crea tu Apuesta</span>
+			</a>
 		</span>
 		
 	</div>
-
 	
 	@include('pages.modals.match')
 

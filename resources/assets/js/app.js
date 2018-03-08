@@ -12,7 +12,6 @@ import vueSlider from 'vue-slider-component';
 
 Vue.use(VeeValidate);
 
-
 Vue.use(VueCurrencyFilter, 
 {
   symbol : '$', 
@@ -27,7 +26,7 @@ const dictionary = {
   es: {
     messages: {
       required: (field) => "El campo " + field +" es requerido",
-      digits: (field, digits) => "El campo " + field +" debe tener " + digits + " digitos",
+      digits: (field, digits) => "El campo " + field +" debe tener " + digits + " dígitos",
     }
   }
 };
@@ -278,6 +277,7 @@ const app = new Vue({
             var urlMatchs = 'publicaciones';
             axios.get(urlMatchs).then(response => {
                 this.publicaciones = response.data;
+
                 this.loading = false;
             })
             .catch(e => {
@@ -323,7 +323,7 @@ const app = new Vue({
         // Match
         detailPublicacion(match, bandera) {
             console.log(match);
-            console.log("la bandera es" , bandera);
+            //console.log("la bandera es" , bandera);
             if(bandera == 'detalle' ) {
                 this.banderaDetalle =  true;
             }else {
@@ -346,17 +346,15 @@ const app = new Vue({
             var bandera_pasarela = false;
             
             if(parseInt(this.saldo_user) > parseInt(apuestaUsuario)) {
-                console.log("bandera_pasarela es falsa " + this.saldo_user + ", " + apuestaUsuario);                
+                //console.log("bandera_pasarela es falsa " + this.saldo_user + ", " + apuestaUsuario);                
                 bandera_pasarela = false;
                 valor_apuesta = this.saldo_user - apuestaUsuario ;    
             }else {
-                console.log("bandera_pasarela es verdadera " + this.saldo_user + ", " + apuestaUsuario);             
+                //console.log("bandera_pasarela es verdadera " + this.saldo_user + ", " + apuestaUsuario);             
                 bandera_pasarela = true;
                 valor_apuesta = apuestaUsuario - this.saldo_user ;    
             }
-            
 
-            console.log(bandera_pasarela);
 
             var impuesto_payco = ((valor_apuesta / 100 ) * 2.99 + 900) ;
 
@@ -426,7 +424,6 @@ const app = new Vue({
             .catch(e => {
                 console.log(e);
             });
-            
            
         },
 
@@ -500,7 +497,7 @@ const app = new Vue({
             }else {
                 // Save Match
                  axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(response => {
-                    console.log("" + response.data.saldo);
+                    //console.log("" + response.data.saldo);
                     this.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
                     if(this.banderaDetalle) {
@@ -549,7 +546,7 @@ const app = new Vue({
             }
             impuesto_payco_iva = impuesto_payco * 0.19;
             
-            console.log("El valor a agregar es" + creditoAgregarFinal);
+            //console.log("El valor a agregar es" + creditoAgregarFinal);
 
             //console.log(parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva));
             var handler = ePayco.checkout.configure({
@@ -612,7 +609,6 @@ const app = new Vue({
                 this.searchDate = '';
                 this.clickHoyState = 0;
             }
-
         },
     }
 

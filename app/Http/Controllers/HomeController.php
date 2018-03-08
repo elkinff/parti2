@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Publicacion;
 use Redirect;
+
 class HomeController extends Controller{
 
     public function index(){

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\MovimientoBancario;
 use App\Http\Requests\CreditoRetiroRequest;
 use Auth;
-
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\AvisoRetiroNotification;
+    
 class CreditoController extends Controller{
     
     public function __construct(){
@@ -16,6 +19,35 @@ class CreditoController extends Controller{
     public function index(){
         $historial = Auth::user()->historialCrediticio;
     	return view('pages.dashboard.credito', compact("historial"));
+    }
+
+     public function retirarDinero(CreditoRetiroRequest $request){
+        $this->validate($request, ['valor' => 'required|menor_saldo']);
+        try {
+            $valorRetiro = $request->valor;
+            $usuario = Auth::user();
+            $usuario->saldo = $usuario->saldo - str_replace(array("$",","), "", $valorRetiro);
+            $usuario->save();
+
+            //Enviar Correo a admin-parti2
+            $usuarioAdmin = new User();
+            $usuarioAdmin->email = "hola@parti2.com";
+            $usuarioAdmin->notify(new AvisoRetiroNotification($usuario, $valorRetiro));
+
+            //Registrar el movimiento de credito del usuario
+            $request["valor"] = str_replace(array("$", ","), "", $valorRetiro);
+            $request["id_usu"] = $usuario->id;
+            $request["tipo"] = "Retiro";
+            $request["fecha"] = date("Y-m-d H:i:s");
+
+            MovimientoBancario::create($request->all());
+
+            alert()->success('Tu transacción se ha realizado satisfactoriamente, en un momento recibirás tu dinero');
+        }catch (Exception $e) {
+            alert()->info($e);
+        }
+         
+        return redirect()->to("credito");
     }
 
     public function respuestaPasarela(Request $request){
@@ -53,19 +85,7 @@ class CreditoController extends Controller{
         //Falta registrar movimiento banacario
     }
 
-    public function retirarDinero(CreditoRetiroRequest $request){
-    	$this->validate($request, ['valor' => 'required|menor_saldo']);
-
-    	$valorRetiro = $request->valor;
-    	$usuario = Auth::user();
-
-    	$usuario->saldo = $usuario->saldo - $valorRetiro;
-    	$usuario->save();
-
-    	//Enviar Correo a admin-parti2
-
-        //Falta registrar movimiento banacario
-    }
+   
 }
 
 

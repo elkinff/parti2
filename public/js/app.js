@@ -1491,7 +1491,7 @@ var app = new Vue({
                     extra1: "publicacion",
 
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://localhost:8080/api/publicaciones/detalle"
+                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/respuestaPasarela"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
@@ -1572,7 +1572,7 @@ var app = new Vue({
                     extra1: "match",
                     extra2: idUsuario,
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/detalle"
+                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/respuestaPasarela"
                 };
 
                 handler.open(data);
@@ -1650,7 +1650,7 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: idUsuario,
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
-                    response: "http://127.0.0.1/api/credito/agregar/respuesta"
+                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/respuesta"
                 };
 
                 handler.open(data);

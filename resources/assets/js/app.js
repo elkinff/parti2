@@ -4,11 +4,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-
 import VueCurrencyFilter from 'vue-currency-filter';
 import VeeValidate from 'vee-validate';
 import vueSlider from 'vue-slider-component';
-
 
 Vue.use(VeeValidate);
 
@@ -37,7 +35,7 @@ VeeValidate.Validator.localize('es'); // now this validator will generate messag
 // Vue.component('example', require('./components/ExampleComponent.vue'));
 
 VeeValidate.Validator.extend('prueba', {
-    getMessage: field => `Deben ser multiplos de $10.000 ($20.000, $50.000)`,
+    getMessage: field => `Deben ser múltiplos de $10.000 ($20.000, $50.000)`,
     validate: value => {
         value = value.replace(/,/g, '').replace(/\$/g, '');
         if( value!= 0 && (value % 10000) == 0 && value !== '$0' ){

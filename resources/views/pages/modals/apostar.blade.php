@@ -26,7 +26,7 @@
 				        		@{{ auxMatch.homeTeamName }}
 				        	</div>
 			        	</div>
-			        	
+
 			        	<div class="equipos__item"> 
 				        	<label class="radio">
 				        		{{-- <img :src="auxMatch.imageAwayTeam" class="img-check"> --}}
@@ -80,10 +80,7 @@
 						<div v-else>
 							@if(Auth::user())
 				        		<center>@{{validateCreditoApuesta}}</center>
-								
 								<button class="btn block center" @click="validateBeforeSubmit()">Pagar</button>
-							
-
 				        	@else
 								<a class="btn block center" href="{{ url('login') }}">Pagar</a>
 				        	@endif	

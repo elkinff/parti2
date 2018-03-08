@@ -15,10 +15,14 @@
 
 				<div class="profile__image sm-12 md-5 center-xs">
 					<div>
-						@if($usuario->foto)
-							<img src="/img/usuario/{{$usuario->foto}}" class="profile__image--preview">
-						@else 
-							<img src="{{ asset('img/email/users.png') }}"  class="profile__image--preview">
+						@if(Auth::user()->foto)
+							@if(Auth::user()->id_google || Auth::user()->id_facebook)
+								<img src="{{Auth::user()->foto}}" >
+							@else 
+								<img src="/img/usuario/{{Auth::user()->foto}}" >	
+							@endif
+						@else
+							<img src="{{ asset('img/email/users.png') }}" >
 						@endif
 					</div>
 
@@ -70,7 +74,9 @@
 			        </div>
 					
 					@if(Auth::user()->id_google || Auth::user()->id_facebook )
-				        <div class="form-element">
+						{{-- Esta autenticado con redes sociales --}}
+				    @else
+				    	<div class="form-element">
 				            <div class="columns">
 				                <div class="sm-6">
 				                    <label>Nueva Contraseña</label>

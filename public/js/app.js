@@ -1105,7 +1105,7 @@ __WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */].Validator.localize
 
 __WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */].Validator.extend('prueba', {
     getMessage: function getMessage(field) {
-        return 'Deben ser multiplos de $10.000 ($20.000, $50.000)';
+        return 'Deben ser m\xFAltiplos de $10.000 ($20.000, $50.000)';
     },
     validate: function validate(value) {
         value = value.replace(/,/g, '').replace(/\$/g, '');

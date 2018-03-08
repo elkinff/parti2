@@ -21,7 +21,7 @@ class CreditoController extends Controller{
     	return view('pages.dashboard.credito', compact("historial"));
     }
 
-     public function retirarDinero(CreditoRetiroRequest $request){
+    public function retirarDinero(CreditoRetiroRequest $request){
         $this->validate($request, ['valor' => 'required|menor_saldo']);
         try {
             $valorRetiro = $request->valor;
@@ -51,41 +51,36 @@ class CreditoController extends Controller{
     }
 
     public function respuestaPasarela(Request $request){
-    	if ($request->x_franchise == "AM" || $request->x_franchise == "CR" || $request->x_franchise == "DC" || $request->x_franchise == "CR" || $request->x_franchise == "MC" || $request->x_franchise == "SP") {
-    		alert()->info("Tu Pago se ha realizado satisfactoriamente, en unos segundos se reflejará en tu saldo");
-    		return view('pages.dashboard.credito');
-    	}else{
-    		alert()->info("Tu Pago se ha realizado satisfactoriamente, en unos segundos se reflejará en tu saldo");
-    		return view('pages.dashboard.credito');
-    	}	
-	}
-
-    public function confirmacionPasarela(Request $request){
     	//Validar firma
-		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
-		
-		if ($signature == $request->x_signature) {
-			$codigoRespuesta = $request->x_cod_response;
-			if ($codigoRespuesta == 1) {
-				$saldoRecarga = $request->x_amount;
-				$usuario = User::findOrFail($request->x_extra1);
-				$usuario->saldo = $usuario->saldo + $saldoRecarga;
-				$usuario->save();
+        $signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
+        
+        if ($signature == $request->x_signature) {
+            switch ($request->x_cod_response) {
+                case 1:
+                    $saldoRecarga = $request->x_amount_base;
+                    $usuario = User::findOrFail($request->x_extra1);
+                    $usuario->saldo = $usuario->saldo + $saldoRecarga;
+                    $usuario->save();
 
-				$mensaje ="Saldo cargado";
-			}else{
-				$mensaje ="No Realizada, estado = ".$codigoRespuesta;
-			}
-		}else{
-			$mensaje = "No coincide la firma";
-		}
+                    //Registrar el movimiento de credito del usuario
+                    $request["valor"] = str_replace(array("$", ","), "", $saldoRecarga);
+                    $request["id_usu"] = $usuario->id;
+                    $request["tipo"] = "Adición de credito";
+                    $request["fecha"] = date("Y-m-d H:i:s");
 
-		return $mensaje;
+                    MovimientoBancario::create($request->all());
 
-        //Falta registrar movimiento banacario
+                    alert()->success("Tu credito se ha agregado satisfactoriamente");
+                    break;
+                
+                //Transaccion en espera
+                case 3:
+                    alert()->success("Tu transacción esta en espera");
+                    break;
+            }
+            return redirect()->to("credito");
+	   }
     }
-
-   
 }
 
 

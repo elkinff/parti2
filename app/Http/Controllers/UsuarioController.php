@@ -24,6 +24,7 @@ class UsuarioController extends Controller{
     public function actualizarUsuario(UsuarioRequest $request){
         $request["email"] = $this->usuario->email;
 
+        // dd(isset($request->password));
         if (bcrypt($request->password) <> $this->usuario->password) {
             $request["password"] = bcrypt($request->password);
         }

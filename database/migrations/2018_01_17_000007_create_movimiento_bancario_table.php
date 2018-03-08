@@ -21,7 +21,7 @@ class CreateMovimientoBancarioTable extends Migration{
                 ->onUpdate('no action');
 
             $table->bigInteger('valor');
-            $table->string('tipo', 10);
+            $table->string('tipo', 20);
             $table->dateTime('fecha');
         });
     }

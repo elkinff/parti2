@@ -1650,7 +1650,7 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: idUsuario,
                     confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/respuesta"
+                    response: "http://127.0.0.1:8000/api/credito/agregar/respuesta"
                 };
 
                 handler.open(data);

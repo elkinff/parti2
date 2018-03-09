@@ -43,7 +43,7 @@ class UsuarioController extends Controller{
             $path = public_path().'/img/usuario';
             $nombreArchivo = md5($file->getClientOriginalName().$this->usuario->id).".".$file->extension();
             $file->move($path, $nombreArchivo);
-            $request["foto"] = $nombreArchivo;
+            $request["foto"] = url('img/usuario/'.$nombreArchivo);
         }
 
         $this->usuario->fill($request->all());

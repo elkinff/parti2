@@ -34,11 +34,7 @@
 				
 				<a id="dropdownUser" class="dropbtn header__menu__item header__menu__item--user">
 					@if(Auth::user()->foto)
-						@if(Auth::user()->id_google || Auth::user()->id_facebook)
-							<img src="{{Auth::user()->foto}}" >
-						@else 
-							<img src="/img/usuario/{{Auth::user()->foto}}" >	
-						@endif
+						<img src="{{Auth::user()->foto}}" >
 					@else
 						<img src="{{ asset('img/email/users.png') }}" >
 					@endif

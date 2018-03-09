@@ -423,7 +423,6 @@ nav ul {
     height: 100%;
     max-width: 80%;
     position: fixed;
-    overflow-y: scroll;
     z-index: 50;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -444,7 +443,7 @@ nav ul {
 
 @media (max-width: 768px) {
   .nav__content {
-    padding-top: 1em;
+    padding-top: 0.5em;
   }
 }
 

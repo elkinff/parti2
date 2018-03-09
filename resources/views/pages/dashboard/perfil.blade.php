@@ -3,7 +3,6 @@
 
 @section('content')
 	
-	
 	{{-- {{ $usuario }} --}}
 	<div class="profile ">
 		
@@ -15,13 +14,10 @@
 				
 				{{-- Foto del usuario en la parte izquierda --}}
 				<div class="profile__image sm-12 md-5 center-xs">
+
 					<div>
 						@if(Auth::user()->foto)
-							@if(Auth::user()->id_google || Auth::user()->id_facebook)
-								<img src="{{Auth::user()->foto}}" class="profile__image--preview">
-							@else 
-								<img src="/img/usuario/{{Auth::user()->foto}}" class="profile__image--preview">	
-							@endif
+							<img src="{{Auth::user()->foto}}" class="profile__image--preview">
 						@else
 							<img src="{{ asset('img/email/users.png') }}" class="profile__image--preview">
 						@endif

@@ -10,18 +10,17 @@
 		left: 0;
 		top: 0;
 		height: 100%;
-		max-width: 80%;
+		max-width: 80%; //Tamaño versión movil
 		position: fixed;
-		//background-color: red;
-		overflow-y: scroll;
+		//overflow-y: auto;
 		z-index: 50;
+		//background-color: red;
 		@include transition();	
 		@include translate(-$widthNav, 0);
 
 		 &.show {
             @include translate;
         }
-
 	}
 
 	&__content {
@@ -29,7 +28,7 @@
 		padding-top:2em;
 
 		@include max('sm') {
-			padding-top:1em;
+			padding-top:0.5em;
 		}
 	}
 
@@ -78,9 +77,7 @@
 	}
 
 	&__ayuda {
-		// position: absolute;
-		// bottom: 20px;
-		// left: 0;
+
 		margin: 1em auto;
 		display:block;
 		text-align: center;
@@ -91,7 +88,6 @@
 			color: lighten($white, 10%);			
 		}
 	}
-
 }
 
 #overlay {

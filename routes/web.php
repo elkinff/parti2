@@ -35,3 +35,24 @@ Route::post('perfil', 'UsuarioController@actualizarUsuario')->name("perfil.updat
 
 Auth::routes(); 
 Route::get('logout', 'Auth\LoginController@logout');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

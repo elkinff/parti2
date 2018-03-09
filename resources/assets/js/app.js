@@ -494,7 +494,7 @@ const app = new Vue({
 
             }else {
                 // Save Match
-                 axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(response => {
+                axios.post(this.baseUrl + urlSavePublicacion, this.matchUser).then(response => {
                     //console.log("" + response.data.saldo);
                     this.saldo_user = response.data.saldo;
                     $("#modalApostar").modal('hide');
@@ -519,6 +519,8 @@ const app = new Vue({
         agregarCredito() {
             var impuesto_payco;
             var impuesto_payco_iva;
+
+            var urlAgregarCredito = '/credito/agregar';
 
             var radios = document.getElementsByName('creditoAgregar');
             var creditoAgregarOpcion;
@@ -552,28 +554,43 @@ const app = new Vue({
                 test: true
             });
 
-            if(creditoAgregarFinal && creditoAgregarFinal!=0) {
-                
-                var data={
-                    //Parametros compra (obligatorio)
-                    name: "Crédito Parti2",
-                    description: "Agregar crédito a tu saldo de Parti2",
-                    invoice: this.auxMatch2.id,//Id publicacion
-                    currency: "cop",
-                    amount: parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva) ,
-                    tax_base: creditoAgregarFinal,
-                    tax: impuesto_payco + impuesto_payco_iva,
-                    country: "co",
-                    lang: "es",
-                    //Onpage="false" - Standard="true"
-                    external: "true",
-                    //Atributos opcionales
-                    extra1: idUsuario,
-                    confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/respuesta",
-                }
+            
+            var objectCredito = {
+                valor : creditoAgregarFinal,
+                id_usu  : idUsuario,
+            }    
 
-                handler.open(data);
+            if(creditoAgregarFinal && creditoAgregarFinal!=0) {
+               
+                axios.post(this.baseUrl + urlAgregarCredito, objectCredito).then(response => {
+                    
+                    //console.log(response.data.id);
+                    var data={
+                        //Parametros compra (obligatorio)
+                        name: "Crédito Parti2",
+                        description: "Agregar crédito a tu saldo de Parti2",
+                        invoice: this.auxMatch2.id,//Id publicacion
+                        currency: "cop",
+                        amount: parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva) ,
+                        tax_base: creditoAgregarFinal,
+                        tax: impuesto_payco + impuesto_payco_iva,
+                        country: "co",
+                        lang: "es",
+                        //Onpage="false" - Standard="true"
+                        external: "true",
+                        //Atributos opcionales
+                        extra1: idUsuario,
+                        extra2: response.data.id,
+                        confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
+                        response: "http://localhost:8080/api/credito/agregar/respuesta",
+                    }
+
+                    handler.open(data);
+
+                })
+                .catch(e => {
+                    console.log(e);
+                });
 
             }else {
                 this.errorCredito = "Debes seleccionar una opción o ingresar un valor";
@@ -614,9 +631,11 @@ const app = new Vue({
 
 
 require('./framy');
+require('./hammer.min.js');
 require('./functions');
 require('./modal');
 require('./sweetalert');
+
 
 
 

@@ -7,7 +7,7 @@
 		
 		@include('includes._header')
 		
-		<main class="container__main" id="app">
+		<main class="container__main" id="app" style="touch-action: pan-x pan-y !important;">
 			{{-- Si hay nav  --}}
 
 			<input type="hidden" value="{{ url('/') }}" v-model="baseUrl" />

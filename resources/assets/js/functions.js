@@ -120,8 +120,42 @@ $('input[name=creditoAgregar]').change(function() {
 		$("#agregarOtroValor").val('')
 	}
 
-	//console.log( $("#agregarOtroValor").val('') );
 });
+
+var myElement = document.getElementById('app');
+
+//var mc = new Hammer(myElement, {touchAction:"pan-y" } );
+
+// mc.get('pan').set({
+//   direction: Hammer.DIRECTION_HORIZONTAL,
+//   threshold: 100, 
+//   velocity:0.1
+// });
+
+// // Eventos Swipe 
+// mc.on("panright panleft", function(ev) {
+
+// 	ev.preventDefault();
+//     if(ev.type == 'panright' && !nav.classList.contains('show') ){
+//     	console.log("hola swipe right");
+//     	nav.classList.toggle('show');
+// 		$('#overlay').fadeIn(200);	
+//     }
+
+//     if(ev.type == 'panleft' && nav.classList.contains('show') ){
+//     	console.log("hola swipe left");
+//     	nav.classList.toggle('show');		
+// 		$('#overlay').fadeOut(200);
+//     }
+
+// });
+
+
+
+
+
+
+
 
 
 

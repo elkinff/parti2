@@ -20,11 +20,8 @@
 		@include max('sm') {
 			max-width: 200px;
 		}
-
 		img {
 			width: 60%;
-			//margin-left: -15px;
-			//background-color:teal;
 			@include max('sm') {
 				width: 85%;
 			}

@@ -89,14 +89,14 @@
 		            </div>
 		        </div>
 
-		        <span v-show="errorCredito">
+		        <span v-show="errorCredito" class="equipos__error">
 					@{{ errorCredito }}
 				</span>
 		        
 				<br>
 
 		        <div>
-		            <button class="btn block center" @click="agregarCredito()">Agregar</button>
+		            <button class="btn block center" :disabled="errors.has('valor')" @click="agregarCredito()">Agregar</button>
 		        </div>
 	      	</div>
 

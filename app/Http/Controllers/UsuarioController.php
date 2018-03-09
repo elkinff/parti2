@@ -24,7 +24,6 @@ class UsuarioController extends Controller{
     }
 
     public function actualizarUsuario(UsuarioRequest $request){
-    // public function actualizarUsuario(Request $request){
         $request["email"] = $this->usuario->email;
 
         if(isset($request->password)){

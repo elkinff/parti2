@@ -27,4 +27,8 @@ class User extends Authenticatable{
     public function matchs(){
         return $this->hasMany(Publicacion::class, "id_usu_receptor");
     }    
+
+    public static function matchsUsuarios($idUsuario){
+        return Publicacion::whereIdUsuRetador($idUsuario)->orWhere('id_usu_receptor', $idUsuario)->whereEstado(2)->get();
+    }
 }

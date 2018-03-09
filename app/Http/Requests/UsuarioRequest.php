@@ -14,9 +14,11 @@ class UsuarioRequest extends FormRequest{
     public function rules(){
         $passwordRule = "";
 
-        if ($this->request->all()["password"] <> "") {
-            $passwordRule = 'required|string|min:6|confirmed';
-        }   
+        if (isset($this->request->all()["password"])) {   
+            if ($this->request->all()["password"] <> "") {
+                $passwordRule = 'required|string|min:6|confirmed';
+            }   
+        }
         
         return [
             'nombre' => 'required|string|max:90',

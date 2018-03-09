@@ -9,5 +9,5 @@ class MovimientoBancario extends Model{
     protected $table = "movimiento_bancario";
     public $timestamps = false;
     
-    protected $fillable = ['id_usu', 'valor', 'tipo', 'fecha'];
+    protected $fillable = ['id_usu', 'valor', 'tipo', 'fecha', 'estado'];
 }

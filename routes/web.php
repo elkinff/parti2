@@ -27,6 +27,7 @@ Route::get('partidos', 'PartidoController@getPartidos')->name('get.partido');
 //Credito
 Route::get('credito', 'CreditoController@index');
 Route::post('credito/retirar', 'CreditoController@retirarDinero')->name('credito.retirar');
+Route::post('credito/agregar', 'CreditoController@adicionarCredito')->name('credito.agregar');
 
 //Perfil
 Route::get('perfil', 'UsuarioController@index')->name("perfil");

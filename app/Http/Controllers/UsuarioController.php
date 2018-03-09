@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\UsuarioRequest;
 use File;
+use App\User;
 
 class UsuarioController extends Controller{
     
@@ -13,6 +14,7 @@ class UsuarioController extends Controller{
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->usuario = Auth::user();
+            // $this->usuario = User::find(1);
             return $next($request);
         });
     }
@@ -22,13 +24,19 @@ class UsuarioController extends Controller{
     }
 
     public function actualizarUsuario(UsuarioRequest $request){
+    // public function actualizarUsuario(Request $request){
         $request["email"] = $this->usuario->email;
 
-        // dd(isset($request->password));
-        if (bcrypt($request->password) <> $this->usuario->password) {
-            $request["password"] = bcrypt($request->password);
+        if(isset($request->password)){
+            if (bcrypt($request->password) <> $this->usuario->password) {
+                $request["password"] = bcrypt($request->password);
+            }else{
+                $request["password"] = $this->usuario->password;
+            }
+        }else{
+            $request["password"] = $this->usuario->password;
         }
-
+        
         //Subir foto de perfil
         if(!is_null($request->file('fotoUsuario'))){
             $file = $request->file('fotoUsuario'); 

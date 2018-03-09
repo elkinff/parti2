@@ -9,6 +9,6 @@ class VerifyCsrfToken extends Middleware
   
     protected $except = [
     	"perfil*",
-    	"credito/retirar*"
+    	"credito/agregar*"
     ];
 }

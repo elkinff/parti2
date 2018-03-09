@@ -23,6 +23,7 @@ class CreateMovimientoBancarioTable extends Migration{
             $table->bigInteger('valor');
             $table->string('tipo', 20);
             $table->dateTime('fecha');
+            $table->boolean('estado');
         });
     }
 

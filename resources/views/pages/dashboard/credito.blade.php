@@ -27,6 +27,12 @@
 
 		</div>
 	</div>
+	
+
+	@if(Session::has('message'))
+		{{Session('message')}}
+	@endif
+
 
 	<table class="table stripe hover responsive">
 		<thead>
@@ -48,6 +54,10 @@
 
 		</tbody>
 	</table>
+
+	
+		
+	
 	
 	@include('pages.modals.retirar-credito')
 	

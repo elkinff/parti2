@@ -564,7 +564,6 @@ const app = new Vue({
                
                 axios.post(this.baseUrl + urlAgregarCredito, objectCredito).then(response => {
                     
-                    //console.log(response.data.id);
                     var data={
                         //Parametros compra (obligatorio)
                         name: "Crédito Parti2",

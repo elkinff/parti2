@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\AvisoRetiroNotification;
 use App\Publicacion;
+use Session;
 
 class CreditoController extends Controller{
     
@@ -18,6 +19,7 @@ class CreditoController extends Controller{
     }
 
     public function index(){
+        Session::flash('message', 'This is a message!'); 
         $historial = Auth::user()->historialCrediticio()->whereEstado(1)->get();
     	return view('pages.dashboard.credito', compact("historial"));
     }
@@ -47,6 +49,7 @@ class CreditoController extends Controller{
                 $request["estado"] = 1;
 
                 MovimientoBancario::create($request->all());
+
 
                 alert()->success('Tu transacción se ha realizado satisfactoriamente, en un momento recibirás tu dinero');
             }else{
@@ -80,22 +83,33 @@ class CreditoController extends Controller{
             $usuario = User::findOrFail($request->x_extra1);
             $movimientoBancario = MovimientoBancario::findOrFail($request->x_extra2);
 
-            switch ($request->x_cod_response) {
-                case 1:
-                    $usuario->saldo = $usuario->saldo + $saldoRecarga;
-                    $usuario->save();
+            if ($request->x_cod_response = 1) {
+                $usuario->saldo = $usuario->saldo + $saldoRecarga;
+                $usuario->save();
 
-                    $movimientoBancario->estado = 1;
-                    $movimientoBancario->save();
-
-                    alert()->success("Tu credito se ha agregado satisfactoriamente");
-                    break;
-                
-                //Transaccion en espera
-                case 3:    
-                    alert()->success("Tu transacción esta en espera");
-                    break;
+                $movimientoBancario->estado = 1;
+                $movimientoBancario->save();
+                alert()->success("Tu crédito se ha agregado satisfactoriamente");
+            }else{
+                alert()->info("Tu transacción está en espera");
             }
+
+            // switch ($request->x_cod_response) {
+            //     case 1:
+            //         $usuario->saldo = $usuario->saldo + $saldoRecarga;
+            //         $usuario->save();
+
+            //         $movimientoBancario->estado = 1;
+            //         $movimientoBancario->save();
+            //         break;
+            //         alert()->success("Tu credito se ha agregado satisfactoriamente");
+
+            //     //Transaccion en espera
+            //     case 3:    
+            //         break;
+            //         alert()->success("Tu transacción esta en espera");
+            // }
+            alert()->success("Tu crédito se ha agregado satisfactoriamente");
             return redirect()->to("credito");
         }
     }

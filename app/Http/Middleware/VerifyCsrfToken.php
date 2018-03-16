@@ -8,7 +8,8 @@ class VerifyCsrfToken extends Middleware
 {
   
     protected $except = [
-    	"perfil*",
-    	"credito/agregar*"
+    	// "perfil*",
+    	// "credito/agregar*"
+    	// "api/item*"
     ];
 }

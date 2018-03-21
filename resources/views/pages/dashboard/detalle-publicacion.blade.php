@@ -14,6 +14,8 @@
 		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
 	@endif
 
+
+
 	<div class="message-detail">
 		<div class="message-detail__icon">
 			<img src="{{ asset('img/users.svg') }}">
@@ -66,7 +68,14 @@
 				{{ $publicacion->partido->date_show }}
 			</div>
 			<div class="match__content">
-				<div class="match__equipo ">
+
+				
+				@if($publicacion->equipo_local->seleccionado)
+					<div class="match__equipo ">
+				@else 
+					<div class="match__equipo match__equipo--selected">		
+				@endif
+				
 
 					<div class="match__equipo__escudo">
 						<div class="image__team image__team--large" 
@@ -85,7 +94,13 @@
 
 				</div>
 				
-				<div class="match__equipo match__equipo--selected">
+				
+
+				@if($publicacion->equipo_visitante->seleccionado)
+					<div class="match__equipo ">
+				@else 
+					<div class="match__equipo match__equipo--selected">		
+				@endif
 					
 					<div class="match__equipo__escudo">
 						<div class="image__team image__team--large" 
@@ -107,8 +122,13 @@
 			<div class="match__vs">
 				VS
 			</div>
-
-			<div class="match__price">${{ number_format($publicacion->valor) }}</div>
+			
+			@if($publicacion->equipo_local->seleccionado)
+				<div class="match__price">${{ number_format($publicacion->valor) }}</div>
+			@else 
+				<div class="match__price match__price--visitante">${{ number_format($publicacion->valor) }}</div>
+			@endif
+			
 		</div>
 	
 		@if( $publicacion->estado == 0 )

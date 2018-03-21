@@ -14,7 +14,6 @@ class UsuarioController extends Controller{
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->usuario = Auth::user();
-            // $this->usuario = User::find(1);
             return $next($request);
         });
     }

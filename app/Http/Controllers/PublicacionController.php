@@ -113,7 +113,7 @@ class PublicacionController extends Controller{
 		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion, $key) {
    			return $publicacion->partido->fecha_inicio;
 		});	
-
+		// dd($publicacionesUsuario);
 		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 

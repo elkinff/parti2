@@ -33,7 +33,7 @@ Route::post('credito/agregar', 'CreditoController@adicionarCredito')->name('cred
 Route::get('perfil', 'UsuarioController@index')->name("perfil");
 Route::post('perfil', 'UsuarioController@actualizarUsuario')->name("perfil.update");
 
-Auth::routes(); 
+Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
 

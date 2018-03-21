@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Auth;
+// use App\User;
 
 class Publicacion extends Model{
 
@@ -59,13 +60,27 @@ class Publicacion extends Model{
             $publicacion->equipo_visitante->seleccionado = false;
 
             //Asignar el usuario al equipo por el que aposto
-            if ($publicacion->id_equipo_retador == $publicacion->equipo_local->id) {
+            if ($publicacion->equipo_local->id == $publicacion->id_equipo_retador) {
                 $publicacion->equipo_local->usuario = $publicacion->usuarioRetador;
-                $publicacion->equipo_local->seleccionado = true;
+
+                // Asignar usuario logeado a su respectivo equipo
+                if ($publicacion->equipo_local->usuario->id == Auth::user()->id) {
+                    $publicacion->equipo_local->seleccionado = true;    
+                }else{
+                    $publicacion->equipo_visitante->seleccionado = true; 
+                }
+                
             }else{
-                $publicacion->equipo_visitante->usuario  = $publicacion->usuarioRetador;
-                $publicacion->equipo_visitante->seleccionado = true;
-            }   
+                $publicacion->equipo_visitante->usuario = $publicacion->usuarioRetador;
+
+                //Asignar usuario logeado su respectivo equipo
+                if ( $publicacion->equipo_visitante->usuario->id == Auth::user()->id) {
+                    $publicacion->equipo_visitante->seleccionado = true; 
+                     
+                }else{
+                   $publicacion->equipo_local->seleccionado = true;   
+                }
+            }  
         }
         return $publicaciones;
     }

@@ -1,5 +1,11 @@
 .pagination {
     @include clear-after;
+    display:flex;
+    justify-content:center;
+    // @include max('sm') {
+    //     justify-content:center;
+    // }
+
     .prev,
     .next {
         float: left;
@@ -51,7 +57,7 @@
             list-style: none;
             position: relative;
             border-right: 1px solid $paginationBorder;
-            padding: $paginationPadding ($paginationPadding + 4);
+            padding: $paginationPadding ($paginationPadding + 10);
             color: $paginationColor;
             &:last-child {
                 border-right: 0;

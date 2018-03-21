@@ -1640,6 +1640,15 @@ form.horizontal .switch.inline {
   display: block;
 }
 
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .pagination:after {
   content: '';
   clear: both;
@@ -1715,7 +1724,7 @@ form.horizontal .switch.inline {
   list-style: none;
   position: relative;
   border-right: 1px solid #D1D7E4;
-  padding: 6px 10px;
+  padding: 6px 16px;
   color: #a8b3c0;
 }
 

@@ -10,7 +10,9 @@
 		3: Pendiente por pagar
 		4: Cancelado
 	--}}
+	
 
+	{{-- {{$publicacionesUsuario}} --}}
 	<div class="publicacion-user">
 		<table class="table stripe hover responsive">
 			<thead>
@@ -35,14 +37,6 @@
 								Vs <strong>{{ $publicacion->equipo_visitante->nombre }}</strong>
 							@endif
 						</td>
-
-						{{-- <td data-th="Tipo">
-							@if($publicacion->id_usu_receptor)
-								Publicación
-							@else
-								Match
-							@endif
-						</td> --}}
 
 						<td data-th="Fecha Partido">{{ $publicacion->partido->date_show }}</td>
 

@@ -22,14 +22,18 @@
 							<img src="{{ asset('img/email/users.png') }}" class="profile__image--preview">
 						@endif
 					</div>
-
-					<div class="form-element">
-	                    <div class="form-file-field">
-	                        <span class="file-btn">Selecciona tu archivo</span>
-	                        <span class="file-msg">o arrastralo aquí</span>
-	                        <input type="file" name="fotoUsuario" id="inputImageProfile" accept="image/*" >
-	                    </div>
-	                </div>
+					
+					@if(Auth::user()->id_google || Auth::user()->id_facebook )
+						{{-- Esta autenticado con redes sociales --}}
+				    @else
+						<div class="form-element">
+		                    <div class="form-file-field">
+		                        <span class="file-btn">Selecciona tu archivo</span>
+		                        <span class="file-msg">o arrastralo aquí</span>
+		                        <input type="file" name="fotoUsuario" id="inputImageProfile" accept="image/*" >
+		                    </div>
+		                </div>
+				    @endif
 
 				</div>
 

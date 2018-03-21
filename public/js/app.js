@@ -1452,8 +1452,6 @@ var app = new Vue({
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
 
-            //console.log(this.matchUser);
-
             axios.post(urlSaveMatch, this.matchUser).then(function (response) {
 
                 _this7.link_compartir = response.data.link;
@@ -1645,7 +1643,6 @@ var app = new Vue({
 
                 axios.post(this.baseUrl + urlAgregarCredito, objectCredito).then(function (response) {
 
-                    //console.log(response.data.id);
                     var data = {
                         //Parametros compra (obligatorio)
                         name: "Crédito Parti2",
@@ -1663,7 +1660,7 @@ var app = new Vue({
                         extra1: idUsuario,
                         extra2: response.data.id,
                         confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
-                        response: "http://127.0.0.1:8000/api/credito/agregar/respuesta"
+                        response: "http://localhost:8080/api/credito/agregar/respuesta"
                     };
 
                     handler.open(data);

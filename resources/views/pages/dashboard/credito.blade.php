@@ -3,7 +3,9 @@
 
 @section('content')
 
-	{{-- Id para enviarlo en las opraciones de credito --}}
+	{{-- 
+		Id para enviarlo en las opraciones de credito--}}
+	
 	@if(Auth::user())
 		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
 		<input type="hidden" value="{{ Auth::user()->saldo }}" id="saldoUser">
@@ -54,10 +56,10 @@
 
 		</tbody>
 	</table>
-
 	
-		
-	
+	<div class="pagination">
+		{{ $historial->links() }}
+	</div>
 	
 	@include('pages.modals.retirar-credito')
 	

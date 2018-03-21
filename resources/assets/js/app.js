@@ -353,7 +353,6 @@ const app = new Vue({
                 valor_apuesta = apuestaUsuario - this.saldo_user ;    
             }
 
-
             var impuesto_payco = ((valor_apuesta / 100 ) * 2.99 + 900) ;
 
             var impuesto_payco_iva = impuesto_payco * 0.19;
@@ -365,8 +364,6 @@ const app = new Vue({
             this.matchUser.valor_ganado = this.totalGanancia;
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
-
-            //console.log(this.matchUser);
 
             axios.post(urlSaveMatch, this.matchUser).then(response => {
 
@@ -563,7 +560,7 @@ const app = new Vue({
             if(creditoAgregarFinal && creditoAgregarFinal!=0) {
                
                 axios.post(this.baseUrl + urlAgregarCredito, objectCredito).then(response => {
-                    
+
                     var data={
                         //Parametros compra (obligatorio)
                         name: "Crédito Parti2",

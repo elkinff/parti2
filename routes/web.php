@@ -37,10 +37,10 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
 
-
-
-
-
+// PAgos prueba interfaz (ELIMINAR)
+Route::get('/pagos', function () {
+    return view('pages.admin.pagos');
+});
 
 
 

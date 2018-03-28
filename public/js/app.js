@@ -1444,6 +1444,12 @@ var app = new Vue({
 
             var impuesto_payco_iva = impuesto_payco * 0.19;
 
+            var valor_base = valor_apuesta + (impuesto_payco + impuesto_payco_iva); //Valor con impuesto mnos de rete fuente
+
+            var impuesto_rete_fuente = valor_base / 100 * 1.5;
+
+            var valor_total_payco = valor_base + impuesto_rete_fuente;
+
             var urlSaveMatch = 'api/publicar';
 
             this.matchUser = this.auxMatch;
@@ -1461,8 +1467,11 @@ var app = new Vue({
                 //console.log(response.data);
                 var equipoRetador = response.data.equipoRetador.nombre;
 
-                //console.log(equipoRetador);
-
+                // Impresiones de prueba
+                console.log("El valor total es: ", valor_apuesta + (impuesto_payco + impuesto_payco_iva));
+                console.log("El valor de los impuestos es:", impuesto_payco + impuesto_payco_iva);
+                console.log("El valor de la rete fuente es:", impuesto_rete_fuente);
+                console.log("El valor total enviado a payco es igual a ", valor_total_payco);
                 //$("#modalCompartir").modal('show');
 
                 var handler = ePayco.checkout.configure({
@@ -1476,7 +1485,7 @@ var app = new Vue({
                     description: "Acabas de realizar una publicación a favor de " + equipoRetador,
                     invoice: response.data.publicacion, //Id publicacion
                     currency: "cop",
-                    amount: valor_apuesta + (impuesto_payco + impuesto_payco_iva),
+                    amount: valor_total_payco,
                     tax_base: valor_apuesta,
                     tax: impuesto_payco + impuesto_payco_iva,
                     country: "co",
@@ -1533,6 +1542,12 @@ var app = new Vue({
             var impuesto_payco = valor_apuesta / 100 * 2.99 + 900;
             var impuesto_payco_iva = impuesto_payco * 0.19;
 
+            var valor_base = valor_apuesta + (impuesto_payco + impuesto_payco_iva); //Valor con impuesto mnos de rete fuente
+
+            var impuesto_rete_fuente = valor_base / 100 * 1.5;
+
+            var valor_total_payco = valor_base + impuesto_rete_fuente;
+
             var idUsuario = document.querySelector('#idUsuario').value;
 
             //console.log(idUsuario);
@@ -1559,7 +1574,7 @@ var app = new Vue({
                     description: "Acabas de realizar un Match en Parti2, a favor del equipo " + equipoSeleccionado,
                     invoice: this.auxMatch2.id, //Id publicacion
                     currency: "cop",
-                    amount: valor_apuesta + (impuesto_payco + impuesto_payco_iva),
+                    amount: valor_total_payco,
                     tax_base: valor_apuesta,
                     tax: impuesto_payco + impuesto_payco_iva,
                     country: "co",
@@ -1626,6 +1641,12 @@ var app = new Vue({
             }
             impuesto_payco_iva = impuesto_payco * 0.19;
 
+            var valor_base = creditoAgregarFinal + (impuesto_payco + impuesto_payco_iva); //Valor con impuesto mnos de rete fuente
+
+            var impuesto_rete_fuente = creditoAgregarFinal / 100 * 1.5;
+
+            var valor_total_payco = creditoAgregarFinal + impuesto_rete_fuente;
+
             //console.log("El valor a agregar es" + creditoAgregarFinal);
 
             //console.log(parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva));
@@ -1649,7 +1670,7 @@ var app = new Vue({
                         description: "Agregar crédito a tu saldo de Parti2",
                         invoice: _this9.auxMatch2.id, //Id publicacion
                         currency: "cop",
-                        amount: parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva),
+                        amount: parseInt(valor_total_payco),
                         tax_base: creditoAgregarFinal,
                         tax: impuesto_payco + impuesto_payco_iva,
                         country: "co",

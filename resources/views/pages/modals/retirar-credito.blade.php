@@ -12,7 +12,8 @@
 				@submit.prevent="validateBeforeSubmitRetirar()">
         
 			        {{ csrf_field() }}
-			        
+			        <p>Recuerda que los retiros se realizan de 8am a 8pm todos los días</p>
+
 			        <div class="form-element ">
 		                <label class="radio fancy">
 		                    <input type="radio" name="metodo" value="nequi" v-validate="'required'">
@@ -20,6 +21,7 @@
 		                    <span>Nequi</span>
 		                </label>
 		            </div>
+		            
 
 		            <div class="form-element ">
 		                <label class="radio fancy">

@@ -1497,8 +1497,9 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: "publicacion",
 
-                    confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/respuestaPasarela"
+                    confirmation: "http://app.parti2.com/api/publicar/confirmacion",
+                    // response: "http://app.parti2.com/api/publicaciones/respuestaPasarela"
+                    response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
@@ -1584,9 +1585,9 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: "match",
                     extra2: idUsuario,
-                    confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicar/confirmacion",
-                    // response: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/publicaciones/respuestaPasarela"
-                    response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
+                    confirmation: "http://app.parti2.com/api/publicar/confirmacion",
+                    response: "http://app.parti2.com/api/publicaciones/respuestaPasarela"
+                    // response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
                 };
 
                 handler.open(data);
@@ -1681,8 +1682,8 @@ var app = new Vue({
                         //Atributos opcionales
                         extra1: idUsuario,
                         extra2: response.data.id,
-                        confirmation: "http://parti2-env.us-west-2.elasticbeanstalk.com/api/credito/agregar/confirmacion",
-                        response: "http://localhost:8080/api/credito/agregar/respuesta"
+                        confirmation: "http://app.parti2.com/api/credito/agregar/confirmacion",
+                        response: "http://app.parti2.com/api/credito/agregar/respuesta"
                     };
 
                     handler.open(data);

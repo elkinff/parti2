@@ -122,8 +122,8 @@ class PublicacionController extends Controller{
 		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 
+	//Los pagos vienen con metodos de pago inmediatos (tarjeta de credito)
 	public function respuestaPasarela(Request $request){
-		// dd($request);
 		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 
 		if ($signature == $request->x_signature) {
@@ -175,8 +175,9 @@ class PublicacionController extends Controller{
 				case 3:
 					if ($request->x_franchise == "BA" || $request->x_franchise == "EF" || $request->x_franchise == "GA" || $request->x_franchise == "PR" || $request->x_franchise == "RS" || $request->x_franchise == "PSE") {
 						cookie('espera', true, 1);
-						$publicacion->intenciones()->attach($request->x_extra2);
 
+						//Se crea al intencion si la pubicacion esta en espera del match
+						$publicacion->intenciones()->attach($request->x_extra2);
 					}
 					return redirect()->to("publicaciones/".$publicacion->id);
 					break;
@@ -191,14 +192,16 @@ class PublicacionController extends Controller{
 		}		
 	}
 	
+	// Los pagos vienen de metodos de pago por efectivo
 	public function confirmacionPasarelaPublicacion(Request $request){
         //Validar firma
         $signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
         
         if ($signature == $request->x_signature) {
-            $publicacion = Publicacion::findOrFail($request->x_id_invoice);
-            $this->usuarioReceptor = User::findOrFail($request->x_extra2);
-            if ($publicacion->estado == 3) {
+        	$publicacion = Publicacion::findOrFail($request->x_id_invoice);
+
+        	//Activar publicacion: estado 3 - Activar Match: estado 0
+            if ($publicacion->estado == 3 || $publicacion->estado == 0) {
                 switch ($request->x_cod_response) {
                     //Transacción Aceptada
                     case 1:
@@ -211,8 +214,11 @@ class PublicacionController extends Controller{
                             $usuario = $publicacion->usuarioRetador;
                             $usuario->saldo = 0;
                             $usuario->save();
+
+                            return "Publicación exitosa";
                         }else{
-                            //Se ha creado el match                       
+                            //Se ha creado el match    
+                            $this->usuarioReceptor = User::findOrFail($request->x_extra2);                   
                             $this->usuarioRetador = $publicacion->usuarioRetador;
 
                             //Actualizamos el estado de la publicacion
@@ -237,35 +243,43 @@ class PublicacionController extends Controller{
 
                             //Notificar a los usuarios en espera de pago para hacer match
 	    					Publicacion::hasIntencionesMatch($publicacion, $this->usuarioReceptor);
+
+	    					return "Match exitoso";
                         }
                         break;
-                    // //Transaccion Rechazada
-                    // case 2:
-
-                    // case 4:
-                    //     $publicacion->delete();
-                    //     break;
+                    //Transaccion Rechazada
+                    case 2:
+                    case 4:
+                        return "Transaccion rechazada o declinada";
+                        break;
                 }
             }elseif($publicacion->estado == 1){
+            	$usuarioReceptor = User::findOrFail($request->x_extra2);
             	foreach ($publicacion->intenciones as $usuario) {
-            		if ($usuario->id == $this->usuarioReceptor->id) {
+            		if ($usuario->id == $usuarioReceptor->id) {
+            			$valor = $request->x_amount_base;
 
             			//Actualizar el saldo al usuario
-            			$usuario->saldo = $usuario->saldo + $request->x_amount_base;
+            			$usuario->saldo = $usuario->saldo + $valor;
             			$usuario->save();
 
         				// Notificar al usuario pagador que ya habia perdido el match y que se acaba de recargar el saldo
                         $imagen = "empate";
                         $titulo = "Saldo recargado!";
-                        $descripcion = "Se te ha recargado tu saldo ya que tu publicación para el match habia perdido su oportunidad "; 
+                        $descripcion = "Se te han recargado $ ".number_format($valor)." a tu saldo, ya que tu publicación a favor de ".$publicacion->equipoReceptor->nombre." para hacer match habia perdido su oportunidad";
                         $labelButton = "Continua publicando!";
                         $url = url("publicar");
                         $subject = 'Haz recargado tu credito en Parti2';
 
-                        $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+                        $usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
             		}
             	}
+            	return "Se ha recargado el saldo al usuario que habia perdido la oportunidad de hacer match";
+            }else{
+            	return "El estado de la publicacion no es 3 ni 1 ni 0";
             }
+        }else{
+        	return "No coincide la firma";
         }
     }
 }

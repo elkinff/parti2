@@ -34,10 +34,4 @@ class EmailNotification extends Notification{
             ->subject($this->subject)
             ->view("emails.email", compact("imagen", "titulo", "descripcion", "labelButton", "url"));
     }
-
-    public function toArray($notifiable){
-        return [
-            //
-        ];
-    }
 }

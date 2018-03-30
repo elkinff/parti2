@@ -24,6 +24,7 @@ class CreateMovimientoBancarioTable extends Migration{
             $table->string('tipo', 20);
             $table->dateTime('fecha');
             $table->boolean('estado');
+            $table->boolean('estado_pago_admin');
         });
     }
 

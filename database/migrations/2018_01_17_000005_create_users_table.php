@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration{
 
             $table->boolean("validado")->default(0);
             $table->string("token", 100)->nullable();
+            $table->boolean("tipo")->default(0);
             $table->rememberToken();
             $table->timestamps();
 

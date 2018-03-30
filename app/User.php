@@ -9,7 +9,7 @@ class User extends Authenticatable{
     use Notifiable;
 
     protected $fillable = [
-        'nombre', 'email', 'password', 'celular', 'foto', 'id_google', 'id_facebook', 'saldo', 'id_configuracion_retiro', 'token', 'validado'
+        'nombre', 'email', 'password', 'celular', 'foto', 'id_google', 'id_facebook', 'saldo', 'id_configuracion_retiro', 'token', 'validado', 'tipo'
     ];
 
     protected $hidden = [
@@ -18,6 +18,10 @@ class User extends Authenticatable{
 
     public function historialCrediticio(){
         return $this->hasMany(MovimientoBancario::class, "id_usu");
+    }
+
+    public function intenciones(){
+        return $this->belongsToMany(Publicacion::class, "intencion_match", "id_usuario", "id_publicacion");
     }
 
     public function publicaciones(){

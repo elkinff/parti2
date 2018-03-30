@@ -8,22 +8,25 @@
 				<th>ID</th>
 				<th>Fecha de solicitud</th>
 				<th>Estado</th>
-				<th>Fecha de pago</th>
+				<th>Monto</th>
+				<th>Celular</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td data-th="ID">12123</td>
-				<td data-th="Fecha solicitud">01/01/2018</td>
-				<td data-th="Estado">En espera de pago</td>
-				<td data-th="Fecha de pago">$100.000</td>
-				<td data-th="">
-					<a href="#" class="btn sm">Pagar</a>
-					<a href="#" class="btn secondary sm">Seguimiento</a>
-				</td>
-			</tr>
-
+			@foreach ($retiros as $retiro)
+				<tr>
+					<td data-th="ID">{{$retiro->id}}</td>
+					<td data-th="Fecha solicitud">{{$retiro->fecha}}</td>
+					<td data-th="Estado">{{$retiro->estado_pago_admin}}</td>
+					<td data-th="Monto">$ {{number_format($retiro->valor)}}</td>
+					<td data-th="Celular">{{$retiro->usuario->celular}}</td>
+					<td data-th="">
+						<a href={{ url("admin/solicitudes/pagar/".$retiro->id) }} class="btn sm">Pagar</a>
+						<a href="#" class="btn secondary sm">Seguimiento</a>
+					</td>
+				</tr>
+			@endforeach
 		</tbody>
 	</table>
 

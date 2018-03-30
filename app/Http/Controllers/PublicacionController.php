@@ -12,6 +12,7 @@ use Auth;
 use App\Http\Requests\PublicacionRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\EmailNotification;
+use Session;
 
 class PublicacionController extends Controller{
 
@@ -21,7 +22,7 @@ class PublicacionController extends Controller{
 
     //Envio de publicaciones activas al muro
 	public function getPublicaciones(){
-    	return Publicacion::getPublicacionesActivas("All");
+    	return Publicacion::getPublicacionesActivasMuro();
 	}
 
 	public function store(PublicacionRequest $request){
@@ -94,11 +95,15 @@ class PublicacionController extends Controller{
 	    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 	    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 
+	    //Notificar a los usuarios en espera de pago para hacer match
+	    Publicacion::hasIntencionesMatch($publicacion, $this->usuarioReceptor);
+
 		return response()->json(["success" => "Se ha creado el match con tu contrincante!", "saldo" => $this->usuarioReceptor->saldo]);		
 	}
 
 	public function show($idPublicacion){
 		$publicacion = Publicacion::getPublicacionesActivas($idPublicacion)->first();
+		
 		if (is_null($publicacion->equipo_local->usuario)) {
 			$publicacion->equipo_local->usuario = $publicacion->usuarioReceptor;
 		}else{
@@ -113,11 +118,12 @@ class PublicacionController extends Controller{
 		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion, $key) {
    			return $publicacion->partido->fecha_inicio;
 		});	
-		// dd($publicacionesUsuario);
+		
 		return view('pages.dashboard.publicaciones', compact("publicacionesUsuario"));
 	}
 
 	public function respuestaPasarela(Request $request){
+		// dd($request);
 		$signature = hash('sha256', $request->x_cust_id_cliente.'^86c18a3ad068b30d14c99a47940ad176bb0c7721^'.$request->x_ref_payco.'^'.$request->x_transaction_id.'^'.$request->x_amount.'^'.$request->x_currency_code);
 
 		if ($signature == $request->x_signature) {
@@ -139,7 +145,7 @@ class PublicacionController extends Controller{
 						$this->usuarioReceptor = User::findOrFail($request->x_extra2);
 						$this->usuarioRetador = $publicacion->usuarioRetador;
 
-						//Actualizamos el estado de la publicacion
+						//Actualizamos el estado de la publicación
 						$publicacion->id_usu_receptor = $this->usuarioReceptor->id;
 						$publicacion->estado = 1;
 						$publicacion->save();
@@ -158,16 +164,24 @@ class PublicacionController extends Controller{
 
 					    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 					    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+					    //Notificar a los usuarios en espera de pago para hacer match
+	    				Publicacion::hasIntencionesMatch($publicacion, $this->usuarioReceptor);
 					}
 					return redirect()->to("publicaciones/".$publicacion->id);
 					break;
 
-				//Transaccion en espera
+				//Transacción en espera
 				case 3:
+					if ($request->x_franchise == "BA" || $request->x_franchise == "EF" || $request->x_franchise == "GA" || $request->x_franchise == "PR" || $request->x_franchise == "RS" || $request->x_franchise == "PSE") {
+						cookie('espera', true, 1);
+						$publicacion->intenciones()->attach($request->x_extra2);
+
+					}
 					return redirect()->to("publicaciones/".$publicacion->id);
 					break;
 
-				//Transaccion Rechazada
+				//Transacción Rechazada
 				case 2:
 				case 4:
 					$publicacion->delete();
@@ -183,6 +197,7 @@ class PublicacionController extends Controller{
         
         if ($signature == $request->x_signature) {
             $publicacion = Publicacion::findOrFail($request->x_id_invoice);
+            $this->usuarioReceptor = User::findOrFail($request->x_extra2);
             if ($publicacion->estado == 3) {
                 switch ($request->x_cod_response) {
                     //Transacción Aceptada
@@ -197,8 +212,7 @@ class PublicacionController extends Controller{
                             $usuario->saldo = 0;
                             $usuario->save();
                         }else{
-                            //Se ha creado el match
-                            $this->usuarioReceptor = User::findOrFail($request->x_extra2);
+                            //Se ha creado el match                       
                             $this->usuarioRetador = $publicacion->usuarioRetador;
 
                             //Actualizamos el estado de la publicacion
@@ -220,15 +234,37 @@ class PublicacionController extends Controller{
 
                             $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
                             $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+                            //Notificar a los usuarios en espera de pago para hacer match
+	    					Publicacion::hasIntencionesMatch($publicacion, $this->usuarioReceptor);
                         }
                         break;
+                    // //Transaccion Rechazada
+                    // case 2:
 
-                    //Transaccion Rechazada
-                    case 2:
-                    case 4:
-                        $publicacion->delete();
-                        break;
+                    // case 4:
+                    //     $publicacion->delete();
+                    //     break;
                 }
+            }elseif($publicacion->estado == 1){
+            	foreach ($publicacion->intenciones as $usuario) {
+            		if ($usuario->id == $this->usuarioReceptor->id) {
+
+            			//Actualizar el saldo al usuario
+            			$usuario->saldo = $usuario->saldo + $request->x_amount_base;
+            			$usuario->save();
+
+        				// Notificar al usuario pagador que ya habia perdido el match y que se acaba de recargar el saldo
+                        $imagen = "empate";
+                        $titulo = "Saldo recargado!";
+                        $descripcion = "Se te ha recargado tu saldo ya que tu publicación para el match habia perdido su oportunidad "; 
+                        $labelButton = "Continua publicando!";
+                        $url = url("publicar");
+                        $subject = 'Haz recargado tu credito en Parti2';
+
+                        $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+            		}
+            	}
             }
         }
     }

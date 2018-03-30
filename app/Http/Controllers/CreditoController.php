@@ -32,6 +32,7 @@ class CreditoController extends Controller{
             if (!$matchsUser->isEmpty()) {            
                 $valorRetiro = $request->valor;
                 
+                $usuario->celular = $request->celular;
                 $usuario->saldo = $usuario->saldo - str_replace(array("$",","), "", $valorRetiro);
                 $usuario->save();
 

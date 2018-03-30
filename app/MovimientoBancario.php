@@ -9,5 +9,9 @@ class MovimientoBancario extends Model{
     protected $table = "movimiento_bancario";
     public $timestamps = false;
     
-    protected $fillable = ['id_usu', 'valor', 'tipo', 'fecha', 'estado'];
+    protected $fillable = ['id_usu', 'valor', 'tipo', 'fecha', 'estado', 'estado_pago_admin'];
+
+    public function usuario(){
+    	return $this->belongsTo(User::class, "id_usu");
+    }
 }

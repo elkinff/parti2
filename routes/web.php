@@ -33,14 +33,12 @@ Route::post('credito/agregar', 'CreditoController@adicionarCredito')->name('cred
 Route::get('perfil', 'UsuarioController@index')->name("perfil");
 Route::post('perfil', 'UsuarioController@actualizarUsuario')->name("perfil.update");
 
+//Administrador
+Route::get("admin/solicitudes", "AdminController@getSolicitudesPagos");
+Route::get("admin/solicitudes/pagar/{idRetiro}", "AdminController@pagarRetiro");
+
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
-
-
-// PAgos prueba interfaz (ELIMINAR)
-Route::get('/pagos', function () {
-    return view('pages.admin.pagos');
-});
 
 
 

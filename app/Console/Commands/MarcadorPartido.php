@@ -18,7 +18,8 @@ class MarcadorPartido extends Command{
     }
 
     public function handle(){
-        $fechaHoraActual = date("Y-m-d H:i");
+        // $fechaHoraActual = date("Y-m-d H:i");
+        //Url que se envia al correo de notificacion
         $url = url("publicar");
 
         //Validar Matchs Realizados en Parti2
@@ -84,8 +85,6 @@ class MarcadorPartido extends Command{
 
                             $publicacion->id_ganador = $this->usuarioGanador->id;
                             $publicacion->id_perdedor = $this->usuarioPerdedor->id;
-
-
                         }else{
                             $this->usuarioGanador = $publicacion->usuarioReceptor;
                             $this->usuarioPerdedor = $publicacion->usuarioRetador;
@@ -112,7 +111,7 @@ class MarcadorPartido extends Command{
                         // Notificar al usuario de la perdida
                         $imagenP = "perdedor";
                         $tituloP = "Lo sentimos, has perdido tu match";
-                        $descripcionP = "Tu equipo ".$equipoPerdedor->nombre." perdió su partido. Pero no te desanimes!!! sigue publicando para que empieces tu racha ganadora"; 
+                        $descripcionP = "Tu equipo ".$equipoPerdedor->nombre." perdió su partido. Pero no te desanimes!!! Sigue publicando para que empieces tu racha ganadora"; 
                         $labelButtonP = "Publica Ya!";
                         $subjectP = 'Perdiste en Parti2';
 
@@ -129,7 +128,7 @@ class MarcadorPartido extends Command{
         }
 
         //Validar Publicaciones que no encontraron Match
-        $publicacionesSinMatch = Publicacion::getPublicacionesSinMacth();
+        $publicacionesSinMatch = Publicacion::getPublicacionesSinMatch();
         foreach ($publicacionesSinMatch as $publicacion) {
             $publicacion->estado = 5;
             $publicacion->save();
@@ -139,16 +138,35 @@ class MarcadorPartido extends Command{
             $usuarioRetador->saldo = $usuarioRetador->saldo + $publicacion->valor;
             $usuarioRetador->save();
 
-             // Notificar al usuario que no encontró match
+            // Notificar al usuario que no encontró match
             $imagen = "no_match";
             $titulo = "Lo sentimos, no encontraste tu match";
-            $descripcion = "Tu publicacion a favor de ".$publicacion->equipoRetador->nombre." por un valor de $".number_format($publicacion->valor)." no encontró un usuario receptor para realizar el match. Pero no te desanimes!!! sigue publicando para que empieces tu racha ganadora"; 
+            $descripcion = "Tu publicación a favor de ".$publicacion->equipoRetador->nombre." por un valor de $".number_format($publicacion->valor)." no encontró un usuario receptor para realizar el match. Pero no te desanimes!!! Sigue publicando para que empieces tu racha ganadora"; 
             $labelButton = "Publica Ya!";
             $subject = 'El partido de tu publicacion ha iniciado y no encontraste el match';
 
            $usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 
             $this->info("No se encontro match para la publicacion");
+        }
+
+        //Validar publicaciones que no fueron pagas
+        $publicacionesSinPagar = Publicacion::getPublicacionesTerminadasSinPagar();
+        foreach ($publicacionesSinPagar as $publicacion) {
+            $publicacion->estado = 6;
+            $publicacion->save();
+
+            // Notificar al usuario que no encontró match
+            $imagen = "no_match";
+            $titulo = "Lo sentimos, no realizaste tu publicación";
+            $descripcion = "Tu publicación a favor de ".$publicacion->equipoRetador->nombre." por un valor de $".number_format($publicacion->valor)." no se realizó ya que no hiciste el pago. Pero no te desanimes!!! Sigue publicando para que empieces tu racha ganadora"; 
+            $labelButton = "Publica Ya!";
+            $subject = 'El partido de tu publicacion ha iniciado y no realizaste el pago';
+
+            $usuarioRetador = $publicacion->usuarioRetador;
+            $usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+            $this->info("No se realizó el pago para la publicacion");
         }
     }
 }

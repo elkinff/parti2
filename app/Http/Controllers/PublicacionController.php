@@ -110,12 +110,14 @@ class PublicacionController extends Controller{
 			$publicacion->equipo_visitante->usuario = $publicacion->usuarioReceptor;
 		}
 
+		$publicacion->ganador = $publicacion->getGanadorPublicacion();
+		
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 
 	public function publicacionesUsuario(){
 		$publicaciones = Publicacion::getPublicacionesActivas("user");
-		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion, $key) {
+		$publicacionesUsuario = $publicaciones->sortByDesc(function ($publicacion) {
    			return $publicacion->partido->fecha_inicio;
 		});	
 		

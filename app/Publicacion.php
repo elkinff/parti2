@@ -13,7 +13,8 @@ class Publicacion extends Model{
 	use Searchable;
     
     protected $table = "publicacion";
-    
+    protected $primaryKey = "id";
+
     protected $fillable = ['id_partido', 'id_usu_retador', 'id_usu_receptor', 'id_equipo_retador', 'id_equipo_receptor', 'valor', 'valor_ganado', 'link', 'id_ganador', 'id_perdedor', 'empate', 'estado'];
 
     public function equipoRetador(){
@@ -120,8 +121,12 @@ class Publicacion extends Model{
         return Publicacion::whereEstado(1)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_final", "<=", date("Y-m-d H:i"))->get(["publicacion.*"]);
     }
 
-    public static function getPublicacionesSinMacth(){
+    public static function getPublicacionesSinMatch(){
         return Publicacion::whereEstado(0)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_inicio", "<=", date("Y-m-d H:i"))->get(["publicacion.*"]);
+    }
+
+    public static function getPublicacionesTerminadasSinPagar(){
+        return Publicacion::whereEstado(3)->join("partido", "partido.id", "publicacion.id_partido")->where("partido.fecha_inicio", "<=", date("Y-m-d H:i"))->get(["publicacion.*"]);   
     }
 
     public static function hasIntencionesMatch($publicacion, $usuarioReceptor){
@@ -139,7 +144,14 @@ class Publicacion extends Model{
                 }
             }
         }
+    }
 
+    public function getGanadorPublicacion(){
+        if ($this->estado == 2) {
+            if ($this->empate == 0) {
+                return $this->id_ganador == $this->id_usu_retador ? $this->equipoRetador : $this->equipoReceptor;    
+            }
+        }
     }
 }
 

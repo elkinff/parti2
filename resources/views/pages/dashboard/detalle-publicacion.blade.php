@@ -152,7 +152,7 @@
 
 	@if($publicacion->ganador)
 		<center>
-			<h4> El equipo ganar fue {{ $publicacion->ganador }} </h4>
+			<h4> El equipo ganador fue {{ $publicacion->ganador->nombre }} </h4>
 		</center>
 	@endif	
 	

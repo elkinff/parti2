@@ -17,4 +17,26 @@
 
 	{{-- Metas --}}
 	<meta description="Disfruta ganando dinero con tu equipo!">
+
+    {{-- Open Graph Twitter --}}
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@parti2co">
+    <meta name="twitter:creator" content="@elkinff">
+    <meta name="twitter:title" content="Empieza a jugar ya!">
+    <meta name="twitter:description" content="Selecciona el partido, el equipo por el cual vas a apostar y en poco tiempo encontrarás tu match.">
+    <meta name="twitter:image" content="https://parti2.com/img/banners/banner.jpg">
+
+    
+    {{-- Open Graph Facebook --}}
+    <meta property="og:description" content="Selecciona el partido, el equipo por el cual vas a apostar y en poco tiempo encontrarás tu match."/>
+    <meta property="og:url" content="www.parti2.com"/>
+    <meta property="og:image" content="https://parti2.com/img/banners/banner.jpg"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Parti2"/>
+
 </head>
+
+
+
+

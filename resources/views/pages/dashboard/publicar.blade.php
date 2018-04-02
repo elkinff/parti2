@@ -46,7 +46,7 @@
         <div>
             <div class="form-group">
 	            <input type="date" class="form-field small dark" placeholder="dd/mm/aaaa" v-model="searchDate">
-	            <span><img src="{{ asset('img/calendar.svg') }}" width="20px"></span>
+	            <span><img src="{{ secure_asset('img/calendar.svg') }}" width="20px"></span>
 	        </div>
         </div>
     </div>
@@ -84,7 +84,7 @@
 	<div class="form-element busqueda busqueda__equipo">
 		<div class="form-group">
 			<span>
-				<img src="{{ asset('img/search.svg') }}" alt="Busqueda Parti2" class="icon">	
+				<img src="{{ secure_asset('img/search.svg') }}" alt="Busqueda Parti2" class="icon">	
 			</span>
 			<input class="form-field" type="text" placeholder="¿Por cual equipo deseas apostar?"
 				v-model="search">
@@ -95,7 +95,7 @@
 	<div class="container__matchs">
 		
 		<div class="container__matchs__loader" v-if="loading">
-			<img src="{{ asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+			<img src="{{ secure_asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
 			<span>Cargando...</span>
 		</div>
 
@@ -149,7 +149,7 @@
 			v-cloak
 			v-if="!filteredMatch.length"
 			>
-			<img src="{{ asset('img/empty_search.png') }}">
+			<img src="{{ secure_asset('img/empty_search.png') }}">
 			Lo sentimos no hay resultados para tu búsqueda <br> Inténtalo con otro torneo o fecha ! 
 		</span>
 

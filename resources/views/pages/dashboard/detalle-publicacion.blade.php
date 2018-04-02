@@ -14,11 +14,9 @@
 		<input type="hidden" id="idUsuario" value="{{ Auth::user()->id }}">
 	@endif
 
-
-
 	<div class="message-detail">
 		<div class="message-detail__icon">
-			<img src="{{ asset('img/users.svg') }}">
+			<img src="{{ secure_asset('img/users.svg') }}">
 		</div>
 
 		<div class="message-detail__info">
@@ -130,7 +128,7 @@
 			@endif
 			
 		</div>
-	
+
 		@if( $publicacion->estado == 0 )
 			<div class="form-element">
 	        	
@@ -147,10 +145,17 @@
 	            </div>
 	        </div>
 		@endif
+
 	</div>
+	
+	<br>
 
-
-
+	@if($publicacion->ganador)
+		<center>
+			<h4> El equipo ganar fue {{ $publicacion->ganador }} </h4>
+		</center>
+	@endif	
+	
 	@include('pages.modals.match')
 
 	<div id="overlay"></div>

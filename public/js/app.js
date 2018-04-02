@@ -1093,7 +1093,11 @@ var dictionary = {
             },
             digits: function digits(field, _digits) {
                 return "El campo " + field + " debe tener " + _digits + " dígitos";
+            },
+            max_value: function max_value(field) {
+                return "El campo " + field + " debe ser menor a $3.000.000";
             }
+
         }
     }
 };
@@ -1448,7 +1452,7 @@ var app = new Vue({
 
             var impuesto_rete_fuente = valor_base / 100 * 1.5;
 
-            var valor_total_payco = valor_base + impuesto_rete_fuente;
+            var valor_total_payco = +valor_base + +impuesto_rete_fuente;
 
             var urlSaveMatch = 'api/publicar';
 
@@ -1497,9 +1501,8 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: "publicacion",
 
-                    confirmation: "http://app.parti2.com/api/publicar/confirmacion",
-                    // response: "http://app.parti2.com/api/publicaciones/respuestaPasarela"
-                    response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
+                    confirmation: "http://localhost:8080/api/publicar/confirmacion",
+                    response: "http://localhost:8080/api/publicaciones/respuestaPasarela"
                 };
 
                 if (bandera_pasarela && valor_apuesta != 0 && valor_apuesta > 0) {
@@ -1547,7 +1550,7 @@ var app = new Vue({
 
             var impuesto_rete_fuente = valor_base / 100 * 1.5;
 
-            var valor_total_payco = valor_base + impuesto_rete_fuente;
+            var valor_total_payco = +valor_base + +impuesto_rete_fuente;
 
             var idUsuario = document.querySelector('#idUsuario').value;
 
@@ -1585,9 +1588,8 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: "match",
                     extra2: idUsuario,
-                    confirmation: "http://app.parti2.com/api/publicar/confirmacion",
-                    response: "http://app.parti2.com/api/publicaciones/respuestaPasarela"
-                    // response: "http://127.0.0.1:8000/api/publicaciones/respuestaPasarela"
+                    confirmation: "http://localhost:8080/api/publicar/confirmacion",
+                    response: "http://localhost:8080/api/publicaciones/respuestaPasarela"
                 };
 
                 handler.open(data);
@@ -1643,11 +1645,19 @@ var app = new Vue({
             }
             impuesto_payco_iva = impuesto_payco * 0.19;
 
-            var valor_base = creditoAgregarFinal + (impuesto_payco + impuesto_payco_iva); //Valor con impuesto mnos de rete fuente
+            var valor_base = +creditoAgregarFinal + (+impuesto_payco + +impuesto_payco_iva); //Valor con impuesto mnos de rete fuente
 
-            var impuesto_rete_fuente = creditoAgregarFinal / 100 * 1.5;
+            var impuesto_rete_fuente = valor_base / 100 * 1.5;
 
-            var valor_total_payco = creditoAgregarFinal + impuesto_rete_fuente;
+            var valor_total_payco = +valor_base + +impuesto_rete_fuente;
+
+            // Impresiones de prueba
+            console.log("el valor del credito a agregar es ", creditoAgregarFinal);
+
+            console.log("El valor total es: ", valor_base);
+            console.log("El valor de los impuestos es:", impuesto_payco + impuesto_payco_iva);
+            console.log("El valor de la rete fuente es:", impuesto_rete_fuente);
+            console.log("El valor total enviado a payco es igual a ", valor_total_payco);
 
             //console.log("El valor a agregar es" + creditoAgregarFinal);
 
@@ -1682,8 +1692,8 @@ var app = new Vue({
                         //Atributos opcionales
                         extra1: idUsuario,
                         extra2: response.data.id,
-                        confirmation: "http://app.parti2.com/api/credito/agregar/confirmacion",
-                        response: "http://app.parti2.com/api/credito/agregar/respuesta"
+                        confirmation: "http://localhost:8080/api/credito/agregar/confirmacion",
+                        response: "http://localhost:8080/api/credito/agregar/respuesta"
                     };
 
                     handler.open(data);

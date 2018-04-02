@@ -14,7 +14,7 @@
 	<div class="credito__header">
 		<div class="credito__user">
 			
-			<img src="{{ asset('img/credito.svg') }}">
+			<img src="{{ secure_asset('img/credito.svg') }}">
 			
 			<div>
 				<label>Saldo Actual</label>

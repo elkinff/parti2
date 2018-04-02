@@ -19,7 +19,7 @@
 						@if(Auth::user()->foto)
 							<img src="{{Auth::user()->foto}}" class="profile__image--preview">
 						@else
-							<img src="{{ asset('img/email/users.png') }}" class="profile__image--preview">
+							<img src="{{ secure_asset('img/email/users.png') }}" class="profile__image--preview">
 						@endif
 					</div>
 					

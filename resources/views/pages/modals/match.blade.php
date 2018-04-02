@@ -33,7 +33,7 @@
 				        			:class="{ check : !auxMatch2.equipo_local.seleccionado }">
 				        			
 				        			<div class="image__team" 
-				        				:style="{'background-image' :'url(' + auxMatch2.equipo_local.escudo + ')'}">
+				        				:style="{'background-image' :'url(../' + auxMatch2.equipo_local.escudo + ')'}">
 				        				
 				        			</div>
 				        		</div>	
@@ -53,7 +53,7 @@
 				        			:class="{ check : !auxMatch2.equipo_visitante.seleccionado }">
 
 				        			<div class="image__team" 
-				        				:style="{'background-image' :'url(' + auxMatch2.equipo_visitante.escudo + ')'}">
+				        				:style="{'background-image' :'url(../' + auxMatch2.equipo_visitante.escudo + ')'}">
 				        			</div>
 
 				        		</div>	

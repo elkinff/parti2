@@ -111,7 +111,7 @@ class PublicacionController extends Controller{
 		}
 
 		$publicacion->ganador = $publicacion->getGanadorPublicacion();
-		dd($publicacion);
+		
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 

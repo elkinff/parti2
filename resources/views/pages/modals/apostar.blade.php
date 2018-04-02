@@ -52,7 +52,7 @@
 			            <label>Valor (COP)</label>
 			            <div>
 			                <input type="text" :value="apuesta" name="valor" class="form-field"
-			                	v-validate="'required|max_value:30|prueba'"
+			                	v-validate="'required|prueba'"
 			                	@input="apuesta = $options.filters.currency($event.target.value)"
 			                	:class="{'error': errors.has('valor') }"
 			                	>

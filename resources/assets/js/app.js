@@ -25,8 +25,6 @@ const dictionary = {
     messages: {
       required: (field) => "El campo " + field +" es requerido",
       digits: (field, digits) => "El campo " + field +" debe tener " + digits + " dígitos",
-      max_value: (field) => "El campo " + field +" debe ser menor a $3.000.000",
-
     }
   }
 };

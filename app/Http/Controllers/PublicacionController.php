@@ -111,7 +111,7 @@ class PublicacionController extends Controller{
 		}
 
 		$publicacion->ganador = $publicacion->getGanadorPublicacion();
-		
+		dd($publicacion);
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 
@@ -176,8 +176,20 @@ class PublicacionController extends Controller{
 				//Transacción en espera
 				case 3:
 					if ($request->x_franchise == "BA" || $request->x_franchise == "EF" || $request->x_franchise == "GA" || $request->x_franchise == "PR" || $request->x_franchise == "RS" || $request->x_franchise == "PSE") {
-						cookie('espera', true, 1);
+						if ($tipoPublicacion == "match") {
 
+							// Notificar al 
+					        $imagen = "empate";
+					        $titulo = "Apresúrate a pagar tu match!";
+					        $descripcion = "Tu publicación para hacer match está en espera, apresúrate a pagar el monto para que realices tu match"; 
+					        $labelButton = "Continua publicando!";
+					        $url = url("publicar");
+							$subject = 'Estás a punto de hacer match en parti2';
+
+						    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+						}
+						
 						//Se crea al intencion si la pubicacion esta en espera del match
 						$publicacion->intenciones()->attach($request->x_extra2);
 					}

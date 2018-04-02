@@ -151,7 +151,7 @@ class Publicacion extends Model{
             if ($this->empate == 0) {
                 return $this->id_ganador == $this->id_usu_retador ? $this->equipoRetador : $this->equipoReceptor;    
             }else{
-                return true;
+                $this->empate = true;
             }
         }
     }

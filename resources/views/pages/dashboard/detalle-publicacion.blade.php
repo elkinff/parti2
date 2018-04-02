@@ -149,12 +149,16 @@
 	</div>
 	
 	<br>
-
-	@if($publicacion->ganador)
-		<center>
+	<center>
+		@if($publicacion->ganador)
 			<h4> El equipo ganador fue {{ $publicacion->ganador->nombre }} </h4>
-		</center>
-	@endif	
+		@elseif($publicacion->ganador == true)
+			<h4> El partido quedo en empate</h4>
+		@endif
+	</center>
+	
+
+	
 	
 	@include('pages.modals.match')
 

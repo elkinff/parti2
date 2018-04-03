@@ -35,6 +35,19 @@
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="Parti2"/>
 
+    {{-- Web Push Notifications --}}
+
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "a4698ecd-a0c4-4bd9-beed-acfa8bf8a45a",
+        });
+      });
+    </script>
+    
 </head>
 
 

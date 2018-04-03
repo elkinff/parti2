@@ -82,10 +82,11 @@
 		display:block;
 		text-align: center;
 		width: 100%;
-		color: $white;
+		
+		color: darken($white, 15%);			
 
 		&:hover {
-			color: lighten($white, 10%);			
+			color: $white;			
 		}
 
 		&:active {

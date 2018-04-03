@@ -504,11 +504,11 @@ nav ul {
   display: block;
   text-align: center;
   width: 100%;
-  color: #fff;
+  color: #d9d9d9;
 }
 
 .nav__ayuda:hover {
-  color: white;
+  color: #fff;
 }
 
 .nav__ayuda:active {

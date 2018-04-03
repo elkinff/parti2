@@ -13,6 +13,7 @@ use App\Http\Requests\PublicacionRequest;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\EmailNotification;
 use Session;
+use OneSignal;
 
 class PublicacionController extends Controller{
 
@@ -61,6 +62,9 @@ class PublicacionController extends Controller{
 					$user->saldo = $user->saldo - $valorPublicacion;
 					$user->save();
 				}
+
+				// Web Push Notification
+				OneSignal::sendNotificationToAll("Titulo", "Mensaje", $url = $linkCompartir, $data = null);
 
 				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador, "saldo" => $user->saldo]);		
 

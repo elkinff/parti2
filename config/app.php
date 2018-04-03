@@ -177,9 +177,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class
+        Laravel\Scout\ScoutServiceProvider::class,
 
-        
+        // Web Push Notifications
+        Berkayk\OneSignal\OneSignalServiceProvider::class
 
 
     ],
@@ -233,6 +234,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+
+        // Web Push Notifications
+
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
 
     ],
 

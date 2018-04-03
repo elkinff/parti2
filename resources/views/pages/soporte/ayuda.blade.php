@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('image__auth')
-	<img src="{{asset('img/copa.svg')}}" alt="Login Parti2">
+	<img src="{{asset('img/soporte.svg')}}" alt="Login Parti2">
 @endsection
 
 @section('form__auth')
@@ -43,7 +43,7 @@
         <div>
         	<button class="btn block center">Enviar</button>
         </div>
-        
+
 		{{-- <div class="form__links">
             <a href="{{ url('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
 		</div> --}}

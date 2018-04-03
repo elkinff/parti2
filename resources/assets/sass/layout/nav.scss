@@ -87,6 +87,14 @@
 		&:hover {
 			color: lighten($white, 10%);			
 		}
+
+		&:active {
+			color: $white;
+		}
+
+		&:focus {
+			color: $white;
+		}
 	}
 }
 

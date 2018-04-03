@@ -56,6 +56,7 @@ const app = new Vue({
 
     data: {
         baseUrl: '',
+        urlPasarela: 'http://localhost:8080',
         matchs: [],
         auxMatch: {},
         
@@ -289,8 +290,13 @@ const app = new Vue({
 
             if(fechaMatch.includes('Hoy ')) {
                 fechaMatch = fechaMatch.slice(-5).replace(':','');
+                
+                // Prueba hora vs fecha
+                console.log("La fecha del partido es : " + fechaMatch);
+                console.log("La hora es : " + hora);
 
-                if(hora >= fechaMatch){
+                if(parseInt(hora) >= parseInt(fechaMatch)){
+                    console.log("la hora es menor");
                     return false;    
                 }else {
                     return true;
@@ -395,25 +401,23 @@ const app = new Vue({
                 });
 
                 var data={
-                  //Parametros compra (obligatorio)
-                  name: "Publicación  Parti2",
-                  description: "Acabas de realizar una publicación a favor de " + equipoRetador,
-                  invoice: response.data.publicacion,//Id publicacion
-                  currency: "cop",
-                  amount: valor_total_payco  ,
-                  tax_base: valor_apuesta,
-                  tax: impuesto_payco + impuesto_payco_iva,
-                  country: "co",
-                  lang: "es",
+                    //Parametros compra (obligatorio)
+                    name: "Publicación  Parti2",
+                    description: "Acabas de realizar una publicación a favor de " + equipoRetador,
+                    invoice: response.data.publicacion,//Id publicacion
+                    currency: "cop",
+                    amount: valor_total_payco  ,
+                    tax_base: valor_apuesta,
+                    tax: impuesto_payco + impuesto_payco_iva,
+                    country: "co",
+                    lang: "es",
+                    //Onpage="false" - Standard="true"
+                    external: "true",
+                    //Atributos opcionales
+                    extra1: "publicacion",
 
-                  //Onpage="false" - Standard="true"
-                  external: "true",
-
-                  //Atributos opcionales
-                  extra1: "publicacion",
-                
-                  confirmation: "http://localhost:8080/api/publicar/confirmacion",
-                  response: "http://localhost:8080/api/publicaciones/respuestaPasarela",
+                    confirmation: this.urlPasarela + "/api/publicar/confirmacion",
+                    response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
                 }
 
                 if (bandera_pasarela && valor_apuesta !=0 && valor_apuesta > 0) {
@@ -432,7 +436,7 @@ const app = new Vue({
            
         },
 
-        // Match publicacion 
+        // Match publicacion
         savePublicacion() {
             this.loadingPago = true;
             var urlSavePublicacion = '/publicaciones/match';
@@ -466,8 +470,6 @@ const app = new Vue({
 
             var idUsuario = document.querySelector('#idUsuario').value;
 
-
-            //console.log(idUsuario);
             
             this.matchUser = this.auxMatch2;
             if (bandera_pasarela) {
@@ -501,8 +503,8 @@ const app = new Vue({
                     //Atributos opcionales
                     extra1: "match",
                     extra2: idUsuario,
-                    confirmation: "http://localhost:8080/api/publicar/confirmacion",
-                    response: "http://localhost:8080/api/publicaciones/respuestaPasarela",
+                    confirmation: this.urlPasarela + "/api/publicar/confirmacion",
+                    response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
                 }
 
                 handler.open(data);
@@ -568,24 +570,18 @@ const app = new Vue({
 
             var valor_total_payco = + valor_base + +impuesto_rete_fuente;
 
-              // Impresiones de prueba
+          // Impresiones de prueba
             console.log("el valor del credito a agregar es " , creditoAgregarFinal);
-             
             console.log("El valor total es: ", valor_base);
             console.log("El valor de los impuestos es:" ,  impuesto_payco + impuesto_payco_iva)
             console.log("El valor de la rete fuente es:" , impuesto_rete_fuente);
             console.log("El valor total enviado a payco es igual a " , valor_total_payco);
 
-            
-            //console.log("El valor a agregar es" + creditoAgregarFinal);
-
-            //console.log(parseInt(creditoAgregarFinal) + (impuesto_payco + impuesto_payco_iva));
             var handler = ePayco.checkout.configure({
                 key: 'cc6dfc520c35ec628e622bcf782a5f01',
                 test: true
             });
 
-            
             var objectCredito = {
                 valor : creditoAgregarFinal,
                 id_usu  : idUsuario,
@@ -611,8 +607,8 @@ const app = new Vue({
                         //Atributos opcionales
                         extra1: idUsuario,
                         extra2: response.data.id,
-                        confirmation: "http://localhost:8080/api/credito/agregar/confirmacion",
-                        response: "http://localhost:8080/api/credito/agregar/respuesta",
+                        confirmation: this.urlPasarela + "/api/credito/agregar/confirmacion",
+                        response: this.urlPasarela + "/api/credito/agregar/respuesta",
                     }
 
                     handler.open(data);
@@ -644,6 +640,7 @@ const app = new Vue({
                 mm = '0'+mm
             } 
             today = yyyy + '-' + mm + '-' + dd;
+            
             // var tomorrow = new Date() 
             // tomorrow = yyyy + '-' + mm + '-' + (dd + 1);
 
@@ -665,6 +662,29 @@ require('./hammer.min.js');
 require('./functions');
 require('./modal');
 require('./sweetalert');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

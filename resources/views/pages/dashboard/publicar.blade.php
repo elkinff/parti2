@@ -65,7 +65,7 @@
 	</div>
 	
 
-	<a class="nav__ayuda" href="#">
+	<a class="nav__ayuda" target="_blank" href="{{ url('ayuda') }}">
 		¿Necesitas ayuda?
 	</a>
 

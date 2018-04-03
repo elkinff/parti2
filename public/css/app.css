@@ -511,6 +511,14 @@ nav ul {
   color: white;
 }
 
+.nav__ayuda:active {
+  color: #fff;
+}
+
+.nav__ayuda:focus {
+  color: #fff;
+}
+
 @media (max-width: 768px) {
   #overlay {
     z-index: 40;

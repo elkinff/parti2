@@ -4756,6 +4756,58 @@ form.horizontal .form-element .last-xs {
   background-color: #ddd;
 }
 
+p.accordion {
+  background-color: #F5F6FA;
+  border-radius: 4px;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  -webkit-box-shadow: 0 3px 7px 1px rgba(38, 66, 109, 0.1);
+          box-shadow: 0 3px 7px 1px rgba(38, 66, 109, 0.1);
+}
+
+p.accordion.active,
+p.accordion:hover {
+  background-color: #e4e7f2;
+}
+
+p.accordion::after {
+  content: '\2795';
+  font-size: 13px;
+  color: transparent;
+  text-shadow: 0 0 0 #355C7D;
+  float: right;
+  margin-left: 5px;
+}
+
+p.accordion.active:after {
+  content: "\2796";
+}
+
+div.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+  margin-bottom: 10px;
+  color: #7d8da0;
+}
+
+div.panel.show {
+  opacity: 1;
+  max-height: 500px;
+}
+
 #buttonFiltros {
   display: none;
 }
@@ -5136,6 +5188,13 @@ form.horizontal .form-element .last-xs {
     height: 100px;
     margin-bottom: 2em;
   }
+}
+
+.faq-container {
+  max-height: 80vh;
+  overflow: scroll;
+  margin-bottom: 10vh;
+  width: 90%;
 }
 
 .equipos {

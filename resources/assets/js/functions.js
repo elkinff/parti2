@@ -124,32 +124,30 @@ $('input[name=creditoAgregar]').change(function() {
 
 var myElement = document.getElementById('app');
 
-//var mc = new Hammer(myElement, {touchAction:"pan-y" } );
 
-// mc.get('pan').set({
-//   direction: Hammer.DIRECTION_HORIZONTAL,
-//   threshold: 100, 
-//   velocity:0.1
-// });
 
-// // Eventos Swipe 
-// mc.on("panright panleft", function(ev) {
+// Accordion FAQ
+var acc = document.getElementsByClassName("accordion");
+var panel = document.getElementsByClassName('panel');
 
-// 	ev.preventDefault();
-//     if(ev.type == 'panright' && !nav.classList.contains('show') ){
-//     	console.log("hola swipe right");
-//     	nav.classList.toggle('show');
-// 		$('#overlay').fadeIn(200);	
-//     }
+for (var i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+        var setClasses = !this.classList.contains('active');
+        setClass(acc, 'active', 'remove');
+        setClass(panel, 'show', 'remove');
 
-//     if(ev.type == 'panleft' && nav.classList.contains('show') ){
-//     	console.log("hola swipe left");
-//     	nav.classList.toggle('show');		
-// 		$('#overlay').fadeOut(200);
-//     }
+        if (setClasses) {
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+        }
+    }
+}
 
-// });
-
+function setClass(els, className, fnName) {
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList[fnName](className);
+    }
+}
 
 
 

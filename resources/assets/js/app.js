@@ -284,6 +284,7 @@ const app = new Vue({
             });
         },
 
+        // Validar que le partido no halla empezado de acuerdo con la hora del sistema
         validacionHora(fechaMatch) {
             var d = new Date();
             var hora = d.getHours() +''+ d.getMinutes();
@@ -306,9 +307,10 @@ const app = new Vue({
             }
         },
 
+
         detailMatch(match) {
             console.log(match);
-            
+
             var ele = document.getElementsByName("equipo");
 
             for(var i=0;i<ele.length;i++){
@@ -624,10 +626,12 @@ const app = new Vue({
 
         },     
 
+        // Rutas dinamicas para las imagenes 
         imageUrl(url) {
             return 'url("'+ url + '")';
         },
 
+        // Filtro de los partidos por dia y fecha
         filterDia(dia) {
             var today = new Date();
             var dd = today.getDate();

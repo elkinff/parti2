@@ -56,8 +56,8 @@
             <a href="{{ url('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
             <a href="{{ url('register') }}">¿No tienes una cuenta ? Créala aquí</a>
 		</div>
-
-
 	</form>
+
+    
 @endsection
 

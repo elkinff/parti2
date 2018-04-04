@@ -1370,6 +1370,9 @@ var app = new Vue({
                 console.log(e);
             });
         },
+
+
+        // Validar que le partido no halla empezado de acuerdo con la hora del sistema
         validacionHora: function validacionHora(fechaMatch) {
             var d = new Date();
             var hora = d.getHours() + '' + d.getMinutes();
@@ -1698,9 +1701,15 @@ var app = new Vue({
                 this.errorCredito = "Debes seleccionar una opción o ingresar un valor";
             }
         },
+
+
+        // Rutas dinamicas para las imagenes 
         imageUrl: function imageUrl(url) {
             return 'url("' + url + '")';
         },
+
+
+        // Filtro de los partidos por dia y fecha
         filterDia: function filterDia(dia) {
             var today = new Date();
             var dd = today.getDate();
@@ -48907,31 +48916,28 @@ $('input[name=creditoAgregar]').change(function () {
 
 var myElement = document.getElementById('app');
 
-//var mc = new Hammer(myElement, {touchAction:"pan-y" } );
+// Accordion FAQ
+var acc = document.getElementsByClassName("accordion");
+var panel = document.getElementsByClassName('panel');
 
-// mc.get('pan').set({
-//   direction: Hammer.DIRECTION_HORIZONTAL,
-//   threshold: 100, 
-//   velocity:0.1
-// });
+for (var i = 0; i < acc.length; i++) {
+	acc[i].onclick = function () {
+		var setClasses = !this.classList.contains('active');
+		setClass(acc, 'active', 'remove');
+		setClass(panel, 'show', 'remove');
 
-// // Eventos Swipe 
-// mc.on("panright panleft", function(ev) {
+		if (setClasses) {
+			this.classList.toggle("active");
+			this.nextElementSibling.classList.toggle("show");
+		}
+	};
+}
 
-// 	ev.preventDefault();
-//     if(ev.type == 'panright' && !nav.classList.contains('show') ){
-//     	console.log("hola swipe right");
-//     	nav.classList.toggle('show');
-// 		$('#overlay').fadeIn(200);	
-//     }
-
-//     if(ev.type == 'panleft' && nav.classList.contains('show') ){
-//     	console.log("hola swipe left");
-//     	nav.classList.toggle('show');		
-// 		$('#overlay').fadeOut(200);
-//     }
-
-// });
+function setClass(els, className, fnName) {
+	for (var i = 0; i < els.length; i++) {
+		els[i].classList[fnName](className);
+	}
+}
 
 /***/ }),
 /* 43 */

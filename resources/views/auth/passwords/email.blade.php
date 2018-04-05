@@ -1,12 +1,12 @@
 @extends('layouts.auth')
 
 @section('image__auth')
-    <img src="{{asset('img/recuperar.svg')}}" alt="Login Parti2">
+    <img src="{{secure_asset('img/recuperar.svg')}}" alt="Login Parti2">
 @endsection
 
 @section('form__auth')
     {{-- Forma Azul --}}
-    <img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
+    <img src="{{ secure_asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
     
 
     <form class="form" method="POST" action="{{ route('password.email') }}">

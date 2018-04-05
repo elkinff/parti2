@@ -14,7 +14,7 @@
         
         <div class="form__title">
             <h2>Preguntas Frecuentes</h2> 
-            <p>Si no encuentras solución dentro de la siguiente documentación contáctate con asesor mediante el chat ubicado en la parte inferior de la pantalla </p>
+           {{--  <p>Si no encuentras solución dentro de la siguiente documentación contáctate con asesor mediante el chat ubicado en la parte inferior de la pantalla </p> --}}
         </div>
 
         <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>

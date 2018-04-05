@@ -1,12 +1,12 @@
 @extends('layouts.auth')
 
 @section('image__auth')
-    <img src="{{asset('img/users.svg')}}" alt="Login Parti2">
+    <img src="{{secure_asset('img/users.svg')}}" alt="Login Parti2">
 @endsection
 
 @section('form__auth')
     
-    <img src="{{ asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
+    <img src="{{ secure_asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
 
     <form class="form" method="POST" action="{{ route('password.request') }}">
         {{ csrf_field() }}

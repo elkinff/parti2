@@ -1,12 +1,12 @@
 @extends('layouts.auth')
 
 @section('image__auth')
-    <img src="{{asset('img/copa.svg')}}" alt="Login Parti2">
+    <img src="{{secure_asset('img/copa.svg')}}" alt="Login Parti2">
 @endsection
 
 @section('form__auth')
     {{-- Forma Azul --}}
-    <img src="{{ asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
+    <img src="{{ secure_asset('img/forma__footer.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footer">
 
     <form class="form" method="POST" action="{{ route('login') }}">
         
@@ -20,12 +20,12 @@
 
             <a class="btn border icon-svg" href="{{ route('social.auth', 'google') }}">
                 Iniciar con
-                <img src="{{ asset('img/google.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
+                <img src="{{ secure_asset('img/google.svg') }}" class="icon-image" width="30px" alt="Google Parti2">
             </a>
 
             <a class="btn border icon-svg" href="{{ route('social.auth', 'facebook') }}">
                 Iniciar con
-                <img src="{{ asset('img/facebook.svg') }}" class="icon-image" width="30px" alt="Facebook Parti2">
+                <img src="{{ secure_asset('img/facebook.svg') }}" class="icon-image" width="30px" alt="Facebook Parti2">
             </a>
         </div>
 
@@ -64,8 +64,8 @@
 
             <div>
                 Al crear tu cuenta aceptas nuestros 
-                <a href="{{ asset('documentos/terminos_condiciones.pdf') }}" target="_blank">Términos y Condiciones</a> y 
-                <a href="{{ asset('documentos/politica_privacidad.pdf') }}" target="_blank">Política de Tratamiento de Datos.</a>
+                <a href="{{ secure_asset('documentos/terminos_condiciones.pdf') }}" target="_blank">Términos y Condiciones</a> y 
+                <a href="{{ secure_asset('documentos/politica_privacidad.pdf') }}" target="_blank">Política de Tratamiento de Datos.</a>
             </div>
 
         </div>

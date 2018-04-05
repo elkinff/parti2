@@ -1,12 +1,12 @@
 @extends('layouts.auth')
 
 @section('image__auth')
-    <img src="{{asset('img/users.svg')}}" alt="Login Parti2">
+    <img src="{{secure_asset('img/users.svg')}}" alt="Login Parti2">
 @endsection
 
 @section('form__auth')
     
-    <img src="{{ asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
+    <img src="{{ secure_asset('img/forma__footer_alt.svg') }}" alt="Parti2 Login" class="forma__auth forma__auth--footeralt">
 
     <form class="form" method="POST" action="{{ route('register.user') }}">
         
@@ -83,8 +83,8 @@
             <a href="{{url('login')}}">¿Ya tienes una cuenta?</a><br>
             <div>
                 Al crear tu cuenta aceptas nuestros 
-                 <a href="{{ asset('documentos/terminos_condiciones.pdf') }}" target="_blank">Términos y Condiciones</a> y 
-                <a href="{{ asset('documentos/politica_privacidad.pdf') }}" target="_blank">Política de Tratamiento de Datos.</a>
+                 <a href="{{ secure_asset('documentos/terminos_condiciones.pdf') }}" target="_blank">Términos y Condiciones</a> y 
+                <a href="{{ secure_asset('documentos/politica_privacidad.pdf') }}" target="_blank">Política de Tratamiento de Datos.</a>
             </div>
         </div>
 

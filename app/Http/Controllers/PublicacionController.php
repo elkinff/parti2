@@ -7,7 +7,7 @@ use App\Partido;
 use App\Liga; 
 use App\Equipo; 
 use App\User; 
-use App\Publicacion;
+use App\Publicacion; 
 use Auth; 
 use App\Http\Requests\PublicacionRequest;
 use Illuminate\Support\Facades\Notification;
@@ -16,10 +16,6 @@ use Session;
 use OneSignal;
 
 class PublicacionController extends Controller{
-
-	use OneSignal {
-		sendNotificationToAll as perfomSendNotificationToAll
-	}
 
     public function __construct(){
         $this->middleware('auth', ["only" => ["store", "match", "show", "publicacionesUsuario"]]);
@@ -304,44 +300,6 @@ class PublicacionController extends Controller{
         	return "No coincide la firma";
         }
     }
-
-
-    // Sobreescribir la funcion que esta definida en vendor en la clase OneSignal 
-    public function sendNotificationToAll($title,$message, $url = null, $data = null, $buttons = null, $schedule = null) {
-        $contents = array(
-            "en" => $message
-        );
-
-        $heading = array(
-           "en" => $title
-        );
-
-        $params = array(
-            'app_id' => $this->appId,
-            'contents' => $contents,
-            'headings' => $heading,
-            'included_segments' => array('All')
-        );
-
-        if (isset($url)) {
-            $params['url'] = $url;
-        }
-
-        if (isset($data)) {
-            $params['data'] = $data;
-        }
-
-        if (isset($buttons)) {
-            $params['buttons'] = $buttons;
-        }
-
-        if(isset($schedule)){
-            $params['send_after'] = $schedule;
-        }
-
-        $this->sendNotificationCustom($params);
-    }
-
 }
 
 

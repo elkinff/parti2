@@ -85,7 +85,7 @@
 			        <div>
 
 			        	<div class="container__loader" v-if="loadingPago">
-							<img src="{{ asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+							<img src="{{ secure_asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
 							<span>Cargando...</span>
 						</div>
 

@@ -21,7 +21,7 @@
                 </div>
 
 				<a class="compartir__redes" :href=" 'whatsapp://send?text=' + link_compartir" data-action="share/whatsapp/share">
-					<img src="{{ asset('img/whatsapp.svg') }}">
+					<img src="{{ secure_asset('img/whatsapp.svg') }}">
 				</a>
 				
 				<button class="btn block border" data-toggle="modal" data-target="#modalCompartir">Cerrar</button>

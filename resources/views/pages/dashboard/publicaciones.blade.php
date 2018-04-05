@@ -58,7 +58,7 @@
 							</div>
 						</td>
 
-						<td data-th="Acción"><a class="btn sm secondary" href="{{ url('publicaciones', $publicacion->id) }}">Ver</a></td>
+						<td data-th="Acción"><a class="btn sm secondary" href="{{ secure_url('publicaciones', $publicacion->id) }}">Ver</a></td>
 					</tr>
 				@endforeach
 				

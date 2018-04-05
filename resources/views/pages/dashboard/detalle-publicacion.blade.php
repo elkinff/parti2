@@ -137,7 +137,7 @@
 	        	</label>
 
 	            <div class="form-group">
-	                <input class="form-field" type="url" id="inputLinkCompartir" value="{{ url($publicacion->link) }}">
+	                <input class="form-field" type="url" id="inputLinkCompartir" value="{{ secure_url($publicacion->link) }}">
 	                 <button class="btn sm" id="buttonCompartir">
 	                    <i class="icon-layers"></i>
 	                    Copiar

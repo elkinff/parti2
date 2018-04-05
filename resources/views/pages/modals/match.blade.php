@@ -98,7 +98,7 @@
 								</button>
 
 				        	@else
-								<a class="btn block center" href="{{ url('login') }}">
+								<a class="btn block center" href="{{ secure_url('login') }}">
 									Pagar @{{ auxMatch2.valor | currency }}
 								</a>
 				        	@endif	

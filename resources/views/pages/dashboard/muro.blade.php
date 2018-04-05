@@ -79,7 +79,7 @@
 	</div>
 	
 
-	<a class="nav__ayuda" target="_blank" href="{{ url('ayuda') }}">
+	<a class="nav__ayuda" target="_blank" href="{{ secure_url('ayuda') }}">
 		¿Necesitas ayuda?
 	</a>
 
@@ -180,7 +180,7 @@
 			<img src="{{ secure_asset('img/empty_search.png') }}">
 			Lo sentimos no hay resultados para tu búsqueda <br> Inténtalo con otro torneo o fecha ! 
 			<br><br>
-			<a class="header__menu__item header__menu__item--accent btn btn" href="{{ url('publicar') }}">
+			<a class="header__menu__item header__menu__item--accent btn btn" href="{{ secure_url('publicar') }}">
 				<span>Crea tu Apuesta</span>
 			</a>
 		</span>

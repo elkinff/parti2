@@ -26,7 +26,7 @@
         </div>
 
 		<div class="form__links">
-            <a href="{{ url('login') }}">Iniciar Sesión</a>
+            <a href="{{ secure_url('login') }}">Iniciar Sesión</a>
 		</div>
 
 	</form>

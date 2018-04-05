@@ -53,8 +53,8 @@
         </div>
 		
 		<div class="form__links">
-            <a href="{{ url('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
-            <a href="{{ url('register') }}">¿No tienes una cuenta ? Créala aquí</a>
+            <a href="{{ secure_url('recuperar') }}">¿Olvidaste tu contraseña?</a><br>
+            <a href="{{ secure_url('register') }}">¿No tienes una cuenta ? Créala aquí</a>
 		</div>
 	</form>
 

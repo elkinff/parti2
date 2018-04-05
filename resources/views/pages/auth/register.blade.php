@@ -58,7 +58,7 @@
         </div>
 		
 		<div class="form__links">
-            <a href="{{url('login')}}">¿Ya tienes una cuenta?</a>
+            <a href="{{secure_url('login')}}">¿Ya tienes una cuenta?</a>
 		</div>
 
 	</form>

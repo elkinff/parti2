@@ -17,23 +17,41 @@
            {{--  <p>Si no encuentras solución dentro de la siguiente documentación contáctate con asesor mediante el chat ubicado en la parte inferior de la pantalla </p> --}}
         </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Qué es un match ?</p>
+        <div class="panel">
+            Es el momento en el que se efectúa una apuesta a un determinado partido entre dos personas.
+        </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Cuanto es la comisión por match ?</p>
+        <div class="panel">
+            La comisión que cobra parti2 es solamente del 5% sobre el valor total del match, debes tener en cuenta que toda transacción que se realice mediante la pasarela de pagos “epayco” tiene un valor adicional de impuestos establecido por la plataforma.
+        </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Cómo retiro mi crédito ?</p>
+        <div class="panel">
+            En el módulo de crédito dentro de la plataforma hay una opción de retiro, el cual te va a solicitar por que metodo lo deseas retirar ya sea por Nequi o Daviplata, el valor a retirar y la confirmación del número de celular.
+        </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Cuales son los métodos de retiro  ?</p>
+        <div class="panel">
+            Los métodos de retiro son Nequi o Daviplata.
+        </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Cuales son los horarios de retiro ?</p>
+        <div class="panel">
+            Los retiros se hacen efectivos todos los días de 8 de la mañana a 8 de la noche, dentro este periodo de tiempo tendrán una duración máxima de 10 minutos, si realizas la petición de retiro fuera de este horario quedarán en lista de espera para ser efectuado dentro del horario establecido.
+        </div>
 
-        <p class="accordion">Q1. Cuanto es la comisión por Match ?</p>
-        <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas fugiat velit voluptatem nemo porro, eligendi provident adipisci illo soluta similique ipsum obcaecati dolorem quia, ad dolores dignissimos delectus quasi placeat.</div>
+        <p class="accordion">Cuales son los métodos de pago ?</p>
+        <div class="panel">
+            Puedes realizar tus pagos con tarjeta de crédito, débito y efectivo. 
+            Contamos con herramientas de pago cómo Baloto, Efecty, Gana, Punto Red  Red Servi, y PSE.
+        </div>
+
+        <p class="accordion">Como puedo agregar crédito ?</p>
+        <div class="panel">
+            El el módulo de crédito dentro de la plataforma hay una opción de agregar crédito, el cual te va a solicitar el monto que desear agregar, posteriormente te redirigirá a la pasarela de pagos en la cual puedes pagar con cualquier método de pago.
+        </div>
 
     </div>
 

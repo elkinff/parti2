@@ -30,7 +30,7 @@
 		
 		<script type="text/javascript" src="https://checkout.epayco.co/checkout.js">   </script>
 
-		<script src="{{ asset('js/app.js') }}"></script>
+		<script src="{{ secure_asset('js/app.js') }}"></script>
 
 		@include('sweet::alert')
 		

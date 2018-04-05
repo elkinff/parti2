@@ -35,7 +35,7 @@ Route::post('perfil', 'UsuarioController@actualizarUsuario')->name("perfil.updat
 
 //Administrador
 Route::get("admin/solicitudes", "AdminController@getSolicitudesPagos");
-Route::get("admin/solicitudes/pagar/{idRetiro}", "AdminController@pagarRetiro");
+Route::get("admin/solicitudes/estado/{estado}/{idRetiro}", "AdminController@cambiarEstadoRetiro");
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');

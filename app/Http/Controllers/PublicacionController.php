@@ -115,7 +115,7 @@ class PublicacionController extends Controller{
 		}
 
 		$publicacion->ganador = $publicacion->getGanadorPublicacion();
-		dd($publicacion);
+		
 		return view("pages.dashboard.detalle-publicacion", compact("publicacion"));
 	}
 
@@ -134,10 +134,10 @@ class PublicacionController extends Controller{
 
 		if ($signature == $request->x_signature) {
 			$publicacion = Publicacion::findOrFail($request->x_id_invoice);
+			$tipoPublicacion = $request->x_extra1;
 			switch ($request->x_cod_response) {
 				//Transacción Aceptada
 				case 1:
-					$tipoPublicacion = $request->x_extra1;
 					if ($tipoPublicacion == "publicacion") {
 						$publicacion->estado = 0;
 						$publicacion->save();
@@ -189,9 +189,9 @@ class PublicacionController extends Controller{
 					        $labelButton = "Continua publicando!";
 					        $url = url("publicar");
 							$subject = 'Estás a punto de hacer match en parti2';
-
-						    $this->usuarioRetador->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
-
+							
+							$this->usuarioReceptor = User::findOrFail($request->x_extra2);
+						    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
 						}
 						
 						//Se crea al intencion si la pubicacion esta en espera del match

@@ -236,7 +236,6 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
         // Web Push Notifications
-
         'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
 
     ],

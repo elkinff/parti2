@@ -17,9 +17,9 @@ class AdminController extends Controller{
     	return view('pages.admin.pagos', compact("retiros"));
     }
 
-    public function pagarRetiro($idRetiro){
+    public function cambiarEstadoRetiro($estadoTipo, $idRetiro){
     	$retiro = MovimientoBancario::findOrFail($idRetiro);
-    	$retiro->estado_pago_admin = 1;
+    	$retiro->estado_pago_admin = $estadoTipo;
     	$retiro->save();
 
     	return redirect()->back();

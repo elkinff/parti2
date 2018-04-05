@@ -154,7 +154,7 @@
 		@if($publicacion->ganador)
 			<h4> El equipo ganador fue {{ $publicacion->ganador->nombre }} </h4>
 		@elseif($publicacion->empate)	
-			<h4>El partido quedo en empate</h4>
+			<h4>El partido quedó en empate</h4>
 		@endif	
 	</center>
 	

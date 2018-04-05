@@ -23,8 +23,8 @@
 					<td data-th="Monto">$ {{ number_format($retiro->valor) }}</td>
 					<td data-th="Celular">{{ $retiro->usuario->celular }}</td>
 					<td data-th="">
-						<a href={{ url("admin/solicitudes/pagar/".$retiro->id) }} class="btn sm">Pagar</a>
-						<a href="#" class="btn secondary sm">Seguimiento</a>
+						<a href={{ url("admin/solicitudes/estado/1/".$retiro->id) }} class="btn sm">Pagar</a>
+						<a href={{ url("admin/solicitudes/estado/2/".$retiro->id) }} class="btn secondary sm">Seguimiento</a>
 					</td>
 				</tr>
 			@endforeach

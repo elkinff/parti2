@@ -62,9 +62,9 @@ class PublicacionController extends Controller{
 					$user->saldo = $user->saldo - $valorPublicacion;
 					$user->save();
 				}
-
+				
 				// Web Push Notification
-				OneSignal::sendNotificationToAll("Titulo", "Mensaje", $url = $linkCompartir, $data = null);
+				OneSignal::sendNotificationToAll("Ingresa ya y realiza el match", "Nueva apuesta a favor de ".$equipoRetador->nombre." por $ ".number_format($valorPublicacion)." vs ".$equipoReceptor, $url = $linkCompartir, $data = null);
 
 				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador, "saldo" => $user->saldo]);		
 

@@ -41,6 +41,7 @@
 			<tr>
 				<th>Fecha</th>
 				<th>Tipo</th>
+				<th>Estado</th>
 				<th>Monto</th>
 			</tr>
 		</thead>
@@ -50,6 +51,7 @@
 				<tr>
 					<td data-th="Fecha">{{ $transaccion->fecha }}</td>
 					<td data-th="Retiro">{{ $transaccion->tipo }}</td>
+					<td data-th="Estado">{{ $transaccion->estado == 0 ? "En espera" : "Realizado" }}</td>
 					<td data-th="Monto">${{ number_format($transaccion->valor) }}</td>
 				</tr>
 			@endforeach

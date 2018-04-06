@@ -182,7 +182,7 @@ class PublicacionController extends Controller{
 					if ($request->x_franchise == "BA" || $request->x_franchise == "EF" || $request->x_franchise == "GA" || $request->x_franchise == "PR" || $request->x_franchise == "RS" || $request->x_franchise == "PSE") {
 						if ($tipoPublicacion == "match") {
 
-							// Notificar al 
+							// Notificar al usuario que debe pagar lo mas pronto posible
 					        $imagen = "empate";
 					        $titulo = "Apresúrate a pagar tu match!";
 					        $descripcion = "Tu publicación para hacer match está en espera, apresúrate a pagar el monto para que realices tu match"; 
@@ -275,7 +275,7 @@ class PublicacionController extends Controller{
             	$usuarioReceptor = User::findOrFail($request->x_extra2);
             	foreach ($publicacion->intenciones as $usuario) {
             		if ($usuario->id == $usuarioReceptor->id) {
-            			$valor = $request->x_amount_base;
+            			$valor = $request->x_extra3;
 
             			//Actualizar el saldo al usuario
             			$usuario->saldo = $usuario->saldo + $valor;

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPasswordOwn;
 
 class User extends Authenticatable{
     use Notifiable;
@@ -34,5 +35,9 @@ class User extends Authenticatable{
 
     public static function matchsUsuarios($idUsuario){
         return Publicacion::whereIdUsuRetador($idUsuario)->orWhere('id_usu_receptor', $idUsuario)->whereEstado(2)->get();
+    }
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new ResetPasswordOwn($token));
     }
 }

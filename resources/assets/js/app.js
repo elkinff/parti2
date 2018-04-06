@@ -505,6 +505,7 @@ const app = new Vue({
                     //Atributos opcionales
                     extra1: "match",
                     extra2: idUsuario,
+                    extra3: valor_apuesta,
                     confirmation: this.urlPasarela + "/api/publicar/confirmacion",
                     response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
                 }
@@ -609,12 +610,13 @@ const app = new Vue({
                         //Atributos opcionales
                         extra1: idUsuario,
                         extra2: response.data.id,
+                        extra3: creditoAgregarFinal,
                         confirmation: this.urlPasarela + "/api/credito/agregar/confirmacion",
                         response: this.urlPasarela + "/api/credito/agregar/respuesta",
                     }
 
                     handler.open(data);
-
+                    
                 })
                 .catch(e => {
                     console.log(e);

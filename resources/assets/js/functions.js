@@ -1,3 +1,4 @@
+// Menu lateral (Filtros)
 var buttonFiltros = document.querySelector("#buttonFiltros");
 var nav =  document.querySelector("#nav");
 
@@ -24,12 +25,14 @@ if(cerrarModal) {
 	}
 }
 
+
 // Seleccion de equipos
 $(".img-check").click(function(){
 	//console.log("hola mundos");
 	$(".img-check").removeClass("check");
 	$(this).addClass("check");
 });
+
 
 // Etiquetas de busqueda
 $('#filterSelectHoy').click(function() {
@@ -46,6 +49,7 @@ $('#filterSelectHoy').click(function() {
 });
 
 
+// Loader en submit  de formularios
 var $loaderLink = document.querySelector(".loaderLink");
 
 $('.form').on('submit', function() {
@@ -61,6 +65,8 @@ $('.form').on('submit', function() {
     }
 });
 
+
+// Copia de link popup de compartir 
 function copiarLink() {
   var copyText = document.getElementById("inputLinkCompartir");
   copyText.select();
@@ -73,7 +79,6 @@ $('#buttonCompartir').click(function() {
 
 
 // Dropdown User
-
 $('#dropdownUser').click(function(event){
 	event.stopImmediatePropagation();
     document.getElementById("myDropdown").classList.toggle("show");	
@@ -121,9 +126,6 @@ $('input[name=creditoAgregar]').change(function() {
 	}
 
 });
-
-var myElement = document.getElementById('app');
-
 
 
 // Accordion FAQ

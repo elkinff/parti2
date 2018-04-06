@@ -1589,6 +1589,7 @@ var app = new Vue({
                     //Atributos opcionales
                     extra1: "match",
                     extra2: idUsuario,
+                    extra3: valor_apuesta,
                     confirmation: this.urlPasarela + "/api/publicar/confirmacion",
                     response: this.urlPasarela + "/api/publicaciones/respuestaPasarela"
                 };
@@ -1689,6 +1690,7 @@ var app = new Vue({
                         //Atributos opcionales
                         extra1: idUsuario,
                         extra2: response.data.id,
+                        extra3: creditoAgregarFinal,
                         confirmation: _this9.urlPasarela + "/api/credito/agregar/confirmacion",
                         response: _this9.urlPasarela + "/api/credito/agregar/respuesta"
                     };
@@ -48308,6 +48310,7 @@ var index_esm = {
 /* 41 */
 /***/ (function(module, exports) {
 
+// Menu lateral (Filtros)
 var buttonFiltros = document.querySelector("#buttonFiltros");
 var nav = document.querySelector("#nav");
 
@@ -48355,6 +48358,7 @@ $('#filterSelectHoy').click(function () {
 	// 	return true; 
 });
 
+// Loader en submit  de formularios
 var $loaderLink = document.querySelector(".loaderLink");
 
 $('.form').on('submit', function () {
@@ -48370,6 +48374,7 @@ $('.form').on('submit', function () {
 	}
 });
 
+// Copia de link popup de compartir 
 function copiarLink() {
 	var copyText = document.getElementById("inputLinkCompartir");
 	copyText.select();
@@ -48381,7 +48386,6 @@ $('#buttonCompartir').click(function () {
 });
 
 // Dropdown User
-
 $('#dropdownUser').click(function (event) {
 	event.stopImmediatePropagation();
 	document.getElementById("myDropdown").classList.toggle("show");
@@ -48426,8 +48430,6 @@ $('input[name=creditoAgregar]').change(function () {
 		$("#agregarOtroValor").val('');
 	}
 });
-
-var myElement = document.getElementById('app');
 
 // Accordion FAQ
 var acc = document.getElementsByClassName("accordion");

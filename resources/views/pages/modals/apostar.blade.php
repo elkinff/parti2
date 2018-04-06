@@ -81,7 +81,7 @@
 				        		<center>@{{validateCreditoApuesta}}</center>
 								<button class="btn block center" @click="validateBeforeSubmit()">Pagar</button>
 				        	@else
-								<a class="btn block center" href="{{ url('login') }}">Pagar</a>
+								<a class="btn block center" href="{{ secure_url('login') }}">Pagar</a>
 				        	@endif	
 						</div>
 

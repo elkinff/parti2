@@ -19,7 +19,6 @@
 	<meta description="Disfruta ganando dinero con tu equipo!">
 
     {{-- Open Graph Twitter --}}
-    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@parti2co">
     <meta name="twitter:creator" content="@elkinff">

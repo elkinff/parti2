@@ -242,7 +242,7 @@ const app = new Vue({
                 }
                 //'Correct them errors!';
             });
-        }, 
+        },
 
 
         validateBeforeSubmitRetirar() {
@@ -662,38 +662,9 @@ const app = new Vue({
 
 
 require('./framy');
-require('./hammer.min.js');
+//require('./hammer.min.js');
 require('./functions');
 require('./modal');
 require('./sweetalert');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

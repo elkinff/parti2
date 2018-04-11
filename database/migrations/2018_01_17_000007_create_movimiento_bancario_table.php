@@ -23,7 +23,7 @@ class CreateMovimientoBancarioTable extends Migration{
             $table->bigInteger('valor');
             $table->string('tipo', 20);
             $table->dateTime('fecha');
-            $table->string('metodo_retiro', 20)->nullable();
+            $table->string('metodo', 20)->nullable();
             $table->boolean('estado');
             $table->boolean('estado_pago_admin')->default(0);
         });

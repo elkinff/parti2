@@ -1478,10 +1478,14 @@ var app = new Vue({
 
                 // Impresiones de prueba
                 console.log("El valor total es: ", valor_apuesta + (impuesto_payco + impuesto_payco_iva));
-                console.log("El valor de los impuestos es:", impuesto_payco + impuesto_payco_iva);
+
+                console.log("El valor de los impuestos es:", impuesto_payco + impuesto_payco_iva + impuesto_rete_fuente);
+
                 console.log("El valor de la rete fuente es:", impuesto_rete_fuente);
+
                 console.log("El valor total enviado a payco es igual a ", valor_total_payco);
-                //$("#modalCompartir").modal('show');
+
+                console.log("El valor total de la apuesta menos el impuesto es ", valor_total_payco - (impuesto_payco + impuesto_payco_iva + impuesto_rete_fuente));
 
                 var handler = ePayco.checkout.configure({
                     key: 'cc6dfc520c35ec628e622bcf782a5f01',
@@ -1496,7 +1500,7 @@ var app = new Vue({
                     currency: "cop",
                     amount: valor_total_payco,
                     tax_base: valor_apuesta,
-                    tax: impuesto_payco + impuesto_payco_iva,
+                    tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
                     country: "co",
                     lang: "es",
                     //Onpage="false" - Standard="true"
@@ -1581,7 +1585,7 @@ var app = new Vue({
                     currency: "cop",
                     amount: valor_total_payco,
                     tax_base: valor_apuesta,
-                    tax: impuesto_payco + impuesto_payco_iva,
+                    tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
                     country: "co",
                     lang: "es",
                     //Onpage="false" - Standard="true"
@@ -1682,7 +1686,7 @@ var app = new Vue({
                         currency: "cop",
                         amount: parseInt(valor_total_payco),
                         tax_base: creditoAgregarFinal,
-                        tax: impuesto_payco + impuesto_payco_iva,
+                        tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
                         country: "co",
                         lang: "es",
                         //Onpage="false" - Standard="true"

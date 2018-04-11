@@ -9,6 +9,7 @@
 				<th>Fecha de solicitud</th>
 				<th>Estado</th>
 				<th>Monto</th>
+				<th>Método</th>
 				<th>Celular</th>
 				<th></th>
 			</tr>
@@ -19,8 +20,18 @@
 				<tr>
 					<td data-th="ID"> {{ $retiro->id }}</td>
 					<td data-th="Fecha solicitud">{{ $retiro->fecha }}</td>
-					<td data-th="Estado">{{ $retiro->estado_pago_admin }}</td>
+					<td data-th="Estado">
+						@if($retiro->estado_pago_admin == 1)
+							Pagado
+						@elseif($retiro->estado_pago_admin == 2) 
+							Seguimiento
+						@else 
+							----			
+						@endif
+						
+					</td>
 					<td data-th="Monto">$ {{ number_format($retiro->valor) }}</td>
+					<td data-th="Método"> {{ $retiro->metodo_retiro }}</td>
 					<td data-th="Celular">{{ $retiro->usuario->celular }}</td>
 					<td data-th="">
 						<a href={{ secure_url("admin/solicitudes/estado/1/".$retiro->id) }} class="btn sm">Pagar</a>

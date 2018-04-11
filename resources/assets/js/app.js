@@ -287,14 +287,17 @@ const app = new Vue({
         // Validar que le partido no halla empezado de acuerdo con la hora del sistema
         validacionHora(fechaMatch) {
             var d = new Date();
-            var hora = d.getHours() +''+ d.getMinutes();
+
+            var hora = d.getHours() +''+ (d.getMinutes()<10?'0':'') + d.getMinutes();
+            
+            //console.log(hora);
 
             if(fechaMatch.includes('Hoy ')) {
                 fechaMatch = fechaMatch.slice(-5).replace(':','');
                 
                 // Prueba hora vs fecha
                 console.log("La fecha del partido es : " + fechaMatch);
-                console.log("La hora es : " + hora);
+                console.log("la hora del partido es :  " ,  hora)
 
                 if(parseInt(hora) >= parseInt(fechaMatch)){
                     console.log("la hora es menor");

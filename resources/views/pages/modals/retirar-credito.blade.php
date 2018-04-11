@@ -16,16 +16,15 @@
 
 			        <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo_retiro" value="nequi" v-validate="'required'">
+		                    <input type="radio" name="metodo" value="nequi" v-validate="'required'">
 		                    <div></div>
 		                    <span>Nequi</span>
 		                </label>
 		            </div>
-		            
 
 		            <div class="form-element ">
 		                <label class="radio fancy">
-		                    <input type="radio" name="metodo_retiro" value="daviplata" v-validate="'required'">
+		                    <input type="radio" name="metodo" value="daviplata" v-validate="'required'">
 		                    <div></div>
 		                    <span>Daviplata</span>
 		                </label>

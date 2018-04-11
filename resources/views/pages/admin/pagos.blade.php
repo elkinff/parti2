@@ -31,7 +31,7 @@
 						
 					</td>
 					<td data-th="Monto">$ {{ number_format($retiro->valor) }}</td>
-					<td data-th="Método"> {{ $retiro->metodo_retiro }}</td>
+					<td data-th="Método"> {{ $retiro->metodo }}</td>
 					<td data-th="Celular">{{ $retiro->usuario->celular }}</td>
 					<td data-th="">
 						<a href={{ secure_url("admin/solicitudes/estado/1/".$retiro->id) }} class="btn sm">Pagar</a>

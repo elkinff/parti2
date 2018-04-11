@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\UrlGenerator;
-use App\Providers\Auth;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider{
 

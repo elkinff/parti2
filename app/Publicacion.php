@@ -45,7 +45,7 @@ class Publicacion extends Model{
         //Validar si se retonan todas las publicaciones activas o solo una publicacion
         if($publicacionTipo == "user") {
             $usuario = Auth::user();
-            $publicaciones = $usuario->publicaciones;
+            $publicaciones = $usuario->publicaciones()->where("estado", "<>", 7)->get();
             $publicaciones = $publicaciones->merge($usuario->matchs);
         }else{
             $publicacion = Publicacion::findOrFail($publicacionTipo);
@@ -114,7 +114,12 @@ class Publicacion extends Model{
                 $publicacion->equipo_visitante->seleccionado = true; 
             }  
         }
-        return $publicaciones;
+
+        $sortedPublicaciones = $publicaciones->sortBy(function ($publicacion) {
+            return $publicacion->partido->fecha_inicio;
+        });
+        
+        return $sortedPublicaciones->values()->all();
     }
 
     public static function getMatchsHoraActual(){

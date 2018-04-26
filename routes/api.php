@@ -6,4 +6,4 @@ Route::post('publicar/confirmacion', 'PublicacionController@confirmacionPasarela
 
 //Pagina de respuesta y confirmacion epay co agregar credito
 Route::post('credito/agregar/respuesta', 'CreditoController@respuestaPasarela')->name('respuesta.credito.agregar');
-Route::post('credito/agregar/confirmacion', 'ApiController@confirmacionPasarelaCredito')->name('confirmacion.credito.agregar');
+Route::post('credito/agregar/confirmacion', 'CreditoController@confirmacionPasarelaCredito')->name('confirmacion.credito.agregar');

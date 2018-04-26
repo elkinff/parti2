@@ -61,10 +61,10 @@ class PublicacionController extends Controller{
 				if ($estadoPublicacion == 0) {
 					$user->saldo = $user->saldo - $valorPublicacion;
 					$user->save();
+
+					// Web Push Notification
+					OneSignal::sendNotificationToAll("Ingresa ya y realiza el match", "Nueva apuesta a favor de ".$equipoRetador->nombre." por $ ".number_format($valorPublicacion)." vs ".$equipoReceptor->nombre, $url = $linkCompartir, $data = null);
 				}
-				
-				// Web Push Notification
-				OneSignal::sendNotificationToAll("Ingresa ya y realiza el match", "Nueva apuesta a favor de ".$equipoRetador->nombre." por $ ".number_format($valorPublicacion)." vs ".$equipoReceptor->nombre, $url = $linkCompartir, $data = null);
 
 				return response()->json(["success" => "Se ha creado la publicación satisfactoriamente", "link" => url("publicaciones/".$publicacion->id), "publicacion" => $publicacion->id, "equipoRetador" => $equipoRetador, "saldo" => $user->saldo]);		
 
@@ -192,10 +192,19 @@ class PublicacionController extends Controller{
 							
 							$this->usuarioReceptor = User::findOrFail($request->x_extra2);
 						    $this->usuarioReceptor->notify(new EmailNotification($imagen, $titulo, $descripcion, $labelButton, $url, $subject));
+
+							//Se crea al intencion si la pubicacion esta en espera del match
+							$publicacion->intenciones()->attach($request->x_extra2);
+						}else{
+							//Se actualiza el estado a 3 ya que se genero la publicacion
+							$publicacion->estado = 3;
+							$publicacion->save();
+
+							//Actualizamos el saldo del usuario a $0
+							$usuarioRetador = $publicacion->usuarioRetador;
+							$usuarioRetador->saldo = 0;
+							$usuarioRetador->save();
 						}
-						
-						//Se crea al intencion si la pubicacion esta en espera del match
-						$publicacion->intenciones()->attach($request->x_extra2);
 					}
 					return redirect()->to("publicaciones/".$publicacion->id);
 					break;
@@ -228,10 +237,13 @@ class PublicacionController extends Controller{
                             $publicacion->estado = 0;
                             $publicacion->save();
 
-                            //Actualizamos el saldo del usuario a $0
-                            $usuario = $publicacion->usuarioRetador;
-                            $usuario->saldo = 0;
-                            $usuario->save();
+                            // //Actualizamos el saldo del usuario a $0
+                            // $usuario = $publicacion->usuarioRetador;
+                            // $usuario->saldo = 0;
+                            // $usuario->save();
+
+                            // Web Push Notification
+							OneSignal::sendNotificationToAll("Ingresa ya y realiza el match", "Nueva apuesta a favor de ".$equipoRetador->nombre." por $ ".number_format($valorPublicacion)." vs ".$equipoReceptor->nombre, $url = $linkCompartir, $data = null);
 
                             return "Publicación exitosa";
                         }else{

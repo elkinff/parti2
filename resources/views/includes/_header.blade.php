@@ -6,17 +6,17 @@
 
 	<div class="header__menu">
 		
-		<a class="header__menu__item" href="{{ secure_url('/') }}">
+		<a class="header__menu__item {{ setActive('/','header__menu__item--active') }} " href="{{ secure_url('/') }}">
 			<img src="{{ secure_asset('img/apuestas.png') }}">
 			<span>Apuestas publicadas</span>
 		</a>
 
-		<a class="header__menu__item" href="{{ secure_url('usuario/publicaciones') }}">
+		<a class="header__menu__item {{ setActive('usuario/publicaciones','header__menu__item--active') }} " href="{{ secure_url('usuario/publicaciones') }}">
 			<img src="{{ secure_asset('img/ball.svg') }}">
 			<span>Mis Publicaciones</span>
 		</a>
 
-		<a class="header__menu__item" href="{{ secure_url('credito') }}">
+		<a class="header__menu__item {{ setActive('credito','header__menu__item--active') }} " href="{{ secure_url('credito') }}">
 			<img src="{{ secure_asset('img/credito.svg') }}">
 			<span>Mi Crédito</span>
 		</a>

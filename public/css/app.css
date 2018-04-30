@@ -405,6 +405,10 @@ nav ul {
   }
 }
 
+.header__menu__item--active {
+  font-weight: bold;
+}
+
 .nav {
   width: 300px;
   max-width: 350px;

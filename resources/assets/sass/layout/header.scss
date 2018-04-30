@@ -41,6 +41,7 @@
 			margin-left: 1em;
 			display: flex;
 			align-items:center;
+			
 			@include max('sm') {
 				margin-left:0.1em;
 				padding:0.3em;
@@ -98,6 +99,11 @@
 				@include max('sm') {
 					display: flex;
 				}
+			}
+
+			&--active {
+				//border-bottom: 2px solid $primary;
+				font-weight: bold;
 			}
 
 		}

@@ -4629,17 +4629,37 @@ form.horizontal .form-element .last-xs {
   line-height: 1em;
   width: 100%;
   font-size: 0.95em;
-  min-height: 30px;
+  min-height: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px;
+  /* fallback */
+  max-height: 32px;
+  /* fallback */
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 .match__equipo__usuario {
   font-weight: light;
   text-align: center;
   margin: 0;
-  font-size: 0.85em;
+  font-size: 0.80em;
   line-height: 0.9em;
   width: 100%;
   margin-top: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px;
+  /* fallback */
+  max-height: 32px;
+  /* fallback */
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 .match__equipo__usuario--large {
@@ -5347,6 +5367,10 @@ div.panel.show {
   padding: 1em 3em;
   margin: 0 auto;
   display: none;
+}
+
+.compartir__redes img {
+  max-width: 70px;
 }
 
 @media (max-width: 768px) {

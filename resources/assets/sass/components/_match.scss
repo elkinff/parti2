@@ -116,19 +116,34 @@
 			line-height: 1em;
 			width: 100%;
 			font-size: 0.95em;
-			min-height: 30px;
-
+			min-height: 32px;
 			//background-color:teal;
+
+			overflow: hidden;
+		   	text-overflow: ellipsis;
+		   	display: -webkit-box;
+		   	line-height: 16px;     /* fallback */
+		   	max-height: 32px;      /* fallback */
+		   	-webkit-line-clamp: 2; /* number of lines to show */
+		   	-webkit-box-orient: vertical;
 		}
 
 		&__usuario {
 			font-weight: light;
 			text-align: center;
 			margin:0;
-			font-size: 0.85em;
+			font-size: 0.80em;
 			line-height: 0.9em;
 			width: 100%;
 			margin-top: 0.5em;
+
+			overflow: hidden;
+		   	text-overflow: ellipsis;
+		   	display: -webkit-box;
+		   	line-height: 16px;     /* fallback */
+		   	max-height: 32px;      /* fallback */
+		   	-webkit-line-clamp: 2; /* number of lines to show */
+		   	-webkit-box-orient: vertical;
 
 			&--large {
 				font-size: 1.1em;

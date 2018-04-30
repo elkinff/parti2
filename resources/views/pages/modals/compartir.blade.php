@@ -2,6 +2,16 @@
 	<div class="modal-dialog">
 	    <!-- Modal content-->
 	    <div class="modal-content">
+
+	    	<div class="swal-icon swal-icon--success">
+			    <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+			    <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+
+			    <div class="swal-icon--success__ring"></div>
+			    <div class="swal-icon--success__hide-corners"></div>
+		  	</div>
+	    	
+
 	      	<div class="modal-header">
 	      		<h3>Comparte esta publicación</h3>
 				<span>Se ha creado la publicación satisfactoriamente</span>
@@ -10,6 +20,7 @@
 	      	<div class="modal-body">
 		        
                 <div class="form-element">
+                	
                 	<label>Copia el siguiente link y compártelo, así tendrás mas posibilidades de encontrar tu match</label>
                     <div class="form-group">
                         <input class="form-field" type="text" id="inputLinkCompartir" v-model="link_compartir">

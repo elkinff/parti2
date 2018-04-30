@@ -283,7 +283,7 @@ const app = new Vue({
                 console.log(e);
             });
         },
-
+        
         // Validar que le partido no halla empezado de acuerdo con la hora del sistema
         validacionHora(fechaMatch) {
             var d = new Date();
@@ -432,11 +432,10 @@ const app = new Vue({
                 if (bandera_pasarela && valor_apuesta !=0 && valor_apuesta > 0) {
                     handler.open(data);
                 }else {
+                    this.loadingPago =  false;
+                    $("#modalApostar").modal('hide');
                     $("#modalCompartir").modal('show');
                 }
-
-                this.loadingPago =  false;
-                $("#modalApostar").modal('hide');                
 
             })
             .catch(e => {
@@ -544,6 +543,9 @@ const app = new Vue({
         },
 
         agregarCredito() {
+
+            this.loadingPago = true;
+            
             var impuesto_payco;
             var impuesto_payco_iva;
 

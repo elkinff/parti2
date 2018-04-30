@@ -96,7 +96,15 @@
 				<br>
 
 		        <div>
-		            <button class="btn block center" :disabled="errors.has('valor')" @click="agregarCredito()">Agregar</button>
+
+		        	<div class="container__loader" v-if="loadingPago">
+						<img src="{{ secure_asset('img/loader__parti2.gif') }}" alt="Loader Parti2">	
+						<span>Cargando...</span>
+					</div>
+					
+					<div v-else>
+	            		<button class="btn block center" :disabled="errors.has('valor')" @click="agregarCredito()">Agregar</button>
+					</div>
 		        </div>
 	      	</div>
 

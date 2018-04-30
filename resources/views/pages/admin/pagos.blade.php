@@ -14,7 +14,7 @@
 				<th></th>
 			</tr>
 		</thead>
-		
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam officiis ipsum similique nisi voluptates earum ab. Minus neque eligendi maiores quod facilis. Reiciendis eaque, quaerat doloremque enim sequi veritatis soluta!
 		<tbody>
 			@foreach ($retiros as $retiro)
 				<tr>

@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration{
             $table->string('foto', 120)->nullable();
             $table->string('id_google', 45)->nullable();
             $table->string('id_facebook', 45)->nullable();
-            $table->bigInteger('saldo')->default('10000');
+            $table->bigInteger('saldo')->default(0);
 
             $table->integer('id_configuracion_retiro')->nullable()->unsigned();
             $table->index(["id_configuracion_retiro"], 'fk_Usuario_Configuracion_Retiro1_idx');

@@ -6,6 +6,11 @@
 
 	<div class="header__menu">
 		
+		<a class="header__menu__item" href="{{ secure_url('/') }}">
+			<img src="{{ secure_asset('img/apuestas.png') }}">
+			<span>Apuestas publicadas</span>
+		</a>
+
 		<a class="header__menu__item" href="{{ secure_url('usuario/publicaciones') }}">
 			<img src="{{ secure_asset('img/ball.svg') }}">
 			<span>Mis Publicaciones</span>

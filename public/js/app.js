@@ -1297,7 +1297,7 @@ var app = new Vue({
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
 
             if (this.saldo_user < parseInt(apuestaUsuario)) {
-                this.estado_pago = 3; //Sin pagar 
+                this.estado_pago = 7; //Sin pagar 
                 return "No tienes crédito suficiente, el saldo restante lo puedes pagar directamente en el siguiente botón";
             } else {
                 this.estado_pago = 0; //Pagado;
@@ -1469,6 +1469,8 @@ var app = new Vue({
             this.matchUser.valor_ganado = this.totalGanancia;
             this.matchUser.id_retador = this.id_retador;
             this.matchUser.estado_pago = this.estado_pago;
+
+            console.log(this.estado_pago);
 
             axios.post(urlSaveMatch, this.matchUser).then(function (response) {
 

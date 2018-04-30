@@ -22,12 +22,16 @@
 		<div class="message-detail__info">
 			@if( $publicacion->estado == 0 )
 				<h3>Estado: Publicado en espera de match</h3>
+				<p>Tu publicación esta publicada a la espera de un contrincante</p>
 			@elseif( $publicacion->estado == 1 )	
 				<h3>Estado : Match</h3>
+				<p>Felicitaciones tu publicación ya encontro un contrincate</p>
 			@elseif( $publicacion->estado == 2 )	
 				<h3>Estado : Match terminado</h3>	
+				<p>La publicación ha terminado</p>
 			@elseif( $publicacion->estado == 3 )	
 				<h3>Estado : Pendiente por pagar</h3>	
+				<p>Tu publicación será publicada cuando realices el pago.</p>
 				<p>
 					@isset($tipoPago)	
 						@if($tipoPago == 'BA')
@@ -41,7 +45,7 @@
 						@elseif($tipoPago == 'RS')	
 							Puedes acercarte a un punto Red Servi para terminar de realizar el pago	
 						@else 
-							La trasacción se esta confirmando, esto puede tardar unos minutos	
+							La transacción se esta confirmando, esto puede tardar unos minutos	
 						@endif
 						
 					@endisset

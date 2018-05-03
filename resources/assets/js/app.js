@@ -348,7 +348,6 @@ const app = new Vue({
 
         //Publicacion de un macth
         saveMatch() {
-
             this.loadingPago =  true;
             var apuestaUsuario = this.apuesta.replace(/,/g, '').replace(/\$/g, '');
             var valor_apuesta = 0;//Valor apuesta en pago epayco
@@ -406,32 +405,32 @@ const app = new Vue({
 
                 console.log("El valor total de la apuesta menos el impuesto es ", valor_total_payco - (impuesto_payco + impuesto_payco_iva + impuesto_rete_fuente));
 
-                var handler = ePayco.checkout.configure({
-                    key: 'cc6dfc520c35ec628e622bcf782a5f01',
-                    test: true
-                });
-
-                var data={
-                    //Parametros compra (obligatorio)
-                    name: "Publicación  Parti2",
-                    description: "Acabas de realizar una publicación a favor de " + equipoRetador,
-                    invoice: response.data.publicacion,//Id publicacion
-                    currency: "cop",
-                    amount: valor_total_payco  ,
-                    tax_base: valor_apuesta,
-                    tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
-                    country: "co",
-                    lang: "es",
-                    //Onpage="false" - Standard="true"
-                    external: "true",
-                    //Atributos opcionales
-                    extra1: "publicacion",
-
-                    confirmation: this.urlPasarela + "/api/publicar/confirmacion",
-                    response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
-                }
-
+            
                 if (bandera_pasarela && valor_apuesta !=0 && valor_apuesta > 0) {
+                    var handler = ePayco.checkout.configure({
+                        key: 'cc6dfc520c35ec628e622bcf782a5f01',
+                        test: true
+                    });
+                     var data={
+                        //Parametros compra (obligatorio)
+                        name: "Publicación  Parti2",
+                        description: "Acabas de realizar una publicación a favor de " + equipoRetador.replace('&',''),
+                        invoice: response.data.publicacion,//Id publicacion
+                        currency: "cop",
+                        amount: valor_total_payco  ,
+                        tax_base: valor_apuesta,
+                        tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
+                        country: "co",
+                        lang: "es",
+                        //Onpage="false" - Standard="true"
+                        external: "true",
+                        //Atributos opcionales
+                        extra1: "publicacion",
+
+                        confirmation: this.urlPasarela + "/api/publicar/confirmacion",
+                        response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
+                    }
+
                     handler.open(data);
                 }else {
                     this.loadingPago =  false;

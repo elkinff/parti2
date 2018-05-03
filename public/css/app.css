@@ -4654,6 +4654,8 @@ form.horizontal .form-element .last-xs {
   line-height: 0.9em;
   width: 100%;
   margin-top: 0.5em;
+  min-height: 32px;
+  /* fallback */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

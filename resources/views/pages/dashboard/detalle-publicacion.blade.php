@@ -5,9 +5,12 @@
 	{{-- 
 		0: Publicado - espera de match - Pagado
 		1: Match
-		2: Publicación terminada - Terminé partido
-		3: Pendiente por pagar
+		2: Publicación terminada - Termino partido - Match encontrado
+		3: Pendiente por pagar para publicar
 		4: Cancelado
+		5: Publicación terminada - Empezó partido - Match no encontrado
+		6: Publicación terminada - Empezó partido - No se pago la publicación
+		7: Intención de publicar sin saldo
 	--}}
 
 	@if(Auth::user())
@@ -25,7 +28,7 @@
 				<p>Tu publicación esta publicada a la espera de un contrincante</p>
 			@elseif( $publicacion->estado == 1 )	
 				<h3>Estado : Match</h3>
-				<p>Felicitaciones tu publicación ya encontro un contrincate</p>
+				<p>Felicitaciones tu publicación ya encontró un contrincate</p>
 			@elseif( $publicacion->estado == 2 )	
 				<h3>Estado : Match terminado</h3>	
 				<p>La publicación ha terminado</p>

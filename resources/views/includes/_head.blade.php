@@ -37,6 +37,7 @@
     {{-- Web Push Notifications --}}
 
     <link rel="manifest" href="/manifest.json" />
+
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
       var OneSignal = window.OneSignal || [];
@@ -45,6 +46,19 @@
           appId: "a4698ecd-a0c4-4bd9-beed-acfa8bf8a45a",
         });
       });
+    </script>
+
+
+    {{-- Google Analytics --}}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118696025-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118696025-1');
     </script>
     
 </head>

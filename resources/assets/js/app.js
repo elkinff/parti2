@@ -409,7 +409,7 @@ const app = new Vue({
                 if (bandera_pasarela && valor_apuesta !=0 && valor_apuesta > 0) {
                     var handler = ePayco.checkout.configure({
                         key: 'cc6dfc520c35ec628e622bcf782a5f01',
-                        test: true
+                        test: false
                     });
                      var data={
                         //Parametros compra (obligatorio)
@@ -493,7 +493,7 @@ const app = new Vue({
                 
                 var handler = ePayco.checkout.configure({
                     key: 'cc6dfc520c35ec628e622bcf782a5f01',
-                    test: true
+                    test: false
                 });
 
                 var data={
@@ -592,7 +592,7 @@ const app = new Vue({
 
             var handler = ePayco.checkout.configure({
                 key: 'cc6dfc520c35ec628e622bcf782a5f01',
-                test: true
+                test: false
             });
 
             var objectCredito = {

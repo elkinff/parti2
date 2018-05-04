@@ -56,7 +56,7 @@ const app = new Vue({
 
     data: {
         baseUrl: '',
-        urlPasarela: 'http://localhost:8080',
+        urlPasarela: 'https://app.parti2.com',
         matchs: [],
         auxMatch: {},
         

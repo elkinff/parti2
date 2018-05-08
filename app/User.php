@@ -18,7 +18,7 @@ class User extends Authenticatable{
     ];
 
     public function historialCrediticio(){
-        return $this->hasMany(MovimientoBancario::class, "id_usu");
+        return $this->hasMany(MovimientoBancario::class, "id_usu")->where("estado", "<>", 0);
     }
 
     public function intenciones(){

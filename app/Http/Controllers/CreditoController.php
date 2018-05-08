@@ -87,11 +87,12 @@ class CreditoController extends Controller{
                 $usuario->save();
 
                 $movimientoBancario->estado = 1;
-                $movimientoBancario->save();
                 alert()->success("Tu crédito se ha agregado satisfactoriamente");
             }else{
+                $movimientoBancario->estado = 2;
                 alert()->info("Tu transacción está en espera");
             }
+            $movimientoBancario->save();
             return redirect()->to("credito");
         }
     }

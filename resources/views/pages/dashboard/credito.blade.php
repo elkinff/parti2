@@ -52,7 +52,7 @@
 					<td data-th="Fecha">{{ $transaccion->fecha }}</td>
 					<td data-th="Retiro">{{ $transaccion->tipo }}</td>
 					@if ($transaccion->tipo == "Adición de credito")
-						<td data-th="Estado">{{ $transaccion->estado == 0 ? "En espera de pago" : "Realizado" }}</td>	
+						<td data-th="Estado">{{ $transaccion->estado == 2 ? "En espera de pago" : "Realizado" }}</td>	
 					@else
 						<td data-th="Estado">{{ $transaccion->estado_pago_admin == 0 ? "En espera de desembolso" : "Realizado" }}</td>	
 					@endif

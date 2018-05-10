@@ -25,7 +25,7 @@ class Equipo extends Model{
 
 		    //Retornamos el escudo del equipo, despues de guardar el registro knsksnksnksnk
 		    return $escudo;
-		}else{
+		}else{   
 			return $equipo->escudo;
 		}
     }

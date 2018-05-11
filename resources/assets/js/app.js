@@ -411,25 +411,55 @@ const app = new Vue({
                         key: 'cc6dfc520c35ec628e622bcf782a5f01',
                         test: false
                     });
-                     var data={
+                    
+                    var data={
                         //Parametros compra (obligatorio)
                         name: "Publicación  Parti2",
                         description: "Acabas de realizar una publicación a favor de " + equipoRetador.replace('&',''),
-                        invoice: response.data.publicacion,//Id publicacion
+                        invoice: response.data.publicacion.toString(),//Id publicacion
                         currency: "cop",
-                        amount: valor_total_payco  ,
-                        tax_base: valor_apuesta,
-                        tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
+                        amount: valor_total_payco.toFixed(2)  ,
+                        tax_base: valor_apuesta.toFixed(2),
+                        tax: (+impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente).toFixed(2),
                         country: "co",
                         lang: "es",
                         //Onpage="false" - Standard="true"
                         external: "true",
                         //Atributos opcionales
                         extra1: "publicacion",
+                        extra2: "extra2",
+                        extra3: "extra3",
 
                         confirmation: this.urlPasarela + "/api/publicar/confirmacion",
                         response: this.urlPasarela + "/api/publicaciones/respuestaPasarela",
                     }
+
+
+                    // var data_funciona= {
+                    //    //Parametros compra (obligatorio)
+                    //    name: "Publicación  Parti2",
+                    //    description: "Acabas de realizar una publicación a favor de Real Sociedad de Fútbol",
+                    //    invoice: "10",
+                    //    currency: "cop",
+                    //    amount: "11598.21" ,
+                    //    tax_base: "11598.21",
+                    //    tax: "1598.21",
+                    //    country: "co",
+                    //    lang: "es",
+
+                    //    //Onpage="false" - Standard="true"
+                    //    external: "true",
+
+
+                    //    //Atributos opcionales
+                    //    extra1: "extra1",
+                    //    extra2: "extra2",
+                    //    extra3: "extra3",
+                    //    confirmation: "https://app.parti2.com/api/publicar/confirmacion",
+                    //    response: "https://app.parti2.com/api/publicaciones/respuestaPasarela",
+                    // }
+
+                    console.log(data);
 
                     handler.open(data);
                 }else {
@@ -500,11 +530,11 @@ const app = new Vue({
                     //Parametros compra (obligatorio)
                     name: "Match Parti2",
                     description: "Acabas de realizar un Match en Parti2, a favor del equipo " + equipoSeleccionado ,
-                    invoice: this.auxMatch2.id,//Id publicacion
+                    invoice: this.auxMatch2.id.toString(),//Id publicacion
                     currency: "cop",
-                    amount: valor_total_payco ,
-                    tax_base: valor_apuesta,
-                    tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente ,
+                    amount: valor_total_payco.toFixed(2) ,
+                    tax_base: valor_apuesta.toFixed(2),
+                    tax: (+impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente).toFixed(2) ,
                     country: "co",
                     lang: "es",
                     //Onpage="false" - Standard="true"
@@ -608,11 +638,11 @@ const app = new Vue({
                         //Parametros compra (obligatorio)
                         name: "Crédito Parti2",
                         description: "Agregar crédito a tu saldo de Parti2",
-                        invoice: this.auxMatch2.id,//Id publicacion
+                        invoice: this.auxMatch2.id.toString(),//Id publicacion
                         currency: "cop",
-                        amount: parseInt(valor_total_payco) ,
-                        tax_base: creditoAgregarFinal,
-                        tax: +impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente,
+                        amount: parseInt(valor_total_payco).toFixed(2) ,
+                        tax_base: creditoAgregarFinal.toFixed(2),
+                        tax: (+impuesto_payco + +impuesto_payco_iva + +impuesto_rete_fuente).toFixed(2),
                         country: "co",
                         lang: "es",
                         //Onpage="false" - Standard="true"

@@ -48,6 +48,13 @@ Route::get('/ayuda', function () {
 });
 
 
+//Health check path
+Route::get("/check", function(){
+	return view("check");
+});
+
+
+
 
 
 

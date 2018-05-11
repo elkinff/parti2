@@ -23,7 +23,7 @@ class Equipo extends Model{
 		    $equipo = Equipo::create(["id" => $idEquipo, "nombre" => $nombreEquipo, "escudo" => $escudo]);
 		    $equipo->ligas()->attach($liga);
 
-		    //Retornamos el escudo del equipo, despues de guardar el registro
+		    //Retornamos el escudo del equipo, despues de guardar el registro knsksnksnksnk
 		    return $escudo;
 		}else{
 			return $equipo->escudo;
